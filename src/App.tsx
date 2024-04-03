@@ -1,9 +1,13 @@
-import './App.css';
+import LoginPage from './pages/login/Login';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
-function App() {
+const App = () => {
   return (
     <>
-    <h1>test</h1>
+      <Header />
+      <LoginPage />
+      <Footer />
     </>
   );
 }
