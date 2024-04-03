@@ -1,19 +1,70 @@
 import React from 'react';
 import styled from 'styled-components';
+import imgSrc from './../assets/carebuddyLogo.png';
+import search from './../assets/searchIcon.png'
+import user from './../assets/userIcon.png'
+import alert from './../assets/alertIcon.png'
 
 // styled-components를 사용하여 header 스타일 정의
 const HeaderContainer = styled.header`
-  background-color: #333;
-  color: #fff;
-  padding: 10px 0;
-  margin: 0;
-  text-align: center;
+  background-color: white;
+  font-weight: bold;
+  font-size: 22px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #343434;
+  padding: 10px 0 10px 0;
+  height: 100px;
 `;
+
+const MenuBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+
+const Logo = styled.img`
+  cursor: pointer;
+  width: 130px;
+  height: 70px;
+`;
+
+const Icon = styled.img`
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  padding: 0 10px 0 10px;
+`;
+
+const Login = styled.a`
+  cursor: pointer;
+  font-size: 18px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: end;
+`
+
+const Container = styled.div`
+  margin: 0 auto;
+  padding: 0;
+  width: 70%;
+`
 
 const Header: React.FC = () => {
   return (
     <HeaderContainer>
-      <h1>header</h1>
+      <Container>
+      <Login>로그인</Login>
+        <MenuBox>
+          <Logo src={imgSrc} />
+            <a>커뮤니티</a>
+            <a>건강관리</a>
+            <a>정보</a>
+            <Icon src={search} />
+            <Icon src={user} />
+            <Icon src={alert} />
+        </MenuBox>
+      </Container>
     </HeaderContainer>
   );
 };

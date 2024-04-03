@@ -1,7 +1,5 @@
 import React from 'react';
 import KakaoLogin from 'react-kakao-login';
-import GlobalStyle from '../../components/GlobalStyle';
-import TopBar from '../../components/TopBar';
 
 const LoginPage: React.FC = () => {
   const responseKaKao = (response: any) => {
@@ -20,9 +18,7 @@ const LoginPage: React.FC = () => {
 
   return (
     <>
-      <TopBar />
       <div className='main'>
-      <GlobalStyle /> {/* GlobalStyle을 최상위 컴포넌트에 추가 */}
         <div className='loginBox'>
           <h2>카카오 소셜 로그인</h2>
           <KakaoLogin
@@ -33,7 +29,7 @@ const LoginPage: React.FC = () => {
             buttonText="카카오로 로그인하기"
           />
         </div>
-    </div>
+      </div>
     </>
   );
 };

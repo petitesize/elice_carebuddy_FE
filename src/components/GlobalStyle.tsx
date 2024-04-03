@@ -1,35 +1,27 @@
 import { createGlobalStyle } from 'styled-components';
+import React from 'react';
+import styled from 'styled-components';
+import reset from 'styled-reset';
 
+// 전역 공통 스타일
 const GlobalStyle = createGlobalStyle`
+  ${reset}
   * {
   font-family: 'Pretendard-Regular';
   }
-  
-  html, #root {
-    margin: 0;
-    padding: 0;
-    background-color: grey;
+
+  html, body, #root {
+    height: 100%;
     width: 100%;
-    height: 100%;
   }
+`
 
-  body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    background-color: white;
-  }
+const Global: React.FC = () => {
+  return (
+    <>
+    <GlobalStyle />
+    </>
+  );
+};
 
-  .main {
-    margin: 0 auto;
-    padding: 0;
-    width: 70%;
-    height: 100%;
-    background-color: aquamarine;
-    display: flex;
-    justify-content: center;
-  }
-`;
-
-export default GlobalStyle;
+export default Global;

@@ -1,13 +1,10 @@
-import LoginPage from './pages/login/Login';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import React from "react";
+import Layout from './components/Layout';
 
 const App = () => {
   return (
     <>
-      <Header />
-      <LoginPage />
-      <Footer />
+      <Layout />
     </>
   );
 }
