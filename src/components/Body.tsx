@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Global from './GlobalStyle';
 import LoginPage from '../pages/login/Login';
 
 const Main = styled.div`
