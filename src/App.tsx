@@ -1,9 +1,10 @@
-import './App.css';
+import React from "react";
+import Layout from './components/Layout';
 
-function App() {
+const App = () => {
   return (
     <>
-    <h1>test</h1>
+      <Layout />
     </>
   );
 }
