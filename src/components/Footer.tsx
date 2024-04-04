@@ -6,6 +6,7 @@ import imgSrc from './../assets/carebuddyLogo.png';
 const FooterContainer = styled.footer`
   background-color: #EEEDE5;
   color: #343434;
+  width: 100%;
   height: 150px;
   display: flex;
   flex-direction: column;

@@ -4,11 +4,19 @@ import Global from "./GlobalStyle";
 import TopBar from "./TopBar";
 import styled from "styled-components";
 
+const LayoutContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* 화면 전체 높이를 최소 높이로 설정 */
+`;
+
+const Body = styled.div`
+  flex: 1; /* Main 요소가 남은 공간을 모두 차지하도록 설정 */
+`;
+
 const Main = styled.div`
   margin: 0 auto;
-  padding: 0 auto;
   width: 70%;
-  height: 100%;
 `;
 
 interface BodyProps {
@@ -17,15 +25,17 @@ interface BodyProps {
 
 const Layout: React.FC<BodyProps> = ({ component: Component }) => {
   return (
-    <>
-    <Global />
+    <LayoutContainer>
+      <Global />
       <Header />
-      <TopBar />
+      <Body>
+        <TopBar />
         <Main>
           <Component />
         </Main>
+      </Body>
       <Footer />
-    </>
+    </LayoutContainer>
   );
 }
 
