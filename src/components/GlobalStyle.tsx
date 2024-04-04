@@ -8,18 +8,19 @@ const GlobalStyle = createGlobalStyle`
   ${reset}
   * {
   font-family: 'Pretendard-Regular';
+  color:#343434;
   }
 
   html, #root {
     width: 100%;
     height: auto;
   }
-`
+`;
 
 const Global: React.FC = () => {
   return (
     <>
-    <GlobalStyle />
+      <GlobalStyle />
     </>
   );
 };
