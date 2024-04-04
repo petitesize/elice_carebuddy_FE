@@ -10,9 +10,9 @@ const GlobalStyle = createGlobalStyle`
   font-family: 'Pretendard-Regular';
   }
 
-  html, body, #root {
-    height: auto;
+  html, #root {
     width: 100%;
+    height: auto;
   }
 `
 

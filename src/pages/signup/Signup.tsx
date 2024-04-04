@@ -13,7 +13,6 @@ const LoginBox = styled.div`
   border-radius: 7px;
   border: 1px solid #cecece;
   padding: 50px;
-  height: 10%;
   text-align: center;
 `
 
