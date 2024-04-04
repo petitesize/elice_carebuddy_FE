@@ -16,14 +16,15 @@ const HeaderContainer = styled.header`
   color: #343434;
   padding: 10px 0 10px 0;
   width: 100%;
-  height: 100px;
+  height: 80px;
   position: fixed; /* 헤더를 고정 */
   top: 0; /* 페이지 상단에 고정 */
   z-index: 1000; /* 다른 요소 위에 헤더 표시 */
-
+  display: flex;
+  align-items: center;
 `;
 
-const MenuBox = styled.div`
+const MenuBox = styled.span`
   display: flex;
   align-items: center;
   justify-content: space-between;

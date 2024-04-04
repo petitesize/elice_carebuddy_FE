@@ -13,11 +13,13 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 400;
     font-style: normal;
   }
-  
-  html, #root {
+
+  html, body, #root {
     width: 100%;
     height: auto;
     font-family: 'Pretendard-Regular', sans-serif;
+    margin: 0;
+    padding: 0;
   }
 `
 
