@@ -5,8 +5,7 @@ import WritingButton from '../../components/Community/WritingButton';
 import FeedBox from '../../components/Community/FeedBox';
 import CommunitySuggestor from '../../components/Community/CommunitySuggestor';
 import CommunitySearch from '../..//components/Community/CommunitySearch'
-
-import homefeedImg from '../../assets/temp-homefeed.png';
+import homefeedImg from '../../assets/temp-homefeed.png'
 import profileImg from '../../assets/temp-profile.png';
 
 export default function Home() {
@@ -72,7 +71,6 @@ export default function Home() {
   return (
     <>
       <div className="main">
-        <GlobalStyle /> 
         <Container>
             <Banner src={homefeedImg} alt="강아지가 뛰어노는 배너 이미지" />
             <CommunitySearch/>
