@@ -1,13 +1,12 @@
-import React from "react";
-import Layout from "./components/Layout";
-import LoginPage from "./pages/signup/Signup";
+import React from 'react';
+import AppRouter from './routes/Router';
 
 const App = () => {
   return (
     <>
-      <Layout component={LoginPage} />
+      <AppRouter />
     </>
   );
-}
+};
 
 export default App;
