@@ -5,12 +5,10 @@ import TopBar from "./TopBar";
 import styled from "styled-components";
 
 const Main = styled.div`
-    margin: 0 auto;
-    padding: 0 auto;
-    width: 70%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
+  margin: 0 auto;
+  padding: 0 auto;
+  width: 70%;
+  height: 100%;
 `;
 
 interface BodyProps {

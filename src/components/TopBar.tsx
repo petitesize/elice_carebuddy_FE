@@ -10,6 +10,7 @@ const TopBarContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding: 10px 0 10px 0;
+  width: 100%;
   height: 100px;
   font-size: 32px;
 `;
