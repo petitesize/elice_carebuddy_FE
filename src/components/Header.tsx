@@ -5,6 +5,7 @@ import search from './../assets/searchIcon.png'
 import user from './../assets/userIcon.png'
 import alert from './../assets/alertIcon.png'
 import TopBar from './TopBar';
+import { Link } from 'react-router-dom'; 
 
 // styled-components를 사용하여 header 스타일 정의
 const HeaderContainer = styled.header`
@@ -55,21 +56,26 @@ const Container = styled.div`
   padding: 0;
   width: 70%;
 `
-
+const Category = styled.a`
+  & a {
+    text-decoration: none; /* Link 컴포넌트 안의 a 태그에 대해 밑줄 효과 제거 */
+    color: inherit; /* 링크의 색상을 상속받음 */
+  }
+`
 const Header: React.FC = () => {
   return (
     <>
       <HeaderContainer>
         <Container>
-        <Login>로그인</Login>
+          <Category><Link to="/signup"><Login>로그인</Login></Link></Category>
           <MenuBox>
-            <Logo src={imgSrc} />
-              <a>커뮤니티</a>
-              <a>건강관리</a>
-              <a>정보</a>
-              <Icon src={search} />
-              <Icon src={user} />
-              <Icon src={alert} />
+            <Link to="/"><Logo src={imgSrc} /></Link>
+            <Category><Link to="/community">커뮤니티</Link></Category>
+            <Category><Link to="/">건강관리</Link></Category>
+            <Category><Link to="/">정보</Link></Category>
+            <Icon src={search} />
+            <Link to="/mypage"><Icon src={user} /></Link>
+            <Icon src={alert} />
           </MenuBox>
         </Container>
       </HeaderContainer>
