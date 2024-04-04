@@ -5,7 +5,7 @@ import TopBar from '../../components/TopBar';
 const Mypage: React.FC = () => {
   return (
     <>
-      <TopBar />
+
 
     </>
   );

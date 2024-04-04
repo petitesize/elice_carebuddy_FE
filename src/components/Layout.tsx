@@ -1,6 +1,7 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import Global from "./GlobalStyle";
+import TopBar from "./TopBar";
 import styled from "styled-components";
 
 const Main = styled.div`
@@ -21,6 +22,7 @@ const Layout: React.FC<BodyProps> = ({ component: Component }) => {
     <>
     <Global />
       <Header />
+      <TopBar />
         <Main>
           <Component />
         </Main>
