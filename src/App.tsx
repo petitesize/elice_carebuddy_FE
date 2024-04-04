@@ -1,12 +1,12 @@
-import React from "react";
-import Layout from './components/Layout';
+import React from 'react';
+import AppRouter from './routes/Router';
 
 const App = () => {
   return (
     <>
-      <Layout />
+      <AppRouter />
     </>
   );
-}
+};
 
 export default App;
