@@ -1,14 +1,29 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import Global from "./GlobalStyle";
-import Body from "./Body";
+import styled from "styled-components";
 
-const Layout : React.FC = () => {
+const Main = styled.div`
+    margin: 0 auto;
+    width: 70%;
+    height: 100%;
+    background-color: aquamarine;
+    display: flex;
+    justify-content: center;
+`;
+
+interface BodyProps {
+  component: React.ComponentType;
+}
+
+const Layout: React.FC<BodyProps> = ({ component: Component }) => {
   return (
     <>
     <Global />
       <Header />
-      <Body />
+        <Main>
+          <Component />
+        </Main>
       <Footer />
     </>
   );

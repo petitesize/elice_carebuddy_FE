@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import LoginPage from '../pages/login/Login';
 
 const Main = styled.div`
     margin: 0 auto;
@@ -11,10 +10,14 @@ const Main = styled.div`
     justify-content: center;
 `;
 
-const Body: React.FC = () => {
+interface BodyProps {
+  component: React.ComponentType;
+}
+
+const Body: React.FC<BodyProps> = ({ component: Component }) => {
   return (
     <Main>
-      <LoginPage />
+      <Component />
     </Main>
   );
 };
