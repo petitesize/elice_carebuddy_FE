@@ -11,10 +11,11 @@ const LayoutContainer = styled.div`
 
 const Body = styled.div`
   flex: 1;
+  padding-top: 130px;
 `;
 
 const Main = styled.div`
-  padding-top: 120px;
+
   margin: 0 auto;
   width: 70%;
 `;
