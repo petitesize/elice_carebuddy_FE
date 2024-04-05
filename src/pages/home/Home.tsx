@@ -32,13 +32,6 @@ const Home: React.FC = () => {
     height: auto;
   `;
 
-  const FeedOption = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  `;
-
   const ContentContainer = styled.div`
     margin-top: 80px;
     display: flex;
@@ -47,25 +40,44 @@ const Home: React.FC = () => {
   `;
 
   const FeedContainer = styled.div`
-    // background-color: yellow;
     width: 70%;
     margin-bottom: 30px;
   `;
+
+  const FeedOption = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  `
 
   const SidePanelContainer = styled.div`
     width: 20%;
   `;
 
+  const Classification = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  backgroud-color: red;
+
+  p {
+    color: var(--color-grey-1);
+    font-size: var(--font-size-md-1);
+  }
+`;
+
+
   const Select = styled.select<SelectProps>`
     display: flex;
     flex-direction: row;
     align-items: center;
-    border: 1px solid #cecece;
+    border: 1px solid var(--color-grey-2);
     border-radius: 30px;
-    height: 36px;
+    height: auto;
     padding: 10px;
-    color: #7d7d7d;
-    font-size: 12px;
+    color: var(--color-grey-1);
     width: ${(props) => (props.width ? props.width : '100px')};
     margin: 0 5px 0 5px;
   `;
@@ -75,21 +87,10 @@ const Home: React.FC = () => {
   `;
 
   const SelectGroup = styled(Select)`
-    width: 150px;
+    width: 120px;
   `;
 
-  const Classification = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-
-    p {
-      color: #7d7d7d;
-      font-size: 14px;
-    }
-  `;
-
+ 
   return (
     <>
       <Banner src={homefeedImg} alt="강아지가 뛰어노는 배너 이미지" />
@@ -106,7 +107,7 @@ const Home: React.FC = () => {
               </SelectGroup>
             </Classification>
             <WritingButton buttonText="글 작성하기" />
-          </FeedOption>
+            </FeedOption>
           <FeedBox
             title={tempTitle}
             content={tempContent}

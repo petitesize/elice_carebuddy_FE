@@ -1,6 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
 import React from 'react';
-import styled from 'styled-components';
 import reset from 'styled-reset';
 
 // 전역 공통 스타일
@@ -26,6 +25,7 @@ const GlobalStyle = createGlobalStyle`
     --font-weight-bold: 700;
     --font-weight-semibold: 600;
     --font-weight-medium: 500; 
+    --font-weight-regular: 400; 
 
     --color-green-main: #6D987A;
     --color-green-sub-1: #98B99C;
@@ -33,6 +33,10 @@ const GlobalStyle = createGlobalStyle`
     --color-beige-main: #EEEDE5;
     --color-beige-sub: #F7F6F2;
     --color-red-main: #E13C45;
+    --color-black-main: #343434;
+    --color-grey-1: #7D7D7D;
+    --color-grey-2: #CECECE;
+    --color-white: #ffffff;
   }
 
   @font-face {
