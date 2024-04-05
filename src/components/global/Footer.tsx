@@ -7,12 +7,12 @@ const FooterContainer = styled.footer`
   background-color: #EEEDE5;
   color: #343434;
   width: 100%;
-  height: 150px;
+  height: 120px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 30px 0 30px 0;
+  padding: 20px 0 20px 0;
 `;
 
 const Container = styled.div`
@@ -21,14 +21,15 @@ const Container = styled.div`
 
 const Logo = styled.img`
   cursor: pointer;
-  width: 130px;
-  height: 70px;
+  width: 100px;
+  height: 55px;
 `;
 
 const Font = styled.p`
   margin: 0;
-  font-size: 14px;
+  font-size: 12px;
   display: flex;
+  line-height: 15px;
 `
 
 const Footer: React.FC = () => {
