@@ -1,7 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
+// 컴포넌트
 import LikeAndCommentCount from '../../components/community/LikeAndCommentCount';
+import PostControlBox from '../../components/community/PostControlBox';
+import Comment from '../../components/community/Comment';
+import Pagination from '../../components/community/Pagination';
+import CommentWritingBox from '../../components/community/CommentWritingBox';
+
+
+
+// 아이콘
+import { LuThumbsUp } from 'react-icons/lu';
 
 // 임시 이미지
 import tempImg from '../../assets/temp-img.png';
@@ -15,6 +25,8 @@ const tempContent = `하다 법정만 이윽고 진단은 이유는, 입다 하�
 const tempTitle = '가입으로 등 통일적을 역습을';
 const tempDate = '2024.03.27 23:10';
 
+const tempLikeCount = 7;
+
 const tempCommentNickname = 'NANA';
 const tempComment = ` 육이구와 개사 한 따라서 가지는 정하여 안정에서 유해가 없다. "발표의 자체가 발전하는, 역성들 초기를 문전을 않은 출산에 체질화되다" 내 최고의 버틸 건전성은 들어가고 내놓는다 기대를 뒤돌 내어 막대하다. 시대가 설익다 정착되다 정책에 한 단체는 효과를 통장의 임신에 모으다. 한편 없는 시계에, 열띠는 오락, 있는 농도는 이곳을 힘드다. 편은 위하다 백화점에서 계열에 산다. 것 것 이래 우리말은 의견이 명칭이 부처의 같다. "소속이는 대통령과 51개 당연히 기능공까지 부처를 지난해는 살핀 음향으로, 전쟁을 가지라" 하다 팔다 지정의 준비와 있다.`;
 
@@ -23,42 +35,79 @@ const POST: React.FC = () => {
   const Container = styled.div`
     display: flex;
     flex-direction: row;
+    margin-top: 60px;
+    width: 100%;
   `;
+
   const LeftContainer = styled.div`
+    font-size: var(--font-size-lg-1);
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    background-color: yellow;
-    width: 24%;
+    width: 25%;
 
     p {
-      color: #7d7d7d;
+      color: vat(--color-grey-1);
     }
   `;
   const PostContainer = styled.div`
     display: flex;
     flex-direction: column;
-    background-color: aquamarine;
-    width: 100%;
+    width: 75%;
   `;
 
   const PostTopArea = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin: 0 0 5px 0;
   `;
 
-  const PostInformation = styled.div``;
+  const PostInformation = styled.div`
+  `;
+
+  const PostTitle = styled.p`
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0 0 10px 0;
+  `;
+
+  const PostUploadedDate = styled.p`
+  font-size: 12px;
+  font-weight: var(--font-weight-regular);
+  color: var(--color-grey-1);
+  `;
+
 
   const PostOption = styled.div`
     display: flex;
     flex-direction: row;
   `;
 
-  const PostContentArea = styled.div``;
+  const PostContentArea = styled.div`
+  margin: 10px 0 20px 0;
+  font-size: 16px;
+  line-height: 1.2rem;
+  color: #343434;
+
+  img {
+    margin: 10px 0 20px 0;
+  }
+  `;
+
+  const Likes = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin: 0 10px;
+  color: #7d7d7d;
+
+  p {
+    margin: 0 5px;
+  }
+  `
 
   const Hr = styled.hr`
-    border-top: 1px solid #343434;
+    border-top: 1px solid #7d7d7d;
     width: 100%;
   `;
 
@@ -74,24 +123,27 @@ const POST: React.FC = () => {
         <PostContainer>
           <PostTopArea>
             <PostInformation>
-              <p>{tempTitle}</p>
-              <p>{tempDate}</p>
+              <PostTitle>{tempTitle}</PostTitle>
+              <PostUploadedDate>{tempDate}</PostUploadedDate>
             </PostInformation>
             <PostOption>
               <LikeAndCommentCount likeCount={1} commentCount={2} />
-              <p>수정삭제 더보기 버튼</p>
+              <PostControlBox />
             </PostOption>
           </PostTopArea>
           <PostContentArea>
             <p>{tempContent}</p>
             <img src={tempImg} alt="이미지" />
-            <p>추천해요</p>
+            <Likes>
+            <LuThumbsUp />
+            <p>추천해요 {tempLikeCount}</p>
+            </Likes>
           </PostContentArea>
           <Hr></Hr>
           <CommentArea>
-            <p>댓글달기 인풋창</p>
-            <p>달린 댓글 컴포넌트</p>
-            <p>페이지네이션 컴포넌트</p>
+            <CommentWritingBox text={tempComment} nickname={tempCommentNickname}></CommentWritingBox>
+            <Comment text={tempComment} nickname={tempCommentNickname} profileImg={tempImg} date={tempDate}></Comment>
+            <Pagination />
           </CommentArea>
         </PostContainer>
       </Container>

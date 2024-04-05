@@ -15,7 +15,7 @@ const TopBarContainer = styled.div`
   font-size: 32px;
 `;
 const Container = styled.div`
-  width: 70%;
+width: 70%;
 `
 
 const Category = styled.div`

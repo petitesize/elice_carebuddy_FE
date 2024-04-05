@@ -9,17 +9,18 @@ type SidePanelProps = {
 
 const StyledSidePanelContainer = styled.div`
 border-radius: 10px;
-border: solid 1px #cecece;
+border: solid 1px var(--color-grey-2);
 height: auto;
 width: 100%;
 padding: 20px;
 // background-color: aqua;
-box-sizing: border-box; /* 부모 요소 크기 그대로 상속받도록 */
+font-size: var(--font-size-md-2);
+box-sizing: border-box; 
 `;
 
 const Hr = styled.hr`
   border: none;
-  border-top: 1px solid #cecece;
+  border-top: 1px solid var(--color-grey-2);
 `;
 
 const SidePanel: React.FC<SidePanelProps> = ({ name, space1, space2, space3 }) => (

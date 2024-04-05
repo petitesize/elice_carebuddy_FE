@@ -56,7 +56,7 @@ const Container = styled.div`
   margin: 0 auto;
   padding: 0;
   width: 70%;
-`
+  `
 const Category = styled.a`
   & a {
     text-decoration: none;

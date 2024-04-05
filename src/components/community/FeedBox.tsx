@@ -33,8 +33,8 @@ const ProfileContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  color: #7d7d7d;
-  font-size: 12px;
+  color: var(--color-grey-1);
+  font-size: var(--font-size-sm-1);
   align-items: center;
   height: auto;
 
@@ -44,7 +44,7 @@ const ProfileContainer = styled.div`
 `;
 
 const Nickname = styled.p`
-  color: #343434;
+color: #343434;
 `;
 
 const ProfileImg = styled.img`
@@ -54,22 +54,22 @@ const ProfileImg = styled.img`
 `;
 
 const Title = styled.p`
-  color: #6d987a;
-  font-weight: 500;
+  color: var(--color-green-main);
+  font-size: var(--font-size-md-2);
+  font-weight: var(--font-weight-bold);
 `;
 
 const Content = styled.pre`
   margin: 20px 0 12px 0;
-  color: #7d7d7d;
-  font-size: 12px;
+  color: var(--color-grey-1);
   width: 100%;
   white-space: pre-wrap;
-  line-height: 1.1rem;
+  line-height: 1.2rem;
 `;
 
 const Hr = styled.hr`
   border: none;
-  border-top: 1px solid #cecece;
+  border-top: 1px solid var(--color-grey-2);
   margin: 10px 0;
 `;
 

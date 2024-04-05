@@ -7,6 +7,7 @@ import CommunitySearch from '../../components/community/CommunitySearch';
 import FeedBox from '../../components/community/FeedBox';
 import SidePanel from '../../components/community/SidePanel';
 import SuggestedMember from '../../components/community/SuggestedMember';
+import Pagination from '../../components/community/Pagination'
 
 // 임시 이미지
 import profileImg from '../../assets/temp-profile.png';
@@ -33,13 +34,6 @@ const Community: React.FC = () => {
     flex-direction: row;
     justify-content: center;
     margin-top: 50px;
-  `;
-
-  const FeedOption = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    margin-bottom: 10px;
   `;
 
   const CommunityFeedContainer = styled.div`
@@ -78,9 +72,7 @@ const Community: React.FC = () => {
       </SearchContainer>
       <ContentContainer>
         <CommunityFeedContainer>
-          <FeedOption>
             <WritingButton buttonText="글 작성하기" />
-          </FeedOption>
           <FeedBox
             title={tempTitle}
             content={tempContent}
@@ -108,6 +100,7 @@ const Community: React.FC = () => {
             likeCount={templikeCount}
             commentCount={tempCommentCount}
           />
+          <Pagination />
         </CommunityFeedContainer>
         <SidePanelContainer>
           <GroupOption>

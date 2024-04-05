@@ -1,3 +1,5 @@
+// 거의 미시작 페이지입니다
+
 import React from 'react';
 import styled from 'styled-components';
 

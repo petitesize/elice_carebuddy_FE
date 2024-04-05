@@ -17,7 +17,7 @@ const Body = styled.div`
 const Main = styled.div`
   margin: 0 auto;
   width: 70%;
-`;
+  `;
 
 interface BodyProps {
   component: React.ComponentType;
