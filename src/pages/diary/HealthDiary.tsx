@@ -124,7 +124,7 @@ const DetailTitle = styled.p`
   font-weight: var(--font-weight-bold);
 
   + p {
-    font-size: var(--font-size-md-2);
+    font-size: var(--font-size-md-1);
     margin-top: 4px;
     line-height: var(--font-size-hd-2);
     white-space: pre-wrap;

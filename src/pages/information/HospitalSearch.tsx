@@ -19,10 +19,10 @@ const StyledSearch = styled(BasedSearch)`
   width: 100%;
 `;
 
-const StyledSelect = styled(BasedSelect)`
-  margin-left: 15px;
-  width: 100%;
-`;
+// const StyledSelect = styled(BasedSelect)`
+//   margin-left: 15px;
+//   width: 100%;
+// `;
 
 const SearchBoxContainer = styled.div`
   width: 50%;
@@ -58,20 +58,22 @@ const Search = () => (
   <StyledSearch type="string" placeholder="검색어를 입력하세요"></StyledSearch>
 );
 
-interface SelectProps {
-  className?: string;
-  options: { value: string; label: string }[];
-}
+// 기존 방식: 코드 리뷰 후 삭제 예정
+// interface SelectProps {
+//   className?: string;
+//   options: { value: string; label: string }[];
+//   // width:
+// }
 
-const Select: React.FC<SelectProps> = ({ className, options, ...rest }) => (
-  <StyledSelect {...rest}>
-    {options.map((option) => (
-      <option key={option.value} value={option.value}>
-        {option.label}
-      </option>
-    ))}
-  </StyledSelect>
-);
+// const Select: React.FC<SelectProps> = ({ className, options, ...rest }) => (
+//   <BasedSelect {...rest}>
+//     {options.map((option) => (
+//       <option key={option.value} value={option.value}>
+//         {option.label}
+//       </option>
+//     ))}
+//   </BasedSelect>
+// );
 
 // UI확인용 임시데이터
 const SelectDummyCityOptions = [
@@ -93,8 +95,14 @@ const HospitalSearch: React.FC = () => {
         <SearchBoxContainer>
           <SelectContainer>
             <Title>지역: </Title>
-            <Select options={SelectDummyCityOptions}></Select>
-            <Select options={SelectDummyProvinceOptions}></Select>
+            <BasedSelect
+              width="100%"
+              options={SelectDummyCityOptions}
+            ></BasedSelect>
+            <BasedSelect
+              width="100%"
+              options={SelectDummyProvinceOptions}
+            ></BasedSelect>
           </SelectContainer>
           <SearchContainer>
             <Title>병원명: </Title>
