@@ -15,7 +15,7 @@ const TopBarContainer = styled.div`
   font-size: 32px;
 `;
 const Container = styled.div`
-  width: 70%;
+  width: 1024px;
 `
 
 const Category = styled.div`
@@ -23,7 +23,7 @@ const Category = styled.div`
 `
 
 const Title = styled.div`
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
   padding-top: 5px;
 `

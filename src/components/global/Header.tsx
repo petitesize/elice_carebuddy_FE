@@ -17,6 +17,8 @@ const HeaderContainer = styled.header`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   background-color: white;
+  display: flex;
+  align-items: center;
 `;
 
 const MenuBox = styled.span`
@@ -27,8 +29,8 @@ const MenuBox = styled.span`
 
 const Logo = styled.img`
   cursor: pointer;
-  width: 130px;
-  height: 70px;
+  width: 125px;
+  height: 60px;
 `;
 
 const Icon = styled.img`
@@ -49,7 +51,7 @@ const Login = styled.a`
 const Container = styled.div`
   margin: 0 auto;
   padding: 0;
-  width: 70%;
+  width: 1024px;
   height: auto;
 `
 const Category = styled.a`
@@ -66,7 +68,7 @@ const Header: React.FC = () => {
           <MenuBox>
             <Link to="/"><Logo src={imgSrc} /></Link>
             <Category><Link to="/community">커뮤니티</Link></Category>
-            <Category><Link to="/">건강관리</Link></Category>
+            <Category><Link to="/diary">건강관리</Link></Category>
             <Category><Link to="/">정보</Link></Category>
             <Icon src={search} />
             <Category><Link to="/signup"><Login>로그인</Login></Link></Category>
@@ -74,7 +76,7 @@ const Header: React.FC = () => {
             <Icon src={alert} />
           </MenuBox>
         </Container>
-        <TopBar />
+
       </HeaderContainer>
 
     </>
