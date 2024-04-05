@@ -7,6 +7,34 @@ import reset from 'styled-reset';
 const GlobalStyle = createGlobalStyle`
   ${reset}
 
+  :root {
+    --font-size-sm-1: 0.75rem; // 12
+    --font-size-ft-1: 0.875rem; // 14
+
+    --font-size-md-1: 1rem; // 16
+    --font-size-md-2: 1.125rem; // 18
+
+    --font-size-hd-1: 1.25rem; // 20
+    --font-size-hd-2: 1.375rem; // 22
+
+    --font-size-lg-1: 1.625rem; // 26
+    --font-size-lg-2: 2rem; // 32
+    
+    /* h1,h2: bold, h3~h5: semibold, h6: medium 
+      p: regular and bold
+      buttons and labels: semibold */
+    --font-weight-bold: 700;
+    --font-weight-semibold: 600;
+    --font-weight-medium: 500; 
+
+    --color-green-main: #6D987A;
+    --color-green-sub-1: #98B99C;
+    --color-green-sub-2: #E0EAE1;
+    --color-beige-main: #EEEDE5;
+    --color-beige-sub: #F7F6F2;
+    --color-red-main: #E13C45;
+  }
+
   @font-face {
     font-family: 'Pretendard-Regular';
     src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
