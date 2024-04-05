@@ -18,18 +18,23 @@ const HealthDiaryContainer = styled.div`
 
 // 프로필카드 타이틀과 다이어리 타이틀을 구분
 const Title = styled.h2`
-  font-size: ${(props) => (props.className === 'diaryTitle' ? '26px' : '22px')};
+  font-size: ${(props) =>
+    props.className === 'diaryTitle'
+      ? 'var(--font-size-lg-1)'
+      : 'var(--font-size-hd-2)'};
   font-weight: ${(props) =>
-    props.className === 'diaryTitle' ? 'bold' : '500'};
+    props.className === 'diaryTitle'
+      ? 'var(--font-weight-bold)'
+      : 'var(--font-weight-medium)'};
   height: ${(props) => (props.className === 'diaryTitle' ? '115px' : 'auto')};
   color: ${(props) =>
-    props.className === 'diaryTitle' ? '#6d987a' : 'inherit'};
+    props.className === 'diaryTitle' ? 'var(--color-green-main)' : 'inherit'};
   margin-left: ${(props) =>
     props.className === 'deseaseTitle' ? '10px' : '0'};
 `;
 
 const HorizontalLine = styled.div`
-  border-top: 2px solid rgba(152, 185, 156, 0.5);
+  border-top: 3px solid var(--color-green-sub-2);
   top: 115px;
   left: 0;
   width: 100%;
@@ -41,7 +46,7 @@ const AddDiaryBtn = styled.button`
   width: 134px;
   height: 35px;
 
-  background: #6d987a;
+  background: var(--color-green-main);
   border: 0;
   color: #ffffff;
 `;
@@ -116,16 +121,15 @@ const DiaryDetail = styled.div`
 
 const DetailTitle = styled.p`
   width: 300px;
-  font-weight: bold;
+  font-weight: var(--font-weight-bold);
 
   + p {
-    font-size: 18px;
+    font-size: var(--font-size-md-2);
     margin-top: 4px;
-    line-height: 22px;
+    line-height: var(--font-size-hd-2);
     white-space: pre-wrap;
 
     > span {
-      font-size: 16px;
       color: #7d7d7d;
     }
   }
