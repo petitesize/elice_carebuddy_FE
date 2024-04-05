@@ -1,11 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Layout from '../components/Layout';
+import Layout from '../components/global/Layout';
 import LoginPage from '../pages/signup/Signup';
 import Mypage from '../pages/mypage/Mypage';
 import Home from '../pages/home/Home';
 import Community from '../pages/community/Community';
 import Feed from '../pages/feed/Feed';
 import Group from '../pages/group/Group';
+import Diary from '../pages/diary/Diary';
 
 const AppRouter = () => {
   return (
@@ -18,10 +19,10 @@ const AppRouter = () => {
         <Route path="/community" element={<Layout component={Community} />} />
         <Route path="/feed" element={<Layout component={Feed} />} />
         <Route path="/group" element={<Layout component={Group} />} />
+        <Route path="/diary" element={<Layout component={Diary} />} />
       </Routes>
     </Router>
   );
 };
-
 
 export default AppRouter;
