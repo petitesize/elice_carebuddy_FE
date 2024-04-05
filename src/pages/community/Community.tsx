@@ -1,5 +1,4 @@
 import React from 'react';
-import GlobalStyle from '../../components/GlobalStyle';
 import styled from 'styled-components';
 
 const Community: React.FC = () => {
@@ -44,7 +43,6 @@ const Community: React.FC = () => {
   return (
     <>
       <div className="main">
-        <GlobalStyle />
         <CommunityContainer>
           <input type="text"></input>
           <All>
