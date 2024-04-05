@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 // 컴포넌트
-import WritingButton from '../../components/Community/WritingButton';
-import CommunitySearch from '../../components/Community/CommunitySearch';
-import FeedBox from '../../components/Community/FeedBox';
-import SidePanel from '../../components/Community/SidePanel';
-import SuggestedMember from '../../components/Community/SuggestedMember';
+import WritingButton from '../../components/community/WritingButton';
+import CommunitySearch from '../../components/community/CommunitySearch';
+import FeedBox from '../../components/community/FeedBox';
+import SidePanel from '../../components/community/SidePanel';
+import SuggestedMember from '../../components/community/SuggestedMember';
 
 // 임시 이미지
 import profileImg from '../../assets/temp-profile.png';
@@ -20,7 +20,7 @@ const templikeCount = 1;
 const tempNickname = '닉네임';
 const tempIntroduction = '소개';
 
-const Feed: React.FC = () => {
+const Community: React.FC = () => {
   const ContentContainer = styled.div`
     margin-top: 80px;
     display: flex;
@@ -32,7 +32,7 @@ const Feed: React.FC = () => {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin-top:50px;
+    margin-top: 50px;
   `;
 
   const FeedOption = styled.div`
@@ -42,35 +42,34 @@ const Feed: React.FC = () => {
     margin-bottom: 10px;
   `;
 
-  const FeedContainer = styled.div`
+  const CommunityFeedContainer = styled.div`
     // background-color: yellow;
     width: 70%;
     margin-bottom: 30px;
   `;
 
   const SidePanelContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
     width: 20%;
-  // background-color: yellow;
+    // background-color: yellow;
   `;
 
   const GroupOption = styled.div`
-  display: flex;
-  flex-direction: row;
-  // background-color: red;
-  justify-content: space-between;
-  width: 100%;
+    display: flex;
+    flex-direction: row;
+    // background-color: red;
+    justify-content: space-between;
+    width: 100%;
 
-  p{
-    font-size: 14px;
-    margin-bottom: 10px;
-    color: #343434;
-    padding: 0 0 2px;
-    border-bottom: solid 1px #343434; 
-
-  }
-  `
+    p {
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: #343434;
+      padding: 0 0 2px;
+      border-bottom: solid 1px #343434;
+    }
+  `;
 
   return (
     <>
@@ -78,7 +77,7 @@ const Feed: React.FC = () => {
         <CommunitySearch />
       </SearchContainer>
       <ContentContainer>
-        <FeedContainer>
+        <CommunityFeedContainer>
           <FeedOption>
             <WritingButton buttonText="글 작성하기" />
           </FeedOption>
@@ -109,11 +108,11 @@ const Feed: React.FC = () => {
             likeCount={templikeCount}
             commentCount={tempCommentCount}
           />
-        </FeedContainer>
+        </CommunityFeedContainer>
         <SidePanelContainer>
           <GroupOption>
-          <p>그룹 탈퇴</p>
-          <p>다른 그룹 둘러보기</p>
+            <p>그룹 탈퇴</p>
+            <p>다른 그룹 둘러보기</p>
           </GroupOption>
           <SidePanel
             name="추천 멤버"
@@ -145,4 +144,4 @@ const Feed: React.FC = () => {
   );
 };
 
-export default Feed;
+export default Community;

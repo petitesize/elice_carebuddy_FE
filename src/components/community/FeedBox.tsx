@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import LikeAndCommentNum from './LikeAndCommentNum';
+import LikeAndCommentCount from './LikeAndCommentCount';
 
 type FeedBoxProps = {
   title: string;
@@ -85,7 +85,7 @@ const FeedBox: React.FC<FeedBoxProps> = ({
   <StyledFeedBox>
     <TitleContainer>
       <Title>{title}</Title>
-      <LikeAndCommentNum likeCount={likeCount} commentCount={commentCount} />
+      <LikeAndCommentCount likeCount={likeCount} commentCount={commentCount} />
     </TitleContainer>
     <Content>{content}</Content>
     <Hr />
