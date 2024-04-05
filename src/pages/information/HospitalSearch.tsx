@@ -47,6 +47,7 @@ const StyledButton = styled(BasedButton)`
   position: absolute;
   padding: 5px 10px;
   right: -75px;
+  font-weight: var(--font-weight-normal);
 `;
 
 const Title = styled.p`

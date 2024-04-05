@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import HospitalSearch from './HospitalSearch';
+import HospitalSearchResult from './HosplitalSearchResult';
 
 const HospitalInfoPageContainer = styled.div`
   width: 100%;
@@ -16,6 +17,7 @@ const Information: React.FC = () => {
   return (
     <HospitalInfoPageContainer>
       <HospitalSearch />
+      <HospitalSearchResult />
     </HospitalInfoPageContainer>
   );
 };
