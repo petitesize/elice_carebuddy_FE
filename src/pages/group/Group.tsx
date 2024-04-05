@@ -1,13 +1,12 @@
-import GlobalStyle from '../../components/global/GlobalStyle';
+import React from 'react';
 import styled from 'styled-components';
 
-export default function Group() {
+const Group: React.FC = () => {
   const GroupContainer = styled.div``;
 
   return (
     <>
       <div className="main">
-        <GlobalStyle />
         <GroupContainer>
           <h1>강아지 고양이 선택 탭</h1>
           <h1>그룹 컴포넌트</h1>
@@ -16,3 +15,5 @@ export default function Group() {
     </>
   );
 }
+
+export default Group;
