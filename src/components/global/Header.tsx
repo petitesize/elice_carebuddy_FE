@@ -9,17 +9,14 @@ import { Link } from 'react-router-dom';
 
 // styled-components를 사용하여 header 스타일 정의
 const HeaderContainer = styled.header`
-  background-color: white;
-  font-weight: bold;
-  font-size: 22px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  color: #343434;
-  padding: 10px 0 10px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 80px;
-  position: fixed; /* 헤더를 고정 */
-  top: 0; /* 페이지 상단에 고정 */
-  z-index: 1000; /* 다른 요소 위에 헤더 표시 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  background-color: white;
   display: flex;
   align-items: center;
 `;
@@ -32,8 +29,8 @@ const MenuBox = styled.span`
 
 const Logo = styled.img`
   cursor: pointer;
-  width: 130px;
-  height: 70px;
+  width: 125px;
+  height: 60px;
 `;
 
 const Icon = styled.img`
@@ -45,7 +42,6 @@ const Icon = styled.img`
 
 const Login = styled.a`
   cursor: pointer;
-  font-size: 18px;
   margin: 0;
   padding: 0;
   display: flex;
@@ -55,8 +51,9 @@ const Login = styled.a`
 const Container = styled.div`
   margin: 0 auto;
   padding: 0;
-  width: 70%;
-  `
+  width: 1024px;
+  height: auto;
+`
 const Category = styled.a`
   & a {
     text-decoration: none;
@@ -68,19 +65,20 @@ const Header: React.FC = () => {
     <>
       <HeaderContainer>
         <Container>
-          <Category><Link to="/signup"><Login>로그인</Login></Link></Category>
           <MenuBox>
             <Link to="/"><Logo src={imgSrc} /></Link>
             <Category><Link to="/community">커뮤니티</Link></Category>
-            <Category><Link to="/">건강관리</Link></Category>
+            <Category><Link to="/diary">건강관리</Link></Category>
             <Category><Link to="/">정보</Link></Category>
             <Icon src={search} />
+            <Category><Link to="/signup"><Login>로그인</Login></Link></Category>
             <Link to="/mypage"><Icon src={user} /></Link>
             <Icon src={alert} />
           </MenuBox>
         </Container>
+
       </HeaderContainer>
-      <TopBar />
+
     </>
   );
 };

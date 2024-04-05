@@ -11,20 +11,21 @@ const TopBarContainer = styled.div`
   align-items: center;
   padding: 10px 0 10px 0;
   width: 100%;
-  height: 80px;
+  height: 40px;
   font-size: 32px;
 `;
 const Container = styled.div`
-width: 70%;
+  width: 1024px;
 `
 
 const Category = styled.div`
-  font-size: 16px;
+  font-size: 14px;
 `
 
 const Title = styled.div`
-  font-size: 32px;
+  font-size: 20px;
   font-weight: bold;
+  padding-top: 5px;
 `
 
 const TopBar: React.FC = () => {
