@@ -2,6 +2,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import GlobalStyle from "./GlobalStyle";
 import styled from "styled-components";
+import TopBar from "./TopBar";
 
 const LayoutContainer = styled.div`
   display: flex;
@@ -11,13 +12,12 @@ const LayoutContainer = styled.div`
 
 const Body = styled.div`
   flex: 1;
-  padding-top: 130px;
+  padding-top: 80px;
 `;
 
 const Main = styled.div`
-
   margin: 0 auto;
-  width: 70%;
+  width: 1024px;
 `;
 
 interface BodyProps {
@@ -31,6 +31,7 @@ const Layout: React.FC<BodyProps> = ({ component: Component }) => {
     <LayoutContainer>
       <Header />
       <Body>
+      <TopBar />
         <Main>
           <Component />
         </Main>

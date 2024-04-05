@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 import React, { useState } from 'react';
-import UserTrue from '../../pages/mypage/UserTrue';
-import Profile from '../../components/mypage/Profile';
+import UserAsk from '../../pages/mypage/UserAsk';
 
 const Container = styled.div`
-  padding: 20px 0 20px 0;
   display: flex;
   flex-direction: column;
 `;
@@ -16,7 +14,7 @@ const UserContainer = styled.div`
 
 const Menu = styled.span`
   padding: 10px 10px 10px 0;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
 `;
 
@@ -37,13 +35,17 @@ const DataList = styled.span`
 `;
 
 const WithdrawButton = styled.a`
-  padding: 10px 10px 10px 0;
+  padding: 10px 10px 0 0;
   text-decoration: underline;
   cursor: pointer;
 `;
 
 const Data = styled.a`
   padding: 10px 10px 10px 0;
+`;
+
+const Line = styled.hr`
+  border: 1px solid #cecece;
 `;
 
 const UserInfo: React.FC = () => {
@@ -53,11 +55,19 @@ const UserInfo: React.FC = () => {
     setShowModal(!showModal);
   };
 
+    // 더미 데이터
+    const DummyUserInfoData = {
+      name: '케어버디',
+      email: 'carebuddy@kakao.com',
+      phone: '01012345678',
+    };
+
   return (
   <>
     <Container>
         <Menu>
         <Item>회원정보</Item>
+        <Line />
         </Menu>
       <UserContainer>
         <List>
@@ -66,11 +76,11 @@ const UserInfo: React.FC = () => {
           <Item>핸드폰 번호</Item>
         </List>
         <DataList>
+          <Data>{`${DummyUserInfoData.name}`}</Data>
+          <Data>{`${DummyUserInfoData.email}`}</Data>
+          <Data>{`${DummyUserInfoData.phone}`}</Data>
           <WithdrawButton onClick={handleToggleModal}>회원탈퇴</WithdrawButton>
-          {showModal && <UserTrue onClose={handleToggleModal} />}
-          <Data>케어버디</Data>
-          <Data>carebuddy@kakao.com</Data>
-          <Data>01012345678</Data>
+          {showModal && <UserAsk onClose={handleToggleModal} />}
         </DataList>
       </UserContainer>
     </Container>
