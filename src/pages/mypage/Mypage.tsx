@@ -1,18 +1,28 @@
 import styled from 'styled-components';
 import React, { useState } from 'react';
 import UserTrue from './UserTrue';
-import { createGlobalStyle } from 'styled-components';
+import Profile from '../../components/mypage/Profile';
+import UserInfo from '../../components/mypage/UserInfo';
 
-const GlobalStyle = createGlobalStyle`
-  body {
-    font-size: 16px; /* 전역으로 폰트 크기를 16px로 설정 */
-  }
+const Container = styled.div`
+  background-color: blue;
+  padding: 20px 0 20px 0;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const UserContainer = styled.div`
   background-color: grey;
-  padding: 20px 0 20px 0;
+  font-size: 16px;
   display: flex;
+`;
+
+const Menu = styled.span`
+  padding: 20px 20px 20px 0;
+  background-color: aliceblue;
+  font-size: 26px;
+  font-weight: bold;
 `;
 
 const List = styled.span`
@@ -23,16 +33,23 @@ const List = styled.span`
 
 const Item = styled.a`
   font-weight: bold;
+  padding: 20px 20px 20px 0;
 `;
 
 const DataList = styled.span`
-  background-color: white;
+  background-color: green;
   display: flex;
   flex-direction: column;
 `;
 
+const WithdrawButton = styled.a`
+  padding: 20px 20px 20px 0;
+  text-decoration: underline;
+  cursor: pointer;
+`;
+
 const Data = styled.a`
-  font-size: 26px;
+  padding: 20px 20px 20px 0;
 `;
 
 const Mypage: React.FC = () => {
@@ -44,22 +61,8 @@ const Mypage: React.FC = () => {
 
   return (
     <>
-    <GlobalStyle />
-      <UserContainer>
-        <List>
-          <Item>회원정보</Item>
-          <Item>성명</Item>
-          <Item>이메일</Item>
-          <Item>핸드폰 번호</Item>
-        </List>
-        <DataList>
-          <Data onClick={handleToggleModal}>회원탈퇴</Data>
-          {showModal && <UserTrue onClose={handleToggleModal} />}
-          <Data>케어버디</Data>
-          <Data>carebuddy@kakao.com</Data>
-          <Data>01012345678</Data>
-        </DataList>
-      </UserContainer>
+      <UserInfo />
+      <Profile />
     </>
   );
 };

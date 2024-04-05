@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import imgSrc from './../assets/carebuddyLogo.png';
-import search from '../assets/searchIcon.png'
-import user from './../assets/userIcon.png'
-import alert from './../assets/alertIcon.png'
+import imgSrc from './../../assets/carebuddyLogo.png'
+import search from './../../assets/searchIcon.png'
+import user from './../../assets/userIcon.png'
+import alert from './../../assets/alertIcon.png'
 import TopBar from './TopBar';
 import { Link } from 'react-router-dom'; 
 

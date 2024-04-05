@@ -1,4 +1,4 @@
-import GlobalStyle from '../../components/GlobalStyle';
+import GlobalStyle from '../../components/global/GlobalStyle';
 import styled from 'styled-components';
 
 export default function Community() {

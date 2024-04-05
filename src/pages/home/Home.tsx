@@ -1,6 +1,5 @@
-import GlobalStyle from '../../components/GlobalStyle';
+import GlobalStyle from '../../components/global/GlobalStyle';
 import styled from 'styled-components';
-
 import WritingButton from '../../components/Community/WritingButton';
 import FeedBox from '../../components/Community/FeedBox';
 import CommunitySuggestor from '../../components/Community/CommunitySuggestor';
