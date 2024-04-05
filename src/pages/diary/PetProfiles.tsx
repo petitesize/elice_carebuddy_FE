@@ -11,8 +11,8 @@ const PetProfilesContainer = styled.div`
 `;
 
 const PetProfilesTitle = styled.div`
-  font-size: 26px;
-  font-weight: bold;
+  font-size: var(--font-size-lg-1);
+  font-weight: var(--font-weight-bold);
   margin: 50px 0;
 `;
 
