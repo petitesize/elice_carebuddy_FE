@@ -8,6 +8,7 @@ import Post from '../pages/post/Post';
 import Group from '../pages/group/Group';
 import Diary from '../pages/diary/Diary';
 import HospitalInfo from '../pages/information/HospitalInfo';
+import PetRegister from '../pages/petRegister/PetRegister';
 
 const AppRouter = () => {
   return (
@@ -18,6 +19,7 @@ const AppRouter = () => {
         <Route path="/mypage" element={<Layout component={Mypage} />} />
         <Route path="/" element={<Layout component={Home} />} />
         <Route path="/community" element={<Layout component={Community} />} />
+        <Route path="/petRegister" element={<Layout component={PetRegister} />} />
         <Route path="/post" element={<Layout component={Post} />} />
         <Route path="/group" element={<Layout component={Group} />} />
         <Route path="/diary" element={<Layout component={Diary} />} />
