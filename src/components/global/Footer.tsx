@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import imgSrc from './../assets/carebuddyLogo.png';
+import imgSrc from './../../assets/carebuddyLogo.png'
 
 // styled-components를 사용하여 footer 스타일 정의
 const FooterContainer = styled.footer`

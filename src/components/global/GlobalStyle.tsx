@@ -20,13 +20,14 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Pretendard-Regular', sans-serif;
     margin: 0;
     padding: 0;
+    color:#343434;
   }
-`
+`;
 
 const Global: React.FC = () => {
   return (
     <>
-    <GlobalStyle />
+      <GlobalStyle />
     </>
   );
 };
