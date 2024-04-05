@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import imgSrc from './../assets/carebuddyLogo.png';
-import search from './../assets/searchIcon.png'
+import search from '../assets/searchIcon.png'
 import user from './../assets/userIcon.png'
 import alert from './../assets/alertIcon.png'
 import TopBar from './TopBar';
@@ -16,14 +16,15 @@ const HeaderContainer = styled.header`
   color: #343434;
   padding: 10px 0 10px 0;
   width: 100%;
-  height: 100px;
+  height: 80px;
   position: fixed; /* 헤더를 고정 */
   top: 0; /* 페이지 상단에 고정 */
   z-index: 1000; /* 다른 요소 위에 헤더 표시 */
-
+  display: flex;
+  align-items: center;
 `;
 
-const MenuBox = styled.div`
+const MenuBox = styled.span`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -58,8 +59,8 @@ const Container = styled.div`
 `
 const Category = styled.a`
   & a {
-    text-decoration: none; /* Link 컴포넌트 안의 a 태그에 대해 밑줄 효과 제거 */
-    color: inherit; /* 링크의 색상을 상속받음 */
+    text-decoration: none;
+    color: inherit;
   }
 `
 const Header: React.FC = () => {
