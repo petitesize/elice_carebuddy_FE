@@ -8,7 +8,8 @@ const StyledWritingButton = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: center;  
+  align-items: center; 
+
   p {
     margin-right: 10px;
     font-size: 16px;
@@ -17,6 +18,10 @@ const StyledWritingButton = styled.div`
   }
 
   button {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center; 
     height: 36px;
     padding: 10px 20px;
     background-color: #6D987A;

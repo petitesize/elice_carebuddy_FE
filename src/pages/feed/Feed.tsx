@@ -2,14 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 
 // 컴포넌트
-import WritingButton from '../../components/community/WritingButton';
-import FeedBox from '../../components/community/FeedBox';
-// import CommunitySuggestor from '../../components/Community/CommunitySuggestor';
-import SidePanel from '../../components/community/SidePanel';
-import SuggestedCommunity from '../../components/community/SuggestedCommunity';
+import WritingButton from '../../components/Community/WritingButton';
+import CommunitySearch from '../../components/Community/CommunitySearch';
+import FeedBox from '../../components/Community/FeedBox';
+import SidePanel from '../../components/Community/SidePanel';
+import SuggestedMember from '../../components/Community/SuggestedMember';
 
 // 임시 이미지
-import homefeedImg from '../../assets/temp-homefeed.png';
 import profileImg from '../../assets/temp-profile.png';
 
 // 임시 제목과 내용
@@ -18,33 +17,29 @@ const tempContent =
   '안녕하세요 더미글입니다. 자신의 강아지를 소개해보세요. 아주 유용할 것 입니다. 어쩌구 저쩌구 어쩌구 저쩌구 어쩌구 저쩌구 어쩌구 저쩌구 어쩌구 저쩌구 이 사이트는 다양한 정보를 공유하기에 매우 좋습니다. 어쩌구 저쩌구...더보기';
 const tempCommentCount = 1;
 const templikeCount = 1;
-const tempGroupName = '눈 / 피부 / 귀';
-const tempGroupIntroduction =
-  '하다 법정만 이윽고 진단은 이유는, 입다 하고 수 1분 혼란스럽은지. ... ';
-const tempMemberCount = '120';
+const tempNickname = '닉네임';
+const tempIntroduction = '소개';
 
-type SelectProps = {
-  width?: string;
-};
-
-const Home: React.FC = () => {
-  const Banner = styled.img`
-    width: 100%;
-    height: auto;
-  `;
-
-  const FeedOption = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  `;
-
+const Feed: React.FC = () => {
   const ContentContainer = styled.div`
     margin-top: 80px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+  `;
+
+  const SearchContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top:50px;
+  `;
+
+  const FeedOption = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-bottom: 10px;
   `;
 
   const FeedContainer = styled.div`
@@ -54,65 +49,44 @@ const Home: React.FC = () => {
   `;
 
   const SidePanelContainer = styled.div`
+  display: flex;
+  flex-direction: column;
     width: 20%;
+  // background-color: yellow;
   `;
 
-  const Select = styled.select<SelectProps>`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border: 1px solid #cecece;
-    border-radius: 30px;
-    height: 36px;
-    padding: 10px;
-    color: #7d7d7d;
-    font-size: 12px;
-    width: ${(props) => (props.width ? props.width : '100px')};
-    margin: 0 5px 0 5px;
-  `;
+  const GroupOption = styled.div`
+  display: flex;
+  flex-direction: row;
+  // background-color: red;
+  justify-content: space-between;
+  width: 100%;
 
-  const SelectCategory = styled(Select)`
-    width: 100px;
-  `;
+  p{
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #343434;
+    padding: 0 0 2px;
+    border-bottom: solid 1px #343434; 
 
-  const SelectGroup = styled(Select)`
-    width: 150px;
-  `;
-
-  const Classification = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-
-    p {
-      color: #7d7d7d;
-      font-size: 14px;
-    }
-  `;
+  }
+  `
 
   return (
     <>
-      <Banner src={homefeedImg} alt="강아지가 뛰어노는 배너 이미지" />
+      <SearchContainer>
+        <CommunitySearch />
+      </SearchContainer>
       <ContentContainer>
         <FeedContainer>
           <FeedOption>
-            <Classification>
-              <p>분류:</p>
-              <SelectCategory>
-                <option value="category">카테고리</option>
-              </SelectCategory>
-              <SelectGroup>
-                <option value="group">그룹</option>
-              </SelectGroup>
-            </Classification>
             <WritingButton buttonText="글 작성하기" />
           </FeedOption>
           <FeedBox
             title={tempTitle}
             content={tempContent}
             src={profileImg}
-            nickname="냥멍이"
+            nickname={tempNickname}
             uploadedDate="업로드 날짜"
             likeCount={templikeCount}
             commentCount={tempCommentCount}
@@ -121,7 +95,7 @@ const Home: React.FC = () => {
             title={tempTitle}
             content={tempContent}
             src={profileImg}
-            nickname="냥멍이"
+            nickname={tempNickname}
             uploadedDate="업로드 날짜"
             likeCount={templikeCount}
             commentCount={tempCommentCount}
@@ -130,34 +104,38 @@ const Home: React.FC = () => {
             title={tempTitle}
             content={tempContent}
             src={profileImg}
-            nickname="냥멍이"
+            nickname={tempNickname}
             uploadedDate="업로드 날짜"
             likeCount={templikeCount}
             commentCount={tempCommentCount}
           />
         </FeedContainer>
         <SidePanelContainer>
+          <GroupOption>
+          <p>그룹 탈퇴</p>
+          <p>다른 그룹 둘러보기</p>
+          </GroupOption>
           <SidePanel
-            name="추천 커뮤니티"
+            name="추천 멤버"
             space1={
-              <SuggestedCommunity
-                name={tempGroupName}
-                introduction={tempGroupIntroduction}
-                memberCount={tempMemberCount}
+              <SuggestedMember
+                src={profileImg}
+                nickname={tempNickname}
+                introduction={tempIntroduction}
               />
             }
             space2={
-              <SuggestedCommunity
-                name={tempGroupName}
-                introduction={tempGroupIntroduction}
-                memberCount={tempMemberCount}
+              <SuggestedMember
+                src={profileImg}
+                nickname={tempNickname}
+                introduction={tempIntroduction}
               />
             }
             space3={
-              <SuggestedCommunity
-                name={tempGroupName}
-                introduction={tempGroupIntroduction}
-                memberCount={tempMemberCount}
+              <SuggestedMember
+                src={profileImg}
+                nickname={tempNickname}
+                introduction={tempIntroduction}
               />
             }
           />
@@ -167,4 +145,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Feed;

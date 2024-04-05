@@ -2,11 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 // 컴포넌트
-import WritingButton from '../../components/community/WritingButton';
-import FeedBox from '../../components/community/FeedBox';
-// import CommunitySuggestor from '../../components/Community/CommunitySuggestor';
-import SidePanel from '../../components/community/SidePanel';
-import SuggestedCommunity from '../../components/community/SuggestedCommunity';
+import WritingButton from '../../components/Community/WritingButton';
+import FeedBox from '../../components/Community/FeedBox';
+import SidePanel from '../../components/Community/SidePanel';
+import SuggestedCommunity from '../../components/Community/SuggestedCommunity';
 
 // 임시 이미지
 import homefeedImg from '../../assets/temp-homefeed.png';
