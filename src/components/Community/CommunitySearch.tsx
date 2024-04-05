@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 
+type CommunitySearchProps = {
+  searchTerm: string
+}
+
 const Search = styled.input`
-// box-sizing: border-box;
 background: #FFFFFF;
 border: 1px solid #CECECE;
 border-radius: 30px;
@@ -11,8 +14,8 @@ width: 500px;
 font-size: 16px;
 padding: 5px 5px 5px 15px;
 `
-const CommunitySearch= ({ }) => (
-<Search type="string" placeholder="검색어를 입력하세요"></Search>
+const CommunitySearch: React.FC<CommunitySearchProps> = ({ searchTerm }) => (
+<Search type="string" placeholder="검색어를 입력하세요">{searchTerm}</Search>
 )
 
 export default CommunitySearch;

@@ -1,7 +1,8 @@
+import React from 'react';
 import GlobalStyle from '../../components/GlobalStyle';
 import styled from 'styled-components';
 
-export default function Group() {
+const Group: React.FC = () => {
   const GroupContainer = styled.div``;
 
   return (
@@ -16,3 +17,5 @@ export default function Group() {
     </>
   );
 }
+
+export default Group;

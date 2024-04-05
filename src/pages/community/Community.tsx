@@ -1,7 +1,8 @@
+import React from 'react';
 import GlobalStyle from '../../components/GlobalStyle';
 import styled from 'styled-components';
 
-export default function Community() {
+const Community: React.FC = () => {
   const All = styled.div`
     display: flex;
     flex-direction: row;
@@ -68,3 +69,5 @@ export default function Community() {
     </>
   );
 }
+
+export default Community;

@@ -1,70 +1,170 @@
-import GlobalStyle from '../../components/GlobalStyle';
+import React from 'react';
 import styled from 'styled-components';
 
-export default function Community() {
-  const All = styled.div`
+// 컴포넌트
+import WritingButton from '../../components/community/WritingButton';
+import FeedBox from '../../components/community/FeedBox';
+// import CommunitySuggestor from '../../components/Community/CommunitySuggestor';
+import SidePanel from '../../components/community/SidePanel';
+import SuggestedCommunity from '../../components/community/SuggestedCommunity';
+
+// 임시 이미지
+import homefeedImg from '../../assets/temp-homefeed.png';
+import profileImg from '../../assets/temp-profile.png';
+
+// 임시 제목과 내용
+const tempTitle = '안녕하세요 제목입니당 당당당';
+const tempContent =
+  '안녕하세요 더미글입니다. 자신의 강아지를 소개해보세요. 아주 유용할 것 입니다. 어쩌구 저쩌구 어쩌구 저쩌구 어쩌구 저쩌구 어쩌구 저쩌구 어쩌구 저쩌구 이 사이트는 다양한 정보를 공유하기에 매우 좋습니다. 어쩌구 저쩌구...더보기';
+const tempCommentCount = 1;
+const templikeCount = 1;
+const tempGroupName = '눈 / 피부 / 귀';
+const tempGroupIntroduction =
+  '하다 법정만 이윽고 진단은 이유는, 입다 하고 수 1분 혼란스럽은지. ... ';
+const tempMemberCount = '120';
+
+type SelectProps = {
+  width?: string;
+};
+
+const Home: React.FC = () => {
+  const Banner = styled.img`
+    width: 100%;
+    height: auto;
+  `;
+
+  const FeedOption = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  `;
+
+  const ContentContainer = styled.div`
+    margin-top: 80px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
   `;
 
-  const Left = styled.div`
+  const FeedContainer = styled.div`
+    // background-color: yellow;
+    width: 70%;
+    margin-bottom: 30px;
+  `;
+
+  const SidePanelContainer = styled.div`
+    width: 20%;
+  `;
+
+  const Select = styled.select<SelectProps>`
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    background-color: yellow;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid #cecece;
+    border-radius: 30px;
+    height: 36px;
+    padding: 10px;
+    color: #7d7d7d;
+    font-size: 12px;
+    width: ${(props) => (props.width ? props.width : '100px')};
+    margin: 0 5px 0 5px;
   `;
 
-  const Right = styled.div`
+  const SelectCategory = styled(Select)`
+    width: 100px;
+  `;
+
+  const SelectGroup = styled(Select)`
+    width: 150px;
+  `;
+
+  const Classification = styled.div`
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    background-color: green;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    p {
+      color: #7d7d7d;
+      font-size: 14px;
+    }
   `;
-
-  const CommunityContainer = styled.div`
-    max-width: 100%;
-    width: 100%;
-    text-align: center;
-  `;
-
-  const GroupOption = styled.div`
-  display: flex;
-  flex-direction: row;
-  `
-
-  const WritingButton = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-`;
 
   return (
     <>
-      <div className="main">
-        <GlobalStyle />
-        <CommunityContainer>
-          <input type="text"></input>
-          <All>
-            <Left>
-              <WritingButton>
-              <p>함께 나누고 싶은 이야기가 있나요?</p>
-              <button>글 작성하기</button>
-              </WritingButton>
-              <h1>글 하나 컴포넌트</h1>
-              <h1>페이지 넘김 표시</h1>
-            </Left>
-            <Right>
-              <GroupOption>
-              <a>그룹 탈퇴</a>
-              <a>다른 그룹 둘러보기</a>
-              </GroupOption>
-              <h1>그룹멤버 컴포넌트</h1>
-            </Right>
-          </All>
-        </CommunityContainer>
-      </div>
+      <Banner src={homefeedImg} alt="강아지가 뛰어노는 배너 이미지" />
+      <ContentContainer>
+        <FeedContainer>
+          <FeedOption>
+            <Classification>
+              <p>분류:</p>
+              <SelectCategory>
+                <option value="category">카테고리</option>
+              </SelectCategory>
+              <SelectGroup>
+                <option value="group">그룹</option>
+              </SelectGroup>
+            </Classification>
+            <WritingButton buttonText="글 작성하기" />
+          </FeedOption>
+          <FeedBox
+            title={tempTitle}
+            content={tempContent}
+            src={profileImg}
+            nickname="냥멍이"
+            uploadedDate="업로드 날짜"
+            likeCount={templikeCount}
+            commentCount={tempCommentCount}
+          />
+          <FeedBox
+            title={tempTitle}
+            content={tempContent}
+            src={profileImg}
+            nickname="냥멍이"
+            uploadedDate="업로드 날짜"
+            likeCount={templikeCount}
+            commentCount={tempCommentCount}
+          />
+          <FeedBox
+            title={tempTitle}
+            content={tempContent}
+            src={profileImg}
+            nickname="냥멍이"
+            uploadedDate="업로드 날짜"
+            likeCount={templikeCount}
+            commentCount={tempCommentCount}
+          />
+        </FeedContainer>
+        <SidePanelContainer>
+          <SidePanel
+            name="추천 커뮤니티"
+            space1={
+              <SuggestedCommunity
+                name={tempGroupName}
+                introduction={tempGroupIntroduction}
+                memberCount={tempMemberCount}
+              />
+            }
+            space2={
+              <SuggestedCommunity
+                name={tempGroupName}
+                introduction={tempGroupIntroduction}
+                memberCount={tempMemberCount}
+              />
+            }
+            space3={
+              <SuggestedCommunity
+                name={tempGroupName}
+                introduction={tempGroupIntroduction}
+                memberCount={tempMemberCount}
+              />
+            }
+          />
+        </SidePanelContainer>
+      </ContentContainer>
     </>
   );
-}
+};
+
+export default Home;
