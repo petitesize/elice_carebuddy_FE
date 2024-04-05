@@ -1,6 +1,6 @@
 import Header from "./Header";
 import Footer from "./Footer";
-import Global from "./GlobalStyle";
+import GlobalStyle from "./GlobalStyle";
 import TopBar from "./TopBar";
 import styled from "styled-components";
 
@@ -25,8 +25,9 @@ interface BodyProps {
 
 const Layout: React.FC<BodyProps> = ({ component: Component }) => {
   return (
+    <>
+    <GlobalStyle />
     <LayoutContainer>
-      <Global />
       <Header />
       <Body>
         <TopBar />
@@ -36,6 +37,7 @@ const Layout: React.FC<BodyProps> = ({ component: Component }) => {
       </Body>
       <Footer />
     </LayoutContainer>
+    </>
   );
 }
 
