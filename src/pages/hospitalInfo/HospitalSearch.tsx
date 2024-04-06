@@ -15,7 +15,6 @@ const HospitalSearchContainer = styled.div`
   justify-content: center;
 `;
 const StyledSearch = styled(BasedSearch)`
-  margin-left: 15px;
   width: 100%;
 `;
 
@@ -52,6 +51,10 @@ const StyledButton = styled(BasedButton)`
 
 const Title = styled.p`
   white-space: nowrap;
+  margin-right: 15px;
+  + select {
+    margin-right: 15px;
+  }
 `;
 
 const Search = () => (
