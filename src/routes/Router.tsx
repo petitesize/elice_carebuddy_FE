@@ -7,7 +7,7 @@ import Community from '../pages/community/Community';
 import Post from '../pages/post/Post';
 import Group from '../pages/group/Group';
 import Diary from '../pages/diary/Diary';
-import HospitalInfo from '../pages/information/HospitalInfo';
+import HospitalInfo from '../pages/hospitalInfo/HospitalInfo';
 import PetRegister from '../pages/petRegister/PetRegister';
 
 const AppRouter = () => {
@@ -19,12 +19,15 @@ const AppRouter = () => {
         <Route path="/mypage" element={<Layout component={Mypage} />} />
         <Route path="/" element={<Layout component={Home} />} />
         <Route path="/community" element={<Layout component={Community} />} />
-        <Route path="/petRegister" element={<Layout component={PetRegister} />} />
+        <Route
+          path="/pet-register"
+          element={<Layout component={PetRegister} />}
+        />
         <Route path="/post" element={<Layout component={Post} />} />
         <Route path="/group" element={<Layout component={Group} />} />
         <Route path="/diary" element={<Layout component={Diary} />} />
         <Route
-          path="/hospitalInfo"
+          path="/hospital-info"
           element={<Layout component={HospitalInfo} />}
         />
       </Routes>
