@@ -9,7 +9,9 @@ const Container = styled.div`
 
 const UserContainer = styled.div`
   font-size: 14px;
+  margin: 20px 0 40px 0;
   display: flex;
+  justify-content: center;
 `;
 
 const Menu = styled.span`
@@ -30,21 +32,22 @@ const Line = styled.hr`
 const UserInfo: React.FC = () => {
 
   // 더미 데이터
-  const DummyUserInfoData = {
-    name: '케어버디',
-    email: 'carebuddy@kakao.com',
-    phone: '01012345678',
+  const DummyData = {
+    petName: '냥이',
+    breeds: '여자',
+    petAge: 2,
+    petImg: 'undefined',
   };
 
   return (
-  <Container>
-    <Menu>
-      <Item>프로필</Item>
-      <Line />
-    </Menu>
-    <UserContainer>
-      {/* 재사용되는 컴포넌트를 여기에 불러옴*/}
-    </UserContainer>
+    <Container>
+      <Menu>
+        <Item>프로필</Item>
+        <Line />
+      </Menu>
+      <UserContainer>
+        <PetProfileCards petName={DummyData.petName} breeds={DummyData.breeds} petAge={DummyData.petAge} petImg={DummyData.petImg} />
+      </UserContainer>
     </Container>
   );
 };

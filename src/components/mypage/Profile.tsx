@@ -10,6 +10,7 @@ const UserContainer = styled.div`
   font-size: 14px;
   display: flex;
   justify-content: space-evenly;
+  margin: 20px 0 20px 0;
 `;
 
 const Menu = styled.span`

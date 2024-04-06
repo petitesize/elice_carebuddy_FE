@@ -3,6 +3,7 @@ import React from 'react';
 import UserInfo from './UserInfo';
 import Profile from './Profile'
 import PetCard from './PetCard'
+import List from './List'
 
 const Container = styled.div`
   padding: 20px 0 20px 0;
@@ -18,6 +19,7 @@ const Card: React.FC = () => {
       <UserInfo />
       <Profile />
       <PetCard />
+      <List />
     </Container>
     </>
   );
