@@ -44,7 +44,7 @@ const ProfileContainer = styled.div`
 `;
 
 const Nickname = styled.p`
-color: #343434;
+color: var(--color-black: #343434);
 `;
 
 const ProfileImg = styled.img`

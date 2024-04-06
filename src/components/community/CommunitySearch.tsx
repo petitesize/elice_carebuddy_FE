@@ -5,8 +5,8 @@ type CommunitySearchProps = {
 }
 
 const Search = styled.input`
-background: #FFFFFF;
-border: 1px solid #CECECE;
+background: var(--color-white);
+border: 1px solid var(--color-grey-2);
 border-radius: 30px;
 margin-top: 30px;
 height:35px;

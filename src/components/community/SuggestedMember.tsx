@@ -25,13 +25,14 @@ border-radius: 50%;
 width: 100px;
 `
 const Nickname = styled.p`
-color: #7d7d7d;
-font-size: 14px;
+color: var(--color-grey-1);
+font-size: var(--font-size-md-1);
 margin: 30px 0 0 0;
 `
 const Introduction = styled.p`
-color: #7d7d7d;
-font-size: 13px;
+color: var(--color-grey-1);
+font-size: var(--font-size-ft-1);
+line-height: 1.2rem;
 
 `
 

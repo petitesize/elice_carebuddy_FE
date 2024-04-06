@@ -15,24 +15,25 @@ const StyledSuggestedCommunity = styled.div`
 
   p {
     margin: 7px 0;
-    font-weight: var(--font-weight-bold);
   }
 `;
 
 const Name = styled.p`
-font-size: var(--font-size-md-2);
-font-weight: 400;
+font-size: var(--font-size-md-1);
+font-weight: var(--font-weight-bold);
 `
 
 const Introduction = styled.p`
 color: var(--color-grey-1);
 font-size: var(--font-size-md-1);
+font-weight: var( --font-weight-regular);
 line-height: 1.2rem;
 `
 
 const MemberCount = styled.p`
-color: #7d7d7d;
+color: var(--color-grey-1);
 font-size: var(--font-size-ft-1);
+font-weight: var(--font-weight-regular);
 `
 
 const SuggestedCommunity: React.FC<SuggestedCommunityProps> = ({ name, introduction, memberCount }) => (

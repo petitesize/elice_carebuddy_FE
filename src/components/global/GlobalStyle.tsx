@@ -37,6 +37,7 @@ const GlobalStyle = createGlobalStyle`
     --color-grey-1: #7D7D7D;
     --color-grey-2: #CECECE;
     --color-white: #ffffff;
+    --color-black: #343434;
   }
 
   @font-face {

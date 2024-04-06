@@ -5,14 +5,14 @@ const StyledPostControlBox = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border: #cecece solid 1px;
-  color: #cecece;
+  border: var(--color-grey-2) solid 1px;
+  color: var(--color-grey-2);
   width: 36px;
   height: 36px;
 
   p {
-    font-size: 15px;
-    font-weight: 500;
+    font-size: var(--font-size-hd-1);
+    font-weight: var(--font-weight-bold);
   }
 `;
 

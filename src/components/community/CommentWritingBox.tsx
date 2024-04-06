@@ -9,8 +9,7 @@ const StyledCommentWritingBox = styled.input`
 display: flex;
 flex-direction: row;
 justify-content: flex-start;
-  background: #ffffff;
-  border: 1px solid #cecece;
+  border: 1px solid var(--color-grey-2);
   border-radius: 30px;
   height: auto;
   width: auto;

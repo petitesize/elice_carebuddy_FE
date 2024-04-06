@@ -19,7 +19,7 @@ const tempContent =
 const tempCommentCount = 1;
 const templikeCount = 1;
 const tempNickname = '닉네임';
-const tempIntroduction = '소개';
+const tempIntroduction = '안녕하세용 저는 강아지를 키웁니다 ! ';
 
 const Community: React.FC = () => {
   const ContentContainer = styled.div`

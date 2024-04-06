@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import BasedSearch from '../../components/BasedSearch';
-import BasedSelect from '../../components/BasedSelect';
-import BasedButton from '../../components/BasedButton';
+import BasedSearch from '../../components/baseComponent/BasedSearch';
+import BasedSelect from '../../components/baseComponent/BasedSelect';
+import BasedButton from '../../components/baseComponent/BasedButton';
 
 const HospitalResult: React.FC = () => {
   return (
