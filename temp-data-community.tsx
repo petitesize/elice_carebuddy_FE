@@ -40,6 +40,6 @@ const tempIntroduction = '안녕하세용 저는 강아지를 키웁니다 ! ';
 
 export { tempNickname, tempIntroduction }
 
-const tempGroupIntroduction2 = "위주를 빼다 일찌감치 결과로 경제를 있다 수 데 27일 뽑아내다. 권력은 요즘과 열려 애석하고 위원회를 있는 만든 지침의 녹음하다 담다. ..  ";
+const tempGroupIntroduction2 = "위주를 빼다 일찌감치 결과로 경제를 있다 수 데 27일 뽑아내다.   ";
 
 export { tempGroupIntroduction2 }
