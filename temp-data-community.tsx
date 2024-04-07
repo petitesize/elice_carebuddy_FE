@@ -16,3 +16,26 @@ const tempCommentNickname = 'NANA';
 const tempComment = ` 육이구와 개사 한 따라서 가지는 정하여 안정에서 유해가 없다. "발표의 자체가 발전하는, 역성들 초기를 문전을 않은 출산에 체질화되다" 내 최고의 버틸 건전성은 들어가고 내놓는다 기대를 뒤돌 내어 막대하다. 시대가 설익다 정착되다 정책에 한 단체는 효과를 통장의 임신에 모으다. 한편 없는 시계에, 열띠는 오락, 있는 농도는 이곳을 힘드다. 편은 위하다 백화점에서 계열에 산다. 것 것 이래 우리말은 의견이 명칭이 부처의 같다. "소속이는 대통령과 51개 당연히 기능공까지 부처를 지난해는 살핀 음향으로, 전쟁을 가지라" 하다 팔다 지정의 준비와 있다.`;
 
 export { tempImg, tempContent, tempTitle, tempDate, tempLikeCount, tempCommentNickname, tempComment }
+
+// home
+
+import homefeedImg from '@assets/temp-homefeed.png';
+import profileImg from '@assets/temp-profile.png';
+
+const tempFeedContent =
+  '안녕하세요 더미글입니다. 자신의 강아지를 소개해보세요. 아주 유용할 것 입니다. 어쩌구 저쩌구 어쩌구 저쩌구 어쩌구 저쩌구 어쩌구 저쩌구 어쩌구 저쩌구 이 사이트는 다양한 정보를 공유하기에 매우 좋습니다. 어쩌구 저쩌구...더보기';
+const tempCommentCount = 1;
+const templikeCount = 1;
+const tempGroupName = '눈 / 피부 / 귀';
+const tempGroupIntroduction =
+  '하다 법정만 이윽고 진단은 이유는, 입다 하고 수 1분 혼란스럽은지. ... ';
+const tempMemberCount = '120';
+
+export { homefeedImg, profileImg, tempFeedContent, tempCommentCount, templikeCount, tempGroupName, tempGroupIntroduction, tempMemberCount } 
+
+// community
+
+const tempNickname = '닉네임';
+const tempIntroduction = '안녕하세용 저는 강아지를 키웁니다 ! ';
+
+export { tempNickname, tempIntroduction }

@@ -7,13 +7,25 @@ import PostControlBox from '../../components/community/PostControlBox';
 import Comment from '../../components/community/Comment';
 import Pagination from '../../components/community/Pagination';
 import CommentWritingBox from '../../components/community/CommentWritingBox';
+import MemberListSidebar from '../../components/community/MemberListSidebar';
 
 // 아이콘
 import { LuThumbsUp } from 'react-icons/lu';
+import { LuChevronLeft } from 'react-icons/lu';
 
 // 임시 데이터
-import { tempImg, tempContent, tempTitle, tempDate, tempLikeCount, tempCommentNickname, tempComment } from '/Users/using/Desktop/front/temp-data-community.tsx'
-
+import {
+  tempImg,
+  profileImg,
+  tempContent,
+  tempIntroduction,
+  tempNickname,
+  tempTitle,
+  tempDate,
+  tempLikeCount,
+  tempCommentNickname,
+  tempComment,
+} from '/Users/using/Desktop/front/temp-data-community.tsx';
 
 const POST: React.FC = () => {
   const Container = styled.div`
@@ -28,12 +40,27 @@ const POST: React.FC = () => {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    width: 25%;
+    width: 20%;
+    margin-right: 15px;
 
     p {
-      color: vat(--color-grey-1);
+      color: var(--color-grey-1);
     }
   `;
+
+  const MemberContainer = styled.div`
+    width: 50%;
+    // width: auto;
+    height: auto;
+  `;
+
+  const PostListButtonContainer = styled.div`
+    display: flex;
+    fles-direction: row;
+    color: var(--color-grey-1);
+    font-size: var(--font-size-md-2);
+  `;
+
   const PostContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -47,21 +74,19 @@ const POST: React.FC = () => {
     margin: 0 0 5px 0;
   `;
 
-  const PostInformation = styled.div`
-  `;
+  const PostInformation = styled.div``;
 
   const PostTitle = styled.p`
-  font-size: 24px;
-  font-weight: 500;
-  margin: 0 0 10px 0;
+    font-size: var(--font-size-lg-1);
+    font-weight: var(--font-weight-semibold);
+    margin: 0 0 10px 0;
   `;
 
   const PostUploadedDate = styled.p`
-  font-size: 12px;
-  font-weight: var(--font-weight-regular);
-  color: var(--color-grey-1);
+    font-size: var(--font-size-ft-1);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-grey-1);
   `;
-
 
   const PostOption = styled.div`
     display: flex;
@@ -69,30 +94,32 @@ const POST: React.FC = () => {
   `;
 
   const PostContentArea = styled.div`
-  margin: 10px 0 20px 0;
-  font-size: 16px;
-  line-height: 1.2rem;
-  color: #343434;
-
-  img {
     margin: 10px 0 20px 0;
-  }
+    font-soze: var(--font-size-md-1);
+    line-height: 1.4rem;
+    color: var(--color-black);
+
+    img {
+      margin: 10px 0 20px 0;
+    }
   `;
 
   const Likes = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin: 0 10px;
-  color: #7d7d7d;
+    display: flex;
+    flex-direction: row;
+    margin: 0 px;
+    color: var(--color-grey-1);
 
-  p {
-    margin: 0 5px;
-  }
-  `
+    p {
+      font-size: var(--font-size-ft-1);
+      margin: 0 5px;
+    }
+  `;
 
   const Hr = styled.hr`
-    border-top: 1px solid #7d7d7d;
+    border-top: 0.5px solid var(--color-grey-2);
     width: 100%;
+    margin-bottom: 30px;
   `;
 
   const CommentArea = styled.div``;
@@ -101,8 +128,17 @@ const POST: React.FC = () => {
     <>
       <Container>
         <LeftContainer>
-          <p>글 목록 보기</p>
-          <p>프로필 영역</p>
+          <PostListButtonContainer>
+            <LuChevronLeft />
+            <p>글 목록 보기</p>
+          </PostListButtonContainer>
+          <MemberContainer>
+            <MemberListSidebar
+              src={profileImg}
+              nickname={tempNickname}
+              introduction={tempIntroduction}
+            />
+          </MemberContainer>
         </LeftContainer>
         <PostContainer>
           <PostTopArea>
@@ -119,14 +155,22 @@ const POST: React.FC = () => {
             <p>{tempContent}</p>
             <img src={tempImg} alt="이미지" />
             <Likes>
-            <LuThumbsUp />
-            <p>추천해요 {tempLikeCount}</p>
+              <LuThumbsUp />
+              <p>추천해요 {tempLikeCount}</p>
             </Likes>
           </PostContentArea>
           <Hr></Hr>
           <CommentArea>
-            <CommentWritingBox text={tempComment} nickname={tempCommentNickname}></CommentWritingBox>
-            <Comment text={tempComment} nickname={tempCommentNickname} profileImg={tempImg} date={tempDate}></Comment>
+            <CommentWritingBox
+              text={tempComment}
+              nickname={tempCommentNickname}
+            ></CommentWritingBox>
+            <Comment
+              text={tempComment}
+              nickname={tempCommentNickname}
+              profileImg={tempImg}
+              date={tempDate}
+            ></Comment>
             <Pagination />
           </CommentArea>
         </PostContainer>

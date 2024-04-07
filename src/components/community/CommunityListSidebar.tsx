@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-type SuggestedCommunityProps = {
+type CommunityListSidebarProps = {
   name: string, 
   introduction: string, 
   memberCount: string
 }
 
-const StyledSuggestedCommunity = styled.div`
+const StyledCommunityListSidebar = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,14 +36,14 @@ font-size: var(--font-size-ft-1);
 font-weight: var(--font-weight-regular);
 `
 
-const SuggestedCommunity: React.FC<SuggestedCommunityProps> = ({ name, introduction, memberCount }) => (
-  <StyledSuggestedCommunity>
+const CommunityListSidebar: React.FC<CommunityListSidebarProps> = ({ name, introduction, memberCount }) => (
+  <StyledCommunityListSidebar>
     <Name>{name}</Name>
     <Introduction>{introduction}</Introduction>
     <MemberCount>{memberCount}명의 멤버</MemberCount>
-  </StyledSuggestedCommunity>
+  </StyledCommunityListSidebar>
 );
 
-export default SuggestedCommunity;
+export default CommunityListSidebar;
 
 

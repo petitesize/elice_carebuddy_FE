@@ -7,11 +7,11 @@ import styled from 'styled-components';
 // };
 
 const StyledPagination = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: center;
-margin: 25px 0;
-`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 25px 0;
+`;
 
 const Pagination: React.FC = () => (
   <StyledPagination>

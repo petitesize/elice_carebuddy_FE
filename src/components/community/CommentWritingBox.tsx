@@ -5,31 +5,34 @@ type CommentWritingBoxProps = {
   nickname: string;
 };
 
-const StyledCommentWritingBox = styled.input`
+const StyledCommentWritingBox = styled.div`
 display: flex;
-flex-direction: row;
-justify-content: flex-start;
-  border: 1px solid var(--color-grey-2);
-  border-radius: 30px;
-  height: auto;
-  width: auto;
-  font-size: 14px;
-  padding: 5px 0 5px 15px;
-
+align-items: center; /* 수직 가운데 정렬 */
+border: 1px solid var(--color-grey-2);
+border-radius: 10px;
+padding: 5px 15px;
+  font-size: var(--font-size-md-1);
 `;
 
-const Content = styled.div`
-`;
+const Nickname = styled.p`
+margin-right: 10px; 
+`
+
+const InputBox = styled.input`
+flex: 1; /* 인풋박스가 남은 공간을 모두 차지하도록 설정 */
+margin-right: 10px; /* 인풋박스와 버튼 사이 간격 조정 */
+`
 
 const CommentWritingBox: React.FC<CommentWritingBoxProps> = ({
   text,
   nickname,
 }) => (
   <>
-  <p>{nickname}</p>
-  <StyledCommentWritingBox>
-  </StyledCommentWritingBox> 
-  <p>등록하기</p>
+    <StyledCommentWritingBox>
+      <Nickname>{nickname}</Nickname>
+      <InputBox type="text" />
+      <button>등록하기</button>
+    </StyledCommentWritingBox>
   </>
 );
 

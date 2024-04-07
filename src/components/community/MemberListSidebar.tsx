@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-type SuggestedMemberProps = {
+type MemberListSidebarProps = {
   src: string, 
   nickname: string, 
   introduction: string
 }
 
-const StyledSuggestedMember = styled.div`
+const StyledMemberListSidebar = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -36,14 +36,14 @@ line-height: 1.2rem;
 
 `
 
-const SuggestedMember: React.FC<SuggestedMemberProps> = ({ src, nickname, introduction }) => (
-  <StyledSuggestedMember>
+const MemberListSidebar: React.FC<MemberListSidebarProps> = ({ src, nickname, introduction }) => (
+  <StyledMemberListSidebar>
     <ProfileImg src={src} />
     <Nickname>{nickname}</Nickname>
     <Introduction>{introduction}</Introduction>
-  </StyledSuggestedMember>
+  </StyledMemberListSidebar>
 );
 
-export default SuggestedMember;
+export default MemberListSidebar;
 
 

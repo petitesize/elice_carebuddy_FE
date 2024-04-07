@@ -19,7 +19,7 @@ const StyledLikeAndCommentCount = styled.div`
   padding: 5px 15px;
 
   p {
-    sont-size: var(--font-size-ft-1);
+    font-size: var(--font-size-ft-1);
   }
 `;
 

@@ -35,6 +35,6 @@ const SidePanel: React.FC<SidePanelProps> = ({ name, space1, space2, space3 }) =
     <Hr />
     {space3}
   </StyledSidePanelContainer>
-); // 나중에 들어가는 요소 세 개 튜플로 바꿔서 map으로 펼칠 수 있다면 좋을 듯
+);
 
 export default SidePanel;
