@@ -6,10 +6,17 @@ import { tempGroupName, tempGroupIntroduction2 } from '/Users/using/Desktop/fron
 
 const Group: React.FC = () => {
   const Tab = styled.div`
-  margin: 15px 0;
+  margin: 20px 0 15px 0;
+  width: 21%;
+  display: flex;
+  justify-content: space-between;
   
   button { //선택되고 안될 때 상태 관리로 넣어야함
-
+    padding: 10px 12px;
+    font-size: var(--font-size-md-2);
+    width: 100px;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-grey-1);
   }
   `;
 
