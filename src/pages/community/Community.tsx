@@ -52,16 +52,14 @@ const Community: React.FC = () => {
   const GroupOption = styled.div`
     display: flex;
     flex-direction: row;
-    // background-color: red;
     justify-content: space-between;
     width: 100%;
 
     p {
       font-size: 14px;
       margin-bottom: 10px;
-      color: #343434;
       padding: 0 0 2px;
-      border-bottom: solid 1px #343434;
+      border-bottom: solid 1px ;
     }
   `;
 

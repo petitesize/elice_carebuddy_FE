@@ -94,7 +94,7 @@ const POST: React.FC = () => {
   `;
 
   const PostContentArea = styled.div`
-    margin: 10px 0 20px 0;
+    margin: 20px 0;
     font-soze: var(--font-size-md-1);
     line-height: 1.4rem;
     color: var(--color-black);
@@ -119,10 +119,14 @@ const POST: React.FC = () => {
   const Hr = styled.hr`
     border-top: 0.5px solid var(--color-grey-2);
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 24px;
   `;
 
   const CommentArea = styled.div``;
+
+  const ImgContainer = styled.div`
+    margin-top: 20px;
+  `;
 
   return (
     <>
@@ -153,22 +157,36 @@ const POST: React.FC = () => {
           </PostTopArea>
           <PostContentArea>
             <p>{tempContent}</p>
-            <img src={tempImg} alt="이미지" />
+            <ImgContainer>
+              <img src={tempImg} alt="이미지" />
+            </ImgContainer>
             <Likes>
               <LuThumbsUp />
               <p>추천해요 {tempLikeCount}</p>
             </Likes>
           </PostContentArea>
-          <Hr></Hr>
+          <Hr />
           <CommentArea>
             <CommentWritingBox
               text={tempComment}
               nickname={tempCommentNickname}
             ></CommentWritingBox>
             <Comment
+              profileImg={tempImg}
               text={tempComment}
               nickname={tempCommentNickname}
+              date={tempDate}
+            ></Comment>
+            <Comment
               profileImg={tempImg}
+              text={tempComment}
+              nickname={tempCommentNickname}
+              date={tempDate}
+            ></Comment>
+            <Comment
+              profileImg={tempImg}
+              text={tempComment}
+              nickname={tempCommentNickname}
               date={tempDate}
             ></Comment>
             <Pagination />

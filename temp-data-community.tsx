@@ -13,7 +13,7 @@ const tempDate = '2024.03.27 23:10';
 const tempLikeCount = 7;
 
 const tempCommentNickname = 'NANA';
-const tempComment = ` 육이구와 개사 한 따라서 가지는 정하여 안정에서 유해가 없다. "발표의 자체가 발전하는, 역성들 초기를 문전을 않은 출산에 체질화되다" 내 최고의 버틸 건전성은 들어가고 내놓는다 기대를 뒤돌 내어 막대하다. 시대가 설익다 정착되다 정책에 한 단체는 효과를 통장의 임신에 모으다. 한편 없는 시계에, 열띠는 오락, 있는 농도는 이곳을 힘드다. 편은 위하다 백화점에서 계열에 산다. 것 것 이래 우리말은 의견이 명칭이 부처의 같다. "소속이는 대통령과 51개 당연히 기능공까지 부처를 지난해는 살핀 음향으로, 전쟁을 가지라" 하다 팔다 지정의 준비와 있다.`;
+const tempComment = `안녕하세요~! 너무 공감되는 글이에요ㅠㅠ 저도 많이 고민이 되었는데 이렇게 해결하면 되겠군요! 감사합니다!안녕하세요~! 너무 공감되는 글이에요ㅠㅠ 저도 많이 고민이 되었는데 이렇게 해결하면 되겠군요! 감사합니다!안녕하세요~! 너무 공감되는 글이에요ㅠㅠ 저도 많이 고민이 되었는데 이렇게 해결하면 되겠군요! 감사합니다!`;
 
 export { tempImg, tempContent, tempTitle, tempDate, tempLikeCount, tempCommentNickname, tempComment }
 
@@ -39,3 +39,7 @@ const tempNickname = '닉네임';
 const tempIntroduction = '안녕하세용 저는 강아지를 키웁니다 ! ';
 
 export { tempNickname, tempIntroduction }
+
+const tempGroupIntroduction2 = "위주를 빼다 일찌감치 결과로 경제를 있다 수 데 27일 뽑아내다. 권력은 요즘과 열려 애석하고 위원회를 있는 만든 지침의 녹음하다 담다. ..  ";
+
+export { tempGroupIntroduction2 }
