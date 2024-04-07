@@ -22,12 +22,12 @@ const StyledWritingButton = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: center; 
-    width: 120px;
+    width: 110px;
     height: 40px;
     padding: 10px 10px;
     background-color: var(--color-green-main);
     color: var(--color-white);
-    font-size: var(--font-size-md-2);
+    font-size: var(--font-size-md-1);
     border: none;
     border-radius: 25px;
     cursor: pointer;

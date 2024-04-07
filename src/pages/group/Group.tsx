@@ -1,21 +1,46 @@
-// 거의 미시작 페이지입니다
-
 import React from 'react';
 import styled from 'styled-components';
+import GroupCard from '../../components/community/GroupCard';
+
+import { tempGroupName, tempGroupIntroduction2 } from '/Users/using/Desktop/front/temp-data-community.tsx'
 
 const Group: React.FC = () => {
-  const GroupContainer = styled.div``;
+  const Tab = styled.div`
+  margin: 15px 0;
+  
+  button { //선택되고 안될 때 상태 관리로 넣어야함
+
+  }
+  `;
+
+  const GroupCardWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: flex-start;
+  `;
+
 
   return (
     <>
-      <div className="main">
-        <GroupContainer>
-          <h1>강아지 고양이 선택 탭</h1>
-          <h1>그룹 컴포넌트</h1>
-        </GroupContainer>
-      </div>
+      <Tab>
+        <button>강아지</button>
+        <button>고양이</button>
+      </Tab>
+      <GroupCardWrapper>
+      <GroupCard name={tempGroupName} introduction={tempGroupIntroduction2} />
+      <GroupCard name={tempGroupName} introduction={tempGroupIntroduction2} />
+      <GroupCard name={tempGroupName} introduction={tempGroupIntroduction2} />
+      <GroupCard name={tempGroupName} introduction={tempGroupIntroduction2} />
+      <GroupCard name={tempGroupName} introduction={tempGroupIntroduction2} />
+      <GroupCard name={tempGroupName} introduction={tempGroupIntroduction2} />
+      <GroupCard name={tempGroupName} introduction={tempGroupIntroduction2} />
+      <GroupCard name={tempGroupName} introduction={tempGroupIntroduction2} />
+      <GroupCard name={tempGroupName} introduction={tempGroupIntroduction2} />
+      </GroupCardWrapper>
     </>
   );
-}
+};
 
 export default Group;

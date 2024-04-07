@@ -6,20 +6,20 @@ import WritingButton from '../../components/community/WritingButton';
 import CommunitySearch from '../../components/community/CommunitySearch';
 import FeedBox from '../../components/community/FeedBox';
 import SidePanel from '../../components/community/SidePanel';
-import SuggestedMember from '../../components/community/SuggestedMember';
-import Pagination from '../../components/community/Pagination'
+import MemberListSidebar from '../../components/community/MemberListSidebar';
+import Pagination from '../../components/community/Pagination';
 
 // 임시 이미지
-import profileImg from '../../assets/temp-profile.png';
-
-// 임시 제목과 내용
-const tempTitle = '안녕하세요 제목입니당 당당당';
-const tempContent =
-  '안녕하세요 더미글입니다. 자신의 강아지를 소개해보세요. 아주 유용할 것 입니다. 어쩌구 저쩌구 어쩌구 저쩌구 어쩌구 저쩌구 어쩌구 저쩌구 어쩌구 저쩌구 이 사이트는 다양한 정보를 공유하기에 매우 좋습니다. 어쩌구 저쩌구...더보기';
-const tempCommentCount = 1;
-const templikeCount = 1;
-const tempNickname = '닉네임';
-const tempIntroduction = '소개';
+import {
+  tempImg,
+  profileImg,
+  tempFeedContent,
+  tempTitle,
+  tempCommentCount,
+  templikeCount,
+  tempNickname,
+  tempIntroduction,
+} from '/Users/using/Desktop/front/temp-data-community.tsx';
 
 const Community: React.FC = () => {
   const ContentContainer = styled.div`
@@ -52,16 +52,14 @@ const Community: React.FC = () => {
   const GroupOption = styled.div`
     display: flex;
     flex-direction: row;
-    // background-color: red;
     justify-content: space-between;
     width: 100%;
 
     p {
       font-size: 14px;
       margin-bottom: 10px;
-      color: #343434;
       padding: 0 0 2px;
-      border-bottom: solid 1px #343434;
+      border-bottom: solid 1px ;
     }
   `;
 
@@ -72,10 +70,10 @@ const Community: React.FC = () => {
       </SearchContainer>
       <ContentContainer>
         <CommunityFeedContainer>
-            <WritingButton buttonText="글 작성하기" />
+          <WritingButton buttonText="글 작성하기" />
           <FeedBox
             title={tempTitle}
-            content={tempContent}
+            content={tempFeedContent}
             src={profileImg}
             nickname={tempNickname}
             uploadedDate="업로드 날짜"
@@ -84,7 +82,7 @@ const Community: React.FC = () => {
           />
           <FeedBox
             title={tempTitle}
-            content={tempContent}
+            content={tempFeedContent}
             src={profileImg}
             nickname={tempNickname}
             uploadedDate="업로드 날짜"
@@ -93,7 +91,7 @@ const Community: React.FC = () => {
           />
           <FeedBox
             title={tempTitle}
-            content={tempContent}
+            content={tempFeedContent}
             src={profileImg}
             nickname={tempNickname}
             uploadedDate="업로드 날짜"
@@ -110,21 +108,21 @@ const Community: React.FC = () => {
           <SidePanel
             name="추천 멤버"
             space1={
-              <SuggestedMember
+              <MemberListSidebar
                 src={profileImg}
                 nickname={tempNickname}
                 introduction={tempIntroduction}
               />
             }
             space2={
-              <SuggestedMember
+              <MemberListSidebar
                 src={profileImg}
                 nickname={tempNickname}
                 introduction={tempIntroduction}
               />
             }
             space3={
-              <SuggestedMember
+              <MemberListSidebar
                 src={profileImg}
                 nickname={tempNickname}
                 introduction={tempIntroduction}

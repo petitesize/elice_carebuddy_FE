@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-type SuggestedMemberProps = {
+type MemberListSidebarProps = {
   src: string, 
   nickname: string, 
   introduction: string
 }
 
-const StyledSuggestedMember = styled.div`
+const StyledMemberListSidebar = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,24 +25,25 @@ border-radius: 50%;
 width: 100px;
 `
 const Nickname = styled.p`
-color: #7d7d7d;
-font-size: 14px;
+color: var(--color-grey-1);
+font-size: var(--font-size-md-1);
 margin: 30px 0 0 0;
 `
 const Introduction = styled.p`
-color: #7d7d7d;
-font-size: 13px;
+color: var(--color-grey-1);
+font-size: var(--font-size-ft-1);
+line-height: 1.2rem;
 
 `
 
-const SuggestedMember: React.FC<SuggestedMemberProps> = ({ src, nickname, introduction }) => (
-  <StyledSuggestedMember>
+const MemberListSidebar: React.FC<MemberListSidebarProps> = ({ src, nickname, introduction }) => (
+  <StyledMemberListSidebar>
     <ProfileImg src={src} />
     <Nickname>{nickname}</Nickname>
     <Introduction>{introduction}</Introduction>
-  </StyledSuggestedMember>
+  </StyledMemberListSidebar>
 );
 
-export default SuggestedMember;
+export default MemberListSidebar;
 
 
