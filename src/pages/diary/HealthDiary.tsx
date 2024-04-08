@@ -16,21 +16,21 @@ const HealthDiaryContainer = styled.div`
   margin-bottom: 10%;
 `;
 
-// 프로필카드 타이틀과 다이어리 타이틀을 구분
-const Title = styled.h2`
-  font-size: ${(props) =>
-    props.className === 'diaryTitle'
-      ? 'var(--font-size-lg-1)'
-      : 'var(--font-size-hd-2)'};
-  font-weight: ${(props) =>
-    props.className === 'diaryTitle'
-      ? 'var(--font-weight-bold)'
-      : 'var(--font-weight-medium)'};
-  height: ${(props) => (props.className === 'diaryTitle' ? '115px' : 'auto')};
-  color: ${(props) =>
-    props.className === 'diaryTitle' ? 'var(--color-green-main)' : 'inherit'};
-  margin-left: ${(props) =>
-    props.className === 'deseaseTitle' ? '10px' : '0'};
+const DeseaseTitle = styled.h2`
+  font-size: var(--font-size-hd-1);
+  font-weight: var(--font-weight-medium);
+  height: auto;
+  margin-left: 10px;
+`;
+
+const DiaryTitle = styled.h2`
+  font-size: var(--font-size-lg-1);
+  font-weight: var(--font-weight-bold);
+  height: 115px;
+  color: var(--color-green-main);
+  > span {
+    color: var(--color-black-main);
+  }
 `;
 
 const HorizontalLine = styled.div`
@@ -141,7 +141,7 @@ const Icon = styled.img`
 `;
 
 interface DiaryProps {
-  petName: string;
+  name: string;
   visitDate: Date;
   desease: string;
   symptom: string;
@@ -170,7 +170,7 @@ const formatDate = (date: Date, includeTime: boolean = false) => {
 };
 
 const HealthDiary: React.FC<DiaryProps> = ({
-  petName,
+  name,
   visitDate,
   desease,
   symptom,
@@ -182,9 +182,9 @@ const HealthDiary: React.FC<DiaryProps> = ({
 }) => {
   return (
     <HealthDiaryContainer>
-      <Title className="diaryTitle">
-        {petName} <span>건강 다이어리</span>
-      </Title>
+      <DiaryTitle className="diaryTitle">
+        {name} <span>건강 다이어리</span>
+      </DiaryTitle>
       <HorizontalLine />
       <AddDiaryBtn>기록하기</AddDiaryBtn>
       <DiariesContainer>
@@ -192,8 +192,8 @@ const HealthDiary: React.FC<DiaryProps> = ({
         <HealthReport>
           <MoreIcon src={MoreKebabIcon} />
           <DeseaseName>
-            <Icon style={{ width: '25px', height: '25px' }} src={CareIcon} />
-            <Title className="deseaseTitle">{desease}</Title>
+            <Icon style={{ width: '22px', height: '22px' }} src={CareIcon} />
+            <DeseaseTitle>{desease}</DeseaseTitle>
           </DeseaseName>
           <DiaryDetailsLeft>
             <DiaryDetailContainer>

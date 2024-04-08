@@ -4,7 +4,6 @@ import styled from 'styled-components';
 interface BasedSelectProps {
   width?: string;
   borderRadius?: string;
-  className?: string;
 }
 
 interface SelectProps extends BasedSelectProps {
@@ -12,10 +11,10 @@ interface SelectProps extends BasedSelectProps {
 }
 
 const StyledSelect = styled.select<BasedSelectProps>`
-  border: 1px solid #cecece;
-  height: 36px;
-  padding: 10px;
-  color: #7d7d7d;
+  border: 1px solid var(--color-grey-2);
+  padding: 8px 12px;
+  color: var(--color-grey-1);
+  line-height: 1.2;
 
   /* Props로 전달된 width와 borderRadius를 적용 */
   ${({ width }) => width && `width: ${width};`}
@@ -25,11 +24,9 @@ const StyledSelect = styled.select<BasedSelectProps>`
 const BasedSelect: React.FC<SelectProps> = ({
   width,
   borderRadius,
-  className,
   options,
-  ...rest
 }) => (
-  <StyledSelect {...rest} style={{ width, borderRadius }} className={className}>
+  <StyledSelect width={width} borderRadius={borderRadius}>
     {options.map((option) => (
       <option key={option.value} value={option.value}>
         {option.label}

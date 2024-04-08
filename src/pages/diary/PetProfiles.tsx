@@ -19,28 +19,23 @@ const PetProfilesTitle = styled.div`
 // 임시 데이터와 props
 interface PetProfilesProps {
   userName: string;
-  petName: string;
+  name: string;
   breeds: string;
-  petAge: number;
-  petImg: string;
+  age: number;
+  img: string;
 }
 
 const PetProfiles: React.FC<PetProfilesProps> = ({
   userName,
-  petName,
+  name,
   breeds,
-  petAge,
-  petImg,
+  age,
+  img,
 }) => {
   return (
     <PetProfilesContainer>
       <PetProfilesTitle>{userName} 님의 반려동물</PetProfilesTitle>
-      <PetProfileCards
-        petName={petName}
-        breeds={breeds}
-        petAge={petAge}
-        petImg={petImg}
-      />
+      <PetProfileCards name={name} breeds={breeds} age={age} img={img} />
     </PetProfilesContainer>
   );
 };
