@@ -61,7 +61,6 @@ const UserInfo: React.FC = () => {
     };
 
   return (
-  <>
     <Container>
         <Menu>
         <Item>회원정보</Item>
@@ -78,7 +77,6 @@ const UserInfo: React.FC = () => {
         </DataList>
       </UserContainer>
     </Container>
-    </>
   );
 };
 

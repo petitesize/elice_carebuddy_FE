@@ -62,24 +62,20 @@ const Category = styled.a`
 `
 const Header: React.FC = () => {
   return (
-    <>
-      <HeaderContainer>
-        <Container>
-          <MenuBox>
-            <Link to="/"><Logo src={imgSrc} /></Link>
-            <Category><Link to="/community">커뮤니티</Link></Category>
-            <Category><Link to="/diary">건강관리</Link></Category>
-            <Category><Link to="/">정보</Link></Category>
-            <Icon src={search} />
-            <Category><Link to="/signup"><Login>로그인</Login></Link></Category>
-            <Link to="/mypage"><Icon src={user} /></Link>
-            <Icon src={alert} />
-          </MenuBox>
-        </Container>
-
-      </HeaderContainer>
-
-    </>
+    <HeaderContainer>
+      <Container>
+        <MenuBox>
+          <Link to="/"><Logo src={imgSrc} /></Link>
+          <Category><Link to="/community">커뮤니티</Link></Category>
+          <Category><Link to="/diary">건강관리</Link></Category>
+          <Category><Link to="/">정보</Link></Category>
+          <Icon src={search} />
+          <Category><Link to="/signup"><Login>로그인</Login></Link></Category>
+          <Link to="/mypage"><Icon src={user} /></Link>
+          <Icon src={alert} />
+        </MenuBox>
+      </Container>
+    </HeaderContainer>
   );
 };
 

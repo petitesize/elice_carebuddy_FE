@@ -101,7 +101,7 @@ const InputContainer = styled.div`
   width: 100%;
 `
 
-const UserInfo: React.FC = () => {
+const Profile: React.FC = () => {
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [nickName, setNickName] = useState<string>('');
   const [introduction, setIntroduction] = useState<string>('');
@@ -123,16 +123,10 @@ const UserInfo: React.FC = () => {
   };
 
   const handleSave = () => {
-    // 여기서 introduction을 사용하여 저장 로직을 수행합니다.
-    console.log("nickname:", nickName);
-    console.log("introduction:", introduction);
-    
-    // 예시: User DB에 저장하는 코드
     const user = {
       nickName: nickName,
       introduction: introduction
     };
-    // 여기서 user 객체를 데이터베이스에 저장하는 로직을 수행합니다.
   };
 
   return (
@@ -169,4 +163,4 @@ const UserInfo: React.FC = () => {
   );
 };
 
-export default UserInfo;
+export default Profile;

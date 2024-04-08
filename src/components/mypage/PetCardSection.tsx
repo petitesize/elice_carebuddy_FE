@@ -29,7 +29,7 @@ const Line = styled.hr`
   border: 1px solid #cecece;
 `;
 
-const UserInfo: React.FC = () => {
+const PetCard: React.FC = () => {
 
   // 더미 데이터
   const DummyData = {
@@ -42,7 +42,7 @@ const UserInfo: React.FC = () => {
   return (
     <Container>
       <Menu>
-        <Item>프로필</Item>
+        <Item>반려동물 관리</Item>
         <Line />
       </Menu>
       <UserContainer>
@@ -52,4 +52,4 @@ const UserInfo: React.FC = () => {
   );
 };
 
-export default UserInfo;
+export default PetCard;

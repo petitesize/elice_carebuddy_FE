@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 
 // styled-components를 사용하여 TopBar 스타일 정의
 const TopBarContainer = styled.div`
@@ -9,9 +10,7 @@ const TopBarContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 10px 0 10px 0;
-  width: 100%;
-  height: 40px;
+  padding: 10px 0;
   font-size: 32px;
 `;
 const Container = styled.div`
@@ -28,34 +27,59 @@ const Title = styled.div`
   padding-top: 5px;
 `
 
-const TopBar: React.FC<{ routePath: string }> = ({ routePath }) => {
-
 interface DummyData {
   name: number;
   group: string;
   menu: string[];
 }
 
-const DummyData = {
+const DummyData: DummyData = {
   name: 0,
   group: '눈 / 피부 / 귀',
-  menu: ['커뮤니티', '건강 관리', '정보', '마이페이지', '로그인 / 회원가입']
+  menu: ['carebuddy', '커뮤니티', '건강관리',
+    '정보', '마이페이지', '로그인 / 회원가입',
+    ]
 }
 
-interface MenuDummyData {
-  name: string;
-}
+const TopBar: React.FC = () => {
+  const location = useLocation();
+  const { pathname } = location;
 
-const MenuDummyData: MenuDummyData = {
-  name: routePath === '/mypage' ? '마이페이지' : '',
-};
+  let menuIndex = 0; // 초기값으로 첫 번째 메뉴인 'carebuddy'를 선택합니다.
+  let menuName = ''; // menuName의 초기값은 빈 문자열입니다.
+
+ // pathname에 따라 menuIndex와 menuName을 설정합니다.
+ DummyData.menu.forEach((item, index) => {
+  if (pathname === '/' && index === 0) {
+    menuIndex = index;
+    menuName = '반려동물 건강 서비스';
+  } else if (pathname === '/community' && item === '커뮤니티') {
+    menuIndex = index;
+    menuName = '커뮤니티';
+  } else if (pathname === '/mypage' && item === '마이페이지') {
+    menuIndex = index;
+    menuName = '회원 정보 관리';
+  } else if (pathname === '/userpage' && item === 'carebuddy') {
+    menuIndex = index;
+    menuName = '유저 페이지';
+  } else if (pathname === '/diary' && item === '건강관리') {
+    menuIndex = index;
+    menuName = '건강 다이어리';
+  } else if (pathname === '/group' && item === '커뮤니티') {
+    menuIndex = index;
+    menuName = item;
+  } else if (pathname === '/signup' && item === 'carebuddy') {
+    menuIndex = index;
+    menuName = '로그인 / 회원가입';
+  }
+});
 
   return (
     <TopBarContainer>
-    <Container>
-      <Category>{MenuDummyData.name}</Category>
-      <Title >{DummyData.group}</Title>
-    </Container>
+      <Container>
+        <Category>{DummyData.menu[menuIndex]}</Category>
+        <Title>{menuName}</Title>
+      </Container>
     </TopBarContainer>
   );
 };

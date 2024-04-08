@@ -1,10 +1,10 @@
 import React from 'react';
-import Box from '../../components/mypage/Box';
+import MypageContent from '../../components/mypage/MypageContent';
 
 const Mypage: React.FC = () => {
   return (
     <>
-      <Box />
+      <MypageContent />
     </>
   );
 };

@@ -59,9 +59,7 @@ const GlobalStyle = createGlobalStyle`
 
 const Global: React.FC = () => {
   return (
-    <>
       <GlobalStyle />
-    </>
   );
 };
 
