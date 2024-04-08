@@ -10,10 +10,10 @@ const Container = styled.div`
 const UserContainer = styled.div`
   font-size: 14px;
   display: flex;
+  margin: 20px 0 40px 0;
 `;
 
 const Menu = styled.span`
-  padding: 10px 10px 10px 0;
   font-size: 20px;
   font-weight: bold;
 `;
@@ -57,9 +57,7 @@ const UserInfo: React.FC = () => {
 
     // 더미 데이터
     const DummyUserInfoData = {
-      name: '케어버디',
       email: 'carebuddy@kakao.com',
-      phone: '01012345678',
     };
 
   return (
@@ -71,14 +69,10 @@ const UserInfo: React.FC = () => {
         </Menu>
       <UserContainer>
         <List>
-          <Item>성명</Item>
           <Item>이메일</Item>
-          <Item>핸드폰 번호</Item>
         </List>
         <DataList>
-          <Data>{`${DummyUserInfoData.name}`}</Data>
           <Data>{`${DummyUserInfoData.email}`}</Data>
-          <Data>{`${DummyUserInfoData.phone}`}</Data>
           <WithdrawButton onClick={handleToggleModal}>회원탈퇴</WithdrawButton>
           {showModal && <UserAsk onClose={handleToggleModal} />}
         </DataList>

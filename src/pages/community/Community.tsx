@@ -19,7 +19,7 @@ import {
   templikeCount,
   tempNickname,
   tempIntroduction,
-} from '/Users/using/Desktop/front/temp-data-community.tsx';
+} from '../../../temp-data-community';
 
 const Community: React.FC = () => {
   const ContentContainer = styled.div`

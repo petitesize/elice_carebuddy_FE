@@ -25,7 +25,7 @@ import {
   tempLikeCount,
   tempCommentNickname,
   tempComment,
-} from '/Users/using/Desktop/front/temp-data-community.tsx';
+} from '../../../temp-data-community';
 
 const POST: React.FC = () => {
   const Container = styled.div`

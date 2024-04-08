@@ -12,11 +12,13 @@ const ModalBackground = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 9999; /* 최상위로 설정 */
 `;
 
 const ModalContent = styled.div`
-  width: 40%;
-  height: 25%;
+  position: relative; /* 상대적 위치 설정 */
+  width: 400px;
+  height: 200px;
   background-color: white;
   border-radius: 7px;
   border: 1px solid #cecece;
@@ -25,7 +27,9 @@ const ModalContent = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  z-index: 10000; /* 최상위로 설정 */
 `;
+
 
 const Text = styled.p`
   text-align: center;

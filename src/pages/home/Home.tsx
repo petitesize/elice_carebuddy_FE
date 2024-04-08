@@ -9,7 +9,7 @@ import CommunityListSidebar from '../../components/community/CommunityListSideba
 
 
 // 임시 데이터
-import { profileImg, homefeedImg,  tempFeedContent, tempTitle, tempCommentCount, templikeCount, tempGroupName, tempGroupIntroduction, tempMemberCount } from '/Users/using/Desktop/front/temp-data-community.tsx'
+import { profileImg, homefeedImg,  tempFeedContent, tempTitle, tempCommentCount, templikeCount, tempGroupName, tempGroupIntroduction, tempMemberCount } from '../../../temp-data-community'
 
 
 type SelectProps = {
@@ -50,7 +50,7 @@ const Home: React.FC = () => {
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  backgroud-color: red;
+  background-color: red;
 
   p {
     color: var(--color-grey-1);

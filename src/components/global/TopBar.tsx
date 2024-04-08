@@ -28,12 +28,33 @@ const Title = styled.div`
   padding-top: 5px;
 `
 
-const TopBar: React.FC = () => {
+const TopBar: React.FC<{ routePath: string }> = ({ routePath }) => {
+
+interface DummyData {
+  name: number;
+  group: string;
+  menu: string[];
+}
+
+const DummyData = {
+  name: 0,
+  group: '눈 / 피부 / 귀',
+  menu: ['커뮤니티', '건강 관리', '정보', '마이페이지', '로그인 / 회원가입']
+}
+
+interface MenuDummyData {
+  name: string;
+}
+
+const MenuDummyData: MenuDummyData = {
+  name: routePath === '/mypage' ? '마이페이지' : '',
+};
+
   return (
     <TopBarContainer>
     <Container>
-      <Category>건강 관리</Category>
-      <Title>건강 다이어리</Title>
+      <Category>{MenuDummyData.name}</Category>
+      <Title >{DummyData.group}</Title>
     </Container>
     </TopBarContainer>
   );
