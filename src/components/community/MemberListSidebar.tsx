@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 type MemberListSidebarProps = {
-  src: string, 
-  nickname: string, 
-  introduction: string
-}
+  src: string;
+  nickname: string;
+  introduction: string;
+};
 
 const StyledMemberListSidebar = styled.div`
   display: flex;
@@ -21,22 +21,25 @@ const StyledMemberListSidebar = styled.div`
 `;
 
 const ProfileImg = styled.img`
-border-radius: 50%;
-width: 100px;
-`
+  border-radius: 50%;
+  width: 100px;
+`;
 const Nickname = styled.p`
-color: var(--color-grey-1);
-font-size: var(--font-size-md-1);
-margin: 30px 0 0 0;
-`
+  color: var(--color-grey-1);
+  font-size: var(--font-size-md-1);
+  margin: 30px 0 0 0;
+`;
 const Introduction = styled.p`
-color: var(--color-grey-1);
-font-size: var(--font-size-ft-1);
-line-height: 1.2rem;
+  color: var(--color-grey-1);
+  font-size: var(--font-size-ft-1);
+  line-height: 1.2rem;
+`;
 
-`
-
-const MemberListSidebar: React.FC<MemberListSidebarProps> = ({ src, nickname, introduction }) => (
+const MemberListSidebar: React.FC<MemberListSidebarProps> = ({
+  src,
+  nickname,
+  introduction,
+}) => (
   <StyledMemberListSidebar>
     <ProfileImg src={src} />
     <Nickname>{nickname}</Nickname>
@@ -45,5 +48,3 @@ const MemberListSidebar: React.FC<MemberListSidebarProps> = ({ src, nickname, in
 );
 
 export default MemberListSidebar;
-
-

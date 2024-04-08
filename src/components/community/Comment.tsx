@@ -83,10 +83,10 @@ const Comment: React.FC<CommentProps> = ({
       </Info>
       <Content>{text}</Content>
       <CommentOptionWrapper>
-      <CommentOption>
-        <p>수정</p>
-        <p>삭제</p>
-      </CommentOption>
+        <CommentOption>
+          <p>수정</p>
+          <p>삭제</p>
+        </CommentOption>
       </CommentOptionWrapper>
     </div>
   </StyledComment>

@@ -12,33 +12,31 @@ const StyledCommentWritingBox = styled.div`
   border-radius: 10px;
   padding: 10px 15px;
   font-size: var(--font-size-md-1);
-  position: relative; 
+  position: relative;
   height: 120px;
   margin-bottom: 20px;
 `;
 
 const Nickname = styled.p`
-margin-bottom: 5px;
+  margin-bottom: 5px;
 `;
 
 const CommentBox = styled.textarea`
-height: 70px;
-border: none;
+  height: 70px;
+  border: none;
 `;
 
 const Button = styled.p`
-position: absolute; 
-top: 110px;
-right: 15px;
-font-size: var(--font-size-ft-1);
-margin: 0 5px 10px 5px;
-padding: 0 0 2px;
-border-bottom: solid 1px;
-`
+  position: absolute;
+  top: 110px;
+  right: 15px;
+  font-size: var(--font-size-ft-1);
+  margin: 0 5px 10px 5px;
+  padding: 0 0 2px;
+  border-bottom: solid 1px;
+`;
 
-const CommentWritingBox: React.FC<CommentWritingBoxProps> = ({
-  nickname,
-}) => (
+const CommentWritingBox: React.FC<CommentWritingBoxProps> = ({ nickname }) => (
   <>
     <StyledCommentWritingBox>
       <Nickname>{nickname}</Nickname>

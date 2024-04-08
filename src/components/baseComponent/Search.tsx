@@ -38,9 +38,14 @@ const StyledIcon = styled(LuSearch)`
   color: var(--color-grey-2);
 `;
 
-const Search: React.FC<InputProps>= ({ width, fontSize }) => (
+const Search: React.FC<InputProps> = ({ width, fontSize }) => (
   <SearchBox>
-    <StyledInput type="string" placeholder="검색어를 입력하세요" width={width} fontSize={fontSize} />
+    <StyledInput
+      type="string"
+      placeholder="검색어를 입력하세요"
+      width={width}
+      fontSize={fontSize}
+    />
     <StyledIcon />
   </SearchBox>
 );
