@@ -5,22 +5,12 @@ import styled from 'styled-components';
 import WritingButton from '../../components/community/WritingButton';
 import FeedBox from '../../components/community/FeedBox';
 import SidePanel from '../../components/community/SidePanel';
-import SuggestedCommunity from '../../components/community/SuggestedCommunity';
+import CommunityListSidebar from '../../components/community/CommunityListSidebar';
 
-// 임시 이미지
-import homefeedImg from '../../assets/temp-homefeed.png';
-import profileImg from '../../assets/temp-profile.png';
 
-// 임시 제목과 내용
-const tempTitle = '안녕하세요 제목입니당 당당당';
-const tempContent =
-  '안녕하세요 더미글입니다. 자신의 강아지를 소개해보세요. 아주 유용할 것 입니다. 어쩌구 저쩌구 어쩌구 저쩌구 어쩌구 저쩌구 어쩌구 저쩌구 어쩌구 저쩌구 이 사이트는 다양한 정보를 공유하기에 매우 좋습니다. 어쩌구 저쩌구...더보기';
-const tempCommentCount = 1;
-const templikeCount = 1;
-const tempGroupName = '눈 / 피부 / 귀';
-const tempGroupIntroduction =
-  '하다 법정만 이윽고 진단은 이유는, 입다 하고 수 1분 혼란스럽은지. ... ';
-const tempMemberCount = '120';
+// 임시 데이터
+import { profileImg, homefeedImg,  tempFeedContent, tempTitle, tempCommentCount, templikeCount, tempGroupName, tempGroupIntroduction, tempMemberCount } from '/Users/using/Desktop/front/temp-data-community.tsx'
+
 
 type SelectProps = {
   width?: string;
@@ -90,7 +80,6 @@ const Home: React.FC = () => {
     width: 120px;
   `;
 
- 
   return (
     <>
       <Banner src={homefeedImg} alt="강아지가 뛰어노는 배너 이미지" />
@@ -110,7 +99,7 @@ const Home: React.FC = () => {
             </FeedOption>
           <FeedBox
             title={tempTitle}
-            content={tempContent}
+            content={tempFeedContent}
             src={profileImg}
             nickname="냥멍이"
             uploadedDate="업로드 날짜"
@@ -119,7 +108,7 @@ const Home: React.FC = () => {
           />
           <FeedBox
             title={tempTitle}
-            content={tempContent}
+            content={tempFeedContent}
             src={profileImg}
             nickname="냥멍이"
             uploadedDate="업로드 날짜"
@@ -128,7 +117,7 @@ const Home: React.FC = () => {
           />
           <FeedBox
             title={tempTitle}
-            content={tempContent}
+            content={tempFeedContent}
             src={profileImg}
             nickname="냥멍이"
             uploadedDate="업로드 날짜"
@@ -140,21 +129,21 @@ const Home: React.FC = () => {
           <SidePanel
             name="추천 커뮤니티"
             space1={
-              <SuggestedCommunity
+              <CommunityListSidebar
                 name={tempGroupName}
                 introduction={tempGroupIntroduction}
                 memberCount={tempMemberCount}
               />
             }
             space2={
-              <SuggestedCommunity
+              <CommunityListSidebar
                 name={tempGroupName}
                 introduction={tempGroupIntroduction}
                 memberCount={tempMemberCount}
               />
             }
             space3={
-              <SuggestedCommunity
+              <CommunityListSidebar
                 name={tempGroupName}
                 introduction={tempGroupIntroduction}
                 memberCount={tempMemberCount}

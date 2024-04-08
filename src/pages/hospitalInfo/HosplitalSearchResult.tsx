@@ -2,10 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { Space, Table, Tag, ConfigProvider } from 'antd';
 import type { TableProps } from 'antd';
-import { ColumnProps } from 'antd/es/table';
-import { BiBorderRadius } from 'react-icons/bi';
-import Column from 'antd/es/table/Column';
-import TextArea from 'antd/es/input/TextArea';
+// import { ColumnProps } from 'antd/es/table';
+// import { BiBorderRadius } from 'react-icons/bi';
+// import Column from 'antd/es/table/Column';
+// import TextArea from 'antd/es/input/TextArea';
+// 제 부분 아닌데 오류가 나서 일단 주석처리 해두었습니다! - 유신
 
 const Container = styled.div`
   display: flex;

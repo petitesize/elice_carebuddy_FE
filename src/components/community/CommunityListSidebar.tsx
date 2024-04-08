@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-type SuggestedCommunityProps = {
+type CommunityListSidebarProps = {
   name: string, 
   introduction: string, 
   memberCount: string
 }
 
-const StyledSuggestedCommunity = styled.div`
+const StyledCommunityListSidebar = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,34 +15,35 @@ const StyledSuggestedCommunity = styled.div`
 
   p {
     margin: 7px 0;
-    font-weight: var(--font-weight-bold);
   }
 `;
 
 const Name = styled.p`
-font-size: var(--font-size-md-2);
-font-weight: 400;
+font-size: var(--font-size-md-1);
+font-weight: var(--font-weight-bold);
 `
 
 const Introduction = styled.p`
 color: var(--color-grey-1);
 font-size: var(--font-size-md-1);
+font-weight: var( --font-weight-regular);
 line-height: 1.2rem;
 `
 
 const MemberCount = styled.p`
-color: #7d7d7d;
+color: var(--color-grey-1);
 font-size: var(--font-size-ft-1);
+font-weight: var(--font-weight-regular);
 `
 
-const SuggestedCommunity: React.FC<SuggestedCommunityProps> = ({ name, introduction, memberCount }) => (
-  <StyledSuggestedCommunity>
+const CommunityListSidebar: React.FC<CommunityListSidebarProps> = ({ name, introduction, memberCount }) => (
+  <StyledCommunityListSidebar>
     <Name>{name}</Name>
     <Introduction>{introduction}</Introduction>
     <MemberCount>{memberCount}명의 멤버</MemberCount>
-  </StyledSuggestedCommunity>
+  </StyledCommunityListSidebar>
 );
 
-export default SuggestedCommunity;
+export default CommunityListSidebar;
 
 

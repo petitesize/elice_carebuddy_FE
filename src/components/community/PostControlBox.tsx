@@ -1,24 +1,25 @@
 import styled from 'styled-components';
+import { LuMoreHorizontal } from 'react-icons/lu';
 
 const StyledPostControlBox = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border: #cecece solid 1px;
-  color: #cecece;
+  border: var(--color-grey-2) solid 1px;
+  color: var(--color-grey-2);
   width: 36px;
   height: 36px;
+  margin-left: 10px;
+`;
 
-  p {
-    font-size: 15px;
-    font-weight: 500;
-  }
+const StyledIcon = styled(LuMoreHorizontal)`
+  font-size: 24px;
 `;
 
 const PostControlBox: React.FC = () => (
   <StyledPostControlBox>
-    <p>...</p>
+    <StyledIcon />
   </StyledPostControlBox>
 );
 
