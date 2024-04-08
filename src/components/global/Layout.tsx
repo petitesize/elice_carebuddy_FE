@@ -3,6 +3,7 @@ import Footer from "./Footer";
 import GlobalStyle from "./GlobalStyle";
 import styled from "styled-components";
 import TopBar from "./TopBar";
+import Community from './../../pages/community/Community';
 
 const LayoutContainer = styled.div`
   display: flex;
@@ -26,19 +27,16 @@ interface BodyProps {
 
 const Layout: React.FC<BodyProps> = ({ component: Component }) => {
   return (
-    <>
-    <GlobalStyle />
     <LayoutContainer>
       <Header />
       <Body>
-      <TopBar />
+      <TopBar routePath="/mypage" />
         <Main>
           <Component />
         </Main>
       </Body>
         <Footer />
     </LayoutContainer>
-    </>
   );
 }
 

@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import React from 'react';
-import UserInfo from './UserInfo';
-import Profile from './Profile'
-import PetCard from './PetCard'
-import List from './List'
+import UserInfo from './UserInfoSection';
+import Profile from './ProfileSection'
+import PetCard from './PetCardSection'
+import List from './ListSection'
 
 const Container = styled.div`
   padding: 20px 0 20px 0;
@@ -12,17 +12,15 @@ const Container = styled.div`
 `;
 
 
-const Card: React.FC = () => {
+const MypageContent: React.FC = () => {
   return (
-  <>
     <Container>
       <UserInfo />
       <Profile />
       <PetCard />
       <List />
     </Container>
-    </>
   );
 };
 
-export default Card;
+export default MypageContent;

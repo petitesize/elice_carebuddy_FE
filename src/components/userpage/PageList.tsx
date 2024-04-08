@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import React from 'react';
-import PageList from './PageList';
-import HospitalSearchResult from './../../pages/hospitalInfo/HosplitalSearchResult'
 
 const Container = styled.div`
 `;
@@ -13,15 +11,8 @@ const UserContainer = styled.div`
   justify-content: space-around;
 `;
 
-const Menu = styled.span`
-  padding: 10px 10px 10px 0;
-  font-weight: bold;
-  font-size: 20px;
-`;
-
-const Item = styled.a`
-  font-weight: bold;
-  padding: 10px 10px 10px 0;
+const Page = styled.div`
+  display: flex;
 `;
 
 const Line = styled.hr`
@@ -29,20 +20,14 @@ const Line = styled.hr`
 `;
 
 const List = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
 
-const Title = styled.a`
-  font-weight: bold;
 `;
 
 const Data = styled.a`
 
 `;
 
-const UserInfo: React.FC = () => {
+const PageList: React.FC = () => {
   // 더미 데이터
   const DummyData = {
     name: 0, // 대분류: 0강아지 1고양이
@@ -63,28 +48,21 @@ const UserInfo: React.FC = () => {
   };
 
   return (
-    <Container>
-      <Menu>
-        <Item>작성 글 목록</Item>
-        <Line />
-      </Menu>
-      <UserContainer>
-        <List>
-          <Title>그룹</Title>
-        </List>
-        <List>
-          <Title>글 제목</Title>
-        </List>
-        <List>
-          <Title>작성일</Title>
-        </List>
-      </UserContainer>
-      <Line />
-      <PageList />
-      <PageList />
-      <PageList />
-    </Container>
+    <>
+    <UserContainer>
+      <List>
+        <Data>{DummyData.group} {animalType}</Data>
+      </List>
+      <List>
+        <Data>{DummyData.title}</Data>
+      </List>
+      <List>
+        <Data>{formatDate(DummyData.createdAt)}</Data>
+      </List>
+    </UserContainer>
+    <Line />
+    </>
   );
 };
 
-export default UserInfo;
+export default PageList;
