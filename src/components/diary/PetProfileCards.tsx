@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import MoreKebabIcon from '../../assets/MoreKebabIcon.png';
+import defaultImg from '/src/assets/carebuddyLogo.png';
 
 // 카드 전체 컨테이너
 const PetProfileCardsContainer = styled.div`
@@ -81,34 +82,34 @@ const PetDetails = styled.p`
 `;
 
 interface PetProfilesProps {
-  petName: string;
+  name: string;
   breeds: string;
-  petAge: number;
-  petImg: string;
+  age: number;
+  img: string;
 }
 
 const PetProfileCards: React.FC<PetProfilesProps> = ({
-  petName,
+  name,
   breeds,
-  petAge,
-  petImg,
+  age,
+  img,
 }) => {
   return (
     <PetProfileCardsContainer>
       <PetProfileCardConatiner>
         <MoreIcon src={MoreKebabIcon} />
-        <PetProfileImg src={petImg} alt="프로필사진" />
-        <PetName>{petName}</PetName>
+        <PetProfileImg src={img || defaultImg} alt="프로필사진" />
+        <PetName>{name}</PetName>
         <PetDetails>
-          {breeds} / {petAge}살
+          {breeds} / {age}살
         </PetDetails>
       </PetProfileCardConatiner>
       <PetProfileCardConatiner>
         <MoreIcon src={MoreKebabIcon} />
-        <PetProfileImg src={petImg} alt="프로필사진" />
-        <PetName>{petName}</PetName>
+        <PetProfileImg src={img || defaultImg} alt="프로필사진" />
+        <PetName>{name}</PetName>
         <PetDetails>
-          {breeds} / {petAge}살
+          {breeds} / {age}살
         </PetDetails>
       </PetProfileCardConatiner>
       <PetProfileCardConatiner>

@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import PetProfiles from './PetProfiles';
-import HealthDiary from './HealthDiary';
+import PetProfiles from '../../components/diary/PetProfiles';
+import HealthDiary from '../../components/diary/HealthDiary';
 
 const DiaryPageContainer = styled.div`
   width: 100%;
@@ -16,14 +16,14 @@ const DiaryPageContainer = styled.div`
 // 테스트용 더미데이터
 const DummyProfilesData = {
   userName: 'UserName',
-  petName: 'Pet',
+  name: 'Pet',
   breeds: '코리안 숏헤어',
-  petAge: 16,
-  petImg: '/src/assets/carebuddyLogo.png',
+  age: 16,
+  img: '/src/assets/temp-profile.png',
 };
 
 const DummyDiaryData = {
-  petName: 'Pet',
+  name: 'Pet',
   visitDate: new Date(2024, 3, 5),
   desease: 'DESEASE-19',
   symptom: '콧물, 눈물, 잦은 기침',

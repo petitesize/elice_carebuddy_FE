@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import HospitalSearch from './HospitalSearch';
-import HospitalSearchResult from './HosplitalSearchResult';
+import HospitalSearch from '../../components/information/HospitalSearch';
+import HospitalSearchResult from '../../components/information/HosplitalSearchResult';
 
 const HospitalInfoPageContainer = styled.div`
   width: 100%;
