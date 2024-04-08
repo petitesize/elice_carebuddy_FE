@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 // 컴포넌트
 import WritingButton from '../../components/community/WritingButton';
-import CommunitySearch from '../../components/community/CommunitySearch';
+import Search from '../../components/baseComponent/Search';
 import FeedBox from '../../components/community/FeedBox';
 import SidePanel from '../../components/community/SidePanel';
 import MemberListSidebar from '../../components/community/MemberListSidebar';
@@ -37,7 +37,6 @@ const Community: React.FC = () => {
   `;
 
   const CommunityFeedContainer = styled.div`
-    // background-color: yellow;
     width: 70%;
     margin-bottom: 30px;
   `;
@@ -46,7 +45,6 @@ const Community: React.FC = () => {
     display: flex;
     flex-direction: column;
     width: 20%;
-    // background-color: yellow;
   `;
 
   const GroupOption = styled.div`
@@ -66,7 +64,7 @@ const Community: React.FC = () => {
   return (
     <>
       <SearchContainer>
-        <CommunitySearch />
+        <Search />
       </SearchContainer>
       <ContentContainer>
         <CommunityFeedContainer>

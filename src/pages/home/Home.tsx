@@ -50,7 +50,6 @@ const Home: React.FC = () => {
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  background-color: red;
 
   p {
     color: var(--color-grey-1);
