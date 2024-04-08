@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import PetProfileCards from '../../components/diary/PetProfileCards';
+import PetProfileCards from './PetProfileCards';
 
-import MoreKebabIcon from '../../assets/MoreKebabIcon.png';
+// import MoreKebabIcon from '../../assets/MoreKebabIcon.png';
 
 const PetProfilesContainer = styled.div`
   height: 400px;

@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import PetProfiles from './PetProfiles';
-import HealthDiary from './HealthDiary';
+import PetProfiles from '../../components/diary/PetProfiles';
+import HealthDiary from '../../components/diary/HealthDiary';
 
 const DiaryPageContainer = styled.div`
   width: 100%;
