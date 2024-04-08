@@ -15,7 +15,7 @@ const StyledFeedBox = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 10px;
-  border: solid 1px #cecece;
+  border: solid 1px var(--color-grey-2);
   height: auto;
   padding: 20px 20px;
   margin: 15px 0;
@@ -44,7 +44,7 @@ const ProfileContainer = styled.div`
 `;
 
 const Nickname = styled.p`
-color: var(--color-black: #343434);
+  color: var(--color-black: #343434);
 `;
 
 const ProfileImg = styled.img`
@@ -64,7 +64,7 @@ const Content = styled.pre`
   color: var(--color-grey-1);
   width: 100%;
   white-space: pre-wrap;
-  line-height: 1.2rem;
+  line-height: 1.4;
 `;
 
 const Hr = styled.hr`
