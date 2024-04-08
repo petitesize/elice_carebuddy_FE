@@ -7,7 +7,6 @@ import PostControlBox from '../../components/community/PostControlBox';
 import Comment from '../../components/community/Comment';
 import Pagination from '../../components/community/Pagination';
 import CommentWritingBox from '../../components/community/CommentWritingBox';
-import MemberListSidebar from '../../components/community/MemberListSidebar';
 
 // 아이콘
 import { LuThumbsUp } from 'react-icons/lu';
@@ -18,8 +17,6 @@ import {
   tempImg,
   profileImg,
   tempContent,
-  tempIntroduction,
-  tempNickname,
   tempTitle,
   tempDate,
   tempLikeCount,
@@ -40,18 +37,13 @@ const POST: React.FC = () => {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    width: 20%;
-    margin-right: 15px;
+    width: 22%;
+    padding-right: 15px;
+    box-sizing: border-box;
 
     p {
       color: var(--color-grey-1);
     }
-  `;
-
-  const MemberContainer = styled.div`
-    width: 50%;
-    // width: auto;
-    height: auto;
   `;
 
   const PostListButtonContainer = styled.div`
@@ -82,12 +74,6 @@ const POST: React.FC = () => {
     margin: 0 0 10px 0;
   `;
 
-  const PostUploadedDate = styled.p`
-    font-size: var(--font-size-ft-1);
-    font-weight: var(--font-weight-regular);
-    color: var(--color-grey-1);
-  `;
-
   const PostOption = styled.div`
     display: flex;
     flex-direction: row;
@@ -95,12 +81,17 @@ const POST: React.FC = () => {
 
   const PostContentArea = styled.div`
     margin: 20px 0;
-    font-soze: var(--font-size-md-1);
+    font-size: var(--font-size-md-1);
     line-height: 1.4rem;
     color: var(--color-black);
+    width: 100%;
 
     img {
       margin: 10px 0 20px 0;
+    }
+
+    pre {
+      white-space: pre-wrap;
     }
   `;
 
@@ -128,6 +119,26 @@ const POST: React.FC = () => {
     margin-top: 20px;
   `;
 
+  const ProfileContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    color: var(--color-grey-1);
+    font-size: var(--font-size-ft-1);
+    align-items: center;
+    height: auto;
+
+    p {
+      margin: 0 3px;
+    }
+  `;
+
+  const ProfileImg = styled.img`
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+  `;
+
   return (
     <>
       <Container>
@@ -136,19 +147,17 @@ const POST: React.FC = () => {
             <LuChevronLeft />
             <p>글 목록 보기</p>
           </PostListButtonContainer>
-          <MemberContainer>
-            <MemberListSidebar
-              src={profileImg}
-              nickname={tempNickname}
-              introduction={tempIntroduction}
-            />
-          </MemberContainer>
         </LeftContainer>
         <PostContainer>
           <PostTopArea>
             <PostInformation>
               <PostTitle>{tempTitle}</PostTitle>
-              <PostUploadedDate>{tempDate}</PostUploadedDate>
+              <ProfileContainer>
+                <ProfileImg src={profileImg} alt="프로필 이미지" />
+                <p>닉네임</p>
+                <p>|</p>
+                <p>업로드 날짜</p>
+              </ProfileContainer>
             </PostInformation>
             <PostOption>
               <LikeAndCommentCount likeCount={1} commentCount={2} />
@@ -156,7 +165,7 @@ const POST: React.FC = () => {
             </PostOption>
           </PostTopArea>
           <PostContentArea>
-            <p>{tempContent}</p>
+            <pre>{tempContent}</pre>
             <ImgContainer>
               <img src={tempImg} alt="이미지" />
             </ImgContainer>
