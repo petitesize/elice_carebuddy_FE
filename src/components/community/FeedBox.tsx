@@ -64,7 +64,8 @@ const Content = styled.pre`
   color: var(--color-grey-1);
   width: 100%;
   white-space: pre-wrap;
-  line-height: 1.2rem;
+  line-height: 1.4;
+  
 `;
 
 const Hr = styled.hr`

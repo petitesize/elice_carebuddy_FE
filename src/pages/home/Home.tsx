@@ -2,15 +2,22 @@ import React from 'react';
 import styled from 'styled-components';
 
 // 컴포넌트
-import WritingButton from '../../components/community/WritingButton';
 import FeedBox from '../../components/community/FeedBox';
 import SidePanel from '../../components/community/SidePanel';
 import CommunityListSidebar from '../../components/community/CommunityListSidebar';
 
+import posts from '../../../temp-data-posts.json';
 
 // 임시 데이터
-import { profileImg, homefeedImg,  tempFeedContent, tempTitle, tempCommentCount, templikeCount, tempGroupName, tempGroupIntroduction, tempMemberCount } from '../../../temp-data-community'
-
+import {
+  profileImg,
+  homefeedImg,
+  tempCommentCount,
+  templikeCount,
+  tempGroupName,
+  tempGroupIntroduction,
+  tempMemberCount,
+} from '../../../temp-data-community';
 
 type SelectProps = {
   width?: string;
@@ -35,28 +42,27 @@ const Home: React.FC = () => {
   `;
 
   const FeedOption = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  `
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  `;
 
   const SidePanelContainer = styled.div`
     width: 20%;
   `;
 
   const Classification = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
 
-  p {
-    color: var(--color-grey-1);
-    font-size: var(--font-size-md-1);
-  }
-`;
-
+    p {
+      color: var(--color-grey-1);
+      font-size: var(--font-size-md-1);
+    }
+  `;
 
   const Select = styled.select<SelectProps>`
     display: flex;
@@ -79,6 +85,33 @@ const Home: React.FC = () => {
     width: 120px;
   `;
 
+  const WritingButton = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center; 
+
+  p {
+    font-size: var( --font-size-ft-1);
+    color: var(--color-grey-1);
+    width: 205px;
+  } 
+
+  button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; 
+    width: 110px;
+    height: 40px;
+    padding: 10px 10px;
+    background-color: var(--color-green-main);
+    color: var(--color-white);
+    font-size: var(--font-size-md-1);
+    border: none;
+    border-radius: 25px;
+    `;
+
   return (
     <>
       <Banner src={homefeedImg} alt="강아지가 뛰어노는 배너 이미지" />
@@ -94,35 +127,22 @@ const Home: React.FC = () => {
                 <option value="group">그룹</option>
               </SelectGroup>
             </Classification>
-            <WritingButton buttonText="글 작성하기" />
-            </FeedOption>
-          <FeedBox
-            title={tempTitle}
-            content={tempFeedContent}
-            src={profileImg}
-            nickname="냥멍이"
-            uploadedDate="업로드 날짜"
-            likeCount={templikeCount}
-            commentCount={tempCommentCount}
-          />
-          <FeedBox
-            title={tempTitle}
-            content={tempFeedContent}
-            src={profileImg}
-            nickname="냥멍이"
-            uploadedDate="업로드 날짜"
-            likeCount={templikeCount}
-            commentCount={tempCommentCount}
-          />
-          <FeedBox
-            title={tempTitle}
-            content={tempFeedContent}
-            src={profileImg}
-            nickname="냥멍이"
-            uploadedDate="업로드 날짜"
-            likeCount={templikeCount}
-            commentCount={tempCommentCount}
-          />
+            <WritingButton>
+              <p>함께 나누고 싶은 이야기가 있나요?</p>
+              <button>글 작성하기</button> {/* 나중에 컴포넌트로 교체 */}
+            </WritingButton>
+          </FeedOption>
+          {posts.map((post) => (
+            <FeedBox
+              title={post.title}
+              content={post.content}
+              src={profileImg}
+              nickname="닉네임"
+              uploadedDate="업로드 날짜"
+              likeCount={templikeCount}
+              commentCount={tempCommentCount}
+            />
+          ))}
         </FeedContainer>
         <SidePanelContainer>
           <SidePanel

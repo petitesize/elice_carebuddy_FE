@@ -13,7 +13,7 @@ justify-content: flex-start;
   border: solid 1px var(--color-grey-2);
   border-radius: 5px;
   box-sizing: border-box;
-  height: 160px;
+  height: 150px;
   width: 240px;
   margin: 5px;
   margin-bottom: 10px;
@@ -66,6 +66,11 @@ p{
 }
 `;
 
+const ButtonWrapper = styled.div`
+display: flex;
+justify-content: flex-end;
+`
+
 
 const GroupCard: React.FC<GroupCardProps> = ({ name, introduction }) => (
   <>
@@ -76,7 +81,9 @@ const GroupCard: React.FC<GroupCardProps> = ({ name, introduction }) => (
       <GroupInfoWrapper>
       <GroupName>{name}</GroupName>
       <GroupIntroduction>{introduction}</GroupIntroduction>
+      <ButtonWrapper>
       <Button>가입</Button>
+      </ButtonWrapper>
       {/* <MemberCheck>
         <LuCheck />
         <p>당신은 이 그룹의 멤버입니다</p>

@@ -37,7 +37,7 @@ const Content = styled.div`
   line-height: 1.3;
   width: 700px;
   font-size: var(--font-size-ft-1);
-  margin-bottom: 10px;
+  margin: 10px 0;
 `;
 
 const ProfileImg = styled.img`

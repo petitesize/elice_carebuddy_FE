@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 // 컴포넌트
-import WritingButton from '../../components/community/WritingButton';
 import Search from '../../components/baseComponent/Search';
 import FeedBox from '../../components/community/FeedBox';
 import SidePanel from '../../components/community/SidePanel';
@@ -11,15 +10,14 @@ import Pagination from '../../components/community/Pagination';
 
 // 임시 이미지
 import {
-  tempImg,
   profileImg,
-  tempFeedContent,
-  tempTitle,
   tempCommentCount,
   templikeCount,
   tempNickname,
   tempIntroduction,
 } from '../../../temp-data-community';
+
+import posts from '../../../temp-data-posts.json';
 
 const Community: React.FC = () => {
   const ContentContainer = styled.div`
@@ -57,9 +55,36 @@ const Community: React.FC = () => {
       font-size: 14px;
       margin-bottom: 10px;
       padding: 0 0 2px;
-      border-bottom: solid 1px ;
+      border-bottom: solid 1px;
     }
   `;
+
+  const WritingButton = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center; 
+
+  p {
+    font-size: var( --font-size-ft-1);
+    color: var(--color-grey-1);
+    width: 205px;
+  } 
+
+  button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; 
+    width: 110px;
+    height: 40px;
+    padding: 10px 10px;
+    background-color: var(--color-green-main);
+    color: var(--color-white);
+    font-size: var(--font-size-md-1);
+    border: none;
+    border-radius: 25px;
+    `;
 
   return (
     <>
@@ -68,34 +93,22 @@ const Community: React.FC = () => {
       </SearchContainer>
       <ContentContainer>
         <CommunityFeedContainer>
-          <WritingButton buttonText="글 작성하기" />
-          <FeedBox
-            title={tempTitle}
-            content={tempFeedContent}
-            src={profileImg}
-            nickname={tempNickname}
-            uploadedDate="업로드 날짜"
-            likeCount={templikeCount}
-            commentCount={tempCommentCount}
-          />
-          <FeedBox
-            title={tempTitle}
-            content={tempFeedContent}
-            src={profileImg}
-            nickname={tempNickname}
-            uploadedDate="업로드 날짜"
-            likeCount={templikeCount}
-            commentCount={tempCommentCount}
-          />
-          <FeedBox
-            title={tempTitle}
-            content={tempFeedContent}
-            src={profileImg}
-            nickname={tempNickname}
-            uploadedDate="업로드 날짜"
-            likeCount={templikeCount}
-            commentCount={tempCommentCount}
-          />
+          <WritingButton>
+            <p>함께 나누고 싶은 이야기가 있나요?</p>
+            <button>글 작성하기</button> {/* 나중에 컴포넌트로 교체 */}
+          </WritingButton>
+          {posts.map((post) => (
+            <FeedBox
+              title={post.title}
+              content={post.content}
+              src={profileImg}
+              nickname={tempNickname}
+              uploadedDate="업로드 날짜"
+              likeCount={templikeCount}
+              commentCount={tempCommentCount}
+            />
+          ))}
+
           <Pagination />
         </CommunityFeedContainer>
         <SidePanelContainer>

@@ -25,7 +25,7 @@ font-weight: var(--font-weight-bold);
 
 const Introduction = styled.p`
 color: var(--color-grey-1);
-font-size: var(--font-size-md-1);
+font-size: var(--font-size-ft-1);
 font-weight: var( --font-weight-regular);
 line-height: 1.2rem;
 `
