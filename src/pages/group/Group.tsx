@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import GroupCard from '../../components/community/GroupCard';
 
-import { tempGroupName, tempGroupIntroduction2 } from '/Users/using/Desktop/front/temp-data-community.tsx'
+import { tempGroupName, tempGroupIntroduction2 } from '../../../temp-data-community'
 
 const Group: React.FC = () => {
   const Tab = styled.div`

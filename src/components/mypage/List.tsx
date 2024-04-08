@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import PageList from './PageList';
+import HospitalSearchResult from './../../pages/hospitalInfo/HosplitalSearchResult'
 
 const Container = styled.div`
 `;
