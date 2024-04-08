@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 import React from 'react';
 import PageList from './PageList';
-import HospitalSearchResult from '../../pages/hospitalInfo/HosplitalSearchResult'
+import HospitalSearchResult from '../information/HosplitalSearchResult';
 
-const Container = styled.div`
-`;
+const Container = styled.div``;
 
 const UserContainer = styled.div`
   font-size: 14px;
@@ -38,9 +37,7 @@ const Title = styled.a`
   font-weight: bold;
 `;
 
-const Data = styled.a`
-
-`;
+const Data = styled.a``;
 
 const List: React.FC = () => {
   // 더미 데이터

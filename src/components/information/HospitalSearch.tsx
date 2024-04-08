@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import BasedSearch from '../../components/baseComponent/Search';
-import BasedSelect from '../../components/baseComponent/BasedSelect';
-import BasedButton from '../../components/baseComponent/BasedButton';
+import BasedSelect from '../baseComponent/BasedSelect';
+import BasedButton from '../baseComponent/BasedButton';
+import BasedSearch from '../baseComponent/Search';
 
 const HospitalSearchContainer = styled.div`
   display: flex;
@@ -14,14 +14,6 @@ const HospitalSearchContainer = styled.div`
   align-items: center;
   justify-content: center;
 `;
-const StyledSearch = styled(BasedSearch)`
-  width: 100%;
-`;
-
-// const StyledSelect = styled(BasedSelect)`
-//   margin-left: 15px;
-//   width: 100%;
-// `;
 
 const SearchBoxContainer = styled.div`
   width: 50%;
@@ -38,7 +30,6 @@ const SelectContainer = styled.div`
 const SearchContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
   position: relative;
 `;
 
@@ -57,9 +48,9 @@ const Title = styled.p`
   }
 `;
 
-const Search = () => (
-  <StyledSearch type="string" placeholder="검색어를 입력하세요"></StyledSearch>
-);
+// const Search = () => (
+//   <StyledSearch type="string" placeholder="검색어를 입력하세요"></StyledSearch>
+// );
 
 // 기존 방식: 코드 리뷰 후 삭제 예정
 // interface SelectProps {
@@ -109,7 +100,7 @@ const HospitalSearch: React.FC = () => {
           </SelectContainer>
           <SearchContainer>
             <Title>병원명: </Title>
-            <Search />
+            <BasedSearch width="100%" />
             <StyledButton>검색</StyledButton>
           </SearchContainer>
         </SearchBoxContainer>
