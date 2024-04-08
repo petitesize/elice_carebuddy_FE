@@ -90,7 +90,7 @@ const Community: React.FC = () => {
     <>
       <SearchContainer>
         <BasedSearch
-          width="500"
+          width="500px"
           fontSize="var(--font-size-md-2)"
           padding="15px 16px"
         />
