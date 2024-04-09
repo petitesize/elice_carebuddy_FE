@@ -10,7 +10,7 @@ const PetProfileCardsContainer = styled.div`
 `;
 
 // 카드 컨테이너
-const PetProfileCardConatiner = styled.div`
+const PetProfileCardContainer = styled.div`
   width: 244px;
   height: 100%;
   background: #ffffff;
@@ -96,26 +96,26 @@ const PetProfileCards: React.FC<PetProfilesProps> = ({
 }) => {
   return (
     <PetProfileCardsContainer>
-      <PetProfileCardConatiner>
+      <PetProfileCardContainer>
         <MoreIcon src={MoreKebabIcon} />
         <PetProfileImg src={img || defaultImg} alt="프로필사진" />
         <PetName>{name}</PetName>
         <PetDetails>
           {breeds} / {age}살
         </PetDetails>
-      </PetProfileCardConatiner>
-      <PetProfileCardConatiner>
+      </PetProfileCardContainer>
+      <PetProfileCardContainer>
         <MoreIcon src={MoreKebabIcon} />
         <PetProfileImg src={img || defaultImg} alt="프로필사진" />
         <PetName>{name}</PetName>
         <PetDetails>
           {breeds} / {age}살
         </PetDetails>
-      </PetProfileCardConatiner>
-      <PetProfileCardConatiner>
+      </PetProfileCardContainer>
+      <PetProfileCardContainer>
         <AddProfile />
         <AddProfileMsg>프로필 추가</AddProfileMsg>
-      </PetProfileCardConatiner>
+      </PetProfileCardContainer>
     </PetProfileCardsContainer>
   );
 };

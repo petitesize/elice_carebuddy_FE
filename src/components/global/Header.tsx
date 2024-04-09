@@ -4,7 +4,6 @@ import imgSrc from './../../assets/carebuddyLogo.png'
 import search from './../../assets/searchIcon.png'
 import user from './../../assets/userIcon.png'
 import alert from './../../assets/alertIcon.png'
-import TopBar from './TopBar';
 import { Link } from 'react-router-dom'; 
 
 // styled-components를 사용하여 header 스타일 정의
@@ -19,6 +18,7 @@ const HeaderContainer = styled.header`
   background-color: white;
   display: flex;
   align-items: center;
+  font-weight: bold;
 `;
 
 const MenuBox = styled.span`
