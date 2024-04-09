@@ -21,8 +21,8 @@ const Container = styled.div`
 
 const Logo = styled.img`
   cursor: pointer;
-  width: 100px;
-  height: 55px;
+  width: 120px;
+  height: 60px;
 `;
 
 const Font = styled.p`

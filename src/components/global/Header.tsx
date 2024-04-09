@@ -29,7 +29,7 @@ const MenuBox = styled.span`
 
 const Logo = styled.img`
   cursor: pointer;
-  width: 125px;
+  width: 120px;
   height: 60px;
 `;
 

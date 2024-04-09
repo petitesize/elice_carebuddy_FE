@@ -14,9 +14,11 @@ const UserContainer = styled.div`
   margin: 20px 0 40px 0;
 `;
 
-const Menu = styled.span`
+const Menu = styled.p`
   font-size: 22px;
   font-weight: bold;
+  border-bottom: 1px solid #cecece;
+  padding-bottom: 10px;
 `;
 
 const List = styled.span`
@@ -45,10 +47,6 @@ const Data = styled.a`
   padding: 10px 10px 10px 0;
 `;
 
-const Line = styled.hr`
-  border: 1px solid #cecece;
-`;
-
 const UserInfo: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
 
@@ -65,7 +63,6 @@ const UserInfo: React.FC = () => {
     <Container>
         <Menu>
         <Item>회원정보</Item>
-        <Line />
         </Menu>
       <UserContainer>
         <List>
