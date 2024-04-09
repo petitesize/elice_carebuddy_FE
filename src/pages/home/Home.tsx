@@ -5,29 +5,45 @@ import styled from 'styled-components';
 import FeedBox from '../../components/community/FeedBox';
 import SidePanel from '../../components/community/SidePanel';
 import CommunityListSidebar from '../../components/community/CommunityListSidebar';
+import Banner from '../../components/community/Banner';
+
+import BasedSelect from '../../components/baseComponent/BasedSelect';
+import Button from '../../components/baseComponent/Button';
 
 import posts from '../../../temp-data-posts.json';
 
 // 임시 데이터
 import {
   profileImg,
-  homefeedImg,
   tempCommentCount,
   templikeCount,
   tempGroupName,
   tempGroupIntroduction,
   tempMemberCount,
+  SelectDummyCategoryOptions,
+  SelectDummyGroupOptions,
 } from '../../../temp-data-community';
 
-type SelectProps = {
-  width?: string;
-};
+const dummyArray = [
+  <CommunityListSidebar
+    name={tempGroupName}
+    introduction={tempGroupIntroduction}
+    memberCount={tempMemberCount}
+  />,
+  <CommunityListSidebar
+    name={tempGroupName}
+    introduction={tempGroupIntroduction}
+    memberCount={tempMemberCount}
+  />,
+  <CommunityListSidebar
+    name={tempGroupName}
+    introduction={tempGroupIntroduction}
+    memberCount={tempMemberCount}
+  />,
+];
 
 const Home: React.FC = () => {
-  const Banner = styled.img`
-    width: 100%;
-    height: auto;
-  `;
+  const BannerWrapper = styled.div``;
 
   const ContentContainer = styled.div`
     margin-top: 80px;
@@ -59,36 +75,15 @@ const Home: React.FC = () => {
     width: 100%;
 
     p {
+      padding-right: 5px;
       color: var(--color-grey-1);
       font-size: var(--font-size-md-1);
     }
   `;
 
-  const Select = styled.select<SelectProps>`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border: 1px solid var(--color-grey-2);
-    border-radius: 30px;
-    height: auto;
-    padding: 10px;
-    color: var(--color-grey-1);
-    width: ${(props) => (props.width ? props.width : '100px')};
-    margin: 0 5px 0 5px;
-  `;
-
-  const SelectCategory = styled(Select)`
-    width: 100px;
-  `;
-
-  const SelectGroup = styled(Select)`
-    width: 120px;
-  `;
-
   const WritingButton = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
   align-items: center; 
 
   p {
@@ -114,61 +109,45 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <Banner src={homefeedImg} alt="강아지가 뛰어노는 배너 이미지" />
+      <BannerWrapper>
+        <Banner />
+      </BannerWrapper>
       <ContentContainer>
         <FeedContainer>
           <FeedOption>
             <Classification>
               <p>분류:</p>
-              <SelectCategory>
-                <option value="category">카테고리</option>
-              </SelectCategory>
-              <SelectGroup>
-                <option value="group">그룹</option>
-              </SelectGroup>
+              <BasedSelect
+                width="100px"
+                borderRadius="30px"
+                options={SelectDummyCategoryOptions}
+              ></BasedSelect>
+              <BasedSelect
+                width="120px"
+                borderRadius="30px"
+                options={SelectDummyGroupOptions}
+              ></BasedSelect>
             </Classification>
             <WritingButton>
               <p>함께 나누고 싶은 이야기가 있나요?</p>
-              <button>글 작성하기</button> {/* 나중에 컴포넌트로 교체 */}
+              <Button>글 작성하기</Button>
             </WritingButton>
           </FeedOption>
-          {posts.map((post) => (
+          {posts.map((post, index) => (
             <FeedBox
+              key={index}
               title={post.title}
               content={post.content}
               src={profileImg}
-              nickname="닉네임"
-              uploadedDate="업로드 날짜"
+              nickname="냥멍이"
+              uploadedDate="2024.03.27"
               likeCount={templikeCount}
               commentCount={tempCommentCount}
             />
           ))}
         </FeedContainer>
         <SidePanelContainer>
-          <SidePanel
-            name="추천 커뮤니티"
-            space1={
-              <CommunityListSidebar
-                name={tempGroupName}
-                introduction={tempGroupIntroduction}
-                memberCount={tempMemberCount}
-              />
-            }
-            space2={
-              <CommunityListSidebar
-                name={tempGroupName}
-                introduction={tempGroupIntroduction}
-                memberCount={tempMemberCount}
-              />
-            }
-            space3={
-              <CommunityListSidebar
-                name={tempGroupName}
-                introduction={tempGroupIntroduction}
-                memberCount={tempMemberCount}
-              />
-            }
-          />
+          <SidePanel name="추천 커뮤니티" array={dummyArray} />
         </SidePanelContainer>
       </ContentContainer>
     </>

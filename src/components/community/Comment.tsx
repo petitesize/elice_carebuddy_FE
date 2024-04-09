@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 type CommentProps = {
-  text?: string;
+  text: string;
   profileImg: string;
   nickname: string;
-  date: string; //string 맞는지 확인
+  date: string; 
 };
 
 const StyledComment = styled.div`

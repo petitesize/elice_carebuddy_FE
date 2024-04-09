@@ -2,13 +2,34 @@ import React from 'react';
 import styled from 'styled-components';
 
 // 컴포넌트
-import BasedSearch from '../../components/baseComponent/BasedSearch';
+import Search from '../../components/baseComponent/Search';
 import FeedBox from '../../components/community/FeedBox';
 import SidePanel from '../../components/community/SidePanel';
 import MemberListSidebar from '../../components/community/MemberListSidebar';
-import Pagination from '../../components/community/Pagination';
+import Pagination from '../../components/baseComponent/Pagination';
+
+import Button from '../../components/baseComponent/Button';
 
 // 임시 이미지
+
+const dummyArray = [
+  <MemberListSidebar
+    src={profileImg}
+    nickname={tempNickname}
+    introduction={tempIntroduction}
+  />,
+  <MemberListSidebar
+    src={profileImg}
+    nickname={tempNickname}
+    introduction={tempIntroduction}
+  />,
+  <MemberListSidebar
+    src={profileImg}
+    nickname={tempNickname}
+    introduction={tempIntroduction}
+  />,
+];
+
 import {
   profileImg,
   tempCommentCount,
@@ -89,7 +110,7 @@ const Community: React.FC = () => {
   return (
     <>
       <SearchContainer>
-        <BasedSearch
+        <Search
           width="500px"
           fontSize="var(--font-size-md-2)"
           padding="15px 16px"
@@ -99,10 +120,11 @@ const Community: React.FC = () => {
         <CommunityFeedContainer>
           <WritingButton>
             <p>함께 나누고 싶은 이야기가 있나요?</p>
-            <button>글 작성하기</button> {/* 나중에 컴포넌트로 교체 */}
+            <Button>글 작성하기</Button>
           </WritingButton>
-          {posts.map((post) => (
+          {posts.map((post, index) => (
             <FeedBox
+              key={index}
               title={post.title}
               content={post.content}
               src={profileImg}
@@ -112,37 +134,14 @@ const Community: React.FC = () => {
               commentCount={tempCommentCount}
             />
           ))}
-          <Pagination />
+          {/* <Pagination /> */}
         </CommunityFeedContainer>
         <SidePanelContainer>
           <GroupOption>
             <p>그룹 탈퇴</p>
             <p>다른 그룹 둘러보기</p>
           </GroupOption>
-          <SidePanel
-            name="추천 멤버"
-            space1={
-              <MemberListSidebar
-                src={profileImg}
-                nickname={tempNickname}
-                introduction={tempIntroduction}
-              />
-            }
-            space2={
-              <MemberListSidebar
-                src={profileImg}
-                nickname={tempNickname}
-                introduction={tempIntroduction}
-              />
-            }
-            space3={
-              <MemberListSidebar
-                src={profileImg}
-                nickname={tempNickname}
-                introduction={tempIntroduction}
-              />
-            }
-          />
+          <SidePanel name="추천 멤버" array={dummyArray} />
         </SidePanelContainer>
       </ContentContainer>
     </>
