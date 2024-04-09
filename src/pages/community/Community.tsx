@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 // 컴포넌트
-import Search from '../../components/baseComponent/Search';
+import BasedSearch from '../../components/baseComponent/BasedSearch';
 import FeedBox from '../../components/community/FeedBox';
 import SidePanel from '../../components/community/SidePanel';
 import MemberListSidebar from '../../components/community/MemberListSidebar';
@@ -89,7 +89,11 @@ const Community: React.FC = () => {
   return (
     <>
       <SearchContainer>
-        <Search />
+        <BasedSearch
+          width="500px"
+          fontSize="var(--font-size-md-2)"
+          padding="15px 16px"
+        />
       </SearchContainer>
       <ContentContainer>
         <CommunityFeedContainer>
@@ -108,7 +112,6 @@ const Community: React.FC = () => {
               commentCount={tempCommentCount}
             />
           ))}
-
           <Pagination />
         </CommunityFeedContainer>
         <SidePanelContainer>
