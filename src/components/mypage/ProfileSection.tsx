@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import React, { useState } from 'react';
 import Button from '../../components/baseComponent/Button'
+import InputBox from '../../components/baseComponent/InputBox'
+import TextArea from '../baseComponent/TextArea';
 
 const Container = styled.div`
   display: flex;
@@ -8,7 +10,7 @@ const Container = styled.div`
 `;
 
 const UserContainer = styled.div`
-  font-size: 14px;
+  font-size: var(--font-size-md-1);
   display: flex;
   justify-content: space-evenly;
   margin: 20px 0 40px 0;
@@ -23,15 +25,17 @@ const Menu = styled.span`
 `;
 
 const List = styled.span`
-  margin-right: 30px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
 `;
 
 const Item = styled.a`
   font-weight: bold;
-  padding: 10px 10px 10px 0;
-  margin: 0 10px 10px 0;
+`;
+
+const ListItem = styled.a`
+  font-weight: bold;
+  margin: 10px;
 `;
 
 const PetProfileImg = styled.img`
@@ -70,23 +74,14 @@ const Info = styled.div`
   justify-content: space-evenly
 `
 
-const InputBox = styled.input`
-  padding: 10px 10px 10px 0;
-  width: 100%;
-  border: 1px solid #cecece;
-  margin: 0 10px 10px 0;
-`
-
 const InputList = styled.span`
-  margin-right: 30px;
   display: flex;
-  flex-direction: column;
 `;
 
 const InputContainer = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
+  //display: flex;
+  //align-items: center;
+  //width: 100%;
 `
 
 const Profile: React.FC = () => {
@@ -123,26 +118,28 @@ const Profile: React.FC = () => {
         <Item>프로필</Item>
       </Menu>
       <UserContainer>
-
         <ImgContainer>
           <PetProfileImg src={profileImage || undefined} />
           <UploadButton htmlFor="upload-input">프로필 사진 업로드하기</UploadButton>
           <HiddenInput id="upload-input" type="file" accept="image/*" onChange={handleImageUpload} />
         </ImgContainer>
-
         <Info>
         <InputContainer>
-          <List>
-            <Item>닉네임</Item>
-            <Item>소개</Item>
-          </List>
           <InputList>
-            <InputBox type="text" value={nickName} onChange={handleNickNameChange} placeholder="닉네임 입력" />
-            <InputBox type="text" value={introduction} onChange={handleIntroductionChange} placeholder="소개 입력" />
+          <List>
+            <ListItem>닉네임</ListItem>
+          </List>
+            <InputBox margin="10px" padding="5px" placeholder="닉네임을 입력해주세요."></InputBox>
+          </InputList>
+          <InputList>
+            <List>
+              <ListItem>소개글</ListItem>
+            </List>
+            <TextArea placeholder="소개글을 입력해주세요." />
           </InputList>
         </InputContainer>
           <DataList>
-            <Button onClick={handleSave} variant="primary" shape="round" fontSize="ft-1">저장하기</Button>
+            <Button onClick={handleSave} variant="primary" shape="round" fontSize="md-1" padding="10px 20px" margin="0 10px 0 0">저장하기</Button>
           </DataList>
         </Info>
       </UserContainer>

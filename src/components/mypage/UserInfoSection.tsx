@@ -9,13 +9,13 @@ const Container = styled.div`
 `;
 
 const UserContainer = styled.div`
-  font-size: 14px;
+  font-size: var(--font-size-md-1); //16
   display: flex;
   margin: 20px 0 40px 0;
 `;
 
 const Menu = styled.p`
-  font-size: 22px;
+  font-size: var(--font-size-hd-2); //22
   font-weight: bold;
   border-bottom: 1px solid #cecece;
   padding-bottom: 10px;
@@ -41,6 +41,7 @@ const WithdrawButton = styled.a`
   padding: 10px 10px 0 0;
   text-decoration: underline;
   cursor: pointer;
+  font-size: var(--font-size-ft-1);
 `;
 
 const Data = styled.a`
