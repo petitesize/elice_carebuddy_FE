@@ -30,7 +30,7 @@ const InputBoxElement = styled.input<InputProps>`
   padding: ${(props) => props.padding || '0'};
   width: ${(props) => props.width || '300px'};
   height: ${(props) => props.height || '30px'};
-  color: ${(props) => props.color || '#343434'};
+  color: ${(props) => props.color || 'var(--color-black)'};
   outline: none;
 `;
 
