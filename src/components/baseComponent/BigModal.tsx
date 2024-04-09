@@ -22,7 +22,7 @@ const ModalContent = styled.div`
   background-color: var(--color-white);
   border-radius: 7px;
   border: 1px solid var(--color-grey2);;
-  border-top: 20px solid #6d987a;
+  border-top: 20px solid var(--color-green-main);
   padding: 20px 30px;
   display: flex;
   z-index: 10000;
@@ -40,9 +40,16 @@ const Title = styled.div`
   border-bottom: 1px solid var(--color-grey-2);
 `
 
+const ComponentContainer = styled.div`
+width: 1000px;
+padding: 0;
+`;
+
 const ButtonContainer = styled.div`
   display: flex;
 `;
+
+
 
 interface ModalProps {
   onClose: () => void;
@@ -51,7 +58,7 @@ interface ModalProps {
   value: string;
 }
 
-const RecordModal: React.FC<ModalProps> = ({ title, value, onClose, component: Component }) => {
+const BigModal: React.FC<ModalProps> = ({ title, value, onClose, component: Component }) => {
   const handleModalBackgroundClick = () => {
     onClose(); // 모달 닫기 함수 호출
   };
@@ -61,7 +68,9 @@ const RecordModal: React.FC<ModalProps> = ({ title, value, onClose, component: C
       <ModalContent onClick={(e) => e.stopPropagation()}>
         <Container>
           <Title>{title}</Title>
+          <ComponentContainer>
           {Component}
+          </ComponentContainer>
           <ButtonContainer>
             <Button variant="primary" fontSize="ft-1" padding="0 20px" margin="0 10px 0 0">{value}</Button>
             <Button fontSize="ft-1" padding="0 20px" onClick={handleModalBackgroundClick}>취소</Button>
@@ -72,4 +81,4 @@ const RecordModal: React.FC<ModalProps> = ({ title, value, onClose, component: C
   );
 };
 
-export default RecordModal;
+export default BigModal;

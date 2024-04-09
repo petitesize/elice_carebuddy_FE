@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 // 컴포넌트
+import Banner from '../../components/community/Banner';
 import FeedBox from '../../components/community/FeedBox';
 import SidePanel from '../../components/community/SidePanel';
 import CommunityListSidebar from '../../components/community/CommunityListSidebar';
-import Banner from '../../components/community/Banner';
-
 import Select from '../../components/baseComponent/BasedSelect';
 import Button from '../../components/baseComponent/Button';
+import BigModal from '../../components/baseComponent/BigModal';
+import WritingModal from '../../components/community/WritingModal';
+
+// 임시 데이터
 
 import posts from '../../../temp-data-posts.json';
 
-// 임시 데이터
 import {
   profileImg,
   tempCommentCount,
@@ -42,70 +44,76 @@ const dummyArray = [
   />,
 ];
 
-const Home: React.FC = () => {
-  const BannerWrapper = styled.div``;
+const BannerWrapper = styled.div``;
 
-  const ContentContainer = styled.div`
-    margin-top: 80px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  `;
-
-  const FeedContainer = styled.div`
-    width: 70%;
-    margin-bottom: 30px;
-  `;
-
-  const FeedOption = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  `;
-
-  const SidePanelContainer = styled.div`
-    width: 20%;
-  `;
-
-  const Classification = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
-
-    p {
-      padding-right: 5px;
-      color: var(--color-grey-1);
-      font-size: var(--font-size-md-1);
-    }
-  `;
-
-  const WritingButton = styled.div`
+const ContentContainer = styled.div`
+  margin-top: 80px;
   display: flex;
   flex-direction: row;
-  align-items: center; 
+  justify-content: space-between;
+`;
+
+const FeedContainer = styled.div`
+  width: 70%;
+  margin-bottom: 30px;
+`;
+
+const FeedOption = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+const SidePanelContainer = styled.div`
+  width: 20%;
+`;
+
+const Classification = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
 
   p {
-    font-size: var( --font-size-ft-1);
+    padding-right: 5px;
     color: var(--color-grey-1);
-    width: 205px;
-  } 
-
-  button {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center; 
-    width: 110px;
-    height: 40px;
-    padding: 10px 10px;
-    background-color: var(--color-green-main);
-    color: var(--color-white);
     font-size: var(--font-size-md-1);
-    border: none;
-    border-radius: 25px;
-    `;
+  }
+`;
+
+const WritingButton = styled.div`
+display: flex;
+flex-direction: row;
+align-items: center; 
+
+p {
+  font-size: var( --font-size-ft-1);
+  color: var(--color-grey-1);
+  width: 205px;
+} 
+
+button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; 
+  width: 110px;
+  height: 40px;
+  padding: 10px 10px;
+  background-color: var(--color-green-main);
+  color: var(--color-white);
+  font-size: var(--font-size-md-1);
+  border: none;
+  border-radius: 25px;
+  `;
+
+const Home: React.FC = () => {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleToggleModal = () => {
+    setShowModal((prevState) => !prevState);
+  };
 
   return (
     <>
@@ -121,16 +129,24 @@ const Home: React.FC = () => {
                 width="100px"
                 borderRadius="30px"
                 options={SelectDummyCategoryOptions}
-              / >
+              />
               <Select
                 width="120px"
                 borderRadius="30px"
                 options={SelectDummyGroupOptions}
-              / >
+              />
             </Classification>
             <WritingButton>
               <p>함께 나누고 싶은 이야기가 있나요?</p>
-              <Button>글 작성하기</Button>
+              <Button onClick={handleToggleModal}>글 작성하기</Button>
+              {showModal && (
+                <BigModal
+                  title="글쓰기"
+                  value="등록"
+                  component={<WritingModal />}
+                  onClose={handleToggleModal}
+                />
+              )}
             </WritingButton>
           </FeedOption>
           {posts.map((post, index) => (

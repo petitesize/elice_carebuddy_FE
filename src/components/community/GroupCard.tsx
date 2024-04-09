@@ -44,12 +44,6 @@ const GroupInfoWrapper = styled.div`
   padding-left: 10px;
 `;
 
-// const Button = styled.button`
-//   padding: 3px 14px;
-//   border: 1px solid var(--color-grey-1);
-//   background-color: var(--color-white);
-// `;
-
 const MemberCheck = styled.div`
   display: flex;
   font-size: var(--font-size-ft-1);
@@ -66,6 +60,13 @@ const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
+
+// const Button = styled.button`
+//   padding: 3px 14px;
+//   border: 1px solid var(--color-grey-1);
+//   background-color: var(--color-white);
+// `;
+
 
 const GroupCard: React.FC<GroupCardProps> = ({ name, introduction }) => (
   <>
