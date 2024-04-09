@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import LikeAndCommentCount from '../../components/community/LikeAndCommentCount';
 import PostControlBox from '../../components/community/PostControlBox';
 import Comment from '../../components/community/Comment';
-import Pagination from '../../components/community/Pagination';
+import Pagination from '../../components/baseComponent/BasedPagination';
 import CommentWritingBox from '../../components/community/CommentWritingBox';
 
 // 아이콘
@@ -198,7 +198,7 @@ const POST: React.FC = () => {
               nickname={tempCommentNickname}
               date={tempDate}
             ></Comment>
-            <Pagination />
+            {/* <Pagination /> */}
           </CommentArea>
         </PostContainer>
       </Container>

@@ -6,7 +6,7 @@ import BasedSearch from '../../components/baseComponent/BasedSearch';
 import FeedBox from '../../components/community/FeedBox';
 import SidePanel from '../../components/community/SidePanel';
 import MemberListSidebar from '../../components/community/MemberListSidebar';
-import Pagination from '../../components/community/Pagination';
+import Pagination from '../../components/baseComponent/BasedPagination';
 
 // 임시 이미지
 import {
@@ -112,7 +112,7 @@ const Community: React.FC = () => {
               commentCount={tempCommentCount}
             />
           ))}
-          <Pagination />
+          {/* <Pagination /> */}
         </CommunityFeedContainer>
         <SidePanelContainer>
           <GroupOption>

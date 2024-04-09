@@ -18,10 +18,13 @@ const GlobalStyle = createGlobalStyle`
 
     --font-size-lg-1: 1.625rem; // 26
     --font-size-lg-2: 2rem; // 32
+    --font-size-lg-3: 2.25rem; 
     
     /* h1,h2: bold, h3~h5: semibold, h6: medium 
       p: regular and bold
       buttons and labels: semibold */
+
+    --font-weight-extrabold: 900;
     --font-weight-bold: 700;
     --font-weight-semibold: 600;
     --font-weight-medium: 500; 
@@ -58,9 +61,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Global: React.FC = () => {
-  return (
-      <GlobalStyle />
-  );
+  return <GlobalStyle />;
 };
 
 export default Global;

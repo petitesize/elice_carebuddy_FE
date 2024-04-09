@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import FeedBox from '../../components/community/FeedBox';
 import SidePanel from '../../components/community/SidePanel';
 import CommunityListSidebar from '../../components/community/CommunityListSidebar';
+import Banner from '../../components/community/Banner';
 
 import posts from '../../../temp-data-posts.json';
 
@@ -24,9 +25,8 @@ type SelectProps = {
 };
 
 const Home: React.FC = () => {
-  const Banner = styled.img`
-    width: 100%;
-    height: auto;
+  const BannerWrapper = styled.div`
+
   `;
 
   const ContentContainer = styled.div`
@@ -114,7 +114,9 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <Banner src={homefeedImg} alt="강아지가 뛰어노는 배너 이미지" />
+      <BannerWrapper>
+        <Banner />
+      </BannerWrapper>
       <ContentContainer>
         <FeedContainer>
           <FeedOption>
