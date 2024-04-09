@@ -15,13 +15,28 @@ const DiaryPageContainer = styled.div`
 
 // 테스트용 더미데이터
 const DummyProfilesData = {
-  userName: 'UserName',
-  name: 'Pet',
-  breeds: '코리안 숏헤어',
-  age: 16,
-  img: '/src/assets/temp-profile.png',
+  userName: 'Owner1',
+  pets: [
+    {
+      name: 'Cat1',
+      breeds: '코리안 숏헤어',
+      age: 16,
+      img: '/src/assets/temp-profile.png',
+    },
+    {
+      name: 'Cat2',
+      breeds: '래그돌',
+      age: 4,
+      img: '/src/assets/temp-profile.png',
+    },
+    {
+      name: 'Cat3',
+      breeds: '코리안 숏헤어',
+      age: 16,
+      img: '/src/assets/temp-profile.png',
+    },
+  ],
 };
-
 const DummyDiaryData = {
   name: 'Pet',
   visitDate: new Date(2024, 3, 5),
