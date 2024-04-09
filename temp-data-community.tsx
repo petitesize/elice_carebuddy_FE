@@ -41,6 +41,10 @@ const SelectDummyCategoryOptions = [
   { value: 'Cat', label: '고양이' },
 ];
 
+const SelectDummyWritingGroupOptions = [
+  { value: 'Group', label: '그룹을 선택해 주세요' },
+];
+
 const SelectDummyGroupOptions = [{ value: 'Default', label: '그룹 선택' }];
 
 export {
@@ -63,4 +67,5 @@ export {
   tempGroupIntroduction2,
   SelectDummyCategoryOptions,
   SelectDummyGroupOptions,
+  SelectDummyWritingGroupOptions
 };

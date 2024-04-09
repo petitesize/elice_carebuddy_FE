@@ -12,6 +12,7 @@ import HospitalInfo from '../pages/hospitalInfo/HospitalInfo';
 import PharmacyInfo from '../pages/pharmacyInfo/PharmacyInfo';
 import PetRegister from '../pages/petRegister/PetRegister';
 import PetEdit from '../pages/petEdit/PetEdit'
+import WritingForModal from '../components/community/WritingForModal'; //테스트용 - 추후 삭제 예정
 import NotFound from '../pages/notFound/NotFound';
 
 const AppRouter = () => {
@@ -31,6 +32,8 @@ const AppRouter = () => {
         <Route path="/diary" element={<Layout component={Diary} />} />
         <Route path="/hospital-info" element={<Layout component={HospitalInfo} />} />
         <Route path="/pharmacy-info" element={<Layout component={PharmacyInfo} />} />
+        <Route path="/writing-for-modal" element={<Layout component={WritingForModal} />} /> {/* 테스트용 - 추후 삭제 예정 */}
+        
         {/* 모든 경로에 대한 매칭을 시도한 후 NotFound 컴포넌트를 렌더링합니다. */}
         <Route path="*" element={<NotFound />} />
       </Routes>

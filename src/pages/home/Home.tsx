@@ -7,7 +7,7 @@ import SidePanel from '../../components/community/SidePanel';
 import CommunityListSidebar from '../../components/community/CommunityListSidebar';
 import Banner from '../../components/community/Banner';
 
-import BasedSelect from '../../components/baseComponent/BasedSelect';
+import Select from '../../components/baseComponent/BasedSelect';
 import Button from '../../components/baseComponent/Button';
 
 import posts from '../../../temp-data-posts.json';
@@ -117,16 +117,16 @@ const Home: React.FC = () => {
           <FeedOption>
             <Classification>
               <p>분류:</p>
-              <BasedSelect
+              <Select
                 width="100px"
                 borderRadius="30px"
                 options={SelectDummyCategoryOptions}
-              ></BasedSelect>
-              <BasedSelect
+              / >
+              <Select
                 width="120px"
                 borderRadius="30px"
                 options={SelectDummyGroupOptions}
-              ></BasedSelect>
+              / >
             </Classification>
             <WritingButton>
               <p>함께 나누고 싶은 이야기가 있나요?</p>

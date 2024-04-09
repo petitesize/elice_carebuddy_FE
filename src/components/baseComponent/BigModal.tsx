@@ -18,7 +18,7 @@ const ModalBackground = styled.div`
 const ModalContent = styled.div`
   position: relative;
   width: 1024px;
-  height: auto; // auto 수정
+  height: auto;
   background-color: var(--color-white);
   border-radius: 7px;
   border: 1px solid var(--color-grey2);;
@@ -47,9 +47,11 @@ const ButtonContainer = styled.div`
 interface ModalProps {
   onClose: () => void;
   component: ReactNode;
+  title: string;
+  value: string;
 }
 
-const RecordModal: React.FC<ModalProps> = ({ onClose, component: Component }) => {
+const RecordModal: React.FC<ModalProps> = ({ title, value, onClose, component: Component }) => {
   const handleModalBackgroundClick = () => {
     onClose(); // 모달 닫기 함수 호출
   };
@@ -58,10 +60,10 @@ const RecordModal: React.FC<ModalProps> = ({ onClose, component: Component }) =>
     <ModalBackground onClick={handleModalBackgroundClick}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
         <Container>
-          <Title>병원기록</Title>
+          <Title>{title}</Title>
           {Component}
           <ButtonContainer>
-            <Button variant="primary" fontSize="ft-1" padding="0 20px" margin="0 10px 0 0">등록</Button>
+            <Button variant="primary" fontSize="ft-1" padding="0 20px" margin="0 10px 0 0">{value}</Button>
             <Button fontSize="ft-1" padding="0 20px" onClick={handleModalBackgroundClick}>취소</Button>
           </ButtonContainer>
         </Container>
