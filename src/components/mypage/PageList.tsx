@@ -9,14 +9,12 @@ const UserContainer = styled.div`
   margin: 20px 0 20px 0;
   display: flex;
   justify-content: space-around;
+  border-bottom: 1px solid #cecece;
+  padding-bottom: 20px;
 `;
 
 const Page = styled.div`
   display: flex;
-`;
-
-const Line = styled.hr`
-  border: 0.1px solid #cecece;
 `;
 
 const List = styled.div`
@@ -48,7 +46,6 @@ const PageList: React.FC = () => {
   };
 
   return (
-    <>
     <UserContainer>
       <List>
         <Data>{DummyData.group} {animalType}</Data>
@@ -60,8 +57,6 @@ const PageList: React.FC = () => {
         <Data>{formatDate(DummyData.createdAt)}</Data>
       </List>
     </UserContainer>
-    <Line />
-    </>
   );
 };
 
