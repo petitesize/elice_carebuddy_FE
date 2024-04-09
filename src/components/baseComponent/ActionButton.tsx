@@ -7,14 +7,14 @@ import {
   LuTrash2,
 } from 'react-icons/lu';
 
-type BasedActionButtonProps = {
+type ActionButtonProps = {
   border?: string;
-  direction?: 'horizontal' | 'vertical';
+  direction?: string;
   borderRadius?: string;
   color?: string;
 };
 
-const StyledBasedActionButton = styled.div<BasedActionButtonProps>`
+const StyledActionButton = styled.div<ActionButtonProps>`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -50,7 +50,7 @@ p{
 }
 `;
 
-const OptionItem = styled.div<BasedActionButtonProps>`
+const OptionItem = styled.div<ActionButtonProps>`
   display: flex;
   flex-direction: row;
   padding: 10px;
@@ -64,7 +64,7 @@ const Hr = styled.hr`
   margin: 0 0;
 `;
 
-const BasedActionButton: React.FC<BasedActionButtonProps> = ({
+const ActionButton: React.FC<ActionButtonProps> = ({
   border,
   direction,
   borderRadius,
@@ -77,7 +77,7 @@ const BasedActionButton: React.FC<BasedActionButtonProps> = ({
   };
 
   return (
-    <StyledBasedActionButton border={border} onClick={handleClick}>
+    <StyledActionButton border={border} onClick={handleClick}>
       {direction === 'vertical' ? (
         <StyledIconVertical />
       ) : (
@@ -96,8 +96,8 @@ const BasedActionButton: React.FC<BasedActionButtonProps> = ({
           </OptionItem>
         </OptionButtons>
       )}
-    </StyledBasedActionButton>
+    </StyledActionButton>
   );
 };
 
-export default BasedActionButton;
+export default ActionButton;

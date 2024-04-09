@@ -8,7 +8,7 @@ import CommunityListSidebar from '../../components/community/CommunityListSideba
 import Banner from '../../components/community/Banner';
 
 import BasedSelect from '../../components/baseComponent/BasedSelect';
-import BasedButton from '../../components/global/UIButton';
+import Button from '../../components/baseComponent/Button';
 
 import posts from '../../../temp-data-posts.json';
 
@@ -130,7 +130,7 @@ const Home: React.FC = () => {
             </Classification>
             <WritingButton>
               <p>함께 나누고 싶은 이야기가 있나요?</p>
-              <BasedButton>글 작성하기</BasedButton>
+              <Button>글 작성하기</Button>
             </WritingButton>
           </FeedOption>
           {posts.map((post) => (

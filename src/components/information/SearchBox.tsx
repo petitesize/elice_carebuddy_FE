@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import BasedSelect from '../baseComponent/BasedSelect';
-import BasedButton from '../baseComponent/Button';
-import BasedSearch from '../baseComponent/BasedSearch';
+import Button from '../baseComponent/Button';
+import Search from '../baseComponent/Search';
 
 const HospitalSearchContainer = styled.div`
   display: flex;
@@ -33,7 +33,7 @@ const SearchContainer = styled.div`
   position: relative;
 `;
 
-const StyledButton = styled(BasedButton)`
+const StyledButton = styled(Button)`
   position: absolute;
   padding: 5px 10px;
   right: -75px;
@@ -80,7 +80,7 @@ const SearchBox: React.FC = () => {
           </SelectContainer>
           <SearchContainer>
             <Title>{isHospital ? '병원' : '약국'}명: </Title>
-            <BasedSearch width="100%" padding="8px 16px" />
+            <Search width="100%" padding="8px 16px" />
             <StyledButton>검색</StyledButton>
           </SearchContainer>
         </SearchBoxContainer>

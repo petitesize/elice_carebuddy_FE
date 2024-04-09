@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 
 // 컴포넌트
-import BasedSearch from '../../components/baseComponent/BasedSearch';
+import Search from '../../components/baseComponent/Search';
 import FeedBox from '../../components/community/FeedBox';
 import SidePanel from '../../components/community/SidePanel';
 import MemberListSidebar from '../../components/community/MemberListSidebar';
-import Pagination from '../../components/baseComponent/BasedPagination';
+import Pagination from '../../components/baseComponent/Pagination';
 
-import BasedButton from '../../components/global/UIButton';
+import Button from '../../components/baseComponent/Button';
 
 // 임시 이미지
 
@@ -110,7 +110,7 @@ const Community: React.FC = () => {
   return (
     <>
       <SearchContainer>
-        <BasedSearch
+        <Search
           width="500px"
           fontSize="var(--font-size-md-2)"
           padding="15px 16px"
@@ -120,7 +120,7 @@ const Community: React.FC = () => {
         <CommunityFeedContainer>
           <WritingButton>
             <p>함께 나누고 싶은 이야기가 있나요?</p>
-            <BasedButton>글 작성하기</BasedButton>
+            <Button>글 작성하기</Button>
           </WritingButton>
           {posts.map((post) => (
             <FeedBox

@@ -4,9 +4,9 @@ import styled from 'styled-components';
 // 컴포넌트
 import LikeAndCommentCount from '../../components/community/LikeAndCommentCount';
 import Comment from '../../components/community/Comment';
-// import Pagination from '../../components/baseComponent/BasedPagination';
+// import Pagination from '../../components/baseComponent/Pagination';
 import CommentWritingBox from '../../components/community/CommentWritingBox';
-import BasedActionButton from '../../components/baseComponent/BasedActionButton';
+import BasedActionButton from '../../components/baseComponent/ActionButton';
 
 // 아이콘
 import { LuThumbsUp } from 'react-icons/lu';

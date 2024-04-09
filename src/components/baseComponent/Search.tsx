@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import { LuSearch } from 'react-icons/lu';
 
-type BasedSearchProps = {
+type SearchProps = {
   width?: string;
   fontSize?: string;
   padding?: string;
 };
 
-const SearchBox = styled.div<BasedSearchProps>`
+const SearchBox = styled.div<SearchProps>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -18,7 +18,7 @@ const SearchBox = styled.div<BasedSearchProps>`
   width: ${({width}) => width && `${width};`};
 `;
 
-const StyledInput = styled.input<BasedSearchProps>`
+const StyledInput = styled.input<SearchProps>`
   border: none;
   border-radius: 30px;
   width: 100%;
@@ -36,7 +36,7 @@ const StyledIcon = styled(LuSearch)`
   color: var(--color-grey-2);
 `;
 
-const BasedSearch: React.FC<BasedSearchProps> = ({ width, fontSize, padding }) => (
+const Search: React.FC<SearchProps> = ({ width, fontSize, padding }) => (
   <SearchBox width={width}>
     <StyledInput
       type="string"
@@ -48,4 +48,4 @@ const BasedSearch: React.FC<BasedSearchProps> = ({ width, fontSize, padding }) =
   </SearchBox>
 );
 
-export default BasedSearch;
+export default Search;
