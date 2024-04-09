@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React, { useState } from 'react';
-import SmallModal from '../modals/SmallModal'
+import SmallModal from '../baseComponent/SmallModal'
 import UserAsk from '../../pages/mypage/UserAsk';
 
 const Container = styled.div`

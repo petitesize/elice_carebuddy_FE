@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import RecordModal from '../modals/RecordModal';
+import BigModal from '../baseComponent/BigModal'
 import RecMade from '../../pages/diary/RecMade'
 import MoreKebabIcon from '../../assets/MoreKebabIcon.png';
 import CareIcon from '../../assets/CareIcon.png';
@@ -195,7 +195,7 @@ const HealthDiary: React.FC<DiaryProps> = ({
       </DiaryTitle>
       <HorizontalLine />
       <AddDiaryBtn onClick={handleToggleModal}>기록하기</AddDiaryBtn>
-      {showModal && <RecordModal component={<RecMade />} onClose={handleToggleModal} />}
+      {showModal && <BigModal component={<RecMade />} onClose={handleToggleModal} />}
       <DiariesContainer>
         <p>{formatDate(visitDate, true)}</p>
         <HealthReport>

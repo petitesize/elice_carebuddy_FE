@@ -38,7 +38,7 @@ const ButtonElement = styled.button<ButtonProps>`
   padding: ${(props) => props.padding || '0'}; 
 
   &:hover {
-    background-color: ${(props) => (props.variant === 'primary' ? '#567760' : 'var(--color-grey-1)')};
+    background-color: ${(props) => (props.variant === 'primary' ? '#567760' : '#d4d4d4')};
     color: ${(props) => (props.variant === 'primary' ? 'var(--color-white)' : 'var(--color-grey-1)')};
   }
 `;
