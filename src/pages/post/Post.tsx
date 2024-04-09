@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 // 컴포넌트
 import LikeAndCommentCount from '../../components/community/LikeAndCommentCount';
-import PostControlBox from '../../components/community/PostControlBox';
 import Comment from '../../components/community/Comment';
-import Pagination from '../../components/baseComponent/BasedPagination';
+// import Pagination from '../../components/baseComponent/BasedPagination';
 import CommentWritingBox from '../../components/community/CommentWritingBox';
+import BasedActionButton from '../../components/baseComponent/BasedActionButton';
 
 // 아이콘
 import { LuThumbsUp } from 'react-icons/lu';
@@ -154,14 +154,14 @@ const POST: React.FC = () => {
               <PostTitle>{tempTitle}</PostTitle>
               <ProfileContainer>
                 <ProfileImg src={profileImg} alt="프로필 이미지" />
-                <p>닉네임</p>
+                <p>냥멍이</p>
                 <p>|</p>
-                <p>업로드 날짜</p>
+                <p>2024.03.27 23:10</p>
               </ProfileContainer>
             </PostInformation>
             <PostOption>
               <LikeAndCommentCount likeCount={1} commentCount={2} />
-              <PostControlBox />
+              <BasedActionButton />
             </PostOption>
           </PostTopArea>
           <PostContentArea>
@@ -180,18 +180,6 @@ const POST: React.FC = () => {
               text={tempComment}
               nickname={tempCommentNickname}
             ></CommentWritingBox>
-            <Comment
-              profileImg={tempImg}
-              text={tempComment}
-              nickname={tempCommentNickname}
-              date={tempDate}
-            ></Comment>
-            <Comment
-              profileImg={tempImg}
-              text={tempComment}
-              nickname={tempCommentNickname}
-              date={tempDate}
-            ></Comment>
             <Comment
               profileImg={tempImg}
               text={tempComment}

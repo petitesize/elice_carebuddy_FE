@@ -138,8 +138,8 @@ const Home: React.FC = () => {
               title={post.title}
               content={post.content}
               src={profileImg}
-              nickname="닉네임"
-              uploadedDate="업로드 날짜"
+              nickname="냥멍이"
+              uploadedDate="2024.03.27"
               likeCount={templikeCount}
               commentCount={tempCommentCount}
             />

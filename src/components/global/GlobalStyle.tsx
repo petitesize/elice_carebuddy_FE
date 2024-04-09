@@ -41,6 +41,7 @@ const GlobalStyle = createGlobalStyle`
     --color-grey-2: #CECECE;
     --color-white: #ffffff;
     --color-black: #343434;
+    --color-red: #E13C45;
 
     --swiper-pagination-color: var(--color-green-main);
   }
