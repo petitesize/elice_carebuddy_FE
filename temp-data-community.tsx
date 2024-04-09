@@ -44,3 +44,14 @@ export { tempNickname, tempIntroduction }
 const tempGroupIntroduction2 = "위주를 빼다 일찌감치 결과로 경제를 있다 수 데 27일 뽑아내다. 위주를 빼다 일찌감치  ";
 
 export { tempGroupIntroduction2 }
+
+const SelectDummyCategoryOptions = [
+  { value: 'Dog', label: '강아지' },
+  { value: 'Cat', label: '고양이' },
+];
+
+const SelectDummyGroupOptions = [
+  { value: 'Default', label: '그룹 선택' },
+];
+
+export { SelectDummyCategoryOptions, SelectDummyGroupOptions }

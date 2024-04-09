@@ -8,7 +8,28 @@ import SidePanel from '../../components/community/SidePanel';
 import MemberListSidebar from '../../components/community/MemberListSidebar';
 import Pagination from '../../components/baseComponent/BasedPagination';
 
+import BasedButton from '../../components/baseComponent/BasedButton';
+
 // 임시 이미지
+
+const dummyArray = [
+  <MemberListSidebar
+    src={profileImg}
+    nickname={tempNickname}
+    introduction={tempIntroduction}
+  />,
+  <MemberListSidebar
+    src={profileImg}
+    nickname={tempNickname}
+    introduction={tempIntroduction}
+  />,
+  <MemberListSidebar
+    src={profileImg}
+    nickname={tempNickname}
+    introduction={tempIntroduction}
+  />,
+];
+
 import {
   profileImg,
   tempCommentCount,
@@ -99,7 +120,7 @@ const Community: React.FC = () => {
         <CommunityFeedContainer>
           <WritingButton>
             <p>함께 나누고 싶은 이야기가 있나요?</p>
-            <button>글 작성하기</button> {/* 나중에 컴포넌트로 교체 */}
+            <BasedButton>글 작성하기</BasedButton>
           </WritingButton>
           {posts.map((post) => (
             <FeedBox
@@ -119,30 +140,7 @@ const Community: React.FC = () => {
             <p>그룹 탈퇴</p>
             <p>다른 그룹 둘러보기</p>
           </GroupOption>
-          <SidePanel
-            name="추천 멤버"
-            space1={
-              <MemberListSidebar
-                src={profileImg}
-                nickname={tempNickname}
-                introduction={tempIntroduction}
-              />
-            }
-            space2={
-              <MemberListSidebar
-                src={profileImg}
-                nickname={tempNickname}
-                introduction={tempIntroduction}
-              />
-            }
-            space3={
-              <MemberListSidebar
-                src={profileImg}
-                nickname={tempNickname}
-                introduction={tempIntroduction}
-              />
-            }
-          />
+          <SidePanel name="추천 멤버" array={dummyArray} />
         </SidePanelContainer>
       </ContentContainer>
     </>

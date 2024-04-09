@@ -1,10 +1,9 @@
+import React from 'react';
 import styled from 'styled-components';
 
 type SidePanelProps = {
   name: string;
-  space1: React.ReactNode;
-  space2: React.ReactNode;
-  space3: React.ReactNode;
+  array: React.ReactNode[];
 };
 
 const StyledSidePanelContainer = styled.div`
@@ -26,19 +25,15 @@ const Hr = styled.hr`
   border-top: 1px solid var(--color-grey-2);
 `;
 
-const SidePanel: React.FC<SidePanelProps> = ({
-  name,
-  space1,
-  space2,
-  space3,
-}) => (
+const SidePanel: React.FC<SidePanelProps> = ({ name, array }) => (
   <StyledSidePanelContainer>
     <P>{name}</P>
-    {space1}
-    <Hr />
-    {space2}
-    <Hr />
-    {space3}
+    {array.map((Component, index) => (
+      <div key={index}>
+        {Component}
+        {index !== array.length -1 && <Hr />}
+      </div>
+    ))}
   </StyledSidePanelContainer>
 );
 
