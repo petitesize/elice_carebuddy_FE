@@ -10,7 +10,7 @@ const Container = styled.div`
 `;
 
 const UserContainer = styled.div`
-  font-size: var(--font-size-md-1);
+  font-size: var(--font-size-md-1); //16
   display: flex;
   justify-content: space-evenly;
   margin: 20px 0 40px 0;
@@ -18,9 +18,9 @@ const UserContainer = styled.div`
 
 const Menu = styled.span`
   padding: 10px 10px 10px 0;
-  font-weight: bold;
-  font-size: 22px;
-  border-bottom: 1px solid #cecece;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-hd-2); //22
+  border-bottom: 1px solid var(--color-grey-2);
   padding-bottom: 10px;
 `;
 
@@ -30,11 +30,11 @@ const List = styled.span`
 `;
 
 const Item = styled.a`
-  font-weight: bold;
+  font-weight: var(--font-weight-bold);
 `;
 
 const ListItem = styled.a`
-  font-weight: bold;
+  font-weight: var(--font-weight-bold);
   margin: 10px;
 `;
 
