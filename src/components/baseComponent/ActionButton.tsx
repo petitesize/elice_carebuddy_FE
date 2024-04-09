@@ -6,7 +6,6 @@ import {
   LuPencil,
   LuTrash2,
 } from 'react-icons/lu';
-
 import Hr from './Hr';
 
 type ActionButtonProps = {
