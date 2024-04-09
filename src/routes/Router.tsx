@@ -8,10 +8,16 @@ import Community from '../pages/community/Community';
 import Post from '../pages/post/Post';
 import Group from '../pages/group/Group';
 import Diary from '../pages/diary/Diary';
+<<<<<<< HEAD
+import HospitalInfo from '../pages/information/HospitalInfo';
+import PetRegister from '../pages/petRegister/PetRegister';
+import PetEdit from '../pages/petEdit/PetEdit';
+=======
 import HospitalInfo from '../pages/hospitalInfo/HospitalInfo';
 import PharmacyInfo from '../pages/pharmacyInfo/PharmacyInfo';
 import PetRegister from '../pages/petRegister/PetRegister';
 import NotFound from '../pages/notFound/NotFound';
+>>>>>>> 12df6e2ba78892aa6e4290613fcf1eab0ab4273e
 
 const AppRouter = () => {
   return (
@@ -23,10 +29,15 @@ const AppRouter = () => {
         <Route path="/userpage" element={<Layout component={Userpage} />} />
         <Route path="/" element={<Layout component={Home} />} />
         <Route path="/community" element={<Layout component={Community} />} />
+<<<<<<< HEAD
+        <Route path="/petRegister" element={<Layout component={PetRegister} />} />
+        <Route path="/petEdit" element={<Layout component={PetEdit} />} />
+=======
         <Route
           path="/pet-register"
           element={<Layout component={PetRegister} />}
         />
+>>>>>>> 12df6e2ba78892aa6e4290613fcf1eab0ab4273e
         <Route path="/post" element={<Layout component={Post} />} />
         <Route path="/group" element={<Layout component={Group} />} />
         <Route path="/diary" element={<Layout component={Diary} />} />
