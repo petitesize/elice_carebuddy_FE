@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { LuMessagesSquare } from 'react-icons/lu';
 import { LuCheck } from 'react-icons/lu';
+import BasedButton from '../../components/global/UIButton';
+
 
 type GroupCardProps = {
   name: string;
@@ -77,7 +79,7 @@ const GroupCard: React.FC<GroupCardProps> = ({ name, introduction }) => (
         <GroupName>{name}</GroupName>
         <GroupIntroduction>{introduction}</GroupIntroduction>
         <ButtonWrapper>
-          <Button>가입</Button>
+          <BasedButton fontSize="ft-1">가입</BasedButton>
         </ButtonWrapper>
         {/* <MemberCheck>
         <LuCheck />

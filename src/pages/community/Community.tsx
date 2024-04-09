@@ -8,7 +8,7 @@ import SidePanel from '../../components/community/SidePanel';
 import MemberListSidebar from '../../components/community/MemberListSidebar';
 import Pagination from '../../components/baseComponent/BasedPagination';
 
-import BasedButton from '../../components/baseComponent/BasedButton';
+import BasedButton from '../../components/global/UIButton';
 
 // 임시 이미지
 

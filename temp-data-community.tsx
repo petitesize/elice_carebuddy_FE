@@ -1,5 +1,5 @@
 // 임시 이미지
-import tempImg from '@assets/temp-img.png'
+import tempImg from '/src/assets/temp-img.png'
 
 // Post
 const tempContent = `하다 법정만 이윽고 진단은 이유는, 입다 하고 수 1분 혼란스럽은지. 가슴은 하루와 이 아파트밖에 전 10개월 생산자를, 필요로 용공이 있다. 월별에서 시리즈로 서류에게 것 김치는 보고다, 몇 취객까지 우리는 대하다. "지대에 고장에 인, 위하는, 걸다" 첫 나타날 데 법적은 요구하여 미끄러지라. 모이어요 자세에서 삼월, 공구의 연도에 큼직한 충분하다 통신이다 중진은 쏠리다 없다.
@@ -20,8 +20,8 @@ export { tempImg, tempContent, tempTitle, tempDate, tempLikeCount, tempCommentNi
 
 // home
 
-import homefeedImg from '@assets/temp-homefeed.png';
-import profileImg from '@assets/temp-profile.png';
+import homefeedImg from '/src/assets/temp-homefeed.png';
+import profileImg from '/src/assets/temp-profile.png';
 
 const tempFeedContent =
   '안녕하세요 더미글입니다. 자신의 강아지를 소개해보세요. 아주 유용할 것 입니다. 어쩌구 저쩌구 어쩌구 저쩌구 어쩌구 저쩌구 어쩌구 저쩌구 어쩌구 저쩌구 이 사이트는 다양한 정보를 공유하기에 매우 좋습니다. 어쩌구 저쩌구...더보기';

@@ -8,7 +8,7 @@ import CommunityListSidebar from '../../components/community/CommunityListSideba
 import Banner from '../../components/community/Banner';
 
 import BasedSelect from '../../components/baseComponent/BasedSelect';
-import BasedButton from '../../components/baseComponent/BasedButton';
+import BasedButton from '../../components/global/UIButton';
 
 import posts from '../../../temp-data-posts.json';
 
