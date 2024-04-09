@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import React, { useState } from 'react';
+import UIButton from '../global/UIButton';
 
 const Container = styled.div`
   display: flex;
@@ -10,13 +11,15 @@ const UserContainer = styled.div`
   font-size: 14px;
   display: flex;
   justify-content: space-evenly;
-  margin: 20px 0 20px 0;
+  margin: 20px 0 40px 0;
 `;
 
 const Menu = styled.span`
   padding: 10px 10px 10px 0;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 22px;
+  border-bottom: 1px solid #cecece;
+  padding-bottom: 10px;
 `;
 
 const List = styled.span`
@@ -29,10 +32,6 @@ const Item = styled.a`
   font-weight: bold;
   padding: 10px 10px 10px 0;
   margin: 0 10px 10px 0;
-`;
-
-const Line = styled.hr`
-  border: 1px solid #cecece;
 `;
 
 const PetProfileImg = styled.img`
@@ -78,17 +77,6 @@ const InputBox = styled.input`
   margin: 0 10px 10px 0;
 `
 
-const SaveButton = styled.button`
-  height: 36px;
-  padding: 10px 20px;
-  background-color: #6D987A;
-  color: #ffffff;
-  font-size: 14px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-`;
-
 const InputList = styled.span`
   margin-right: 30px;
   display: flex;
@@ -133,7 +121,6 @@ const Profile: React.FC = () => {
     <Container>
       <Menu>
         <Item>프로필</Item>
-        <Line />
       </Menu>
       <UserContainer>
 
@@ -155,7 +142,7 @@ const Profile: React.FC = () => {
           </InputList>
         </InputContainer>
           <DataList>
-            <SaveButton onClick={handleSave}>저장하기</SaveButton>
+            <UIButton onClick={handleSave} variant="primary" shape="round" fontSize="ft-1">저장하기</UIButton>
           </DataList>
         </Info>
       </UserContainer>

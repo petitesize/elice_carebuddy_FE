@@ -17,16 +17,14 @@ const UserContainer = styled.div`
 const Menu = styled.span`
   padding: 10px 10px 10px 0;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 22px;
+  border-bottom: 1px solid #cecece;
+  padding-bottom: 10px;
 `;
 
 const Item = styled.a`
   font-weight: bold;
   padding: 10px 10px 10px 0;
-`;
-
-const Line = styled.hr`
-  border: 1px solid #cecece;
 `;
 
 const PetCard: React.FC = () => {
@@ -43,7 +41,6 @@ const PetCard: React.FC = () => {
     <Container>
       <Menu>
         <Item>반려동물 관리</Item>
-        <Line />
       </Menu>
       <UserContainer>
         <PetProfileCards petName={DummyData.petName} breeds={DummyData.breeds} petAge={DummyData.petAge} petImg={DummyData.petImg} />

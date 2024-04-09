@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import React, { useState } from 'react';
+import SmallModal from '../modals/SmallModal'
 import UserAsk from '../../pages/mypage/UserAsk';
 
 const Container = styled.div`
@@ -13,9 +14,11 @@ const UserContainer = styled.div`
   margin: 20px 0 40px 0;
 `;
 
-const Menu = styled.span`
-  font-size: 20px;
+const Menu = styled.p`
+  font-size: 22px;
   font-weight: bold;
+  border-bottom: 1px solid #cecece;
+  padding-bottom: 10px;
 `;
 
 const List = styled.span`
@@ -44,10 +47,6 @@ const Data = styled.a`
   padding: 10px 10px 10px 0;
 `;
 
-const Line = styled.hr`
-  border: 1px solid #cecece;
-`;
-
 const UserInfo: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
 
@@ -64,7 +63,6 @@ const UserInfo: React.FC = () => {
     <Container>
         <Menu>
         <Item>회원정보</Item>
-        <Line />
         </Menu>
       <UserContainer>
         <List>
@@ -73,7 +71,7 @@ const UserInfo: React.FC = () => {
         <DataList>
           <Data>{`${DummyUserInfoData.email}`}</Data>
           <WithdrawButton onClick={handleToggleModal}>회원탈퇴</WithdrawButton>
-          {showModal && <UserAsk onClose={handleToggleModal} />}
+          {showModal && <SmallModal component={<UserAsk onClose={handleToggleModal} />} />}
         </DataList>
       </UserContainer>
     </Container>

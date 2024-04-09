@@ -7,16 +7,18 @@ const Container = styled.div`
 `;
 
 const UserContainer = styled.div`
-  font-size: 14px;
+  font-size: 16px;
   display: flex;
   justify-content: space-evenly;
-  margin: 20px 0 20px 0;
+  margin: 20px 0 40px 0;
 `;
 
 const Menu = styled.span`
   padding: 10px 10px 10px 0;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 22px;
+  border-bottom: 1px solid #cecece;
+  padding-bottom: 10px;
 `;
 
 const List = styled.span`
@@ -29,10 +31,6 @@ const Item = styled.a`
   font-weight: bold;
   padding: 10px 10px 10px 0;
   margin: 0 10px 10px 0;
-`;
-
-const Line = styled.hr`
-  border: 1px solid #cecece;
 `;
 
 const PetProfileImg = styled.img`
@@ -90,7 +88,6 @@ const Profile: React.FC = () => {
     <Container>
       <Menu>
         <Item>프로필</Item>
-        <Line />
       </Menu>
       <UserContainer>
 

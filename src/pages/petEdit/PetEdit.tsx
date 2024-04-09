@@ -1,9 +1,6 @@
 import { Container } from 'react-bootstrap';
 import styled from 'styled-components';
 
-// 아직 미완성 입니다
-// components 따로 정리 해서 빼기
-
 const Profile = styled.div`
   position: relative;
 `;
@@ -98,30 +95,43 @@ const CenteredButtonWrapper = styled.div`
   margin: 70px 0;
 `;
 
-export default function PetRegister() {
-  const renderSection = (title: string, text: string = "", inputClassName: string = "") => {
-    return (
-      <SectionWrapper>
-        <h4>{title}</h4>
-        <p>{text}</p>
-        {inputClassName === 'name' && <Input className={inputClassName} type="text" placeholder="이름을 입력해주세요" />}
-        {inputClassName === 'age' && <Input className={inputClassName} type="text" placeholder="나이를 입력해주세요" />}
-        {inputClassName === '체중' && <Input className={inputClassName} type="text" placeholder="체중을 입력해주세요" />}
-      </SectionWrapper>
-    );
-  };
+const renderSection = (inputType, title, text = "") => {
+  let placeholder = '';
+  switch (inputType) {
+    case 'name':
+      placeholder = '이름을 입력해주세요';
+      break;
+    case 'age':
+      placeholder = '나이를 입력해주세요';
+      break;
+    case 'weight':
+      placeholder = '체중을 입력해주세요';
+      break;
+    default:
+      break;
+  }
 
+  return (
+    <SectionWrapper>
+      <h4>{title}</h4>
+      <p>{text}</p>
+      <Input type={inputType === 'name' ? 'text' : 'number'} placeholder={placeholder} />
+    </SectionWrapper>
+  );
+};
+
+export default function PetRegister() {
   return (
     <>
       <div className="main">
         <Container>
           <Profile>
-              {renderSection("프로필 등록")}
+              {renderSection("name", "프로필 등록")}
                 <PetProfileContainer>
                   <PetProfileImg src="" alt="프로필 이미지" />
                 </PetProfileContainer>
-              {renderSection("반려동물 이름", " ", "name")}
-              {renderSection("반려동물 종")}
+              {renderSection("name", "반려동물 이름", " ")}
+              {renderSection("species", "반려동물 종")}
               <PetSpecies>
                 {/* 체크박스 넣기 */}
                 <Select className="dog">
@@ -132,20 +142,20 @@ export default function PetRegister() {
                   <option value="cat">고양이</option>
                 </Select>
               </PetSpecies>
-              {renderSection("반려동물 나이", " ", "age")}
-              {renderSection("반려동물 성별")}
+              {renderSection("age", "반려동물 나이", " ")}
+              {renderSection("gender", "반려동물 성별")}
               <ButtonGroup>
                 <Button className='man'>남자 아이</Button>
                 <Button className='woman'>여자 아이</Button>
               </ButtonGroup>
-              {renderSection("중성화 여부")}
+              {renderSection("neutered", "중성화 여부")}
               <ButtonGroup>
                 <Button className='neutered'>중성화 전</Button>
                 <Button className='neutered'>중성화 완료</Button>
               </ButtonGroup>
-              {renderSection("반려동물 체중", " ", "체중")}
+              {renderSection("weight", "반려동물 체중", " ")}
               <CenteredButtonWrapper>
-                <Button>완료</Button>
+                <Button>수정</Button>
               </CenteredButtonWrapper>
           </Profile>
         </Container>
