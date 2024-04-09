@@ -40,7 +40,7 @@ const ButtonElement = styled.button<ButtonProps>`
   }
 `;
 
-const Text = styled.div`
+const Value = styled.div`
   font-family: 'Pretendard-Regular', sans-serif;
 `;
 
@@ -50,7 +50,7 @@ const UIButton: React.FC<ButtonProps> = ({ onClick, children, variant, shape, fo
 
   return (
     <ButtonElement onClick={onClick} variant={actualVariant} shape={actualShape} fontSize={fontSize}>
-      <Text>{children}</Text>
+      <Value>{children}</Value>
     </ButtonElement>
   );
 };
