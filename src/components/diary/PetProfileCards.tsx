@@ -2,25 +2,32 @@ import React from 'react';
 import styled from 'styled-components';
 import MoreKebabIcon from '../../assets/MoreKebabIcon.png';
 import defaultImg from '/src/assets/carebuddyLogo.png';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import { Pagination } from 'swiper/modules';
 
 // 카드 전체 컨테이너
 const PetProfileCardsContainer = styled.div`
   height: 300px;
   display: flex;
+  margin-top: 50px;
+  width: 100%;
 `;
 
 // 카드 컨테이너
 const PetProfileCardContainer = styled.div`
   width: 244px;
-  height: 100%;
-  background: #ffffff;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.08);
+  height: 90%;
+  /* background: #ffffff; */
+  box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.08);
   border-radius: 15px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-right: 20px;
+  /* margin-right: 20px; */
   position: relative;
 `;
 
@@ -35,8 +42,8 @@ const MoreIcon = styled.img`
 `;
 
 const PetProfileImg = styled.img`
-  width: 150px;
-  height: 150px;
+  width: 130px;
+  height: 130px;
   background: rgba(152, 185, 156, 0.3);
   border-radius: 50%;
   border: 0;
@@ -55,13 +62,13 @@ const AddProfile = styled.div`
 `;
 
 const PetName = styled.p`
-  margin-top: 26px;
+  margin-top: 22px;
   height: 26px;
-  font-size: 22px;
+  font-size: var(--font-size-hd-1);
   font-weight: bold;
   line-height: 26px;
   text-align: center;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 `;
 
 const AddProfileMsg = styled.p`
@@ -81,6 +88,16 @@ const PetDetails = styled.p`
   margin: 0;
 `;
 
+const StyledSwiper = styled(Swiper)`
+  > div {
+    padding-top: 8px;
+  }
+  > div:last-child {
+    position: absolute;
+    bottom: 0;
+  }
+`;
+
 interface PetProfilesProps {
   name: string;
   breeds: string;
@@ -96,7 +113,67 @@ const PetProfileCards: React.FC<PetProfilesProps> = ({
 }) => {
   return (
     <PetProfileCardsContainer>
-      <PetProfileCardContainer>
+      <StyledSwiper
+        slidesPerView={4}
+        spaceBetween={40}
+        slidesOffsetBefore={20}
+        /* 전체적인 슬라이드의 오른쪽에 20px 공백을 준다. */
+        slidesOffsetAfter={30}
+        pagination={{
+          clickable: true,
+        }}
+        modules={[Pagination]}
+        className="mySwiper"
+      >
+        <SwiperSlide>
+          <PetProfileCardContainer>
+            <MoreIcon src={MoreKebabIcon} />
+            <PetProfileImg src={img || defaultImg} alt="프로필사진" />
+            <PetName>{name}</PetName>
+            <PetDetails>
+              {breeds} / {age}살
+            </PetDetails>
+          </PetProfileCardContainer>
+        </SwiperSlide>
+        <SwiperSlide>
+          <PetProfileCardContainer>
+            <MoreIcon src={MoreKebabIcon} />
+            <PetProfileImg src={img || defaultImg} alt="프로필사진" />
+            <PetName>{name}</PetName>
+            <PetDetails>
+              {breeds} / {age}살
+            </PetDetails>
+          </PetProfileCardContainer>
+        </SwiperSlide>
+        <SwiperSlide>
+          <PetProfileCardContainer>
+            <MoreIcon src={MoreKebabIcon} />
+            <PetProfileImg src={img || defaultImg} alt="프로필사진" />
+            <PetName>{name}</PetName>
+            <PetDetails>
+              {breeds} / {age}살
+            </PetDetails>
+          </PetProfileCardContainer>
+        </SwiperSlide>
+        <SwiperSlide>
+          <PetProfileCardContainer>
+            <MoreIcon src={MoreKebabIcon} />
+            <PetProfileImg src={img || defaultImg} alt="프로필사진" />
+            <PetName>{name}</PetName>
+            <PetDetails>
+              {breeds} / {age}살
+            </PetDetails>
+          </PetProfileCardContainer>
+        </SwiperSlide>
+        <SwiperSlide>
+          <PetProfileCardContainer>
+            <AddProfile />
+            <AddProfileMsg>프로필 추가</AddProfileMsg>
+          </PetProfileCardContainer>
+        </SwiperSlide>
+      </StyledSwiper>
+
+      {/* <PetProfileCardContainer>
         <MoreIcon src={MoreKebabIcon} />
         <PetProfileImg src={img || defaultImg} alt="프로필사진" />
         <PetName>{name}</PetName>
@@ -115,7 +192,7 @@ const PetProfileCards: React.FC<PetProfilesProps> = ({
       <PetProfileCardContainer>
         <AddProfile />
         <AddProfileMsg>프로필 추가</AddProfileMsg>
-      </PetProfileCardContainer>
+      </PetProfileCardContainer> */}
     </PetProfileCardsContainer>
   );
 };

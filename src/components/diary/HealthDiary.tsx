@@ -9,7 +9,7 @@ const HealthDiaryContainer = styled.div`
   box-sizing: border-box;
   width: 100%;
   height: auto;
-  padding: 45px 80px 40px 60px;
+  padding: 50px 80px 40px 60px;
   border: 1px solid #cecece;
   border-radius: 6px 80px 6px 6px;
   margin-top: 100px;
@@ -25,7 +25,7 @@ const DeseaseTitle = styled.h2`
 `;
 
 const DiaryTitle = styled.h2`
-  font-size: var(--font-size-lg-1);
+  font-size: var(--font-size-hd-2);
   font-weight: var(--font-weight-bold);
   height: 115px;
   color: var(--color-green-main);
