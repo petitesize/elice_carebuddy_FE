@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
-import PetProfileCards from './UserPetProfileCards';
+import PetProfileCards from '../diary/PetProfileCards';
 
 const Container = styled.div`
   display: flex;
@@ -28,14 +28,42 @@ const Item = styled.a`
 `;
 
 const PetCard: React.FC = () => {
-
   // 더미 데이터
+  // const DummyData = {
+  //   nickName: '케어버디',
+  //   petName: '냥이',
+  //   breeds: '여자',
+  //   petAge: 2,
+  //   petImg: 'undefined',
+  // };
   const DummyData = {
-    nickName: '케어버디',
-    petName: '냥이',
-    breeds: '여자',
-    petAge: 2,
-    petImg: 'undefined',
+    nickName: 'Owner1',
+    pets: [
+      {
+        name: 'Cat1',
+        breeds: '코리안 숏헤어',
+        age: 16,
+        img: '/src/assets/temp-profile.png',
+      },
+      {
+        name: 'Cat2',
+        breeds: '래그돌',
+        age: 4,
+        img: '/src/assets/temp-profile.png',
+      },
+      {
+        name: 'Cat3',
+        breeds: '코리안 숏헤어',
+        age: 16,
+        img: '/src/assets/temp-profile.png',
+      },
+      {
+        name: 'Cat4',
+        breeds: '코리안 숏헤어',
+        age: 16,
+        img: '/src/assets/temp-profile.png',
+      },
+    ],
   };
 
   return (
@@ -44,7 +72,7 @@ const PetCard: React.FC = () => {
         <Item>{DummyData.nickName}님의 반려동물</Item>
       </Menu>
       <UserContainer>
-        <PetProfileCards petName={DummyData.petName} breeds={DummyData.breeds} petAge={DummyData.petAge} petImg={DummyData.petImg} />
+        <PetProfileCards profiles={DummyData.pets} />
       </UserContainer>
     </Container>
   );
