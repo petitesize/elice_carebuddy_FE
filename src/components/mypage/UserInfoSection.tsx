@@ -15,7 +15,7 @@ const UserContainer = styled.div`
 `;
 
 const Menu = styled.span`
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
 `;
 

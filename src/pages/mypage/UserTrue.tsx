@@ -13,13 +13,13 @@ const Text = styled.p`
   text-align: center;
   line-height: 23px;
   font-size: 16px;
-  padding: 10px;
+  padding: 0 10px 10px 10px;
 `
 
 const Title = styled.p`
   font-weight: bold;
   font-size: 18px;
-  padding: 10px;
+  padding: 20px;
 `
 
 const ButtonContainer = styled.div`
@@ -39,8 +39,8 @@ const Button = styled.button`
 
 const Logo = styled.img`
   cursor: pointer;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 35px;
 `;
 
 interface ModalProps {
@@ -71,7 +71,7 @@ const UserTrue: React.FC<ModalProps> = ({ onClose }) => {
         케어버디를 이용해주셔서 감사합니다.
       </Text>
       <ButtonContainer>
-        <Button primary onClick={handleWithdraw}>탈퇴하기</Button>
+        <Button primary onClick={handleWithdraw}>확인</Button>
         {showUserTrueModal && (
           <SmallModal onClose={handleModalClose} />
         )}

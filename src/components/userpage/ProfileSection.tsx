@@ -7,7 +7,7 @@ const Container = styled.div`
 `;
 
 const UserContainer = styled.div`
-  font-size: 14px;
+  font-size: 16px;
   display: flex;
   justify-content: space-evenly;
   margin: 20px 0 20px 0;
@@ -16,7 +16,7 @@ const UserContainer = styled.div`
 const Menu = styled.span`
   padding: 10px 10px 10px 0;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 22px;
 `;
 
 const List = styled.span`

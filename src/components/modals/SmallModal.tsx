@@ -21,7 +21,7 @@ const ModalContent = styled.div`
   background-color: white;
   border-radius: 7px;
   border: 1px solid #cecece;
-  padding: 50px;
+  padding: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,40 +33,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const Text = styled.p`
-  text-align: center;
-  line-height: 23px;
-  font-size: 16px;
-  padding: 10px;
-`;
-
-const Title = styled.p`
-  font-weight: bold;
-  font-size: 18px;
-  padding: 10px;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-`;
-
-const Button = styled.button`
-  padding: 10px 40px;
-  cursor: pointer;
-  border: none;
-  background-color: ${(props) => (props.primary ? '#6d987a' : 'white')};
-  color: ${(props) => (props.primary ? 'white' : '#343434')}; /* primary 버튼의 글자색을 흰색으로 설정 */
-`;
-
-const Logo = styled.img`
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
 `;
 
 interface ModalProps {

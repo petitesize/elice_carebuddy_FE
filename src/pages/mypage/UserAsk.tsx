@@ -14,14 +14,14 @@ const Text = styled.p`
   text-align: center;
   line-height: 23px;
   font-size: 16px;
-  padding: 10px;
-`;
+  padding: 0 10px 10px 10px;
+`
 
 const Title = styled.p`
   font-weight: bold;
   font-size: 18px;
-  padding: 10px;
-`;
+  padding: 20px;
+`
 
 const ButtonContainer = styled.div`
   display: flex;
