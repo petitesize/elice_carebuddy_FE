@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import imgSrc from '../../assets/withDraw.png';
-import SmallModal from '../../components/modals/SmallModal';
+import SmallModal from '../../components/baseComponent/SmallModal';
 import UserTrue from './UserTrue';
 import Button from '../../components/baseComponent/Button'
 

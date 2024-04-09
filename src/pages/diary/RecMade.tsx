@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Button from '../../components/baseComponent/Button'
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-const Box = styled.div`
-  display: flex;
+  margin: 20px 0;
 `;
 
 const ContentCard = styled.div`
@@ -20,22 +16,13 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid var(--color-grey-2);
-  padding: 10px;
 `;
 
 const BoxTitle = styled.div`
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-hd-1); //20
-  padding: 10px;
 `
 
-const Title = styled.div`
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-hd-1); //20
-  color: var(--color-green-main);
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--color-grey-2);
-`
 const ContentTitle = styled.div`
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-md-2); //18
@@ -44,10 +31,6 @@ const ContentTitle = styled.div`
 const ContentBody = styled.div`
   font-size: var(--font-size-md-1); //16
 `
-
-const ButtonContainer = styled.div`
-  display: flex;
-`;
 
 const Checkbox = styled.input`
 
@@ -69,8 +52,6 @@ const RecMade: React.FC<ModalProps> = ({ onClose }) => {
     <>
       {showRecMadeModal && (
         <Container>
-          <Title>병원기록</Title>
-          <Box>
             <BoxTitle>진단</BoxTitle>
             <ContentCard>
               <Content>
@@ -85,11 +66,6 @@ const RecMade: React.FC<ModalProps> = ({ onClose }) => {
                 <ContentBody>인풋 박스 들어갈거에용</ContentBody>
               </Content>
             </ContentCard>
-          </Box>
-          <ButtonContainer>
-            <Button variant="primary" fontSize="ft-1">등록</Button>
-            <Button fontSize="ft-1">취소</Button>
-          </ButtonContainer>
         </Container>
       )}
     </>
