@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import BasedSelect from '../baseComponent/BasedSelect';
 import BasedButton from '../baseComponent/BasedButton';
-import BasedSearch from '../baseComponent/Search';
+import BasedSearch from '../baseComponent/BasedSearch';
 
 const HospitalSearchContainer = styled.div`
   display: flex;
