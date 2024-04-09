@@ -17,7 +17,7 @@ const ModalBackground = styled.div`
 const ModalContent = styled.div`
   position: relative;
   width: 1024px;
-  height: 700px;
+  height: auto; // auto 수정
   background-color: var(--color-white);
   border-radius: 7px;
   border: 1px solid var(--color-grey2);;

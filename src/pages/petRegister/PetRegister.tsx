@@ -1,8 +1,10 @@
-import { Container } from 'react-bootstrap';
 import styled from 'styled-components';
 
 // 아직 미완성 입니다
 // components 따로 정리 해서 빼기
+
+const Container = styled.div`
+`
 
 const Profile = styled.div`
   position: relative;

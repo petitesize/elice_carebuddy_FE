@@ -1,5 +1,7 @@
-import { Container } from 'react-bootstrap';
 import styled from 'styled-components';
+
+const Container = styled.div`
+`;
 
 const Profile = styled.div`
   position: relative;

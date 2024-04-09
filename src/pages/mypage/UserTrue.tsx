@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import imgSrc from '../../assets/TrueIcon.png'
-import SmallModal from '../../components/modals/SmallModal';
+import SmallModal from '../../components/baseComponent/SmallModal';
 import Button from '../../components/baseComponent/Button'
 
 const Container = styled.div`
