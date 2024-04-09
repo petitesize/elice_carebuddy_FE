@@ -6,11 +6,10 @@ import LikeAndCommentCount from '../../components/community/LikeAndCommentCount'
 import Comment from '../../components/community/Comment';
 // import Pagination from '../../components/baseComponent/Pagination';
 import CommentWritingBox from '../../components/community/CommentWritingBox';
-import BasedActionButton from '../../components/baseComponent/ActionButton';
+import ActionButton from '../../components/baseComponent/ActionButton';
 
 // 아이콘
-import { LuThumbsUp } from 'react-icons/lu';
-import { LuChevronLeft } from 'react-icons/lu';
+import { LuThumbsUp, LuChevronLeft } from 'react-icons/lu';
 
 // 임시 데이터
 import {
@@ -18,127 +17,127 @@ import {
   profileImg,
   tempContent,
   tempTitle,
-  tempDate,
   tempLikeCount,
   tempCommentNickname,
   tempComment,
 } from '../../../temp-data-community';
 
-const POST: React.FC = () => {
-  const Container = styled.div`
-    display: flex;
-    flex-direction: row;
-    margin-top: 60px;
-    width: 100%;
-  `;
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 60px;
+  width: 100%;
+`;
 
-  const LeftContainer = styled.div`
-    font-size: var(--font-size-lg-1);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    width: 22%;
-    padding-right: 15px;
-    box-sizing: border-box;
+const LeftContainer = styled.div`
+  font-size: var(--font-size-lg-1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 22%;
+  padding-right: 15px;
+  box-sizing: border-box;
 
-    p {
-      color: var(--color-grey-1);
-    }
-  `;
-
-  const PostListButtonContainer = styled.div`
-    display: flex;
-    fles-direction: row;
+  p {
     color: var(--color-grey-1);
-    font-size: var(--font-size-md-2);
-  `;
+  }
+`;
 
-  const PostContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 75%;
-  `;
+const PostListButtonContainer = styled.div`
+  display: flex;
+  fles-direction: row;
+  color: var(--color-grey-1);
+  font-size: var(--font-size-md-2);
+`;
 
-  const PostTopArea = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 0 0 5px 0;
-  `;
+const PostContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+`;
 
-  const PostInformation = styled.div``;
+const PostTopArea = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 0 5px 0;
+`;
 
-  const PostTitle = styled.p`
-    font-size: var(--font-size-lg-1);
-    font-weight: var(--font-weight-semibold);
-    margin: 0 0 10px 0;
-  `;
+const PostInformation = styled.div``;
 
-  const PostOption = styled.div`
-    display: flex;
-    flex-direction: row;
-  `;
+const PostTitle = styled.p`
+  font-size: var(--font-size-lg-1);
+  font-weight: var(--font-weight-semibold);
+  margin: 0 0 10px 0;
+`;
 
-  const PostContentArea = styled.div`
-    margin: 20px 0;
-    font-size: var(--font-size-md-1);
-    line-height: 1.4rem;
-    color: var(--color-black);
-    width: 100%;
+const PostOption = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 
-    img {
-      margin: 10px 0 20px 0;
-    }
+const PostContentArea = styled.div`
+  margin: 20px 0;
+  font-size: var(--font-size-md-1);
+  line-height: 1.4rem;
+  color: var(--color-black);
+  width: 100%;
 
-    pre {
-      white-space: pre-wrap;
-    }
-  `;
+  img {
+    margin: 10px 0 20px 0;
+  }
 
-  const Likes = styled.div`
-    display: flex;
-    flex-direction: row;
-    margin: 0 px;
-    color: var(--color-grey-1);
+  pre {
+    white-space: pre-wrap;
+  }
+`;
 
-    p {
-      font-size: var(--font-size-ft-1);
-      margin: 0 5px;
-    }
-  `;
+const Likes = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin: 0 px;
+  color: var(--color-grey-1);
 
-  const Hr = styled.hr`
-    border-top: 0.5px solid var(--color-grey-2);
-    width: 100%;
-    margin-bottom: 24px;
-  `;
-
-  const CommentArea = styled.div``;
-
-  const ImgContainer = styled.div`
-    margin-top: 20px;
-  `;
-
-  const ProfileContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    color: var(--color-grey-1);
+  p {
     font-size: var(--font-size-ft-1);
-    align-items: center;
-    height: auto;
+    margin: 0 5px;
+  }
+`;
 
-    p {
-      margin: 0 3px;
-    }
-  `;
+const Hr = styled.hr`
+  border-top: 0.5px solid var(--color-grey-2);
+  width: 100%;
+  margin-bottom: 24px;
+`;
 
-  const ProfileImg = styled.img`
-    height: 25px;
-    width: 25px;
-    border-radius: 50%;
-  `;
+const CommentArea = styled.div``;
 
+const ImgContainer = styled.div`
+  margin-top: 20px;
+`;
+
+const ProfileContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  color: var(--color-grey-1);
+  font-size: var(--font-size-ft-1);
+  align-items: center;
+  height: auto;
+
+  p {
+    margin: 0 3px;
+  }
+`;
+
+const ProfileImg = styled.img`
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+`;
+
+import comments from '../../../temp-data-comment.json';
+const POST: React.FC = () => {
   return (
     <>
       <Container>
@@ -161,7 +160,7 @@ const POST: React.FC = () => {
             </PostInformation>
             <PostOption>
               <LikeAndCommentCount likeCount={1} commentCount={2} />
-              <BasedActionButton />
+              <ActionButton />
             </PostOption>
           </PostTopArea>
           <PostContentArea>
@@ -180,12 +179,15 @@ const POST: React.FC = () => {
               text={tempComment}
               nickname={tempCommentNickname}
             ></CommentWritingBox>
-            <Comment
-              profileImg={tempImg}
-              text={tempComment}
-              nickname={tempCommentNickname}
-              date={tempDate}
-            ></Comment>
+            {comments.map((comment, index) => (
+              <Comment
+                key={index}
+                profileImg={comment.profileImg}
+                text={comment.text}
+                nickname={comment.nickname}
+                date={comment.date}
+              />
+            ))}
             {/* <Pagination /> */}
           </CommentArea>
         </PostContainer>

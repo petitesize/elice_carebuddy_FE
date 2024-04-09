@@ -26,20 +26,20 @@ import {
 
 const dummyArray = [
   <CommunityListSidebar
-name={tempGroupName}
-introduction={tempGroupIntroduction}
-memberCount={tempMemberCount}
-/>,
+    name={tempGroupName}
+    introduction={tempGroupIntroduction}
+    memberCount={tempMemberCount}
+  />,
   <CommunityListSidebar
-name={tempGroupName}
-introduction={tempGroupIntroduction}
-memberCount={tempMemberCount}
-/>,
+    name={tempGroupName}
+    introduction={tempGroupIntroduction}
+    memberCount={tempMemberCount}
+  />,
   <CommunityListSidebar
-name={tempGroupName}
-introduction={tempGroupIntroduction}
-memberCount={tempMemberCount}
-/>
+    name={tempGroupName}
+    introduction={tempGroupIntroduction}
+    memberCount={tempMemberCount}
+  />,
 ];
 
 const Home: React.FC = () => {
@@ -133,8 +133,9 @@ const Home: React.FC = () => {
               <Button>글 작성하기</Button>
             </WritingButton>
           </FeedOption>
-          {posts.map((post) => (
+          {posts.map((post, index) => (
             <FeedBox
+              key={index}
               title={post.title}
               content={post.content}
               src={profileImg}

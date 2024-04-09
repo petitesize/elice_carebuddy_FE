@@ -20,9 +20,6 @@ const StyledGroupCard = styled.div`
   margin: 5px;
   margin-bottom: 10px;
   padding: 15px;
-
-  display: flex;
-  flex-direction: row;
 `;
 
 const IconWrapper = styled.div`

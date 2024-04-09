@@ -122,8 +122,9 @@ const Community: React.FC = () => {
             <p>함께 나누고 싶은 이야기가 있나요?</p>
             <Button>글 작성하기</Button>
           </WritingButton>
-          {posts.map((post) => (
+          {posts.map((post, index) => (
             <FeedBox
+              key={index}
               title={post.title}
               content={post.content}
               src={profileImg}

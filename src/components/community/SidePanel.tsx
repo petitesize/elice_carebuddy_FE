@@ -28,10 +28,10 @@ const Hr = styled.hr`
 const SidePanel: React.FC<SidePanelProps> = ({ name, array }) => (
   <StyledSidePanelContainer>
     <P>{name}</P>
-    {array.map((Component, index) => (
+    {array.map((component, index) => (
       <div key={index}>
-        {Component}
-        {index !== array.length -1 && <Hr />}
+        {component}
+        {index !== array.length - 1 && <Hr />}
       </div>
     ))}
   </StyledSidePanelContainer>

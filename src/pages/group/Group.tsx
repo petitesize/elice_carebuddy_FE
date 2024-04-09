@@ -1,11 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import GroupCard from '../../components/community/GroupCard';
-
-import {
-  tempGroupName,
-  tempGroupIntroduction2,
-} from '../../../temp-data-community';
+import Groups from '../../../temp-data-group.json';
 
 const Group: React.FC = () => {
   const Tab = styled.div`
@@ -39,15 +35,13 @@ const Group: React.FC = () => {
         <button>고양이</button>
       </Tab>
       <GroupCardWrapper>
-        <GroupCard name={tempGroupName} introduction={tempGroupIntroduction2} />
-        <GroupCard name={tempGroupName} introduction={tempGroupIntroduction2} />
-        <GroupCard name={tempGroupName} introduction={tempGroupIntroduction2} />
-        <GroupCard name={tempGroupName} introduction={tempGroupIntroduction2} />
-        <GroupCard name={tempGroupName} introduction={tempGroupIntroduction2} />
-        <GroupCard name={tempGroupName} introduction={tempGroupIntroduction2} />
-        <GroupCard name={tempGroupName} introduction={tempGroupIntroduction2} />
-        <GroupCard name={tempGroupName} introduction={tempGroupIntroduction2} />
-        <GroupCard name={tempGroupName} introduction={tempGroupIntroduction2} />
+        {Groups.map((group, index) => (
+          <GroupCard
+            key={index}
+            name={group.name}
+            introduction={group.introduction}
+          />
+        ))}
       </GroupCardWrapper>
     </>
   );

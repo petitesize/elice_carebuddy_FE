@@ -1,5 +1,5 @@
 // 임시 이미지
-import tempImg from '/src/assets/temp-img.png'
+import tempImg from '/src/assets/temp-img.png';
 
 // Post
 const tempContent = `하다 법정만 이윽고 진단은 이유는, 입다 하고 수 1분 혼란스럽은지. 가슴은 하루와 이 아파트밖에 전 10개월 생산자를, 필요로 용공이 있다. 월별에서 시리즈로 서류에게 것 김치는 보고다, 몇 취객까지 우리는 대하다. "지대에 고장에 인, 위하는, 걸다" 첫 나타날 데 법적은 요구하여 미끄러지라. 모이어요 자세에서 삼월, 공구의 연도에 큼직한 충분하다 통신이다 중진은 쏠리다 없다.
@@ -16,11 +16,7 @@ const tempLikeCount = 7;
 const tempCommentNickname = 'NANA';
 const tempComment = `안녕하세요~! 너무 공감되는 글이에요ㅠㅠ 저도 많이 고민이 되었는데 이렇게 해결하면 되겠군요! 감사합니다!안녕하세요~! 너무 공감되는 글이에요ㅠㅠ 저도 많이 고민이 되었는데 이렇게 해결하면 되겠군요! 감사합니다!안녕하세요~! 너무 공감되는 글이에요ㅠㅠ 저도 많이 고민이 되었는데 이렇게 해결하면 되겠군요! 감사합니다!`;
 
-export { tempImg, tempContent, tempTitle, tempDate, tempLikeCount, tempCommentNickname, tempComment }
-
 // home
-
-import homefeedImg from '/src/assets/temp-homefeed.png';
 import profileImg from '/src/assets/temp-profile.png';
 
 const tempFeedContent =
@@ -32,26 +28,39 @@ const tempGroupIntroduction =
   '하다 법정만 이윽고 진단은 이유는, 입다 하고 수 1분 혼란스럽은지. ... ';
 const tempMemberCount = '120';
 
-export { homefeedImg, profileImg, tempFeedContent, tempCommentCount, templikeCount, tempGroupName, tempGroupIntroduction, tempMemberCount } 
-
 // community
 
 const tempNickname = '닉네임';
 const tempIntroduction = '안녕하세용 저는 강아지를 키웁니다 ! ';
 
-export { tempNickname, tempIntroduction }
-
-const tempGroupIntroduction2 = "위주를 빼다 일찌감치 결과로 경제를 있다 수 데 27일 뽑아내다. 위주를 빼다 일찌감치  ";
-
-export { tempGroupIntroduction2 }
+const tempGroupIntroduction2 =
+  '위주를 빼다 일찌감치 결과로 경제를 있다 수 데 27일 뽑아내다. 위주를 빼다 일찌감치  ';
 
 const SelectDummyCategoryOptions = [
   { value: 'Dog', label: '강아지' },
   { value: 'Cat', label: '고양이' },
 ];
 
-const SelectDummyGroupOptions = [
-  { value: 'Default', label: '그룹 선택' },
-];
+const SelectDummyGroupOptions = [{ value: 'Default', label: '그룹 선택' }];
 
-export { SelectDummyCategoryOptions, SelectDummyGroupOptions }
+export {
+  tempImg,
+  tempContent,
+  tempTitle,
+  tempDate,
+  tempLikeCount,
+  tempCommentNickname,
+  tempComment,
+  profileImg,
+  tempFeedContent,
+  tempCommentCount,
+  templikeCount,
+  tempGroupName,
+  tempGroupIntroduction,
+  tempMemberCount,
+  tempNickname,
+  tempIntroduction,
+  tempGroupIntroduction2,
+  SelectDummyCategoryOptions,
+  SelectDummyGroupOptions,
+};
