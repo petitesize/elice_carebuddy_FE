@@ -1,10 +1,10 @@
 import React from 'react';
+import InfoPageContainer from '../../components/information/InfoPageContainer';
 // import HospitalSearch from '../../components/information/HospitalSearch';
 import SearchResult from '../../components/information/SearchResult';
-import InfoPageContainer from '../../components/information/InfoPageContainer';
 import SearchBox from '../../components/information/SearchBox';
 
-const Information: React.FC = () => {
+const PharmacyInfo: React.FC = () => {
   return (
     <InfoPageContainer>
       <SearchBox />
@@ -13,4 +13,4 @@ const Information: React.FC = () => {
   );
 };
 
-export default Information;
+export default PharmacyInfo;
