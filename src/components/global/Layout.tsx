@@ -16,6 +16,8 @@ const Body = styled.div`
 
 const Main = styled.div`
   margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
   width: 1024px;
 `;
 
