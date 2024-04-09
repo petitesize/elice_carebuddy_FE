@@ -67,10 +67,16 @@ const TopBar: React.FC = () => {
     menuName = '건강 다이어리';
   } else if (pathname === '/group' && item === '커뮤니티') {
     menuIndex = index;
-    menuName = item;
+    menuName = '모든 그룹';
   } else if (pathname === '/signup' && item === 'carebuddy') {
     menuIndex = index;
     menuName = '로그인 / 회원가입';
+  } else if (pathname === '/post' && item === '커뮤니티') {
+    menuIndex = index;
+    menuName = '피드 상세 보기';
+  } else if (pathname === '/hospital-info' && item === '정보') {
+    menuIndex = index;
+    menuName = '동물 병원 검색';
   }
 });
 
