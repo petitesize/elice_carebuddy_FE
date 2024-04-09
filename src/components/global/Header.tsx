@@ -6,6 +6,17 @@ import user from './../../assets/userIcon.png';
 import alert from './../../assets/alertIcon.png';
 import { Link } from 'react-router-dom';
 
+// 링크 및 아이콘에 대한 배열 생성
+const links = [
+  { path: '/', label: '로고', icon: imgSrc },
+  { path: '/community', label: '커뮤니티', icon: null },
+  { path: '/diary', label: '건강관리', icon: null },
+  { path: '/hospital-info', label: '정보', icon: null },
+  { path: '/signup', label: '로그인', icon: null },
+  { path: '/mypage', label: '', icon: user },
+  { path: '/', label: '', icon: alert }
+];
+
 // styled-components를 사용하여 header 스타일 정의
 const HeaderContainer = styled.header`
   position: fixed;
@@ -18,13 +29,18 @@ const HeaderContainer = styled.header`
   background-color: white;
   display: flex;
   align-items: center;
-  font-weight: bold;
 `;
 
 const MenuBox = styled.span`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  
+  & a {
+    text-decoration: none;
+    color: var(--color-black);
+    font-weight: var(--font-weight-bold);
+  }
 `;
 
 const Logo = styled.img`
@@ -37,15 +53,6 @@ const Icon = styled.img`
   cursor: pointer;
   width: 20px;
   height: 20px;
-  padding: 0 10px 0 10px;
-`;
-
-const Login = styled.a`
-  cursor: pointer;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: end;
 `;
 
 const Container = styled.div`
@@ -54,39 +61,31 @@ const Container = styled.div`
   width: 1024px;
   height: auto;
 `;
+
 const Category = styled.a`
   & a {
     text-decoration: none;
     color: inherit;
   }
 `;
+
 const Header: React.FC = () => {
   return (
     <HeaderContainer>
       <Container>
         <MenuBox>
-          <Link to="/">
-            <Logo src={imgSrc} />
-          </Link>
-          <Category>
-            <Link to="/community">커뮤니티</Link>
-          </Category>
-          <Category>
-            <Link to="/diary">건강관리</Link>
-          </Category>
-          <Category>
-            <Link to="/hospital-info">정보</Link>
-          </Category>
-          <Icon src={search} />
-          <Category>
-            <Link to="/signup">
-              <Login>로그인</Login>
+          {links.map((link, index) => (
+            <Link key={index} to={link.path}>
+              {link.label === '로고' ? (
+                <Logo src={link.icon} />
+              ) : (
+                <>
+                  <Category>{link.label}</Category>
+                  {link.icon && <Icon src={link.icon} />}
+                </>
+              )}
             </Link>
-          </Category>
-          <Link to="/mypage">
-            <Icon src={user} />
-          </Link>
-          <Icon src={alert} />
+          ))}
         </MenuBox>
       </Container>
     </HeaderContainer>

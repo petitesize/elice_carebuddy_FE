@@ -15,7 +15,6 @@ const Text = styled.p`
   text-align: center;
   line-height: 23px;
   font-size: var(--font-size-md-1); //16
-  padding: 0 10px 10px 10px;
 `
 
 const Title = styled.p`
@@ -28,13 +27,18 @@ const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20px;
+  margin: 20px;
 `;
 
 const Logo = styled.img`
   cursor: pointer;
   width: 40px;
   height: 40px;
+`;
+
+const WithdrawButton = styled.a`
+  cursor: pointer;
+  font-size: var(--font-size-ft-1);
 `;
 
 interface ModalProps {
@@ -70,10 +74,10 @@ const UserAsk: React.FC<ModalProps> = ({ onClose }) => {
             재가입해도 복구가 어려워요.
           </Text>
           <ButtonContainer>
-            <Button onClick={handleKeepMembership} variant="primary" fontSize="ft-1">
+            <Button onClick={handleKeepMembership} variant="primary" fontSize="ft-1" margin="10px" padding="0 40px">
               계속 회원을 유지할래요
             </Button>
-            <Button onClick={handleToggleUserTrueModal} onclose={handleUserTrueClose}>탈퇴하기</Button>
+            <WithdrawButton onClick={handleToggleUserTrueModal} onclose={handleUserTrueClose}>탈퇴하기</WithdrawButton>
           </ButtonContainer>
         </Container>
       )}

@@ -64,7 +64,7 @@ const UserTrue: React.FC<ModalProps> = ({ onClose }) => {
         케어버디를 이용해주셔서 감사합니다.
       </Text>
       <ButtonContainer>
-        <Button onClick={handleWithdraw} variant="primary" fontSize="ft-1">확인</Button>
+        <Button onClick={handleWithdraw} variant="primary" fontSize="ft-1" padding="0 80px">확인</Button>
         {showUserTrueModal && (
           <SmallModal onClose={handleModalClose} />
         )}
