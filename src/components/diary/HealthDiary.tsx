@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-
+import RecordModal from '../modals/RecordModal';
+import RecMade from '../../pages/diary/RecMade'
 import MoreKebabIcon from '../../assets/MoreKebabIcon.png';
 import CareIcon from '../../assets/CareIcon.png';
 
@@ -180,13 +181,21 @@ const HealthDiary: React.FC<DiaryProps> = ({
   doctor,
   treatment,
 }) => {
+
+  const [showModal, setShowModal] = useState(false);
+
+  const handleToggleModal = () => {
+    setShowModal(!showModal);
+  };
+
   return (
     <HealthDiaryContainer>
       <DiaryTitle className="diaryTitle">
         {name} <span>건강 다이어리</span>
       </DiaryTitle>
       <HorizontalLine />
-      <AddDiaryBtn>기록하기</AddDiaryBtn>
+      <AddDiaryBtn onClick={handleToggleModal}>기록하기</AddDiaryBtn>
+      {showModal && <RecordModal component={<RecMade />} onClose={handleToggleModal} />}
       <DiariesContainer>
         <p>{formatDate(visitDate, true)}</p>
         <HealthReport>

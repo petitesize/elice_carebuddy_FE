@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import imgSrc from '../../assets/withDraw.png';
 import SmallModal from '../../components/modals/SmallModal';
 import UserTrue from './UserTrue';
+import Button from '../../components/baseComponent/Button'
 
 const Container = styled.div`
   display: flex;
@@ -13,13 +14,13 @@ const Container = styled.div`
 const Text = styled.p`
   text-align: center;
   line-height: 23px;
-  font-size: 16px;
+  font-size: var(--font-size-md-1); //16
   padding: 0 10px 10px 10px;
 `
 
 const Title = styled.p`
-  font-weight: bold;
-  font-size: 18px;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-md-2); //18
   padding: 20px;
 `
 
@@ -28,14 +29,6 @@ const ButtonContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
-`;
-
-const Button = styled.button`
-  padding: 10px 40px;
-  cursor: pointer;
-  border: none;
-  background-color: ${(props) => (props.primary ? '#6d987a' : 'white')};
-  color: ${(props) => (props.primary ? 'white' : '#343434')};
 `;
 
 const Logo = styled.img`
@@ -77,10 +70,10 @@ const UserAsk: React.FC<ModalProps> = ({ onClose }) => {
             재가입해도 복구가 어려워요.
           </Text>
           <ButtonContainer>
-            <Button primary onClick={handleKeepMembership}>
+            <Button onClick={handleKeepMembership} variant="primary" fontSize="ft-1">
               계속 회원을 유지할래요
             </Button>
-            <Button onClick={handleToggleUserTrueModal}>탈퇴하기</Button>
+            <Button onClick={handleToggleUserTrueModal} onclose={handleUserTrueClose}>탈퇴하기</Button>
           </ButtonContainer>
         </Container>
       )}
