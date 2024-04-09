@@ -7,6 +7,7 @@ import Comment from '../../components/community/Comment';
 // import Pagination from '../../components/baseComponent/Pagination';
 import CommentWritingBox from '../../components/community/CommentWritingBox';
 import ActionButton from '../../components/baseComponent/ActionButton';
+import Hr from '../../components/baseComponent/Hr';
 
 // 아이콘
 import { LuThumbsUp, LuChevronLeft } from 'react-icons/lu';
@@ -102,12 +103,6 @@ const Likes = styled.div`
     font-size: var(--font-size-ft-1);
     margin: 0 5px;
   }
-`;
-
-const Hr = styled.hr`
-  border-top: 0.5px solid var(--color-grey-2);
-  width: 100%;
-  margin-bottom: 24px;
 `;
 
 const CommentArea = styled.div``;

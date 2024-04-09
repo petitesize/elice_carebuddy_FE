@@ -195,7 +195,7 @@ const HealthDiary: React.FC<DiaryProps> = ({
       </DiaryTitle>
       <HorizontalLine />
       <AddDiaryBtn onClick={handleToggleModal}>기록하기</AddDiaryBtn>
-      {showModal && <BigModal component={<RecMade />} onClose={handleToggleModal} />}
+      {showModal && <BigModal title="진료 기록" value="등록" component={<RecMade />} onClose={handleToggleModal} />}
       <DiariesContainer>
         <p>{formatDate(visitDate, true)}</p>
         <HealthReport>

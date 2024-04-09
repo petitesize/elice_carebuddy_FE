@@ -7,6 +7,8 @@ import {
   LuTrash2,
 } from 'react-icons/lu';
 
+import Hr from './Hr';
+
 type ActionButtonProps = {
   border?: string;
   direction?: string;
@@ -56,12 +58,6 @@ const OptionItem = styled.div<ActionButtonProps>`
   padding: 10px;
   color: ${({ color }) => color && `${color};`}
   border-radius: ${({ borderRadius }) => borderRadius && `${borderRadius};`}
-`;
-
-const Hr = styled.hr`
-  border-top: 0.5px solid var(--color-grey-2);
-  width: 100%;
-  margin: 0 0;
 `;
 
 const ActionButton: React.FC<ActionButtonProps> = ({

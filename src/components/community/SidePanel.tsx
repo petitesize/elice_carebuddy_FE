@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import Hr from '../baseComponent/Hr';
+
 type SidePanelProps = {
   name: string;
   array: React.ReactNode[];
@@ -18,11 +20,6 @@ const StyledSidePanelContainer = styled.div`
 
 const P = styled.p`
   font-weight: var(--font-weight-bold);
-`;
-
-const Hr = styled.hr`
-  border: none;
-  border-top: 1px solid var(--color-grey-2);
 `;
 
 const SidePanel: React.FC<SidePanelProps> = ({ name, array }) => (

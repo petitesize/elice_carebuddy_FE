@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import LikeAndCommentCount from './LikeAndCommentCount';
+import Hr from '../baseComponent/Hr';
 
 type FeedBoxProps = {
   title: string;
@@ -66,12 +67,6 @@ const Content = styled.pre`
   white-space: pre-wrap;
   line-height: 1.4;
   font-size: var(--font-size-ft-1);
-`;
-
-const Hr = styled.hr`
-  border: none;
-  border-top: 1px solid var(--color-grey-2);
-  margin: 10px 0;
 `;
 
 const FeedBox: React.FC<FeedBoxProps> = ({
