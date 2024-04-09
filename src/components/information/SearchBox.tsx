@@ -1,5 +1,3 @@
-/* Search 기능 구현 완료된 이후 삭제 예정 */
-
 import React from 'react';
 import styled from 'styled-components';
 import BasedSelect from '../baseComponent/BasedSelect';
@@ -63,7 +61,8 @@ const SelectDummyProvinceOptions = [
   { value: 'Yuseong', label: '유성구' },
 ];
 
-const HospitalSearch: React.FC = () => {
+const SearchBox: React.FC = () => {
+  const isHospital = location.pathname === '/hospital-info';
   return (
     <>
       <HospitalSearchContainer>
@@ -80,7 +79,7 @@ const HospitalSearch: React.FC = () => {
             ></BasedSelect>
           </SelectContainer>
           <SearchContainer>
-            <Title>병원명: </Title>
+            <Title>{isHospital ? '병원' : '약국'}명: </Title>
             <BasedSearch width="100%" padding="8px 16px" />
             <StyledButton>검색</StyledButton>
           </SearchContainer>
@@ -90,4 +89,4 @@ const HospitalSearch: React.FC = () => {
   );
 };
 
-export default HospitalSearch;
+export default SearchBox;

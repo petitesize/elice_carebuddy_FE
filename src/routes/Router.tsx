@@ -9,6 +9,7 @@ import Post from '../pages/post/Post';
 import Group from '../pages/group/Group';
 import Diary from '../pages/diary/Diary';
 import HospitalInfo from '../pages/hospitalInfo/HospitalInfo';
+import PharmacyInfo from '../pages/pharmacyInfo/PharmacyInfo';
 import PetRegister from '../pages/petRegister/PetRegister';
 import NotFound from '../pages/notFound/NotFound';
 
@@ -32,6 +33,10 @@ const AppRouter = () => {
         <Route
           path="/hospital-info"
           element={<Layout component={HospitalInfo} />}
+        />
+        <Route
+          path="/pharmacy-info"
+          element={<Layout component={PharmacyInfo} />}
         />
         {/* 모든 경로에 대한 매칭을 시도한 후 NotFound 컴포넌트를 렌더링합니다. */}
         <Route path="*" element={<NotFound />} />

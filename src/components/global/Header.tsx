@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import imgSrc from './../../assets/carebuddyLogo.png'
-import search from './../../assets/searchIcon.png'
-import user from './../../assets/userIcon.png'
-import alert from './../../assets/alertIcon.png'
-import { Link } from 'react-router-dom'; 
+import imgSrc from './../../assets/carebuddyLogo.png';
+import search from './../../assets/searchIcon.png';
+import user from './../../assets/userIcon.png';
+import alert from './../../assets/alertIcon.png';
+import { Link } from 'react-router-dom';
 
 // styled-components를 사용하여 header 스타일 정의
 const HeaderContainer = styled.header`
@@ -25,7 +25,7 @@ const MenuBox = styled.span`
   display: flex;
   align-items: center;
   justify-content: space-between;
-`
+`;
 
 const Logo = styled.img`
   cursor: pointer;
@@ -46,32 +46,46 @@ const Login = styled.a`
   padding: 0;
   display: flex;
   justify-content: end;
-`
+`;
 
 const Container = styled.div`
   margin: 0 auto;
   padding: 0;
   width: 1024px;
   height: auto;
-`
+`;
 const Category = styled.a`
   & a {
     text-decoration: none;
     color: inherit;
   }
-`
+`;
 const Header: React.FC = () => {
   return (
     <HeaderContainer>
       <Container>
         <MenuBox>
-          <Link to="/"><Logo src={imgSrc} /></Link>
-          <Category><Link to="/community">커뮤니티</Link></Category>
-          <Category><Link to="/diary">건강관리</Link></Category>
-          <Category><Link to="/">정보</Link></Category>
+          <Link to="/">
+            <Logo src={imgSrc} />
+          </Link>
+          <Category>
+            <Link to="/community">커뮤니티</Link>
+          </Category>
+          <Category>
+            <Link to="/diary">건강관리</Link>
+          </Category>
+          <Category>
+            <Link to="/hospital-info">정보</Link>
+          </Category>
           <Icon src={search} />
-          <Category><Link to="/signup"><Login>로그인</Login></Link></Category>
-          <Link to="/mypage"><Icon src={user} /></Link>
+          <Category>
+            <Link to="/signup">
+              <Login>로그인</Login>
+            </Link>
+          </Category>
+          <Link to="/mypage">
+            <Icon src={user} />
+          </Link>
           <Icon src={alert} />
         </MenuBox>
       </Container>
