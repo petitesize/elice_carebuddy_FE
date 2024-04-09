@@ -3,7 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import BasedSelect from '../baseComponent/BasedSelect';
-import BasedButton from '../baseComponent/BasedButton';
+import BasedButton from '../baseComponent/Button';
 import BasedSearch from '../baseComponent/BasedSearch';
 
 const HospitalSearchContainer = styled.div`

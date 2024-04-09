@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import imgSrc from '../../assets/TrueIcon.png'
 import SmallModal from '../../components/modals/SmallModal';
+import Button from '../../components/baseComponent/Button'
 
 const Container = styled.div`
   display: flex;
@@ -12,13 +13,13 @@ const Container = styled.div`
 const Text = styled.p`
   text-align: center;
   line-height: 23px;
-  font-size: 16px;
+  font-size: var(--font-size-md-1); //16
   padding: 0 10px 10px 10px;
 `
 
 const Title = styled.p`
-  font-weight: bold;
-  font-size: 18px;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-md-2); //18
   padding: 20px;
 `
 
@@ -27,14 +28,6 @@ const ButtonContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
-`;
-
-const Button = styled.button`
-  padding: 10px 40px;
-  cursor: pointer;
-  border: none;
-  background-color: ${(props) => (props.primary ? '#6d987a' : 'white')};
-  color: ${(props) => (props.primary ? 'white' : '#343434')};
 `;
 
 const Logo = styled.img`
@@ -71,7 +64,7 @@ const UserTrue: React.FC<ModalProps> = ({ onClose }) => {
         케어버디를 이용해주셔서 감사합니다.
       </Text>
       <ButtonContainer>
-        <Button primary onClick={handleWithdraw}>확인</Button>
+        <Button onClick={handleWithdraw} variant="primary" fontSize="ft-1">확인</Button>
         {showUserTrueModal && (
           <SmallModal onClose={handleModalClose} />
         )}
