@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React, { useState } from 'react';
-import UIButton from '../global/UIButton';
+import Button from '../../components/baseComponent/Button'
 
 const Container = styled.div`
   display: flex;
@@ -142,7 +142,7 @@ const Profile: React.FC = () => {
           </InputList>
         </InputContainer>
           <DataList>
-            <UIButton onClick={handleSave} variant="primary" shape="round" fontSize="ft-1">저장하기</UIButton>
+            <Button onClick={handleSave} variant="primary" shape="round" fontSize="ft-1">저장하기</Button>
           </DataList>
         </Info>
       </UserContainer>

@@ -16,23 +16,19 @@ const ModalBackground = styled.div`
 
 const ModalContent = styled.div`
   position: relative;
-  width: 400px;
-  height: auto;
-  background-color: white;
+  width: 1024px;
+  height: 700px;
+  background-color: var(--color-white);
   border-radius: 7px;
-  border: 1px solid #cecece;
+  border: 1px solid var(--color-grey2);;
   padding: 30px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   z-index: 10000;
 `;
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 10px;
 `;
 
 interface ModalProps {
@@ -40,10 +36,13 @@ interface ModalProps {
   component: ReactNode;
 }
 
-const SmallModal: React.FC<ModalProps> = ({ onClose, component:Component }) => {
+const RecordModal: React.FC<ModalProps> = ({ onClose, component: Component }) => {
+  const handleModalBackgroundClick = () => {
+    onClose(); // 모달 닫기 함수 호출
+  };
 
   return (
-    <ModalBackground onClick={onClose}>
+    <ModalBackground onClick={handleModalBackgroundClick}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
         <Container>
           {Component}
@@ -53,4 +52,4 @@ const SmallModal: React.FC<ModalProps> = ({ onClose, component:Component }) => {
   );
 };
 
-export default SmallModal;
+export default RecordModal;

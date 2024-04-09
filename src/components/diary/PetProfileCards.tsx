@@ -89,6 +89,7 @@ const PetDetails = styled.p`
 `;
 
 const StyledSwiper = styled(Swiper)`
+  width: 100%;
   > div {
     padding-top: 8px;
   }
@@ -98,19 +99,19 @@ const StyledSwiper = styled(Swiper)`
   }
 `;
 
-interface PetProfilesProps {
+interface PetProfile {
   name: string;
   breeds: string;
   age: number;
   img: string;
 }
 
-const PetProfileCards: React.FC<PetProfilesProps> = ({
-  name,
-  breeds,
-  age,
-  img,
-}) => {
+interface PetProfileProps {
+  profiles: PetProfile[];
+}
+
+const PetProfileCards: React.FC<PetProfileProps> = ({ profiles }) => {
+  const isMypet = location.pathname !== '/userpage';
   return (
     <PetProfileCardsContainer>
       <StyledSwiper
@@ -125,52 +126,26 @@ const PetProfileCards: React.FC<PetProfilesProps> = ({
         modules={[Pagination]}
         className="mySwiper"
       >
-        <SwiperSlide>
-          <PetProfileCardContainer>
-            <MoreIcon src={MoreKebabIcon} />
-            <PetProfileImg src={img || defaultImg} alt="프로필사진" />
-            <PetName>{name}</PetName>
-            <PetDetails>
-              {breeds} / {age}살
-            </PetDetails>
-          </PetProfileCardContainer>
-        </SwiperSlide>
-        <SwiperSlide>
-          <PetProfileCardContainer>
-            <MoreIcon src={MoreKebabIcon} />
-            <PetProfileImg src={img || defaultImg} alt="프로필사진" />
-            <PetName>{name}</PetName>
-            <PetDetails>
-              {breeds} / {age}살
-            </PetDetails>
-          </PetProfileCardContainer>
-        </SwiperSlide>
-        <SwiperSlide>
-          <PetProfileCardContainer>
-            <MoreIcon src={MoreKebabIcon} />
-            <PetProfileImg src={img || defaultImg} alt="프로필사진" />
-            <PetName>{name}</PetName>
-            <PetDetails>
-              {breeds} / {age}살
-            </PetDetails>
-          </PetProfileCardContainer>
-        </SwiperSlide>
-        <SwiperSlide>
-          <PetProfileCardContainer>
-            <MoreIcon src={MoreKebabIcon} />
-            <PetProfileImg src={img || defaultImg} alt="프로필사진" />
-            <PetName>{name}</PetName>
-            <PetDetails>
-              {breeds} / {age}살
-            </PetDetails>
-          </PetProfileCardContainer>
-        </SwiperSlide>
-        <SwiperSlide>
-          <PetProfileCardContainer>
-            <AddProfile />
-            <AddProfileMsg>프로필 추가</AddProfileMsg>
-          </PetProfileCardContainer>
-        </SwiperSlide>
+        {profiles.map((profile, index) => (
+          <SwiperSlide key={index}>
+            <PetProfileCardContainer>
+              {isMypet && <MoreIcon src={MoreKebabIcon} />}
+              <PetProfileImg src={profile.img || defaultImg} alt="프로필사진" />
+              <PetName>{profile.name}</PetName>
+              <PetDetails>
+                {profile.breeds} / {profile.age}살
+              </PetDetails>
+            </PetProfileCardContainer>
+          </SwiperSlide>
+        ))}
+        {isMypet && (
+          <SwiperSlide>
+            <PetProfileCardContainer>
+              <AddProfile />
+              <AddProfileMsg>프로필 추가</AddProfileMsg>
+            </PetProfileCardContainer>
+          </SwiperSlide>
+        )}
       </StyledSwiper>
 
       {/* <PetProfileCardContainer>
