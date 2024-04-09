@@ -15,7 +15,7 @@ const UserContainer = styled.div`
 const Menu = styled.span`
   padding: 10px 10px 10px 0;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 22px;
 `;
 
 const Item = styled.a`

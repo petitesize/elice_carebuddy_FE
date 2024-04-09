@@ -22,7 +22,7 @@ const Category = styled.div`
 `
 
 const Title = styled.div`
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
   padding-top: 5px;
 `

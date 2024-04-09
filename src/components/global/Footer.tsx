@@ -16,7 +16,7 @@ const FooterContainer = styled.footer`
 `;
 
 const Container = styled.div`
-  width: 70%;
+  width: 1024px;
 `
 
 const Logo = styled.img`
@@ -27,9 +27,9 @@ const Logo = styled.img`
 
 const Font = styled.p`
   margin: 0;
-  font-size: 12px;
+  font-size: 14px;
   display: flex;
-  line-height: 15px;
+  line-height: 18px;
 `
 
 const Footer: React.FC = () => {

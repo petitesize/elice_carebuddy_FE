@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import React, { useState } from 'react';
+import SmallModal from '../modals/SmallModal'
 import UserAsk from '../../pages/mypage/UserAsk';
 
 const Container = styled.div`
@@ -14,7 +15,7 @@ const UserContainer = styled.div`
 `;
 
 const Menu = styled.span`
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
 `;
 
@@ -73,7 +74,7 @@ const UserInfo: React.FC = () => {
         <DataList>
           <Data>{`${DummyUserInfoData.email}`}</Data>
           <WithdrawButton onClick={handleToggleModal}>회원탈퇴</WithdrawButton>
-          {showModal && <UserAsk onClose={handleToggleModal} />}
+          {showModal && <SmallModal component={<UserAsk onClose={handleToggleModal} />} />}
         </DataList>
       </UserContainer>
     </Container>
