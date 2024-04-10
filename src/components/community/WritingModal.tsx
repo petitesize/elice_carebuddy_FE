@@ -16,7 +16,6 @@ const StyledWritingModal = styled.div`
 
   & > * {
     margin: 10px 0;
-    // box-sizing: border-box;
   }
 `;
 
@@ -39,12 +38,6 @@ const ImageArea = styled.div`
     padding: 0 0 2px;
     border-bottom: solid 1px;
   }
-
-  p {
-    width: 600px;
-    // background-color: aqua;
-    font-size: var(--font-size-sm-1);
-  }
 `;
 
 const ImageBox = styled.div`
@@ -52,6 +45,10 @@ const ImageBox = styled.div`
   border-radius: 10px;
   height: 120px;
   margin: 0;
+
+  p {
+    font-size: var(--font-size-sm-1);
+  }
 `;
 
 const WritingModal: React.FC = () => {
@@ -68,7 +65,7 @@ const WritingModal: React.FC = () => {
           placeholder="내용을 입력해 주세요"
           width="100%"
           height="400px"
-          padding="5px 10px"
+          padding="10px 10px"
         />
         <ImageArea>
           <h3>첨부 사진</h3>

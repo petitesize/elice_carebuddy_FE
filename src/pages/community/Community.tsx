@@ -84,7 +84,7 @@ const WritingButton = styled.div`
   p {
     font-size: var(--font-size-ft-1);
     color: var(--color-grey-1);
-    width: 205px;
+    padding: 0 10px;
   }
 `;
 

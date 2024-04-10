@@ -71,7 +71,7 @@ const Classification = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  width: 100%;
+  width: auto;
 
   p {
     padding-right: 5px;
@@ -80,16 +80,28 @@ const Classification = styled.div`
   }
 `;
 
-const WritingButton = styled.div`
-display: flex;
-flex-direction: row;
-align-items: center; 
+// const WritingButton = styled.div`
+// display: flex;
+// flex-direction: row;
+// align-items: center; 
 
-p {
-  font-size: var( --font-size-ft-1);
-  color: var(--color-grey-1);
-  width: 205px;
-}
+// p {
+//   font-size: var( --font-size-ft-1);
+//   color: var(--color-grey-1);
+//   width: 205px;
+// }
+// `;
+
+const WritingButton = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  p {
+    font-size: var(--font-size-ft-1);
+    color: var(--color-grey-1);
+    padding: 0 10px;
+  }
 `;
 
 const Home: React.FC = () => {
