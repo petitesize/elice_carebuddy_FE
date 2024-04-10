@@ -47,6 +47,7 @@ const ButtonElement = styled.button<ButtonProps>`
   margin: ${(props) =>
     props.margin || '0'}; // margin prop 값 또는 기본값 '0' 사용
   padding: ${(props) => props.padding || '0'};
+  transition: all 0.5s;
 
   &:hover {
     background-color: ${(props) =>

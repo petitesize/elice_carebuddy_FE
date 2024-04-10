@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import PetProfiles from '../../components/diary/PetProfiles';
@@ -51,11 +51,24 @@ const DummyDiaryData = {
   doctor: '강의사',
   treatment: '항생제',
 };
+interface Pet {
+  name: string;
+  breeds: string;
+  age: number;
+  img: string;
+}
 
 const Diary: React.FC = () => {
+  const [selectedPet, setSelectedPet] = useState(DummyProfilesData.pets[0]);
+  console.log(selectedPet);
+
+  const handlePetClick = (pet: Pet) => {
+    setSelectedPet(pet);
+  };
+
   return (
     <DiaryPageContainer>
-      <PetProfiles {...DummyProfilesData} />
+      <PetProfiles {...DummyProfilesData} onPetClick={handlePetClick} />
       <HealthDiary {...DummyDiaryData} />
     </DiaryPageContainer>
   );
