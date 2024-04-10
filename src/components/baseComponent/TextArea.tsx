@@ -13,7 +13,7 @@ interface TextAreaProps {
 const StyledTextArea = styled.textarea<TextAreaProps>`
   width: ${(props) => props.width || '300px'};
   height: ${(props) => props.height || '100px'};
-  border: 1px solid #cecece;
+  border: 1px solid var(--color-grey-2);
   font-size: ${(props) => props.fontSize || '16px'};
   padding: ${(props) => props.padding || '5px'};
   margin: ${(props) => props.margin || '10px'};

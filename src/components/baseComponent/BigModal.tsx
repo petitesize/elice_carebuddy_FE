@@ -18,12 +18,17 @@ const ModalBackground = styled.div`
 const ModalContent = styled.div`
   position: relative;
   width: 1024px;
-  height: auto; // auto 수정
+  height: auto;
   background-color: var(--color-white);
   border-radius: 7px;
   border: 1px solid var(--color-grey2);;
+<<<<<<< HEAD
   border-top: 20px solid #6d987a;
   padding: 30px;
+=======
+  border-top: 20px solid var(--color-green-main);
+  padding: 20px 30px;
+>>>>>>> deef8563d754f3f411e06c4a20a5952f567b4d92
   display: flex;
   justify-content: center;
   z-index: 10000;
@@ -41,16 +46,25 @@ const Title = styled.div`
   border-bottom: 1px solid var(--color-grey-2);
 `
 
+const ComponentContainer = styled.div`
+width: 1000px;
+padding: 0;
+`;
+
 const ButtonContainer = styled.div`
   display: flex;
 `;
 
+
+
 interface ModalProps {
   onClose: () => void;
   component: ReactNode;
+  title: string;
+  value: string;
 }
 
-const RecordModal: React.FC<ModalProps> = ({ onClose, component: Component }) => {
+const BigModal: React.FC<ModalProps> = ({ title, value, onClose, component: Component }) => {
   const handleModalBackgroundClick = () => {
     onClose(); // 모달 닫기 함수 호출
   };
@@ -59,10 +73,12 @@ const RecordModal: React.FC<ModalProps> = ({ onClose, component: Component }) =>
     <ModalBackground onClick={handleModalBackgroundClick}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
         <Container>
-          <Title>병원기록</Title>
+          <Title>{title}</Title>
+          <ComponentContainer>
           {Component}
+          </ComponentContainer>
           <ButtonContainer>
-            <Button variant="primary" fontSize="ft-1" padding="0 20px" margin="0 10px 0 0">등록</Button>
+            <Button variant="primary" fontSize="ft-1" padding="0 20px" margin="0 10px 0 0">{value}</Button>
             <Button fontSize="ft-1" padding="0 20px" onClick={handleModalBackgroundClick}>취소</Button>
           </ButtonContainer>
         </Container>
@@ -71,4 +87,4 @@ const RecordModal: React.FC<ModalProps> = ({ onClose, component: Component }) =>
   );
 };
 
-export default RecordModal;
+export default BigModal;
