@@ -12,7 +12,6 @@ const links = [
   { path: '/community', label: '커뮤니티', icon: null },
   { path: '/diary', label: '건강관리', icon: null },
   { path: '/hospital-info', label: '정보', icon: null },
-  { path: '/pharmacy-info', label: '정보', icon: null },
   { path: '/signup', label: '로그인', icon: null },
   { path: '/mypage', label: '', icon: user },
   { path: '/', label: '', icon: alert },
