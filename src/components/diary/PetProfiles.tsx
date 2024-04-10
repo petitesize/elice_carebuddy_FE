@@ -27,13 +27,21 @@ interface PetProfile {
 interface PetProfilesProps {
   userName: string;
   pets: PetProfile[];
+  onPetClick: (pet: PetProfile) => void;
 }
 
-const PetProfiles: React.FC<PetProfilesProps> = ({ userName, pets }) => {
+const PetProfiles: React.FC<PetProfilesProps> = ({
+  userName,
+  pets,
+  onPetClick,
+}) => {
+  const handleClick = (pet: PetProfile) => {
+    onPetClick(pet);
+  };
   return (
     <PetProfilesContainer>
       <PetProfilesTitle>{userName} 님의 반려동물</PetProfilesTitle>
-      <PetProfileCards profiles={pets} />
+      <PetProfileCards profiles={pets} onClick={handleClick} />
     </PetProfilesContainer>
   );
 };

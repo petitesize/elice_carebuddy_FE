@@ -124,10 +124,14 @@ interface PetProfile {
 
 interface PetProfileProps {
   profiles: PetProfile[];
+  onClick: (pet: PetProfile) => void;
 }
 
-const PetProfileCards: React.FC<PetProfileProps> = ({ profiles }) => {
+const PetProfileCards: React.FC<PetProfileProps> = ({ profiles, onClick }) => {
   const isMypet = location.pathname !== '/userpage';
+  const handleClick = (pet: PetProfile) => {
+    onClick(pet);
+  };
   return (
     <PetProfileCardsContainer>
       <StyledSwiper
@@ -144,7 +148,7 @@ const PetProfileCards: React.FC<PetProfileProps> = ({ profiles }) => {
       >
         {profiles.map((profile, index) => (
           <SwiperSlide key={index}>
-            <PetProfileCardContainer>
+            <PetProfileCardContainer onClick={() => handleClick(profile)}>
               <ActionButtonContainer className="action">
                 {/* {isMypet && <MoreIcon src={MoreKebabIcon} />} */}
                 {isMypet && <ActionButton direction="vertical" />}
@@ -167,27 +171,6 @@ const PetProfileCards: React.FC<PetProfileProps> = ({ profiles }) => {
           </SwiperSlide>
         )}
       </StyledSwiper>
-
-      {/* <PetProfileCardContainer>
-        <MoreIcon src={MoreKebabIcon} />
-        <PetProfileImg src={img || defaultImg} alt="프로필사진" />
-        <PetName>{name}</PetName>
-        <PetDetails>
-          {breeds} / {age}살
-        </PetDetails>
-      </PetProfileCardContainer>
-      <PetProfileCardContainer>
-        <MoreIcon src={MoreKebabIcon} />
-        <PetProfileImg src={img || defaultImg} alt="프로필사진" />
-        <PetName>{name}</PetName>
-        <PetDetails>
-          {breeds} / {age}살
-        </PetDetails>
-      </PetProfileCardContainer>
-      <PetProfileCardContainer>
-        <AddProfile />
-        <AddProfileMsg>프로필 추가</AddProfileMsg>
-      </PetProfileCardContainer> */}
     </PetProfileCardsContainer>
   );
 };
