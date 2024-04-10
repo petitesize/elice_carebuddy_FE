@@ -8,15 +8,17 @@ interface ButtonProps {
 
 const StyledButton = styled.button`
   font-size: var(--font-size-ft-1);
-  margin: 0 5px 10px 5px;
+  font-weight: var(--font-weight-regular);
+  margin-bottom: 10px;
+  padding: 0 0 1px 0;
   border: none;
   border-bottom: solid 1px;
-  cursor: pointer;
   background-color: var(--color-white);
+  cursor: pointer;
 `;
 
 const LinkButton: React.FC<ButtonProps> = ({ onClick, text }) => {
-  return <StyledButton onClick={onClick}>{text} </StyledButton>;
+  return <StyledButton onClick={onClick}>{text}</StyledButton>;
 };
 
 export default LinkButton;

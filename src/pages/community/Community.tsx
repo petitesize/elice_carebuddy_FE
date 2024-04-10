@@ -9,6 +9,7 @@ import MemberListSidebar from '../../components/community/MemberListSidebar';
 import Pagination from '../../components/baseComponent/Pagination';
 import BigModal from '../../components/baseComponent/BigModal';
 import PostCreate from '../../components/community/PostCreate';
+import LinkButton from '../../components/baseComponent/LinkButton';
 
 import Button from '../../components/baseComponent/Button';
 
@@ -67,13 +68,6 @@ const SidePanelContainer = styled.div`
 const GroupOption = styled.div`
   display: flex;
   justify-content: space-between;
-
-  a {
-    font-size: var(--font-size-ft-1);
-    margin-bottom: 10px;
-    padding: 0 0 2px 0;
-    border-bottom: solid 1px;
-  }
 `;
 
 const WritingButton = styled.div`
@@ -141,8 +135,8 @@ const Community: React.FC = () => {
         </CommunityFeedContainer>
         <SidePanelContainer>
           <GroupOption>
-            <a>그룹 탈퇴</a>
-            <a>다른 그룹 둘러보기</a>
+            <LinkButton text="그룹 탈퇴" />
+            <LinkButton text="다른 그룹 둘러보기" />
           </GroupOption>
           <SidePanel name="추천 멤버" array={dummyArray} />
         </SidePanelContainer>

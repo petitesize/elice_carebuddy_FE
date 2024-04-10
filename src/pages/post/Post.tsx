@@ -134,8 +134,6 @@ const ProfileImg = styled.img`
   border-radius: 50%;
 `;
 
-
-
 const POST: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
 
@@ -146,14 +144,11 @@ const POST: React.FC = () => {
   const handleSavePost = () => {
     // API 생성되면 로직 구현
     setShowModal(false);
-  }
-  
-  const handleDeleteButton = () => { 
-    return //추후 API 생성되면 추가
   };
 
-
-
+  const handleDeleteButton = () => {
+    return; //추후 API 생성되면 추가
+  };
 
   return (
     <>
@@ -177,7 +172,12 @@ const POST: React.FC = () => {
             </PostInformation>
             <PostOption>
               <LikeAndCommentCount likeCount={1} commentCount={2} />
-              <ActionButton border="default" direction='horizontal' editOnClick={handleToggleModal} deleteOnClick={handleDeleteButton}/>
+              <ActionButton
+                border="default"
+                direction="horizontal"
+                editOnClick={handleToggleModal}
+                deleteOnClick={handleDeleteButton}
+              />
               {showModal && (
                 <BigModal
                   title="글 수정하기"

@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import LinkButton from '../baseComponent/LinkButton.tsx';
+
 
 type CommentWritingBoxProps = {
   text?: string;
@@ -26,14 +28,13 @@ const CommentBox = styled.textarea`
   border: none;
 `;
 
-const Button = styled.div`
+const ButtonContainer = styled.div`
   position: absolute;
   top: 110px;
   right: 15px;
   font-size: var(--font-size-ft-1);
   margin: 0 5px 10px 5px;
   padding: 0 0 2px;
-  border-bottom: solid 1px;
 `;
 
 const CommentWritingBox: React.FC<CommentWritingBoxProps> = ({ nickname }) => (
@@ -41,9 +42,9 @@ const CommentWritingBox: React.FC<CommentWritingBoxProps> = ({ nickname }) => (
     <StyledCommentWritingBox>
       <Nickname>{nickname}</Nickname>
       <CommentBox placeholder="댓글 내용을 입력하세요..." />
-      <Button>
-        <a>등록하기</a>
-      </Button>
+      <ButtonContainer>
+        <LinkButton text="등록하기" />
+      </ButtonContainer>
     </StyledCommentWritingBox>
   </>
 );
