@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import BigModal from '../baseComponent/BigModal';
 import RecMade from '../../pages/diary/RecMade';
+import RecEdit from '../../pages/diary/RecEdit';
 import MoreKebabIcon from '../../assets/MoreKebabIcon.png';
 import CareIcon from '../../assets/CareIcon.png';
 import Button from '../baseComponent/Button';
@@ -169,9 +170,22 @@ const HealthDiary: React.FC<DiaryProps> = ({
   treatment,
 }) => {
   const [showModal, setShowModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
 
   const handleToggleModal = () => {
     setShowModal(!showModal);
+  };
+
+  const handleDeleteButtonClick = () => {
+    setShowModal(true);
+  };
+
+  const handleToggleEditModal = () => { // 수정 모달 표시 여부를 관리하는 함수
+    setShowEditModal(!showEditModal);
+  };
+
+  const handleEditButtonClick = () => {
+    setShowEditModal(true); // 수정하기 버튼 클릭 시 수정 모달 표시
   };
 
   return (
@@ -189,16 +203,24 @@ const HealthDiary: React.FC<DiaryProps> = ({
       ></Button>
       {showModal && (
         <BigModal
-          title="진료 기록"
+          title="진료 기록 등록"
           value="등록"
           component={<RecMade />}
           onClose={handleToggleModal}
         />
       )}
+      {showEditModal && (
+        <BigModal
+          title="진료 기록 수정"
+          value="수정"
+          component={<RecEdit />} // 수정 모달을 불러옴
+          onClose={handleToggleEditModal}
+        />
+      )}
       <DiariesContainer>
         <p>{formatDate(visitDate, true)}</p>
         <HealthReport>
-          <ActionButton direction="horizontal" border="none" />
+          <ActionButton onEdit={handleEditButtonClick} direction="horizontal" border="none" />
           <DeseaseName>
             <Icon style={{ width: '22px', height: '22px' }} src={CareIcon} />
             <DeseaseTitle>{desease}</DeseaseTitle>
