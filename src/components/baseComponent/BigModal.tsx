@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import styled from 'styled-components';
 import Button from '../../components/baseComponent/Button';
 
@@ -18,18 +18,21 @@ const ModalBackground = styled.div`
 const ModalContent = styled.div`
   position: relative;
   width: 1024px;
-  height: auto;
+  max-height: 80vh;
   background-color: var(--color-white);
   border-radius: 7px;
-  border: 1px solid var(--color-grey2);;
-  border-top: 20px solid var(--color-green-main);
+  border: 1px solid var(--color-grey2);
+  border-top: 20px solid #6d987a;
   padding: 20px 30px;
+  margin-bottom: 20px;
   display: flex;
   z-index: 10000;
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 const Container = styled.div`
-  padding: 10px;
+  padding: 10px 0 20px 0;
 `;
 
 const Title = styled.div`
@@ -38,18 +41,12 @@ const Title = styled.div`
   color: var(--color-green-main);
   padding-bottom: 10px;
   border-bottom: 1px solid var(--color-grey-2);
-`
-
-const ComponentContainer = styled.div`
-  width: 1000px;
-  padding: 0;
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
+  padding-bottom: 10px;
 `;
-
-
 
 interface ModalProps {
   onClose: () => void;
@@ -58,7 +55,20 @@ interface ModalProps {
   value: string;
 }
 
-const BigModal: React.FC<ModalProps> = ({ title, value, onClose, component: Component }) => {
+const BigModal: React.FC<ModalProps> = ({
+  title,
+  value,
+  onClose,
+  component: Component,
+}) => {
+  useEffect(() => {
+    document.body.style.overflow = 'hidden'; // 모달 열렸을 때 배경 스크롤 막음
+
+    return () => {
+      document.body.style.overflow = 'auto'; // 닫혔을 때 다시 스크롤 가능하게 만듦
+    };
+  }, []);
+
   const handleModalBackgroundClick = () => {
     onClose(); // 모달 닫기 함수 호출
   };
@@ -68,12 +78,23 @@ const BigModal: React.FC<ModalProps> = ({ title, value, onClose, component: Comp
       <ModalContent onClick={(e) => e.stopPropagation()}>
         <Container>
           <Title>{title}</Title>
-          <ComponentContainer>
           {Component}
-          </ComponentContainer>
           <ButtonContainer>
-            <Button variant="primary" fontSize="ft-1" padding="0 20px" margin="0 10px 0 0">{value}</Button>
-            <Button fontSize="ft-1" padding="0 20px" onClick={handleModalBackgroundClick}>취소</Button>
+            <Button
+              variant="primary"
+              fontSize="ft-1"
+              padding="0 20px"
+              margin="0 10px 0 0"
+            >
+              {value}
+            </Button>
+            <Button
+              fontSize="ft-1"
+              padding="0 20px"
+              onClick={handleModalBackgroundClick}
+            >
+              취소
+            </Button>
           </ButtonContainer>
         </Container>
       </ModalContent>
