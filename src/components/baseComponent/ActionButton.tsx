@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import {
   LuMoreHorizontal,
@@ -13,8 +13,6 @@ type ActionButtonProps = {
   direction?: string;
   borderRadius?: string;
   color?: string;
-  onEdit?: () => void; // 수정 버튼 클릭 이벤트 핸들러
-  onDelete?: () => void; // 삭제 버튼 클릭 이벤트 핸들러
 };
 
 const StyledActionButton = styled.div<ActionButtonProps>`
@@ -66,14 +64,30 @@ const ActionButton: React.FC<ActionButtonProps> = ({
   border,
   direction,
   borderRadius,
-  onEdit,
-  onDelete,
 }) => {
   const [isClicked, setIsClicked] = useState(false);
+  const buttonRef = useRef<HTMLDivElement>(null);
 
   const handleClick = () => {
     setIsClicked((prevState) => !prevState);
   };
+
+  /* 외부 클릭 시 닫히도록하는 이벤트 핸들러*/
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      buttonRef.current &&
+      !buttonRef.current.contains(event.target as Node)
+    ) {
+      setIsClicked(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <StyledActionButton border={border} onClick={handleClick} ref={buttonRef}>
@@ -84,12 +98,12 @@ const ActionButton: React.FC<ActionButtonProps> = ({
       )}
       {isClicked && (
         <OptionButtons style={{ borderRadius }}>
-          <OptionItem color="var(--color-grey-1)" onClick={handleEditClick}>
+          <OptionItem color="var(--color-grey-1)">
             <p>수정</p>
             <LuPencil />
           </OptionItem>
           <Hr />
-          <OptionItem color="var(--color-red)" onClick={handleDeleteClick}>
+          <OptionItem color="var(--color-red)">
             <p>삭제</p>
             <LuTrash2 />
           </OptionItem>
