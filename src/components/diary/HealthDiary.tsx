@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import BigModal from '../baseComponent/BigModal'
-import RecMade from '../../pages/diary/RecMade'
+import BigModal from '../baseComponent/BigModal';
+import RecMade from '../../pages/diary/RecMade';
 import MoreKebabIcon from '../../assets/MoreKebabIcon.png';
 import CareIcon from '../../assets/CareIcon.png';
+import Button from '../baseComponent/Button';
+import ActionButton from '../baseComponent/ActionButton';
 
 const HealthDiaryContainer = styled.div`
   box-sizing: border-box;
@@ -40,16 +42,6 @@ const HorizontalLine = styled.div`
   left: 0;
   width: 100%;
   position: absolute;
-`;
-
-// 기록하기 버튼 => 공통 컴포넌트로 변경 필요
-const AddDiaryBtn = styled.button`
-  width: 134px;
-  height: 35px;
-
-  background: var(--color-green-main);
-  border: 0;
-  color: #ffffff;
 `;
 
 // 타이틀을 포함한 다이어리 컨테이너
@@ -181,7 +173,6 @@ const HealthDiary: React.FC<DiaryProps> = ({
   doctor,
   treatment,
 }) => {
-
   const [showModal, setShowModal] = useState(false);
 
   const handleToggleModal = () => {
@@ -194,12 +185,27 @@ const HealthDiary: React.FC<DiaryProps> = ({
         {name} <span>건강 다이어리</span>
       </DiaryTitle>
       <HorizontalLine />
-      <AddDiaryBtn onClick={handleToggleModal}>기록하기</AddDiaryBtn>
-      {showModal && <BigModal title="진료 기록" value="등록" component={<RecMade />} onClose={handleToggleModal} />}
+      <Button
+        onClick={handleToggleModal}
+        variant={'primary'}
+        shape={'square'}
+        padding={'8px 40px'}
+        children={'기록하기'}
+      ></Button>
+      {showModal && (
+        <BigModal
+          title="진료 기록"
+          value="등록"
+          component={<RecMade />}
+          onClose={handleToggleModal}
+        />
+      )}
       <DiariesContainer>
         <p>{formatDate(visitDate, true)}</p>
         <HealthReport>
           <MoreIcon src={MoreKebabIcon} />
+          <ActionButton direction="vertical" border="none" />
+          <ActionButton direction={'vertical'} border={'none'} />
           <DeseaseName>
             <Icon style={{ width: '22px', height: '22px' }} src={CareIcon} />
             <DeseaseTitle>{desease}</DeseaseTitle>

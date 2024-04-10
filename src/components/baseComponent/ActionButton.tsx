@@ -47,7 +47,7 @@ background-color: var(--color-white);
 p{
   color: var()
   display: inline-block;
-  width: 50px;
+  width: 50px; 
 }
 `;
 
