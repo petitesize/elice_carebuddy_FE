@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 // 컴포넌트
@@ -8,6 +8,8 @@ import Comment from '../../components/community/Comment';
 import CommentWritingBox from '../../components/community/CommentWritingBox';
 import ActionButton from '../../components/baseComponent/ActionButton';
 import Hr from '../../components/baseComponent/Hr';
+import BigModal from '../../components/baseComponent/BigModal';
+import PostEdit from '../../components/community/PostEdit';
 
 // 아이콘
 import { LuThumbsUp, LuChevronLeft } from 'react-icons/lu';
@@ -22,6 +24,7 @@ import {
   tempCommentNickname,
   tempComment,
 } from '../../../temp-data-community';
+import comments from '../../../temp-data-comment.json';
 
 const Container = styled.div`
   display: flex;
@@ -130,16 +133,28 @@ const ProfileImg = styled.img`
   width: 25px;
   border-radius: 50%;
 `;
-const editButtonHandler = () => {
-  return(console.log('에딧버튼핸들러실행!'))
-};
 
-const deleteButtonHandler = () => {
-  return(console.log('딜리트버튼핸들러실행!'))
-};
 
-import comments from '../../../temp-data-comment.json';
+
 const POST: React.FC = () => {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleToggleModal = () => {
+    setShowModal((prevState) => !prevState);
+  };
+
+  const handleSavePost = () => {
+    // API 생성되면 로직 구현
+    setShowModal(false);
+  }
+  
+  const handleDeleteButton = () => { 
+    return //추후 API 생성되면 추가
+  };
+
+
+
+
   return (
     <>
       <Container>
@@ -162,7 +177,15 @@ const POST: React.FC = () => {
             </PostInformation>
             <PostOption>
               <LikeAndCommentCount likeCount={1} commentCount={2} />
-              <ActionButton border="default" direction='horizontal' editOnClick={editButtonHandler} deleteOnClick={deleteButtonHandler}/>
+              <ActionButton border="default" direction='horizontal' editOnClick={handleToggleModal} deleteOnClick={handleDeleteButton}/>
+              {showModal && (
+                <BigModal
+                  title="글 수정하기"
+                  value="수정"
+                  component={<PostEdit />}
+                  onClose={handleToggleModal}
+                />
+              )}
             </PostOption>
           </PostTopArea>
           <PostContentArea>
