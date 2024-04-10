@@ -6,7 +6,7 @@ import Banner from '../../components/community/Banner';
 import FeedBox from '../../components/community/FeedBox';
 import SidePanel from '../../components/community/SidePanel';
 import CommunityListSidebar from '../../components/community/CommunityListSidebar';
-import Select from '../../components/baseComponent/BasedSelect';
+import Select from '../../components/baseComponent/Select';
 import Button from '../../components/baseComponent/Button';
 import BigModal from '../../components/baseComponent/BigModal';
 import WritingModal from '../../components/community/WritingModal';
