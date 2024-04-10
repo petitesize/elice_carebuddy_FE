@@ -26,7 +26,7 @@ const CommentBox = styled.textarea`
   border: none;
 `;
 
-const Button = styled.p`
+const Button = styled.div`
   position: absolute;
   top: 110px;
   right: 15px;
@@ -41,7 +41,9 @@ const CommentWritingBox: React.FC<CommentWritingBoxProps> = ({ nickname }) => (
     <StyledCommentWritingBox>
       <Nickname>{nickname}</Nickname>
       <CommentBox placeholder="댓글 내용을 입력하세요..." />
-      <Button>등록하기</Button>
+      <Button>
+        <a>등록하기</a>
+      </Button>
     </StyledCommentWritingBox>
   </>
 );

@@ -32,12 +32,11 @@ const TitleContainer = styled.div`
 
 const ProfileContainer = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: flex-start;
+  align-items: center;
+  padding: 10px 0;
   color: var(--color-grey-1);
   font-size: var(--font-size-sm-1);
-  align-items: center;
-  height: auto;
 
   p {
     margin: 0 3px;

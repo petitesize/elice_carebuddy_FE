@@ -45,7 +45,7 @@ border: var(--color-grey-2) 1px solid;
 background-color: var(--color-white);
 
 p{
-  color: var()
+  color: var();
   display: inline-block;
   width: 50px;
 }
@@ -64,8 +64,6 @@ const ActionButton: React.FC<ActionButtonProps> = ({
   direction,
   borderRadius,
 }) => {
-  direction = 'horizontal'; // 세로로 사용하려면 direction="vertical", 기본은 가로
-  border = 'default'; // border 없애려면 border="none";
   const [isClicked, setIsClicked] = useState(false);
   const handleClick = () => {
     setIsClicked((prevState) => !prevState);

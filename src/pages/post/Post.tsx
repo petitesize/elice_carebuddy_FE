@@ -155,7 +155,7 @@ const POST: React.FC = () => {
             </PostInformation>
             <PostOption>
               <LikeAndCommentCount likeCount={1} commentCount={2} />
-              <ActionButton />
+              <ActionButton border="default" direction='horizontal'/>
             </PostOption>
           </PostTopArea>
           <PostContentArea>

@@ -49,7 +49,7 @@ const CommentOption = styled.div`
   flex-direction: row;
   margin-left: auto;
 
-  p {
+  a {
     font-size: var(--font-size-ft-1);
     margin: 0 5px 10px 5px;
     padding: 0 0 2px;
@@ -84,8 +84,8 @@ const Comment: React.FC<CommentProps> = ({
       <Content>{text}</Content>
       <CommentOptionWrapper>
         <CommentOption>
-          <p>수정</p>
-          <p>삭제</p>
+          <a>수정</a>
+          <a>삭제</a>
         </CommentOption>
       </CommentOptionWrapper>
     </div>
