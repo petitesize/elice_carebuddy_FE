@@ -1,3 +1,5 @@
+// postCreate 수정하고 따라서 수정 예정
+
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
@@ -23,6 +25,7 @@ const StyledPostEdit = styled.div`
 const ImageArea = styled.div`
   display: flex;
   align-items: baseline;
+
   padding-top: 10px;
 
   & > * {

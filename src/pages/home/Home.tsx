@@ -80,18 +80,6 @@ const Classification = styled.div`
   }
 `;
 
-// const WritingButton = styled.div`
-// display: flex;
-// flex-direction: row;
-// align-items: center; 
-
-// p {
-//   font-size: var( --font-size-ft-1);
-//   color: var(--color-grey-1);
-//   width: 205px;
-// }
-// `;
-
 const WritingButton = styled.div`
   display: flex;
   justify-content: flex-end;

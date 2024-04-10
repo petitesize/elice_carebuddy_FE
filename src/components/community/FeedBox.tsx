@@ -17,7 +17,7 @@ const StyledFeedBox = styled.div`
   flex-direction: column;
   border-radius: 10px;
   border: solid 1px var(--color-grey-2);
-  height: auto;
+  height: 170px;
   padding: 20px 20px;
   margin: 15px 0;
 `;
@@ -76,21 +76,26 @@ const FeedBox: React.FC<FeedBoxProps> = ({
   uploadedDate,
   likeCount,
   commentCount,
-}) => (
-  <StyledFeedBox>
-    <TitleContainer>
-      <Title>{title}</Title>
-      <LikeAndCommentCount likeCount={likeCount} commentCount={commentCount} />
-    </TitleContainer>
-    <Content>{content}</Content>
-    <Hr />
-    <ProfileContainer>
-      <ProfileImg src={src} alt="프로필 이미지" />
-      <Nickname>{nickname}</Nickname>
-      <p>|</p>
-      <p>{uploadedDate}</p>
-    </ProfileContainer>
-  </StyledFeedBox>
-);
+}) => {
+  return (
+    <StyledFeedBox>
+      <TitleContainer>
+        <Title>{title}</Title>
+        <LikeAndCommentCount
+          likeCount={likeCount}
+          commentCount={commentCount}
+        />
+      </TitleContainer>
+      <Content>{content}</Content>
+      <Hr />
+      <ProfileContainer>
+        <ProfileImg src={src} alt="프로필 이미지" />
+        <Nickname>{nickname}</Nickname>
+        <p>|</p>
+        <p>{uploadedDate}</p>
+      </ProfileContainer>
+    </StyledFeedBox>
+  );
+};
 
 export default FeedBox;
