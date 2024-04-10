@@ -23,8 +23,9 @@ const ModalContent = styled.div`
   border-radius: 7px;
   border: 1px solid var(--color-grey2);;
   border-top: 20px solid #6d987a;
-  padding: 20px 30px;
+  padding: 30px;
   display: flex;
+  justify-content: center;
   z-index: 10000;
 `;
 

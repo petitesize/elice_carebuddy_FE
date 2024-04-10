@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import InputBox from '../../components/baseComponent/InputBox';
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
   margin: 20px 0;
+  width: 1024px;
 `;
 
 const ContentCard = styled.div`
@@ -16,11 +17,13 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid var(--color-grey-2);
+  margin-bottom: 20px;
 `;
 
 const BoxTitle = styled.div`
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-hd-1); //20
+  margin-right: 100px;
 `
 
 const ContentTitle = styled.div`
@@ -63,7 +66,7 @@ const RecMade: React.FC<ModalProps> = ({ onClose }) => {
               </Content>
               <Content>
                 <ContentTitle>예약하신 수의사 선생님 성함을 입력하여주세요.</ContentTitle>
-                <ContentBody>인풋 박스 들어갈거에용</ContentBody>
+                <ContentBody><InputBox /></ContentBody>
               </Content>
             </ContentCard>
         </Container>
