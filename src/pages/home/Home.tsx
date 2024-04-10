@@ -93,19 +93,6 @@ p {
   width: 205px;
 } 
 
-button {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center; 
-  width: 110px;
-  height: 40px;
-  padding: 10px 10px;
-  background-color: var(--color-green-main);
-  color: var(--color-white);
-  font-size: var(--font-size-md-1);
-  border: none;
-  border-radius: 25px;
   `;
 
 const Home: React.FC = () => {
@@ -138,7 +125,7 @@ const Home: React.FC = () => {
             </Classification>
             <WritingButton>
               <p>함께 나누고 싶은 이야기가 있나요?</p>
-              <Button onClick={handleToggleModal}>글 작성하기</Button>
+              <Button variant="primary" shape="round" padding='10px 15px' onClick={handleToggleModal}>글 작성하기</Button>
               {showModal && (
                 <BigModal
                   title="글쓰기"
