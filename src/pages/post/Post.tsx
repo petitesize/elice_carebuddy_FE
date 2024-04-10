@@ -175,8 +175,8 @@ const POST: React.FC = () => {
               <ActionButton
                 border="default"
                 direction="horizontal"
-                editOnClick={handleToggleModal}
-                deleteOnClick={handleDeleteButton}
+                onEdit={handleToggleModal}
+                onDelete={handleDeleteButton}
               />
               {showModal && (
                 <BigModal
