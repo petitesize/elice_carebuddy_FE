@@ -1,6 +1,7 @@
 import React from 'react';
 import KakaoLogin from 'react-kakao-login';
 import styled from 'styled-components';
+import LogoImg from '../../assets/carebuddyLogo.png'
 
 const Main = styled.div`
   display: flex;
@@ -9,19 +10,21 @@ const Main = styled.div`
 `
 
 const LoginBox = styled.div`
-  background-color: white;
+  background-color: var(--color-white);
   border-radius: 7px;
-  border: 1px solid #cecece;
+  border: 1px solid var(--color-grey-2);
   padding: 50px;
   text-align: center;
 `
 
 const Text = styled.div`
-  margin: 10px;
+  margin: 20px 0 10px 0;
   font-weight: bold;
-  font-size: 18px;
+  font-size: var(--font-size-md-1); //16
 `
-
+const Logo = styled.img`
+  width: 150px;
+`
 const LoginPage: React.FC = () => {
   const responseKaKao = (response: any) => {
     console.log(response);
@@ -41,6 +44,7 @@ const LoginPage: React.FC = () => {
     <>
       <Main>
         <LoginBox>
+          <Logo src={LogoImg} />
           <Text>간편 로그인 / 회원가입</Text>
           <KakaoLogin
             token="fc0445196ca1bc948515866bb1fba56e"
