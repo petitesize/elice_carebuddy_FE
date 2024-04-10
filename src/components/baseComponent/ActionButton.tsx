@@ -13,6 +13,8 @@ type ActionButtonProps = {
   direction?: string;
   borderRadius?: string;
   color?: string;
+  editOnClick?: React.MouseEventHandler<HTMLDivElement>;
+  deleteOnClick?: React.MouseEventHandler<HTMLDivElement>;
 };
 
 const StyledActionButton = styled.div<ActionButtonProps>`
@@ -64,6 +66,8 @@ const ActionButton: React.FC<ActionButtonProps> = ({
   border,
   direction,
   borderRadius,
+  editOnClick,
+  deleteOnClick
 }) => {
   const [isClicked, setIsClicked] = useState(false);
   const buttonRef = useRef<HTMLDivElement>(null);
@@ -98,12 +102,12 @@ const ActionButton: React.FC<ActionButtonProps> = ({
       )}
       {isClicked && (
         <OptionButtons style={{ borderRadius }}>
-          <OptionItem color="var(--color-grey-1)">
+          <OptionItem color="var(--color-grey-1)" onClick={editOnClick} >
             <p>수정</p>
             <LuPencil />
           </OptionItem>
           <Hr />
-          <OptionItem color="var(--color-red)">
+          <OptionItem color="var(--color-red)" onClick={deleteOnClick}>
             <p>삭제</p>
             <LuTrash2 />
           </OptionItem>

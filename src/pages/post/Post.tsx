@@ -130,6 +130,13 @@ const ProfileImg = styled.img`
   width: 25px;
   border-radius: 50%;
 `;
+const editButtonHandler = () => {
+  return(console.log('에딧버튼핸들러실행!'))
+};
+
+const deleteButtonHandler = () => {
+  return(console.log('딜리트버튼핸들러실행!'))
+};
 
 import comments from '../../../temp-data-comment.json';
 const POST: React.FC = () => {
@@ -155,7 +162,7 @@ const POST: React.FC = () => {
             </PostInformation>
             <PostOption>
               <LikeAndCommentCount likeCount={1} commentCount={2} />
-              <ActionButton border="default" direction='horizontal'/>
+              <ActionButton border="default" direction='horizontal' editOnClick={editButtonHandler} deleteOnClick={deleteButtonHandler}/>
             </PostOption>
           </PostTopArea>
           <PostContentArea>

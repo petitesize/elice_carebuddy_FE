@@ -8,7 +8,7 @@ import SidePanel from '../../components/community/SidePanel';
 import MemberListSidebar from '../../components/community/MemberListSidebar';
 import Pagination from '../../components/baseComponent/Pagination';
 import BigModal from '../../components/baseComponent/BigModal';
-import WritingModal from '../../components/community/WritingModal';
+import PostCreate from '../../components/community/PostCreate';
 
 import Button from '../../components/baseComponent/Button';
 
@@ -68,7 +68,7 @@ const GroupOption = styled.div`
   display: flex;
   justify-content: space-between;
 
-  p {
+  a {
     font-size: var(--font-size-ft-1);
     margin-bottom: 10px;
     padding: 0 0 2px 0;
@@ -120,7 +120,7 @@ const Community: React.FC = () => {
               <BigModal
                 title="글쓰기"
                 value="등록"
-                component={<WritingModal />}
+                component={<PostCreate />}
                 onClose={handleToggleModal}
               />
             )}

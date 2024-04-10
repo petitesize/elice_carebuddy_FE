@@ -9,7 +9,7 @@ import CommunityListSidebar from '../../components/community/CommunityListSideba
 import Select from '../../components/baseComponent/Select';
 import Button from '../../components/baseComponent/Button';
 import BigModal from '../../components/baseComponent/BigModal';
-import WritingModal from '../../components/community/WritingModal';
+import PostCreate from '../../components/community/PostCreate';
 
 // 임시 데이터
 import posts from '../../../temp-data-posts.json';
@@ -139,7 +139,7 @@ const Home: React.FC = () => {
                 <BigModal
                   title="글쓰기"
                   value="등록"
-                  component={<WritingModal />}
+                  component={<PostCreate />}
                   onClose={handleToggleModal}
                 />
               )}
