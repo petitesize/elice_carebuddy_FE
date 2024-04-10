@@ -203,7 +203,7 @@ const HealthDiary: React.FC<DiaryProps> = ({
       ></Button>
       {showModal && (
         <BigModal
-          title="진료 기록"
+          title="진료 기록 등록"
           value="등록"
           component={<RecMade />}
           onClose={handleToggleModal}
@@ -211,7 +211,7 @@ const HealthDiary: React.FC<DiaryProps> = ({
       )}
       {showEditModal && (
         <BigModal
-          title="진료 수정"
+          title="진료 기록 수정"
           value="수정"
           component={<RecEdit />} // 수정 모달을 불러옴
           onClose={handleToggleEditModal}
