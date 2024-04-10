@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import {
   LuMoreHorizontal,
@@ -13,6 +13,8 @@ type ActionButtonProps = {
   direction?: string;
   borderRadius?: string;
   color?: string;
+  onEdit?: () => void; // 수정 버튼 클릭 이벤트 핸들러
+  onDelete?: () => void; // 삭제 버튼 클릭 이벤트 핸들러
 };
 
 const StyledActionButton = styled.div<ActionButtonProps>`
@@ -64,11 +66,26 @@ const ActionButton: React.FC<ActionButtonProps> = ({
   border,
   direction,
   borderRadius,
+  onEdit,
+  onDelete,
 }) => {
   const [isClicked, setIsClicked] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const handleClick = () => {
     setIsClicked((prevState) => !prevState);
+  };
+
+  const handleEditClick = () => {
+    if (onEdit) {
+      onEdit(); // 수정 버튼 클릭 이벤트 핸들러 호출
+    }
+  };
+
+  const handleDeleteClick = () => {
+    if (onDelete) {
+      onDelete(); // 삭제 버튼 클릭 이벤트 핸들러 호출
+    }
   };
 
   return (
@@ -80,12 +97,12 @@ const ActionButton: React.FC<ActionButtonProps> = ({
       )}
       {isClicked && (
         <OptionButtons style={{ borderRadius }}>
-          <OptionItem color="var(--color-grey-1)">
+          <OptionItem color="var(--color-grey-1)" onClick={handleEditClick}>
             <p>수정</p>
             <LuPencil />
           </OptionItem>
           <Hr />
-          <OptionItem color="var(--color-red)">
+          <OptionItem color="var(--color-red)" onClick={handleDeleteClick}>
             <p>삭제</p>
             <LuTrash2 />
           </OptionItem>
