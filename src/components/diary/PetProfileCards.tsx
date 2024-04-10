@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import MoreKebabIcon from '../../assets/MoreKebabIcon.png';
+import ActionButton from '../baseComponent/ActionButton';
 import defaultImg from '/src/assets/carebuddyLogo.png';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -29,6 +30,21 @@ const PetProfileCardContainer = styled.div`
   align-items: center;
   /* margin-right: 20px; */
   position: relative;
+  > div.action {
+    position: absolute;
+
+    top: 15px;
+    right: 15px;
+  }
+`;
+
+const ActionButtonContainer = styled.div`
+  /* position: relative;
+  > div:first-child {
+    position: absolute;
+    top: -30px;
+    right: 0;
+  } */
 `;
 
 const MoreIcon = styled.img`
@@ -129,7 +145,11 @@ const PetProfileCards: React.FC<PetProfileProps> = ({ profiles }) => {
         {profiles.map((profile, index) => (
           <SwiperSlide key={index}>
             <PetProfileCardContainer>
-              {isMypet && <MoreIcon src={MoreKebabIcon} />}
+              <ActionButtonContainer className="action">
+                {/* {isMypet && <MoreIcon src={MoreKebabIcon} />} */}
+                {isMypet && <ActionButton direction="vertical" />}
+              </ActionButtonContainer>
+
               <PetProfileImg src={profile.img || defaultImg} alt="프로필사진" />
               <PetName>{profile.name}</PetName>
               <PetDetails>

@@ -61,16 +61,11 @@ const HealthReport = styled.div`
   border-radius: 6px;
   display: flex;
   position: relative;
-`;
-
-const MoreIcon = styled.img`
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  top: 30px;
-  right: 30px;
-  cursor: pointer;
-  color: #cecece;
+  > div:first-child {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+  }
 `;
 
 const DeseaseName = styled.div`
@@ -203,9 +198,7 @@ const HealthDiary: React.FC<DiaryProps> = ({
       <DiariesContainer>
         <p>{formatDate(visitDate, true)}</p>
         <HealthReport>
-          <MoreIcon src={MoreKebabIcon} />
-          <ActionButton direction="vertical" border="none" />
-          <ActionButton direction={'vertical'} border={'none'} />
+          <ActionButton direction="horizontal" border="none" />
           <DeseaseName>
             <Icon style={{ width: '22px', height: '22px' }} src={CareIcon} />
             <DeseaseTitle>{desease}</DeseaseTitle>
