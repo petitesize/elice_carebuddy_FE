@@ -70,26 +70,13 @@ const ActionButton: React.FC<ActionButtonProps> = ({
   onDelete,
 }) => {
   const [isClicked, setIsClicked] = useState(false);
-  const [showModal, setShowModal] = useState(false);
 
   const handleClick = () => {
     setIsClicked((prevState) => !prevState);
   };
 
-  const handleEditClick = () => {
-    if (onEdit) {
-      onEdit(); // 수정 버튼 클릭 이벤트 핸들러 호출
-    }
-  };
-
-  const handleDeleteClick = () => {
-    if (onDelete) {
-      onDelete(); // 삭제 버튼 클릭 이벤트 핸들러 호출
-    }
-  };
-
   return (
-    <StyledActionButton border={border} onClick={handleClick}>
+    <StyledActionButton border={border} onClick={handleClick} ref={buttonRef}>
       {direction === 'vertical' ? (
         <StyledIconVertical />
       ) : (
