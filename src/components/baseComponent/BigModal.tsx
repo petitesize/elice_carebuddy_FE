@@ -22,15 +22,9 @@ const ModalContent = styled.div`
   background-color: var(--color-white);
   border-radius: 7px;
   border: 1px solid var(--color-grey2);;
-<<<<<<< HEAD
-  border-top: 20px solid #6d987a;
-  padding: 30px;
-=======
   border-top: 20px solid var(--color-green-main);
   padding: 20px 30px;
->>>>>>> deef8563d754f3f411e06c4a20a5952f567b4d92
   display: flex;
-  justify-content: center;
   z-index: 10000;
 `;
 
