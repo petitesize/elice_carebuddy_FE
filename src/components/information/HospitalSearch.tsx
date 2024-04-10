@@ -2,7 +2,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import BasedSelect from '../baseComponent/BasedSelect';
+import BasedSelect from '../baseComponent/Select';
 import Button from '../baseComponent/Button';
 import Search from '../baseComponent/Search';
 

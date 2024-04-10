@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import {
   LuMoreHorizontal,
@@ -16,6 +16,7 @@ type ActionButtonProps = {
 };
 
 const StyledActionButton = styled.div<ActionButtonProps>`
+  cursor: pointer;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -38,25 +39,25 @@ const StyledIconVertical = styled(LuMoreVertical)`
 `;
 
 const OptionButtons = styled.div`
-position: absolute;
-top: 0;
-left: 100%;
-border: var(--color-grey-2) 1px solid;
-background-color: var(--color-white);
-
-p{
-  color: var();
-  display: inline-block;
-  width: 50px;
-}
+  position: absolute;
+  top: 0;
+  left: 100%;
+  border: var(--color-grey-2) 1px solid;
+  background-color: var(--color-white);
+  z-index: 1;
+  p {
+    color: var();
+    display: inline-block;
+    width: 50px;
+  }
 `;
 
 const OptionItem = styled.div<ActionButtonProps>`
   display: flex;
   flex-direction: row;
   padding: 10px;
-  color: ${({ color }) => color && `${color};`}
-  border-radius: ${({ borderRadius }) => borderRadius && `${borderRadius};`}
+  color: ${({ color }) => color && `${color};`};
+  border-radius: ${({ borderRadius }) => borderRadius && `${borderRadius};`};
 `;
 
 const ActionButton: React.FC<ActionButtonProps> = ({
@@ -65,12 +66,31 @@ const ActionButton: React.FC<ActionButtonProps> = ({
   borderRadius,
 }) => {
   const [isClicked, setIsClicked] = useState(false);
+  const buttonRef = useRef<HTMLDivElement>(null);
+
   const handleClick = () => {
     setIsClicked((prevState) => !prevState);
   };
 
+  /* 외부 클릭 시 닫히도록하는 이벤트 핸들러*/
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      buttonRef.current &&
+      !buttonRef.current.contains(event.target as Node)
+    ) {
+      setIsClicked(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <StyledActionButton border={border} onClick={handleClick}>
+    <StyledActionButton border={border} onClick={handleClick} ref={buttonRef}>
       {direction === 'vertical' ? (
         <StyledIconVertical />
       ) : (
