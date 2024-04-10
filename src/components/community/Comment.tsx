@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 
+import LinkButton from '../baseComponent/LinkButton.tsx';
+
 type CommentProps = {
   text: string;
   profileImg: string;
   nickname: string;
-  date: string; 
+  date: string;
 };
 
 const StyledComment = styled.div`
@@ -44,23 +46,14 @@ const ProfileImg = styled.img`
   margin-right: 10px;
 `;
 
-const CommentOption = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-left: auto;
-
-  p {
-    font-size: var(--font-size-ft-1);
-    margin: 0 5px 10px 5px;
-    padding: 0 0 2px;
-    border-bottom: solid 1px;
-  }
-`;
-
 const CommentOptionWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   flex-grow: 1;
+
+  & > * {
+    margin: 0 5px;
+  }
 `;
 
 const Info = styled.div`
@@ -83,10 +76,8 @@ const Comment: React.FC<CommentProps> = ({
       </Info>
       <Content>{text}</Content>
       <CommentOptionWrapper>
-        <CommentOption>
-          <p>수정</p>
-          <p>삭제</p>
-        </CommentOption>
+        <LinkButton text="수정" />
+        <LinkButton text="삭제" />
       </CommentOptionWrapper>
     </div>
   </StyledComment>

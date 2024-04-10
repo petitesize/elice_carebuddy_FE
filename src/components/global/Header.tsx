@@ -14,7 +14,7 @@ const links = [
   { path: '/hospital-info', label: '정보', icon: null },
   { path: '/signup', label: '로그인', icon: null },
   { path: '/mypage', label: '', icon: user },
-  { path: '/', label: '', icon: alert }
+  { path: '/', label: '', icon: alert },
 ];
 
 // styled-components를 사용하여 header 스타일 정의
@@ -35,7 +35,7 @@ const MenuBox = styled.span`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  
+
   & a {
     text-decoration: none;
     color: var(--color-black);
