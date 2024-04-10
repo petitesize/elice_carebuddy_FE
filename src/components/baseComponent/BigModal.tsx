@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import styled from 'styled-components';
 import Button from '../../components/baseComponent/Button';
 
@@ -61,7 +61,13 @@ const BigModal: React.FC<ModalProps> = ({
   onClose,
   component: Component,
 }) => {
-  document.body.style.overflow = 'hidden'; // 모달 열렸을 때 배경 스크롤 막음
+  useEffect(() => {
+    document.body.style.overflow = 'hidden'; // 모달 열렸을 때 배경 스크롤 막음
+
+    return () => {
+      document.body.style.overflow = 'auto'; // 닫혔을 때 다시 스크롤 가능하게 만듦
+    };
+  }, []);
 
   const handleModalBackgroundClick = () => {
     onClose(); // 모달 닫기 함수 호출

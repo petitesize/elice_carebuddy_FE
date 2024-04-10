@@ -21,10 +21,10 @@ width: 100%;
 
 const ImageArea = styled.div`
 display: grid;
-grid-template-columns: 100px 100px 500px;
+grid-template-columns: 100px 90px 500px;
 grid-template-rows: 30px ;
 gap: 10px 20px;
-align-items: end;
+align-items: baseline;
 
 h3{
   background-color: yellow;
@@ -34,10 +34,16 @@ h3{
 }
 
 a{
+  font-size: var(--font-size-ft-1);
+  margin: 0 5px 10px 5px;
+  padding: 0 0 2px;
+  border-bottom: solid 1px ;
   background-color: green;
-  width: 500px;
-  font-size: var();
+}
 
+p{
+  width: 600px;
+  background-color: aqua;
 }
 `;
 
@@ -59,7 +65,7 @@ const WritingModal: React.FC = () => {
         <ImageArea>
           <h3>첨부 사진</h3>
           <a>사진 등록하기</a>
-          <p>사진 첨부 안내멘트: 개당 업로드 용량: 20MB, 첨부 파일의 경우 사진과 동영상을 합쳐 최대 10개 업로드 가능합니다.</p>
+          <p>개당 업로드 용량: 20MB, 첨부 파일의 경우 사진과 동영상을 합쳐 최대 10개 업로드 가능합니다.(수정 필요)</p>
           <ImageBox>사진 박스</ImageBox>
 
         </ImageArea>
