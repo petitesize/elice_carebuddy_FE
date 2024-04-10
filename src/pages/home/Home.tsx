@@ -9,12 +9,10 @@ import CommunityListSidebar from '../../components/community/CommunityListSideba
 import Select from '../../components/baseComponent/Select';
 import Button from '../../components/baseComponent/Button';
 import BigModal from '../../components/baseComponent/BigModal';
-import WritingModal from '../../components/community/WritingModal';
+import PostCreate from '../../components/community/PostCreate';
 
 // 임시 데이터
-
 import posts from '../../../temp-data-posts.json';
-
 import {
   profileImg,
   tempCommentCount,
@@ -73,7 +71,7 @@ const Classification = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  width: 100%;
+  width: auto;
 
   p {
     padding-right: 5px;
@@ -83,17 +81,16 @@ const Classification = styled.div`
 `;
 
 const WritingButton = styled.div`
-display: flex;
-flex-direction: row;
-align-items: center; 
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 
-p {
-  font-size: var( --font-size-ft-1);
-  color: var(--color-grey-1);
-  width: 205px;
-} 
-
-  `;
+  p {
+    font-size: var(--font-size-ft-1);
+    color: var(--color-grey-1);
+    padding: 0 10px;
+  }
+`;
 
 const Home: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
@@ -130,7 +127,7 @@ const Home: React.FC = () => {
                 <BigModal
                   title="글쓰기"
                   value="등록"
-                  component={<WritingModal />}
+                  component={<PostCreate />}
                   onClose={handleToggleModal}
                 />
               )}
