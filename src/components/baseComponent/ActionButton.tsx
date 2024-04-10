@@ -66,13 +66,31 @@ const ActionButton: React.FC<ActionButtonProps> = ({
   borderRadius,
 }) => {
   const [isClicked, setIsClicked] = useState(false);
+  const buttonRef = useRef<HTMLDivElement>(null);
 
   const handleClick = () => {
     setIsClicked((prevState) => !prevState);
   };
 
+  /* 외부 클릭 시 닫히도록하는 이벤트 핸들러*/
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      buttonRef.current &&
+      !buttonRef.current.contains(event.target as Node)
+    ) {
+      setIsClicked(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <StyledActionButton border={border} onClick={handleClick}>
+    <StyledActionButton border={border} onClick={handleClick} ref={buttonRef}>
       {direction === 'vertical' ? (
         <StyledIconVertical />
       ) : (
