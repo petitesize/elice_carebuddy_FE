@@ -1,2 +1,2 @@
 // 상수 파일
-export const API_URL = 'localhost:3001/api/';
+export const API_URL = 'http://localhost:3001/api/';

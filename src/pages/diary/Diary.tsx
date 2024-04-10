@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import PetProfiles from '../../components/diary/PetProfiles';
 import HealthDiary from '../../components/diary/HealthDiary';
 
+import Dummy from './Dummy';
+
 const DiaryPageContainer = styled.div`
   width: 100%;
   height: auto;
@@ -70,6 +72,7 @@ const Diary: React.FC = () => {
     <DiaryPageContainer>
       <PetProfiles {...DummyProfilesData} onPetClick={handlePetClick} />
       <HealthDiary {...DummyDiaryData} />
+      <Dummy />
     </DiaryPageContainer>
   );
 };
