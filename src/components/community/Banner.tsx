@@ -4,6 +4,7 @@ import Typewriter from 'typewriter-effect';
 
 import BannerImg from '/src/assets/bannerImg.png';
 
+
 type GuidelineMessageProps = {
   fontSize?: string;
   color?: string;

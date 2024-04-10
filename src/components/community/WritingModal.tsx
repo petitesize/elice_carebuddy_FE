@@ -7,52 +7,51 @@ import TextArea from '../baseComponent/TextArea.tsx';
 import Hr from '../baseComponent/Hr.tsx';
 
 //임시 select option
-import { SelectDummyWritingGroupOptions } from '../../../temp-data-community.tsx'; 
+import { SelectDummyWritingGroupOptions } from '../../../temp-data-community.tsx';
 
 const StyledWritingModal = styled.div`
-display: flex;
-flex-direction: column;
-width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 970px;
 
-& > * {
-  margin: 10px;
-}
+  & > * {
+    margin: 10px 0;
+    // box-sizing: border-box;
+  }
 `;
 
 const ImageArea = styled.div`
-display: grid;
-grid-template-columns: 100px 90px 500px;
-grid-template-rows: 30px ;
-gap: 10px 20px;
-align-items: baseline;
+  display: flex;
+  align-items: baseline;
+  padding-top: 10px;
 
-h3{
-  background-color: yellow;
-  font-size: var(--font-size-md-2);
-  font-weight: var();
+  & > * {
+    padding-right: 10px;
+  }
 
-}
+  h3 {
+    font-size: var(--font-size-md-2);
+  }
 
-a{
-  font-size: var(--font-size-ft-1);
-  margin: 0 5px 10px 5px;
-  padding: 0 0 2px;
-  border-bottom: solid 1px ;
-  background-color: green;
-}
+  a {
+    font-size: var(--font-size-ft-1);
+    margin: 0 5px 10px 5px;
+    padding: 0 0 2px;
+    border-bottom: solid 1px;
+  }
 
-p{
-  width: 600px;
-  background-color: aqua;
-}
+  p {
+    width: 600px;
+    // background-color: aqua;
+    font-size: var(--font-size-sm-1);
+  }
 `;
 
 const ImageBox = styled.div`
-background-color: red;
-grid-column-start: 1;
-grid-column-end: 4;
-height: 120px;
-width: 970px;
+  border: 1px dashed var(--color-grey-2);
+  border-radius: 10px;
+  height: 120px;
+  margin: 0;
 `;
 
 const WritingModal: React.FC = () => {
@@ -60,15 +59,27 @@ const WritingModal: React.FC = () => {
     <>
       <StyledWritingModal>
         <Select options={SelectDummyWritingGroupOptions} width="200px" />
-        <InputBox placeholder="제목을 입력해 주세요" width="970px" padding="5px" />
-        <TextArea placeholder="내용을 입력해 주세요" width="970px" height="400px" />
+        <InputBox
+          placeholder="제목을 입력해 주세요"
+          width="100%"
+          padding="5px 10px"
+        />
+        <TextArea
+          placeholder="내용을 입력해 주세요"
+          width="100%"
+          height="400px"
+          padding="5px 10px"
+        />
         <ImageArea>
           <h3>첨부 사진</h3>
           <a>사진 등록하기</a>
-          <p>개당 업로드 용량: 20MB, 첨부 파일의 경우 사진과 동영상을 합쳐 최대 10개 업로드 가능합니다.(수정 필요)</p>
-          <ImageBox>사진 박스</ImageBox>
-
         </ImageArea>
+        <ImageBox>
+          <p>
+            개당 업로드 용량: 20MB, 첨부 파일의 경우 사진과 동영상을 합쳐 최대
+            10개 업로드 가능합니다. - 이 부분 나중에 멘트, 위치 수정!
+          </p>
+        </ImageBox>
         <Hr />
       </StyledWritingModal>
     </>

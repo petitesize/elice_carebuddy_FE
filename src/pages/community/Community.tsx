@@ -38,82 +38,62 @@ import {
   tempNickname,
   tempIntroduction,
 } from '../../../temp-data-community';
-
 import posts from '../../../temp-data-posts.json';
 
 const ContentContainer = styled.div`
-margin-top: 80px;
-display: flex;
-flex-direction: row;
-justify-content: space-between;
+  padding-top: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 const SearchContainer = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: center;
-margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
 `;
 
 const CommunityFeedContainer = styled.div`
-width: 70%;
-margin-bottom: 30px;
+  padding-bottom: 30px;
+  width: 70%;
 `;
 
 const SidePanelContainer = styled.div`
-display: flex;
-flex-direction: column;
-width: 20%;
+  display: flex;
+  flex-direction: column;
+  width: 20%;
 `;
 
 const GroupOption = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-width: 100%;
+  display: flex;
+  justify-content: space-between;
 
-a {
-  font-size: 14px;
-  margin-bottom: 10px;
-  padding: 0 0 2px;
-  border-bottom: solid 1px;
-}
+  p {
+    font-size: var(--font-size-ft-1);
+    margin-bottom: 10px;
+    padding: 0 0 2px 0;
+    border-bottom: solid 1px;
+  }
 `;
 
 const WritingButton = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: flex-end;
-align-items: center; 
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 
-p {
-font-size: var( --font-size-ft-1);
-color: var(--color-grey-1);
-width: 205px;
-} 
-
-button {
-display: flex;
-flex-direction: row;
-justify-content: center;
-align-items: center; 
-width: 110px;
-height: 40px;
-padding: 10px 10px;
-background-color: var(--color-green-main);
-color: var(--color-white);
-font-size: var(--font-size-md-1);
-border: none;
-border-radius: 25px;
+  p {
+    font-size: var(--font-size-ft-1);
+    color: var(--color-grey-1);
+    width: 205px;
+  }
 `;
 
 const Community: React.FC = () => {
+  const [showModal, setShowModal] = useState(false);
 
-    const [showModal, setShowModal] = useState(false);
-
-    const handleToggleModal = () => {
-      setShowModal((prevState) => !prevState);
-    };
+  const handleToggleModal = () => {
+    setShowModal((prevState) => !prevState);
+  };
 
   return (
     <>
@@ -128,15 +108,22 @@ const Community: React.FC = () => {
         <CommunityFeedContainer>
           <WritingButton>
             <p>함께 나누고 싶은 이야기가 있나요?</p>
-            <Button onClick={handleToggleModal}>글 작성하기</Button>
-              {showModal && (
-                <BigModal
-                  title="글쓰기"
-                  value="등록"
-                  component={<WritingModal />}
-                  onClose={handleToggleModal}
-                />
-              )}
+            <Button
+              variant="primary"
+              shape="round"
+              padding="10px 15px"
+              onClick={handleToggleModal}
+            >
+              글 작성하기
+            </Button>
+            {showModal && (
+              <BigModal
+                title="글쓰기"
+                value="등록"
+                component={<WritingModal />}
+                onClose={handleToggleModal}
+              />
+            )}
           </WritingButton>
           {posts.map((post, index) => (
             <FeedBox
