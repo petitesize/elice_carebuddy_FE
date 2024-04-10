@@ -129,13 +129,13 @@ const Profile: React.FC = () => {
           <List>
             <ListItem>닉네임</ListItem>
           </List>
-            <InputBox margin="10px" padding="5px" placeholder="닉네임을 입력해주세요."></InputBox>
+            <InputBox margin="10px" placeholder="닉네임을 입력해주세요."></InputBox>
           </InputList>
           <InputList>
             <List>
               <ListItem>소개글</ListItem>
             </List>
-            <TextArea placeholder="소개글을 입력해주세요." />
+            <TextArea margin="10px" placeholder="소개글을 입력해주세요." />
           </InputList>
         </InputContainer>
           <DataList>
