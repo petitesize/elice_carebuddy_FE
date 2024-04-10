@@ -52,13 +52,7 @@ const DummyHospitalData: (string | JSX.Element)[][] = [
 ];
 
 const HospitalResult: React.FC = () => {
-  const isHospital = location.pathname === '/hospital-info';
-  const headersList = [
-    '위치',
-    isHospital ? '병원명' : '약국명',
-    '전화번호',
-    '지도',
-  ];
+  const headersList = ['위치', '병원명', '전화번호', '지도'];
   return <TableList headers={headersList} data={DummyHospitalData} />;
 };
 

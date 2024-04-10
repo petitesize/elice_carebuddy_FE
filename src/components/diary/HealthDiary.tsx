@@ -7,6 +7,14 @@ import MoreKebabIcon from '../../assets/MoreKebabIcon.png';
 import CareIcon from '../../assets/CareIcon.png';
 import Button from '../baseComponent/Button';
 import ActionButton from '../baseComponent/ActionButton';
+import {
+  LuPill,
+  LuActivitySquare,
+  LuStethoscope,
+  LuMessageSquarePlus,
+  LuSyringe,
+} from 'react-icons/lu';
+import { TbBuildingHospital, TbReportMedical } from 'react-icons/tb';
 
 const HealthDiaryContainer = styled.div`
   box-sizing: border-box;
@@ -124,9 +132,17 @@ const DetailTitle = styled.p`
   }
 `;
 
-const Icon = styled.img`
-  width: 20px;
-  height: 20px;
+const Icon = styled.div`
+  > svg {
+    width: 20px;
+    height: 20px;
+    color: var(--color-green-main);
+
+    &.big {
+      width: 24px;
+      height: 24px;
+    }
+  }
 `;
 
 interface DiaryProps {
@@ -180,7 +196,8 @@ const HealthDiary: React.FC<DiaryProps> = ({
     setShowModal(true);
   };
 
-  const handleToggleEditModal = () => { // 수정 모달 표시 여부를 관리하는 함수
+  const handleToggleEditModal = () => {
+    // 수정 모달 표시 여부를 관리하는 함수
     setShowEditModal(!showEditModal);
   };
 
@@ -220,28 +237,41 @@ const HealthDiary: React.FC<DiaryProps> = ({
       <DiariesContainer>
         <p>{formatDate(visitDate, true)}</p>
         <HealthReport>
-          <ActionButton onEdit={handleEditButtonClick} direction="horizontal" border="none" />
+          <ActionButton
+            onEdit={handleEditButtonClick}
+            direction="horizontal"
+            border="none"
+          />
           <DeseaseName>
-            <Icon style={{ width: '22px', height: '22px' }} src={CareIcon} />
+            <Icon>
+              <TbReportMedical className="big" />
+            </Icon>
+
             <DeseaseTitle>{desease}</DeseaseTitle>
           </DeseaseName>
           <DiaryDetailsLeft>
             <DiaryDetailContainer>
-              <Icon src={CareIcon} />
+              <Icon>
+                <LuActivitySquare />
+              </Icon>
               <DiaryDetail>
                 <DetailTitle>증상</DetailTitle>
                 <p>{symptom}</p>
               </DiaryDetail>
             </DiaryDetailContainer>
             <DiaryDetailContainer>
-              <Icon src={CareIcon} />
+              <Icon>
+                <TbBuildingHospital />
+              </Icon>
               <DiaryDetail>
                 <DetailTitle>입원 여부</DetailTitle>
                 <p>{formatDate(hospitalizationStatus, false)}</p>
               </DiaryDetail>
             </DiaryDetailContainer>
             <DiaryDetailContainer>
-              <Icon src={CareIcon} />
+              <Icon>
+                <LuMessageSquarePlus />
+              </Icon>
               <DiaryDetail>
                 <DetailTitle>보호자 메모</DetailTitle>
                 <p>{memo}</p>
@@ -250,14 +280,18 @@ const HealthDiary: React.FC<DiaryProps> = ({
           </DiaryDetailsLeft>
           <DiaryDetailsRight>
             <DiaryDetailContainer>
-              <Icon src={CareIcon} />
+              <Icon>
+                <LuPill />
+              </Icon>
               <DiaryDetail>
                 <DetailTitle>처방</DetailTitle>
                 <p>{treatment}</p>
               </DiaryDetail>
             </DiaryDetailContainer>
             <DiaryDetailContainer>
-              <Icon src={CareIcon} />
+              <Icon>
+                <LuStethoscope />
+              </Icon>
               <DiaryDetail>
                 <DetailTitle>동물병원</DetailTitle>
                 <p>
