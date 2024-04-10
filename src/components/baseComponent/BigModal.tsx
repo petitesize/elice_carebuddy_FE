@@ -41,8 +41,9 @@ const Title = styled.div`
 `
 
 const ComponentContainer = styled.div`
-width: 1000px;
-padding: 0;
+  width: 1000px;
+  padding: 0;
+  margin: 0 auto;
 `;
 
 const ButtonContainer = styled.div`
