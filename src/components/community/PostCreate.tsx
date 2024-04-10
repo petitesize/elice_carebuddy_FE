@@ -11,26 +11,22 @@ import LinkButton from '../baseComponent/LinkButton.tsx';
 import { SelectDummyWritingGroupOptions } from '../../../temp-data-community.tsx';
 
 const StyledPostCreate = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 970px;
 
   & > * {
-    margin: 10px 0;
+    margin: 10px 0 10px 0;
   }
 `;
 
 const ImageArea = styled.div`
   display: flex;
-  align-items: baseline;
-  padding-top: 10px;
 
   & > * {
-    padding-right: 10px;
+    //padding-right: 10px;
   }
 
   h3 {
     font-size: var(--font-size-md-2);
+    margin-right: 10px;
   }
 `;
 
@@ -55,6 +51,9 @@ const ImageBox = styled.div<{ hasImage: boolean }>`
     position: absolute;
   }
 `;
+
+const Text = styled.p`
+`
 
 const PostCreate: React.FC = () => {
   const [uploadedImg, setUploadedImg] = useState('');
@@ -95,10 +94,10 @@ const PostCreate: React.FC = () => {
         <ImageBox hasImage={!!uploadedImg}>
           {uploadedImg && <img src={uploadedImg} alt="Uploaded" />}
         </ImageBox>
-        <p>
+        <Text>
           개당 업로드 용량: 20MB, 첨부 파일의 경우 사진과 동영상을 합쳐 최대
           10개 업로드 가능합니다. - 이 부분 나중에 멘트수정!
-        </p>
+        </Text>
         <Hr />
       </StyledPostCreate>
     </>

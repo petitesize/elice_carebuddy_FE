@@ -24,15 +24,17 @@ const ModalContent = styled.div`
   border: 1px solid var(--color-grey2);
   border-top: 20px solid #6d987a;
   padding: 20px 30px;
-  margin-bottom: 20px;
   display: flex;
+  justify-content: center;
   z-index: 10000;
   overflow-y: auto;
   overflow-x: hidden;
 `;
 
 const Container = styled.div`
-  padding: 10px 0 20px 0;
+  padding-top: 10px;
+  width: 900px;
+  margin: 0 auto;
 `;
 
 const Title = styled.div`
@@ -45,7 +47,7 @@ const Title = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
-  padding-bottom: 10px;
+  padding-bottom: 30px;
 `;
 
 interface ModalProps {
