@@ -1,6 +1,8 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PetProfileCards from '../diary/PetProfileCards';
+import axios from 'axios';
+import { API_URL } from './../../constants/constants';
 
 const Container = styled.div`
   display: flex;
@@ -66,13 +68,48 @@ const PetCard: React.FC = () => {
     ],
   };
 
+  const [buddy, setBuddy] = React.useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${API_URL}buddy`);
+        console.log(response.data);
+        setBuddy(response.data.message);
+        console.log('성공')
+      } catch (error) {
+        console.error('에러', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const [user, setUser] = React.useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${API_URL}users/6613fbcdfaebdd59e9882df3`);
+        console.log(response.data);
+        setUser(response.data.message);
+        console.log('성공')
+      } catch (error) {
+        console.error('에러', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
   return (
     <Container>
       <Menu>
-        <Item>{DummyData.nickName}님의 반려동물</Item>
+        <Item>{user.nickName}님의 반려동물</Item>
       </Menu>
       <UserContainer>
-        <PetProfileCards profiles={DummyData.pets} />
+        <PetProfileCards profiles={buddy} />
       </UserContainer>
     </Container>
   );

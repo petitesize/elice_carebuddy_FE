@@ -7,6 +7,7 @@ import TextArea from '../../components/baseComponent/TextArea';
 const Component = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 10px;
 `;
 
 const Container = styled.div`
@@ -93,7 +94,7 @@ const RecEdit: React.FC<ModalProps> = ({ onClose }) => {
               <Content>
                 <ContentTitle>증상</ContentTitle>
                 <ContentBody>
-                  <TextArea width="900px" height="100px" placeholder='입력하여주세요.'/>
+                  <TextArea width="870px" height="100px" placeholder='입력하여주세요.'/>
                 </ContentBody>
               </Content>
             </ContentCard>
@@ -104,7 +105,7 @@ const RecEdit: React.FC<ModalProps> = ({ onClose }) => {
               <Content>
                 <ContentTitle>치료</ContentTitle>
                 <ContentBody>
-                  <TextArea width="900px" height="100px" placeholder='입력하여주세요.'/>
+                  <TextArea width="870px" height="100px" placeholder='입력하여주세요.'/>
                 </ContentBody>
               </Content>
             </ContentCard>
@@ -115,7 +116,7 @@ const RecEdit: React.FC<ModalProps> = ({ onClose }) => {
               <Content>
                 <ContentTitle>메모</ContentTitle>
                 <ContentBody>
-                  <TextArea width="900px" height="100px" placeholder='입력하여주세요.'/>
+                  <TextArea width="870px" height="100px" placeholder='입력하여주세요.'/>
                 </ContentBody>
               </Content>
             </ContentCard>

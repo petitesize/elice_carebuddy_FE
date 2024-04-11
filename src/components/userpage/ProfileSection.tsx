@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { API_URL } from './../../constants/constants';
 
 const Container = styled.div`
   display: flex;
@@ -71,7 +73,7 @@ const InputContainer = styled.div`
   align-items: center;
   width: 100%;
 `
-interface UserData {
+/* interface UserData {
   nickName: string;
   introduction: string;
 }
@@ -79,10 +81,26 @@ interface UserData {
 const UserData = {
   nickName: '케어버디',
   introduction: '안녕하세요 동물을 사랑하는 사람입니다.'
-}
+} */
 
 const Profile: React.FC = () => {
   const [profileImage, setProfileImage] = useState<string | null>(null);
+  const [user, setUser] = React.useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${API_URL}users/6613fbcdfaebdd59e9882df3`);
+        console.log(response.data);
+        setUser(response.data.message);
+        console.log('성공')
+      } catch (error) {
+        console.error('에러', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <Container>
@@ -102,8 +120,8 @@ const Profile: React.FC = () => {
             <Item>소개</Item>
           </List>
           <InputList>
-            <InputBox>{UserData.nickName}</InputBox>
-            <InputBox>{UserData.introduction}</InputBox>
+            <InputBox>{user.nickName}</InputBox>
+            <InputBox>{user.introduce}</InputBox>
           </InputList>
         </InputContainer>
         </Info>
