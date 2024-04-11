@@ -4,6 +4,7 @@ import styled from 'styled-components';
 interface ButtonProps {
   redirectUrl?: string;
   text: string;
+  onClick?: () => void;
 }
 
 const StyledButton = styled.button`
@@ -17,9 +18,13 @@ const StyledButton = styled.button`
   cursor: pointer;
 `;
 
-const LinkButton: React.FC<ButtonProps> = ({ text, redirectUrl }) => {
+const LinkButton: React.FC<ButtonProps> = ({ text, redirectUrl, onClick }) => {
   const handleClick = () => {
-    window.location.href = redirectUrl!;
+    if (redirectUrl) {
+      window.location.href = redirectUrl;
+    } else if (onClick) {
+      onClick();
+    }
   };
 
   return (

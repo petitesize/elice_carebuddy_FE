@@ -38,6 +38,8 @@ const GroupIntroduction = styled.p`
   color: var(--color-grey-1);
   margin: 12px 0;
   line-height: 1.2;
+  height: 50px;
+  display: block;
 `;
 
 const GroupInfoWrapper = styled.div`
@@ -61,13 +63,6 @@ const ButtonWrapper = styled.div`
   justify-content: flex-end;
 `;
 
-// const Button = styled.button`
-//   padding: 3px 14px;
-//   border: 1px solid var(--color-grey-1);
-//   background-color: var(--color-white);
-// `;
-
-
 const GroupCard: React.FC<GroupCardProps> = ({ name, introduction }) => (
   <>
     <StyledGroupCard>
@@ -78,7 +73,7 @@ const GroupCard: React.FC<GroupCardProps> = ({ name, introduction }) => (
         <GroupName>{name}</GroupName>
         <GroupIntroduction>{introduction}</GroupIntroduction>
         <ButtonWrapper>
-          <Button fontSize="ft-1">가입</Button>
+          <Button variant="secondary" height="28px" padding="4px 10px" fontSize="ft-1">가입</Button>
         </ButtonWrapper>
         {/* <MemberCheck>
         <LuCheck />

@@ -13,8 +13,10 @@ import Button from '../../components/baseComponent/Button';
 import BigModal from '../../components/baseComponent/BigModal';
 import PostCreate from '../../components/community/PostCreate';
 
+//로직
+import SendPostData from '../../services/SendPostData';
+
 import {
-  profileImg,
   tempCommentCount,
   templikeCount,
   tempGroupName,
@@ -82,12 +84,14 @@ interface Posts {
 
 interface Groups {
   group: string;
+  introduction: string;
 }
 
 const Home: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
-  const [posts, setPosts] = useState<any[]>([]);
-  const [groups, setGroups] = useState<any[]>([]);
+  const [posts, setPosts] = useState<Groups[]>([]);
+  const [groups, setGroups] = useState<Posts[]>([]);
+  const [groupArray, setGroupArray] = useState<JSX.Element[]>([]);
 
   // 추천 그룹 불러오기
   useEffect(() => {
@@ -95,41 +99,13 @@ const Home: React.FC = () => {
       try {
         const response = await axios.get(`${API_URL}groups`);
         setGroups(response.data.message);
-        // console.log('그룹즈 배열 출력' + groups);
-        // console.log('그룹즈 배열 출력[0]' + groups[0]);
-        // console.log('groups' + JSON.stringify(groups, null, 2));
-        // console.log('그룹즈 이름', groups[0].group);
-
         console.log('그룹 조회 성공');
-        console.log(response.data.message);
-        console.log(groups[0].group);
       } catch (error) {
         console.error('그룹 조회 실패', error);
       }
     };
-
     fetchData();
   }, []);
-
-  const randomNumber = Math.floor(Math.random() * groups.length);
-
-  const dummyArray = [
-    <CommunityListSidebar
-      name={groups[0].group}
-      introduction="그룹 introdunction 아직"
-      memberCount={tempMemberCount}
-    />,
-    <CommunityListSidebar
-      name={groups[0].group}
-      introduction={tempGroupIntroduction}
-      memberCount={tempMemberCount}
-    />,
-    <CommunityListSidebar
-      name={groups[0].group}
-      introduction={tempGroupIntroduction}
-      memberCount={tempMemberCount}
-    />,
-  ];
 
   // 피드 글 불러오기
   useEffect(() => {
@@ -147,9 +123,29 @@ const Home: React.FC = () => {
     fetchData();
   }, []);
 
+  // useEffect(() => {
+  //   const updatedGroups =  <CommunityListSidebar
+  //       name={groups[0].group}
+  //       introduction={groups[0].introduction}
+  //     />,
+  //     <CommunityListSidebar
+  //     name={groups[0].group}
+  //     introduction={groups[0].introduction}
+  //     />,
+  //     <CommunityListSidebar
+  //     name={groups[0].group}
+  //     introduction={groups[0].introduction}
+  //     />,
+  //   ];
+  // }, [groups])
+
+  const randomNumber = Math.floor(Math.random() * groups.length);
+
   const handleToggleModal = () => {
     setShowModal((prevState) => !prevState);
   };
+
+  //모달 - 글 등록하는 API
 
   return (
     <>
@@ -188,6 +184,7 @@ const Home: React.FC = () => {
                   value="등록"
                   component={<PostCreate />}
                   onClose={handleToggleModal}
+                  onClick={SendPostData()}
                 />
               )}
             </WritingButton>
@@ -197,8 +194,8 @@ const Home: React.FC = () => {
               key={index}
               title={post.title}
               content={post.content}
-              src={profileImg}
-              nickname="냥멍이"
+              profile={post.userId && post.userId.profileImage[0]}
+              nickname={post.userId && post.userId.nickName}
               uploadedDate={post.createdAt}
               likeCount={templikeCount}
               commentCount={tempCommentCount}
@@ -206,7 +203,7 @@ const Home: React.FC = () => {
           ))}
         </FeedContainer>
         <SidePanelContainer>
-          <SidePanel name="추천 커뮤니티" array={dummyArray} />
+          {/* <SidePanel name="추천 커뮤니티" array={dummyArray} /> */}
         </SidePanelContainer>
       </ContentContainer>
     </>

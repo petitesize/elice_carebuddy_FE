@@ -14,7 +14,7 @@ import BigModal from '../../components/baseComponent/BigModal';
 import PostEdit from '../../components/community/PostEdit';
 
 // 로직
-import formatDateIncludeTime from '../../services/formatDateIncludeTime';
+import formatDateIncludeTime from '../../utils/formatDateIncludeTime';
 
 // 아이콘
 import { LuThumbsUp, LuChevronLeft } from 'react-icons/lu';
@@ -145,7 +145,9 @@ interface Post {
   updatedAt: string;
 }
 
-interface Comment {}
+interface Comment {
+
+}
 const postId = '661762dce744e418e35138e3'; //개별 postId
 
 const POST: React.FC = () => {
@@ -159,7 +161,6 @@ const POST: React.FC = () => {
         const response = await axios.get(`${API_URL}post/${postId}`);
         setPost(response.data.message[0]);
         console.log('게시글 조회 성공');
-        console.log(response.data.message[0]); //나중에 삭제
 
       } catch (error) {
         console.error('게시글 조회 실패', error);

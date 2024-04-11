@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import LikeAndCommentCount from './LikeAndCommentCount';
 import Hr from '../baseComponent/Hr';
 
-import formatDate from '../../services/formatDate';
+import formatDate from '../../utils/formatDate';
 
 type FeedBoxProps = {
   title: string;
   content: string;
-  src: string; // url? 이미지 타입 변경해야됨
+  profile: string; // url? 이미지 타입 변경해야됨
   nickname: string;
   uploadedDate: string; 
   likeCount: number;
@@ -80,7 +80,7 @@ const MoreSpan = () => (
 const FeedBox: React.FC<FeedBoxProps> = ({
   title,
   content,
-  src,
+  profile,
   nickname,
   uploadedDate,
   likeCount,
@@ -103,7 +103,7 @@ const FeedBox: React.FC<FeedBoxProps> = ({
       <Content>{processedContent}<MoreSpan /></Content>
       <Hr />
       <ProfileContainer>
-        <ProfileImg src={src} alt="프로필 이미지" />
+        <ProfileImg src={profile} alt="프로필 이미지" />
         <Nickname>{nickname}</Nickname>
         <p>|</p>
         <p>{formattedDate}</p>

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 type CommunityListSidebarProps = {
   name: string;
   introduction: string;
-  memberCount: string;
+  memberCount?: string;
 };
 
 const StyledCommunityListSidebar = styled.div`
