@@ -24,7 +24,7 @@ interface PetProfile {
 
 interface PetProfilesProps {
   userName?: string;
-  pets: PetProfile[] | null; // 아직 반려동물이 등록되지 않았을 경우 고려
+  pets?: PetProfile[] | null; // 아직 반려동물이 등록되지 않았을 경우 고려
   onPetClick: (pet: PetProfile) => void;
   selectedPetName?: string;
 }
@@ -43,7 +43,7 @@ const PetProfiles: React.FC<PetProfilesProps> = ({
     <PetProfilesContainer>
       <PetProfilesTitle>{userName} 님의 반려동물</PetProfilesTitle>
       <PetProfileCards
-        profiles={pets}
+        profiles={pets || null}
         selectedPetName={selectedPetName}
         onClick={handleClick}
       />

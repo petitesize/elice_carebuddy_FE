@@ -259,8 +259,8 @@ const HealthDiary: React.FC<HealthDiaryProps> = ({ petName, diaryData }) => {
                     <DetailTitle>입원 여부</DetailTitle>
                     <p>
                       {data.hospitalizationStatus === null
-                        ? '입원 중'
-                        : '입원 안 함'}
+                        ? '입원 안함'
+                        : formatDate(data.hospitalizationStatus)}
                     </p>
                   </DiaryDetail>
                 </DiaryDetailContainer>

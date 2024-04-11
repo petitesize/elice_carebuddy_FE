@@ -134,7 +134,7 @@ interface PetProfile {
 interface PetProfileProps {
   profiles: PetProfile[] | null;
   onClick: (pet: PetProfile) => void;
-  selectedPetName: string;
+  selectedPetName?: string;
 }
 
 const PetProfileCards: React.FC<PetProfileProps> = ({
@@ -160,31 +160,32 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
         modules={[Pagination]}
         className="mySwiper"
       >
-        {profiles.map((profile, index) => (
-          <SwiperSlide key={index}>
-            <PetProfileCardContainer onClick={() => handleClick(profile)}>
-              <ActionButtonContainer className="action">
-                {/* {isMypet && <MoreIcon src={MoreKebabIcon} />} */}
-                {isMypet && <ActionButton direction="vertical" />}
-              </ActionButtonContainer>
+        {profiles &&
+          profiles.map((profile, index) => (
+            <SwiperSlide key={index}>
+              <PetProfileCardContainer onClick={() => handleClick(profile)}>
+                <ActionButtonContainer className="action">
+                  {/* {isMypet && <MoreIcon src={MoreKebabIcon} />} */}
+                  {isMypet && <ActionButton direction="vertical" />}
+                </ActionButtonContainer>
 
-              <PetProfileImg
-                src={profile.profileImg || defaultImg}
-                alt="프로필사진"
-              />
-              <PetName
-                className={
-                  profile.name === selectedPetName ? 'selectedPet' : ''
-                }
-              >
-                {profile.name}
-              </PetName>
-              <PetDetails>
-                {profile.kind} / {profile.age}살
-              </PetDetails>
-            </PetProfileCardContainer>
-          </SwiperSlide>
-        ))}
+                <PetProfileImg
+                  src={profile.profileImg || defaultImg}
+                  alt="프로필사진"
+                />
+                <PetName
+                  className={
+                    profile.name === selectedPetName ? 'selectedPet' : ''
+                  }
+                >
+                  {profile.name}
+                </PetName>
+                <PetDetails>
+                  {profile.kind} / {profile.age}살
+                </PetDetails>
+              </PetProfileCardContainer>
+            </SwiperSlide>
+          ))}
         {isMypet && (
           <SwiperSlide>
             <PetProfileCardContainer>

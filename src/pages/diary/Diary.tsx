@@ -75,7 +75,7 @@ const DummyProfilesData = {
 // };
 
 interface User {
-  nickName?: string;
+  nickName: string;
 }
 
 interface Pet {
@@ -92,7 +92,7 @@ const Diary: React.FC = () => {
   // 현재 선택된 반려동물 => 다이어리에 처음 보여줄 반려동물 1마리, 또는 없을 수도 있음
   const [selectedPet, setSelectedPet] = useState<Pet | null>();
   // 사용자 정보
-  const [user, setUser] = React.useState<User>({});
+  const [user, setUser] = React.useState<User | null>(null);
   // 반려동물의 병원 기록 => 기록이 여러 개[]일 수도, 없을 수도 있음
   const [hospitalRecords, setHospitalRecords] = useState<any[]>([]);
   console.log(selectedPet);
@@ -125,7 +125,7 @@ const Diary: React.FC = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${API_URL}users/6613fbcdfaebdd59e9882df3`,
+          `${API_URL}users/6617b4493122a35bf1a26f8d`,
         );
         const userData = response.data.message;
         setUser(userData);
@@ -158,7 +158,7 @@ const Diary: React.FC = () => {
   return (
     <DiaryPageContainer>
       <PetProfiles
-        userName={user.nickName}
+        userName={user?.nickName}
         selectedPetName={selectedPet?.name}
         pets={buddy}
         onPetClick={handlePetClick}
