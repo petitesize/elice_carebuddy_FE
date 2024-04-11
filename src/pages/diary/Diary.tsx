@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import PetProfiles from '../../components/diary/PetProfiles';
 import HealthDiary from '../../components/diary/HealthDiary';
 
-import Dummy from './Dummy';
 import axios from 'axios';
 import { API_URL } from '../../constants/constants';
 
@@ -16,63 +15,6 @@ const DiaryPageContainer = styled.div`
   margin: 0 auto;
   height: auto;
 `;
-
-const YourComponent: React.FC = () => {
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${API_URL}hospital`);
-
-        console.log(response.data.message);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  return <div></div>;
-};
-
-// 테스트용 더미데이터
-const DummyProfilesData = {
-  userName: 'Owner1',
-  pets: [
-    {
-      name: 'Cat1',
-      breeds: '코리안 숏헤어',
-      age: 16,
-      img: '/src/assets/temp-profile.png',
-    },
-    {
-      name: 'Cat2',
-      breeds: '래그돌',
-      age: 4,
-      img: '/src/assets/temp-profile.png',
-    },
-    {
-      name: 'Cat3',
-      breeds: '코리안 숏헤어',
-      age: 16,
-      img: '/src/assets/temp-profile.png',
-    },
-  ],
-};
-// const DummyDiaryData = {
-//   name: 'Pet',
-//   visitDate: new Date(2024, 3, 5),
-//   desease: 'DESEASE-19',
-//   symptom: '콧물, 눈물, 잦은 기침',
-//   hospitalizationStatus: new Date(2024, 3, 5),
-//   memo: `콧물이 많이 나오고,
-// 눈물도 많이 나오고,
-// 기침도 많이 나오고, 너무 아프고...
-//   `,
-//   hospitalName: '대전 동물병원',
-//   doctor: '강의사',
-//   treatment: '항생제',
-// };
 
 interface User {
   nickName: string;
@@ -95,7 +37,6 @@ const Diary: React.FC = () => {
   const [user, setUser] = React.useState<User | null>(null);
   // 반려동물의 병원 기록 => 기록이 여러 개[]일 수도, 없을 수도 있음
   const [hospitalRecords, setHospitalRecords] = useState<any[]>([]);
-  console.log(selectedPet);
 
   const handlePetClick = (pet: Pet) => {
     setSelectedPet(pet);
@@ -112,7 +53,6 @@ const Diary: React.FC = () => {
         if (!selectedPet && buddyData.length > 0) {
           setSelectedPet(buddyData[0]);
         }
-        console.log(buddyData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -150,11 +90,11 @@ const Diary: React.FC = () => {
 
     fetchData();
   }, []);
+
   const filteredHospitalRecords = hospitalRecords.filter(
     (record) => record.buddyId === selectedPet?._id,
   );
-  console.log(filteredHospitalRecords);
-  console.log(selectedPet?.name);
+
   return (
     <DiaryPageContainer>
       <PetProfiles

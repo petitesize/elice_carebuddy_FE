@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import MoreKebabIcon from '../../assets/MoreKebabIcon.png';
 import ActionButton from '../baseComponent/ActionButton';
 import defaultImg from '/src/assets/carebuddyLogo.png';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -48,16 +47,6 @@ const ActionButtonContainer = styled.div`
     top: -30px;
     right: 0;
   } */
-`;
-
-const MoreIcon = styled.img`
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  top: 15px;
-  right: 15px;
-  cursor: pointer;
-  color: #cecece;
 `;
 
 const PetProfileImg = styled.img`
