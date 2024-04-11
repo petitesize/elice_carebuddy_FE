@@ -108,8 +108,6 @@ const StyledSwiper = styled(Swiper)`
   width: 100%;
   > div {
     padding-top: 8px;
-    display: flex;
-    justify-content: center;
   }
   > div:last-child {
     position: absolute;
