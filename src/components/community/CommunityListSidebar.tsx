@@ -44,7 +44,7 @@ const CommunityListSidebar: React.FC<CommunityListSidebarProps> = ({
   <StyledCommunityListSidebar>
     <Name>{name}</Name>
     <Introduction>{introduction}</Introduction>
-    <MemberCount>{memberCount}명의 멤버</MemberCount>
+    {/* <MemberCount>{memberCount}명의 멤버</MemberCount> */}
   </StyledCommunityListSidebar>
 );
 

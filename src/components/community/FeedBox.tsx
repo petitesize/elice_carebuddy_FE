@@ -2,12 +2,14 @@ import styled from 'styled-components';
 import LikeAndCommentCount from './LikeAndCommentCount';
 import Hr from '../baseComponent/Hr';
 
+import formatDate from '../../services/formatDate';
+
 type FeedBoxProps = {
   title: string;
   content: string;
   src: string; // url? 이미지 타입 변경해야됨
   nickname: string;
-  uploadedDate: string; // 어떤 타입으로 받아오는지 보고 변경해야됨
+  uploadedDate: string; 
   likeCount: number;
   commentCount: number;
 };
@@ -38,6 +40,7 @@ const ProfileContainer = styled.div`
   color: var(--color-grey-1);
   font-size: var(--font-size-sm-1);
 
+
   p {
     margin: 0 3px;
   }
@@ -66,7 +69,13 @@ const Content = styled.pre`
   white-space: pre-wrap;
   line-height: 1.4;
   font-size: var(--font-size-ft-1);
+  min-height: 60px; 
 `;
+
+const MoreSpan = () => (
+  <span style={{ color: '#0069E4', fontSize: 'var(--font-size-sm-1)' }}> ...더보기</span>
+);
+
 
 const FeedBox: React.FC<FeedBoxProps> = ({
   title,
@@ -77,6 +86,11 @@ const FeedBox: React.FC<FeedBoxProps> = ({
   likeCount,
   commentCount,
 }) => {
+
+  const processedContent = content.split('. ').slice(0, 2).join('. ');// 두 문장만 보여주기
+  
+  const formattedDate = formatDate({rowDate: uploadedDate}) // 날짜만 보여주기(시간 x)
+
   return (
     <StyledFeedBox>
       <TitleContainer>
@@ -86,13 +100,13 @@ const FeedBox: React.FC<FeedBoxProps> = ({
           commentCount={commentCount}
         />
       </TitleContainer>
-      <Content>{content}</Content>
+      <Content>{processedContent}<MoreSpan /></Content>
       <Hr />
       <ProfileContainer>
         <ProfileImg src={src} alt="프로필 이미지" />
         <Nickname>{nickname}</Nickname>
         <p>|</p>
-        <p>{uploadedDate}</p>
+        <p>{formattedDate}</p>
       </ProfileContainer>
     </StyledFeedBox>
   );

@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+import { API_URL } from '../../constants/constants';
 
 // 컴포넌트
 import Banner from '../../components/community/Banner';
@@ -11,8 +13,6 @@ import Button from '../../components/baseComponent/Button';
 import BigModal from '../../components/baseComponent/BigModal';
 import PostCreate from '../../components/community/PostCreate';
 
-// 임시 데이터
-import posts from '../../../temp-data-posts.json';
 import {
   profileImg,
   tempCommentCount,
@@ -23,24 +23,6 @@ import {
   SelectDummyCategoryOptions,
   SelectDummyGroupOptions,
 } from '../../../temp-data-community';
-
-const dummyArray = [
-  <CommunityListSidebar
-    name={tempGroupName}
-    introduction={tempGroupIntroduction}
-    memberCount={tempMemberCount}
-  />,
-  <CommunityListSidebar
-    name={tempGroupName}
-    introduction={tempGroupIntroduction}
-    memberCount={tempMemberCount}
-  />,
-  <CommunityListSidebar
-    name={tempGroupName}
-    introduction={tempGroupIntroduction}
-    memberCount={tempMemberCount}
-  />,
-];
 
 const BannerWrapper = styled.div``;
 
@@ -92,8 +74,78 @@ const WritingButton = styled.div`
   }
 `;
 
+interface Posts {
+  title: string;
+  content: string;
+  createdAt: string;
+}
+
+interface Groups {
+  group: string;
+}
+
 const Home: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
+  const [posts, setPosts] = useState<any[]>([]);
+  const [groups, setGroups] = useState<any[]>([]);
+
+  // 추천 그룹 불러오기
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${API_URL}groups`);
+        setGroups(response.data.message);
+        // console.log('그룹즈 배열 출력' + groups);
+        // console.log('그룹즈 배열 출력[0]' + groups[0]);
+        // console.log('groups' + JSON.stringify(groups, null, 2));
+        // console.log('그룹즈 이름', groups[0].group);
+
+        console.log('그룹 조회 성공');
+        console.log(response.data.message);
+        console.log(groups[0].group);
+      } catch (error) {
+        console.error('그룹 조회 실패', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const randomNumber = Math.floor(Math.random() * groups.length);
+
+  const dummyArray = [
+    <CommunityListSidebar
+      name={groups[0].group}
+      introduction="그룹 introdunction 아직"
+      memberCount={tempMemberCount}
+    />,
+    <CommunityListSidebar
+      name={groups[0].group}
+      introduction={tempGroupIntroduction}
+      memberCount={tempMemberCount}
+    />,
+    <CommunityListSidebar
+      name={groups[0].group}
+      introduction={tempGroupIntroduction}
+      memberCount={tempMemberCount}
+    />,
+  ];
+
+  // 피드 글 불러오기
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${API_URL}post`);
+        setPosts(response.data.message);
+        console.log('피드 글 조회 성공');
+        console.log(response.data.message);
+      } catch (error) {
+        console.error('피드 글 조회 실패', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleToggleModal = () => {
     setShowModal((prevState) => !prevState);
@@ -122,7 +174,14 @@ const Home: React.FC = () => {
             </Classification>
             <WritingButton>
               <p>함께 나누고 싶은 이야기가 있나요?</p>
-              <Button variant="primary" shape="round" padding='10px 15px' onClick={handleToggleModal}>글 작성하기</Button>
+              <Button
+                variant="primary"
+                shape="round"
+                padding="10px 15px"
+                onClick={handleToggleModal}
+              >
+                글 작성하기
+              </Button>
               {showModal && (
                 <BigModal
                   title="글쓰기"
@@ -140,7 +199,7 @@ const Home: React.FC = () => {
               content={post.content}
               src={profileImg}
               nickname="냥멍이"
-              uploadedDate="2024.03.27"
+              uploadedDate={post.createdAt}
               likeCount={templikeCount}
               commentCount={tempCommentCount}
             />
