@@ -91,8 +91,8 @@ const ModalContent = () => {
         </ButtonGroup>
         <h2>중성화 여부</h2>
         <ButtonGroup>
-          <UIButton onClick={() => handleClick('neutered')} variant='square'>중성화 전</UIButton>
-          <UIButton onClick={() => handleClick('spayed')} variant='square'>중성화 완료</UIButton>
+          <UIButton onClick={() => handleClick('neutered')} variant='primary'>중성화 전</UIButton>
+          <UIButton onClick={() => handleClick('spayed')} variant='secondary'>중성화 완료</UIButton>
         </ButtonGroup>
         {renderSection("weight", "반려동물 체중")}
     </Profile>

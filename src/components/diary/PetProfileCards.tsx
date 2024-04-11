@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import ActionButton from '../baseComponent/ActionButton';
 import defaultImg from '/src/assets/carebuddyLogo.png';
@@ -7,6 +7,8 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Pagination } from 'swiper/modules';
+import PetRegister from '../../pages/petRegister/PetRegister';
+import PetEdit from '../../pages/petEdit/PetEdit';
 
 // 카드 전체 컨테이너
 const PetProfileCardsContainer = styled.div`
@@ -131,10 +133,21 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
   selectedPetName,
   onClick,
 }) => {
+  const [showPetRegister, setShowPetRegister] = useState(false);
+  const [showPetEdit, setShowPetEdit] = useState(false);
   const isMypet = location.pathname !== '/userpage';
   const handleClick = (pet: PetProfile) => {
     onClick(pet);
   };
+  
+  const openPetRegister = () => {
+    setShowPetRegister(true);
+  };
+
+  const openPetEdit = () => {
+    setShowPetEdit(true);
+  };
+
   return (
     <PetProfileCardsContainer>
       <StyledSwiper
@@ -155,7 +168,7 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
               <PetProfileCardContainer onClick={() => handleClick(profile)}>
                 <ActionButtonContainer className="action">
                   {/* {isMypet && <MoreIcon src={MoreKebabIcon} />} */}
-                  {isMypet && <ActionButton direction="vertical" />}
+                  {isMypet && <ActionButton direction="vertical" onClick={openPetEdit} />}
                 </ActionButtonContainer>
 
                 <PetProfileImg
@@ -177,13 +190,15 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
           ))}
         {isMypet && (
           <SwiperSlide>
-            <PetProfileCardContainer>
+            <PetProfileCardContainer onClick={openPetRegister}>
               <AddProfile />
               <AddProfileMsg>프로필 추가</AddProfileMsg>
             </PetProfileCardContainer>
           </SwiperSlide>
         )}
       </StyledSwiper>
+      {showPetRegister && <PetRegister onClose={() => setShowPetRegister(false)} />}
+      {showPetEdit && <PetEdit onClose={() => setShowPetEdit(false)} />}
     </PetProfileCardsContainer>
   );
 };
