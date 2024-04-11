@@ -18,13 +18,8 @@ const Container = styled.div`
 `;
 
 const Category = styled.div`
-<<<<<<< Updated upstream
   font-size: 14px;
 `;
-=======
-  font-size: var(--font-size-ft-1); //14
-`
->>>>>>> Stashed changes
 
 const Title = styled.div`
   font-size: var(--font-size-hd-2); //22
@@ -58,42 +53,6 @@ const TopBar: React.FC = () => {
   let menuIndex = 0; // 초기값으로 첫 번째 메뉴인 'carebuddy'를 선택합니다.
   let menuName = ''; // menuName의 초기값은 빈 문자열입니다.
 
-<<<<<<< Updated upstream
-  // pathname에 따라 menuIndex와 menuName을 설정합니다.
-  DummyData.menu.forEach((item, index) => {
-    if (pathname === '/' && index === 0) {
-      menuIndex = index;
-      menuName = '반려동물 건강 서비스';
-    } else if (pathname === '/community' && item === '커뮤니티') {
-      menuIndex = index;
-      menuName = '커뮤니티';
-    } else if (pathname === '/mypage' && item === '마이페이지') {
-      menuIndex = index;
-      menuName = '회원 정보 관리';
-    } else if (pathname === '/userpage' && item === 'carebuddy') {
-      menuIndex = index;
-      menuName = '유저 페이지';
-    } else if (pathname === '/diary' && item === '건강관리') {
-      menuIndex = index;
-      menuName = '건강 다이어리';
-    } else if (pathname === '/group' && item === '커뮤니티') {
-      menuIndex = index;
-      menuName = '모든 그룹';
-    } else if (pathname === '/signup' && item === 'carebuddy') {
-      menuIndex = index;
-      menuName = '로그인 / 회원가입';
-    } else if (pathname === '/post' && item === '커뮤니티') {
-      menuIndex = index;
-      menuName = '피드 상세 보기';
-    } else if (pathname === '/hospital-info' && item === '정보') {
-      menuIndex = index;
-      menuName = '동물 병원 검색';
-    } else if (pathname === '/pharmacy-info' && item === '정보') {
-      menuIndex = index;
-      menuName = '동물 약국 검색';
-    }
-  });
-=======
  // pathname에 따라 menuIndex와 menuName을 설정합니다.
  DummyData.menu.forEach((item, index) => {
   if (pathname === '/' && index === 0) {
@@ -128,7 +87,6 @@ const TopBar: React.FC = () => {
     menuName = '회원가입';
   }
 });
->>>>>>> Stashed changes
 
   return (
     <TopBarContainer>
