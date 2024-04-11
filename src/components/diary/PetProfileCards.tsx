@@ -21,7 +21,7 @@ const PetProfileCardsContainer = styled.div`
 const PetProfileCardContainer = styled.div`
   width: 244px;
   height: 90%;
-  /* background: #ffffff; */
+  background: #ffffff;
   box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.08);
   border-radius: 15px;
   display: flex;
@@ -35,6 +35,9 @@ const PetProfileCardContainer = styled.div`
 
     top: 15px;
     right: 15px;
+  }
+  &:hover {
+    cursor: pointer;
   }
 `;
 
@@ -85,6 +88,10 @@ const PetName = styled.p`
   line-height: 26px;
   text-align: center;
   margin-bottom: 6px;
+  transition: color 0.3s ease;
+  &.selectedPet {
+    color: var(--color-green-main);
+  }
 `;
 
 const AddProfileMsg = styled.p`
@@ -108,28 +115,33 @@ const StyledSwiper = styled(Swiper)`
   width: 100%;
   > div {
     padding-top: 8px;
-    display: flex;
-    justify-content: center;
   }
   > div:last-child {
     position: absolute;
     bottom: 0;
+    display: flex;
+    justify-content: center;
   }
 `;
 
 interface PetProfile {
   name: string;
-  breeds: string;
+  kind: string;
   age: number;
-  img: string;
+  profileImg: string;
 }
 
 interface PetProfileProps {
-  profiles: PetProfile[];
+  profiles: PetProfile[] | null;
   onClick: (pet: PetProfile) => void;
+  selectedPetName: string;
 }
 
-const PetProfileCards: React.FC<PetProfileProps> = ({ profiles, onClick }) => {
+const PetProfileCards: React.FC<PetProfileProps> = ({
+  profiles,
+  selectedPetName,
+  onClick,
+}) => {
   const isMypet = location.pathname !== '/userpage';
   const handleClick = (pet: PetProfile) => {
     onClick(pet);
@@ -156,10 +168,19 @@ const PetProfileCards: React.FC<PetProfileProps> = ({ profiles, onClick }) => {
                 {isMypet && <ActionButton direction="vertical" />}
               </ActionButtonContainer>
 
-              <PetProfileImg src={profile.img || defaultImg} alt="프로필사진" />
-              <PetName>{profile.name}</PetName>
+              <PetProfileImg
+                src={profile.profileImg || defaultImg}
+                alt="프로필사진"
+              />
+              <PetName
+                className={
+                  profile.name === selectedPetName ? 'selectedPet' : ''
+                }
+              >
+                {profile.name}
+              </PetName>
               <PetDetails>
-                {profile.breeds} / {profile.age}살
+                {profile.kind} / {profile.age}살
               </PetDetails>
             </PetProfileCardContainer>
           </SwiperSlide>

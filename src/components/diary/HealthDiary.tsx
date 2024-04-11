@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import BigModal from '../baseComponent/BigModal';
 import RecMade from '../../pages/diary/RecMade';
 import RecEdit from '../../pages/diary/RecEdit';
-import MoreKebabIcon from '../../assets/MoreKebabIcon.png';
-import CareIcon from '../../assets/CareIcon.png';
 import Button from '../baseComponent/Button';
 import ActionButton from '../baseComponent/ActionButton';
 import {
@@ -12,7 +10,6 @@ import {
   LuActivitySquare,
   LuStethoscope,
   LuMessageSquarePlus,
-  LuSyringe,
 } from 'react-icons/lu';
 import { TbBuildingHospital, TbReportMedical } from 'react-icons/tb';
 
@@ -146,15 +143,19 @@ const Icon = styled.div`
 `;
 
 interface DiaryProps {
-  name: string;
-  visitDate: Date;
-  desease: string;
+  consultationDate: String;
+  disease: string;
   symptom: string;
   hospitalizationStatus: Date;
   memo: string;
-  hospitalName: string;
-  doctor: string;
+  address: string;
+  doctorName: string;
   treatment: string;
+}
+
+interface HealthDiaryProps {
+  petName?: string;
+  diaryData: DiaryProps[];
 }
 
 // Date 포맷팅 함수
@@ -174,17 +175,7 @@ const formatDate = (date: Date, includeTime: boolean = false) => {
   return date.toLocaleDateString('ko-KR', options);
 };
 
-const HealthDiary: React.FC<DiaryProps> = ({
-  name,
-  visitDate,
-  desease,
-  symptom,
-  hospitalizationStatus,
-  memo,
-  hospitalName,
-  doctor,
-  treatment,
-}) => {
+const HealthDiary: React.FC<HealthDiaryProps> = ({ petName, diaryData }) => {
   const [showModal, setShowModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
 
@@ -204,11 +195,11 @@ const HealthDiary: React.FC<DiaryProps> = ({
   const handleEditButtonClick = () => {
     setShowEditModal(true); // 수정하기 버튼 클릭 시 수정 모달 표시
   };
-
+  console.log(petName);
   return (
     <HealthDiaryContainer>
       <DiaryTitle className="diaryTitle">
-        {name} <span>건강 다이어리</span>
+        {petName} <span>건강 다이어리</span>
       </DiaryTitle>
       <HorizontalLine />
       <Button
@@ -234,74 +225,83 @@ const HealthDiary: React.FC<DiaryProps> = ({
           onClose={handleToggleEditModal}
         />
       )}
-      <DiariesContainer>
-        <p>{formatDate(visitDate, true)}</p>
-        <HealthReport>
-          <ActionButton
-            onEdit={handleEditButtonClick}
-            direction="horizontal"
-            border="none"
-          />
-          <DeseaseName>
-            <Icon>
-              <TbReportMedical className="big" />
-            </Icon>
-
-            <DeseaseTitle>{desease}</DeseaseTitle>
-          </DeseaseName>
-          <DiaryDetailsLeft>
-            <DiaryDetailContainer>
-              <Icon>
-                <LuActivitySquare />
-              </Icon>
-              <DiaryDetail>
-                <DetailTitle>증상</DetailTitle>
-                <p>{symptom}</p>
-              </DiaryDetail>
-            </DiaryDetailContainer>
-            <DiaryDetailContainer>
-              <Icon>
-                <TbBuildingHospital />
-              </Icon>
-              <DiaryDetail>
-                <DetailTitle>입원 여부</DetailTitle>
-                <p>{formatDate(hospitalizationStatus, false)}</p>
-              </DiaryDetail>
-            </DiaryDetailContainer>
-            <DiaryDetailContainer>
-              <Icon>
-                <LuMessageSquarePlus />
-              </Icon>
-              <DiaryDetail>
-                <DetailTitle>보호자 메모</DetailTitle>
-                <p>{memo}</p>
-              </DiaryDetail>
-            </DiaryDetailContainer>
-          </DiaryDetailsLeft>
-          <DiaryDetailsRight>
-            <DiaryDetailContainer>
-              <Icon>
-                <LuPill />
-              </Icon>
-              <DiaryDetail>
-                <DetailTitle>처방</DetailTitle>
-                <p>{treatment}</p>
-              </DiaryDetail>
-            </DiaryDetailContainer>
-            <DiaryDetailContainer>
-              <Icon>
-                <LuStethoscope />
-              </Icon>
-              <DiaryDetail>
-                <DetailTitle>동물병원</DetailTitle>
-                <p>
-                  {hospitalName} <span>{doctor} 선생님</span>
-                </p>
-              </DiaryDetail>
-            </DiaryDetailContainer>
-          </DiaryDetailsRight>
-        </HealthReport>
-      </DiariesContainer>
+      {diaryData.length > 0 ? (
+        diaryData.map((data, index) => (
+          <DiariesContainer key={index}>
+            <p>{data.consultationDate}</p>
+            <HealthReport>
+              <ActionButton
+                onEdit={handleEditButtonClick}
+                direction="horizontal"
+                border="none"
+              />
+              <DeseaseName>
+                <Icon>
+                  <TbReportMedical className="big" />
+                </Icon>
+                <DeseaseTitle>{data.disease}</DeseaseTitle>
+              </DeseaseName>
+              <DiaryDetailsLeft>
+                <DiaryDetailContainer>
+                  <Icon>
+                    <LuActivitySquare />
+                  </Icon>
+                  <DiaryDetail>
+                    <DetailTitle>증상</DetailTitle>
+                    <p>{data.symptom}</p>
+                  </DiaryDetail>
+                </DiaryDetailContainer>
+                <DiaryDetailContainer>
+                  <Icon>
+                    <TbBuildingHospital />
+                  </Icon>
+                  <DiaryDetail>
+                    <DetailTitle>입원 여부</DetailTitle>
+                    <p>
+                      {data.hospitalizationStatus === null
+                        ? '입원 중'
+                        : '입원 안 함'}
+                    </p>
+                  </DiaryDetail>
+                </DiaryDetailContainer>
+                <DiaryDetailContainer>
+                  <Icon>
+                    <LuMessageSquarePlus />
+                  </Icon>
+                  <DiaryDetail>
+                    <DetailTitle>보호자 메모</DetailTitle>
+                    <p>{data.memo || '메모 없음'}</p>
+                  </DiaryDetail>
+                </DiaryDetailContainer>
+              </DiaryDetailsLeft>
+              <DiaryDetailsRight>
+                <DiaryDetailContainer>
+                  <Icon>
+                    <LuPill />
+                  </Icon>
+                  <DiaryDetail>
+                    <DetailTitle>처방</DetailTitle>
+                    <p>{data.treatment}</p>
+                  </DiaryDetail>
+                </DiaryDetailContainer>
+                <DiaryDetailContainer>
+                  <Icon>
+                    <LuStethoscope />
+                  </Icon>
+                  <DiaryDetail>
+                    <DetailTitle>동물병원</DetailTitle>
+                    <p>
+                      {data.address} <span>{data.doctorName} 선생님</span>
+                    </p>
+                  </DiaryDetail>
+                </DiaryDetailContainer>
+              </DiaryDetailsRight>
+            </HealthReport>
+          </DiariesContainer>
+        ))
+      ) : (
+        <p>기록이 없습니다.(임시작성된 메시지)</p>
+      )}
     </HealthDiaryContainer>
   );
 };
