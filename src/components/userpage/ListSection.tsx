@@ -5,7 +5,7 @@ const Container = styled.div``;
 
 const UserContainer = styled.div`
   font-size: 16px;
-  margin: 20px 0 20px 0;
+  margin: 50px 0 50px 0;
   display: flex;
   flex-direction: column;
 `;
@@ -50,12 +50,20 @@ const ListItem = styled.div`
   border-bottom: 1px solid #cecece;
 `;
 
+interface Post {
+  _id: string;
+  userId: string;
+  categoryId: string;
+  name: number;
+  title: string;
+  createdAt: Date;
+}
+
 const ListSection: React.FC<Post> = ({
   _id,
   userId,
   categoryId,
   name,
-  group,
   title,
   createdAt,
 }) => {
@@ -70,6 +78,10 @@ const ListSection: React.FC<Post> = ({
     return `${year}/${month}/${day}`;
   };
 
+  // 제목과 데이터 배열
+  const titles = ['그룹', '글 제목', '작성일'];
+  const datas = [`${categoryId} ${animalType}`, title, formatDate(new Date(createdAt))];
+
   return (
     <Container>
       <Menu>
@@ -79,14 +91,14 @@ const ListSection: React.FC<Post> = ({
         <UserContainer>
           <ListContainer>
             <ListItem>
-              <Title>그룹</Title>
-              <Title>글 제목</Title>
-              <Title>작성일</Title>
+              {titles.map((title, index) => (
+                <Title key={index}>{title}</Title>
+              ))}
             </ListItem>
             <ListItem>
-              <Data>{categoryId} {animalType}</Data>
-              <Data>{title}</Data>
-              <Data>{formatDate(new Date(createdAt))}</Data>
+              {datas.map((data, index) => (
+                <Data key={index}>{data}</Data>
+              ))}
             </ListItem>
           </ListContainer>
         </UserContainer>

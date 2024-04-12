@@ -8,10 +8,14 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
+const Section = styled.div`
+  margin: 30px 0 30px 0;
+`
+
 const UserContainer = styled.div`
   font-size: var(--font-size-md-1); //16
   display: flex;
-  margin: 20px 0 40px 0;
+  margin: 10px 0 10px 0;
 `;
 
 const Menu = styled.p`
@@ -48,7 +52,13 @@ const Data = styled.a`
   padding: 10px 10px 10px 0;
 `;
 
-const UserInfo: React.FC = () => {
+interface UserInfoProps {
+  nickName?: string;
+  email?: string;
+  introduce?: string;
+}
+
+const UserInfo: React.FC<UserInfoProps> = ({ nickName, email, introduce }) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleToggleModal = () => {
@@ -56,25 +66,43 @@ const UserInfo: React.FC = () => {
   };
 
     // 더미 데이터
-    const DummyUserInfoData = {
-      email: 'carebuddy@kakao.com',
-    };
+    // const DummyUserInfoData = {
+    //   email: 'carebuddy@kakao.com',
+    // };
 
   return (
     <Container>
         <Menu>
         <Item>회원정보</Item>
         </Menu>
-      <UserContainer>
-        <List>
-          <Item>이메일</Item>
-        </List>
-        <DataList>
-          <Data>{`${DummyUserInfoData.email}`}</Data>
-          <WithdrawButton onClick={handleToggleModal}>회원탈퇴</WithdrawButton>
-          {showModal && <SmallModal component={<UserAsk onClose={handleToggleModal} />} />}
-        </DataList>
-      </UserContainer>
+      <Section>
+        <UserContainer>
+          <List>
+            <Item>이메일</Item>
+          </List>
+          <DataList>
+            <Data>{email}</Data>
+            <WithdrawButton onClick={handleToggleModal}>회원탈퇴</WithdrawButton>
+            {showModal && <SmallModal component={<UserAsk onClose={handleToggleModal} />} />}
+          </DataList>
+        </UserContainer>
+        <UserContainer>
+          <List>
+            <Item>닉네임</Item>
+          </List>
+          <DataList>
+              <Data>{nickName}</Data>
+            </DataList>
+        </UserContainer>
+        <UserContainer>
+          <List>
+            <Item>소개글</Item>
+          </List>
+          <DataList>
+            <Data>{introduce}</Data>
+          </DataList>
+        </UserContainer>
+      </Section>
     </Container>
   );
 };

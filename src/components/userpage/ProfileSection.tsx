@@ -12,7 +12,7 @@ const UserContainer = styled.div`
   font-size: 16px;
   display: flex;
   justify-content: space-evenly;
-  margin: 20px 0 40px 0;
+  margin: 50px 0 50px 0;
 `;
 
 const Menu = styled.span`
@@ -72,6 +72,7 @@ const InputContainer = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+  font-size: 16px;
 `
 /* interface UserData {
   nickName: string;

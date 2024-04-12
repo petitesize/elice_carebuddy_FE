@@ -14,7 +14,6 @@ import PetEdit from '../../pages/petEdit/PetEdit';
 const PetProfileCardsContainer = styled.div`
   height: 300px;
   display: flex;
-  margin-top: 50px;
   width: 100%;
 `;
 

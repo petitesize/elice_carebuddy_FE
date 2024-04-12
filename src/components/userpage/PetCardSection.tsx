@@ -1,8 +1,6 @@
 import styled from 'styled-components';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PetProfileCards from '../diary/PetProfileCards';
-import axios from 'axios';
-import { API_URL } from './../../constants/constants';
 
 const Container = styled.div`
   display: flex;
@@ -11,7 +9,7 @@ const Container = styled.div`
 
 const UserContainer = styled.div`
   font-size: 14px;
-  margin: 20px 0 40px 0;
+  margin: 50px 0 50px 0;
   display: flex;
   justify-content: center;
 `;

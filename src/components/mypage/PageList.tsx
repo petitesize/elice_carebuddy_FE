@@ -6,7 +6,7 @@ const Container = styled.div`
 
 const UserContainer = styled.div`
   font-size: 14px;
-  margin: 20px 0 20px 0;
+  margin: 50px 0 50px 0;
   display: flex;
   justify-content: space-around;
   border-bottom: 1px solid #cecece;

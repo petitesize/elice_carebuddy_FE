@@ -1,17 +1,13 @@
 import styled from 'styled-components';
 import React from 'react';
-import PageList from './PageList';
-import HospitalSearchResult from '../information/HosplitalSearchResult';
 
 const Container = styled.div``;
 
 const UserContainer = styled.div`
-  font-size: 14px;
+  font-size: 16px;
   margin: 20px 0 20px 0;
   display: flex;
-  justify-content: space-around;
-  border-bottom: 1px solid #cecece;
-  padding-bottom: 20px;
+  flex-direction: column;
 `;
 
 const Menu = styled.div`
@@ -27,31 +23,64 @@ const Item = styled.a`
   padding: 10px 10px 10px 0;
 `;
 
-const ListItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Title = styled.a`
+const Title = styled.div`
   font-weight: bold;
   font-size: 16px;
+  margin: 10px 0;
 `;
 
-const Data = styled.a`
+const Data = styled.div`
+  margin: 10px 0;
+  text-align: center;
 `;
 
 const SectionContainer = styled.div`
-    margin: 20px 0 40px 0;
-`
-const List: React.FC = () => {
-  // 더미 데이터
-  const DummyData = {
-    name: 0, // 대분류: 0강아지 1고양이
-    group: '눈',
-    title: '아이가 아파요 무슨일 일까요?',
-    createdAt: new Date('2024-03-22'),
+  margin: 20px 0 40px 0;
+`;
+
+const ListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const ListItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #cecece;
+`;
+
+interface Post {
+  _id: string;
+  userId: string;
+  categoryId: string;
+  name: number;
+  title: string;
+  createdAt: Date;
+}
+
+const ListSection: React.FC<Post> = ({
+  _id,
+  userId,
+  categoryId,
+  name,
+  title,
+  createdAt,
+}) => {
+  // name 값에 따라 출력할 동물을 결정
+  const animalType = name === 0 ? '강아지' : '고양이';
+
+  // 년-월-일 형식으로 날짜 포맷팅 함수
+  const formatDate = (date: Date) => {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${year}/${month}/${day}`;
   };
+
+  // 제목과 데이터 배열
+  const titles = ['그룹', '글 제목', '작성일'];
+  const datas = [`${categoryId} ${animalType}`, title, formatDate(new Date(createdAt))];
 
   return (
     <Container>
@@ -59,23 +88,23 @@ const List: React.FC = () => {
         <Item>작성 글 목록</Item>
       </Menu>
       <SectionContainer>
-      <UserContainer>
-        <ListItem>
-          <Title>그룹</Title>
-        </ListItem>
-        <ListItem>
-          <Title>글 제목</Title>
-        </ListItem>
-        <ListItem>
-          <Title>작성일</Title>
-        </ListItem>
+        <UserContainer>
+          <ListContainer>
+            <ListItem>
+              {titles.map((title, index) => (
+                <Title key={index}>{title}</Title>
+              ))}
+            </ListItem>
+            <ListItem>
+              {datas.map((data, index) => (
+                <Data key={index}>{data}</Data>
+              ))}
+            </ListItem>
+          </ListContainer>
         </UserContainer>
-      <PageList />
-      <PageList />
-      <PageList />
       </SectionContainer>
     </Container>
   );
 };
 
-export default List;
+export default ListSection;
