@@ -2,13 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface ButtonProps {
-  onClick?: () => void;
   children: React.ReactNode;
   variant?: 'primary' | 'secondary';
   shape?: 'round' | 'square';
   fontSize?: keyof typeof fontSizeMap;
   margin?: string;
   padding?: string;
+  height?: string;
+  onClick?: () => void; 
 }
 
 const fontSizeMap = {
@@ -23,7 +24,6 @@ const fontSizeMap = {
 };
 
 const ButtonElement = styled.button<ButtonProps>`
-  height: 36px;
   width: auto;
   background-color: ${(props) =>
     props.variant === 'primary'
@@ -48,6 +48,7 @@ const ButtonElement = styled.button<ButtonProps>`
     props.margin || '0'}; // margin prop 값 또는 기본값 '0' 사용
   padding: ${(props) => props.padding || '0'};
   transition: all 0.5s;
+  height: ${(props) => props.height || '36px'};
 
   &:hover {
     background-color: ${(props) =>
@@ -71,6 +72,7 @@ const UIButton: React.FC<ButtonProps> = ({
   fontSize,
   margin,
   padding,
+  height,
 }) => {
   const actualVariant = variant || 'secondary'; // variant가 없는 경우에는 'secondary'로 설정
   const actualShape = shape || 'square'; // shape가 없는 경우에는 'square'로 설정
@@ -83,6 +85,7 @@ const UIButton: React.FC<ButtonProps> = ({
       fontSize={fontSize}
       margin={margin}
       padding={padding}
+      height={height}
     >
       <Text>{children}</Text>
     </ButtonElement>

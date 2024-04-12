@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+import { API_URL } from '../../constants/constants';
 
 // 컴포넌트
 import LikeAndCommentCount from '../../components/community/LikeAndCommentCount';
@@ -11,6 +13,9 @@ import Hr from '../../components/baseComponent/Hr';
 import BigModal from '../../components/baseComponent/BigModal';
 import PostEdit from '../../components/community/PostEdit';
 
+// 로직
+import formatDateIncludeTime from '../../utils/formatDateIncludeTime';
+
 // 아이콘
 import { LuThumbsUp, LuChevronLeft } from 'react-icons/lu';
 
@@ -18,12 +23,11 @@ import { LuThumbsUp, LuChevronLeft } from 'react-icons/lu';
 import {
   tempImg,
   profileImg,
-  tempContent,
-  tempTitle,
   tempLikeCount,
   tempCommentNickname,
   tempComment,
 } from '../../../temp-data-community';
+
 import comments from '../../../temp-data-comment.json';
 
 const Container = styled.div`
@@ -134,8 +138,37 @@ const ProfileImg = styled.img`
   border-radius: 50%;
 `;
 
+interface Post {
+  title?: string;
+  content?: string;
+  userId?: string;
+  updatedAt?: string;
+}
+
+interface Comment {}
+const postId = '661762dce744e418e35138e3'; //개별 postId
+
 const POST: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
+  const [post, setPost] = useState<Post | null>(null);
+  // const [comments, setComment] = useState<Comment[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${API_URL}post/${postId}`);
+        setPost(response.data.message[0]);
+        console.log(response.data.message[0]);
+        console.log('게시글 조회 성공');
+      } catch (error) {
+        console.error('게시글 조회 실패', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const formattedDate = post?.updatedAt ? formatDateIncludeTime({ rowDate: post.updatedAt }) : '';
 
   const handleToggleModal = () => {
     setShowModal((prevState) => !prevState);
@@ -152,71 +185,73 @@ const POST: React.FC = () => {
 
   return (
     <>
-      <Container>
-        <LeftContainer>
-          <PostListButtonContainer>
-            <LuChevronLeft />
-            <p>글 목록 보기</p>
-          </PostListButtonContainer>
-        </LeftContainer>
-        <PostContainer>
-          <PostTopArea>
-            <PostInformation>
-              <PostTitle>{tempTitle}</PostTitle>
-              <ProfileContainer>
-                <ProfileImg src={profileImg} alt="프로필 이미지" />
-                <p>냥멍이</p>
-                <p>|</p>
-                <p>2024.03.27 23:10</p>
-              </ProfileContainer>
-            </PostInformation>
-            <PostOption>
-              <LikeAndCommentCount likeCount={1} commentCount={2} />
-              <ActionButton
-                border="default"
-                direction="horizontal"
-                onEdit={handleToggleModal}
-                onDelete={handleDeleteButton}
-              />
-              {showModal && (
-                <BigModal
-                  title="글 수정하기"
-                  value="수정"
-                  component={<PostEdit />}
-                  onClose={handleToggleModal}
+      {post && (
+        <Container>
+          <LeftContainer>
+            <PostListButtonContainer>
+              <LuChevronLeft />
+              <p>글 목록 보기</p>
+            </PostListButtonContainer>
+          </LeftContainer>
+          <PostContainer>
+            <PostTopArea>
+              <PostInformation>
+                <PostTitle>{post.title}</PostTitle>
+                <ProfileContainer>
+                  <ProfileImg src={profileImg} alt="프로필 이미지" />
+                  <p>{post.userId && post.userId.nickName}</p>
+                  <p>|</p>
+                  <p>{formattedDate}</p>
+                </ProfileContainer>
+              </PostInformation>
+              <PostOption>
+                <LikeAndCommentCount likeCount={1} commentCount={2} />
+                <ActionButton
+                  border="default"
+                  direction="horizontal"
+                  onEdit={handleToggleModal}
+                  onDelete={handleDeleteButton}
                 />
-              )}
-            </PostOption>
-          </PostTopArea>
-          <PostContentArea>
-            <pre>{tempContent}</pre>
-            <ImgContainer>
-              <img src={tempImg} alt="이미지" />
-            </ImgContainer>
-            <Likes>
-              <LuThumbsUp />
-              <p>추천해요 {tempLikeCount}</p>
-            </Likes>
-          </PostContentArea>
-          <Hr />
-          <CommentArea>
-            <CommentWritingBox
-              text={tempComment}
-              nickname={tempCommentNickname}
-            ></CommentWritingBox>
-            {comments.map((comment, index) => (
-              <Comment
-                key={index}
-                profileImg={comment.profileImg}
-                text={comment.text}
-                nickname={comment.nickname}
-                date={comment.date}
-              />
-            ))}
-            {/* <Pagination /> */}
-          </CommentArea>
-        </PostContainer>
-      </Container>
+                {showModal && (
+                  <BigModal
+                    title="글 수정하기"
+                    value="수정"
+                    component={<PostEdit />}
+                    onClose={handleToggleModal}
+                  />
+                )}
+              </PostOption>
+            </PostTopArea>
+            <PostContentArea>
+              <pre>{post.content}</pre>
+              <ImgContainer>
+                <img src={tempImg} alt="이미지" />
+              </ImgContainer>
+              <Likes>
+                <LuThumbsUp />
+                <p>추천해요 {tempLikeCount}</p>
+              </Likes>
+            </PostContentArea>
+            <Hr />
+            <CommentArea>
+              <CommentWritingBox
+                text={tempComment}
+                nickname={tempCommentNickname}
+              ></CommentWritingBox>
+              {comments.map((comment, index) => (
+                <Comment
+                  key={index}
+                  profileImg={comment.profileImg}
+                  text={comment.text}
+                  nickname={comment.nickname}
+                  date={comment.date}
+                />
+              ))}
+              {/* <Pagination /> */}
+            </CommentArea>
+          </PostContainer>
+        </Container>
+      )}
     </>
   );
 };
