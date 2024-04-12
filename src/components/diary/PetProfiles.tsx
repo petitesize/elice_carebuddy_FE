@@ -11,7 +11,7 @@ const PetProfilesContainer = styled.div`
 const PetProfilesTitle = styled.div`
   font-size: var(--font-size-hd-2);
   font-weight: var(--font-weight-bold);
-  margin: 20px 0;
+  margin: 20px 0 30px 0;
 `;
 
 // 임시 데이터와 props
