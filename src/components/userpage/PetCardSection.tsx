@@ -9,7 +9,7 @@ const Container = styled.div`
 
 const UserContainer = styled.div`
   font-size: 14px;
-  margin: 50px 0 50px 0;
+  margin: 30px 0 30px 0;
   display: flex;
   justify-content: center;
 `;

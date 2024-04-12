@@ -13,8 +13,10 @@ const Container = styled.div`
 `;
 
 interface User {
+  _id: string;
   nickName: string;
   introduce: string;
+  email: string;
 }
 
 interface Pet {
@@ -106,6 +108,21 @@ useEffect(() => {
     fetchData();
   }, []);
 
+  // const updateUser = async (newNickname: string, newIntroduce: string) => {
+  //   try {
+  //     const response = await axios.put(`${API_URL}users/${user?._id}`, {
+  //       nickName: newNickname,
+  //       introduce: newIntroduce
+  //     });
+  //     console.log(response.data);
+  //     const updatedUser = response.data.message;
+  //     setUser(updatedUser);
+  //     console.log('성공')
+  //   } catch (error) {
+  //     console.error('에러', error);
+  //   }
+  // };
+
   return (
     <Container>
       <UserInfoSection
@@ -113,7 +130,9 @@ useEffect(() => {
         introduce={user?.introduce}
         email={user?.email}
       />
-      <ProfileSection />
+      <ProfileSection 
+        nickName={user?.nickName}
+        introduce={user?.introduce}/>
       <PetCardSection 
         nickName={user?.nickName}
         selectedPetName={selectedPet?.name}
