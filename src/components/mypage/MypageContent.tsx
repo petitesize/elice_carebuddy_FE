@@ -66,7 +66,7 @@ const MypageContent: React.FC = () => {
     };
 
     fetchData();
-}, []);
+}, [selectedPet]);
 
 useEffect(() => {
   const fetchData = async () => {
@@ -122,6 +122,13 @@ useEffect(() => {
   //     console.error('에러', error);
   //   }
   // };
+
+  const handleNickNameChange = (newNickName: string) => {
+    setUser(prevUser => ({
+      ...prevUser,
+      nickName: newNickName
+    }));
+  };
 
   return (
     <Container>

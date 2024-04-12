@@ -94,8 +94,8 @@ const UserInfo: React.FC<UserInfoProps> = ({ nickName, email, introduce }) => {
             <Item>닉네임</Item>
           </List>
           <DataList>
-              <Data>{nickName}</Data>
-            </DataList>
+            {nickName && <Data>{nickName}</Data>}
+          </DataList>
         </UserContainer>
         <UserContainer>
           <List>
