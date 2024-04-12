@@ -27,6 +27,7 @@ const InputBoxElement = styled.input<InputProps>`
   font-family: 'Pretendard-Regular', sans-serif;
   font-size: ${(props) => props.fontSize ? fontSizeMap[props.fontSize] : 'var(--font-size-ft-1)'}; //14
   border: 1px solid var(--color-grey-2); // 항상
+  border-radius: 4px;
   margin: ${(props) => props.margin || '0'};
   padding: ${(props) => props.padding || '5px'};
   width: ${(props) => props.width || '300px'};

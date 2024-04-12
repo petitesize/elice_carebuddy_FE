@@ -12,7 +12,11 @@ const UserContainer = styled.div`
   font-size: 16px;
   display: flex;
   justify-content: space-evenly;
-  margin: 20px 0 40px 0;
+  margin: 30px 0 30px 0;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 15px;
+  height: 200px;
 `;
 
 const Menu = styled.span`
@@ -48,6 +52,7 @@ const ImgContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 `
 
 const Info = styled.div`
@@ -72,6 +77,7 @@ const InputContainer = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+  font-size: 16px;
 `
 /* interface UserData {
   nickName: string;
@@ -83,24 +89,13 @@ const UserData = {
   introduction: '안녕하세요 동물을 사랑하는 사람입니다.'
 } */
 
-const Profile: React.FC = () => {
+interface ProfilesProps {
+  nickName?: string;
+  introduce?: string;
+}
+
+const Profile: React.FC<ProfilesProps> = ({ nickName, introduce }) => {
   const [profileImage, setProfileImage] = useState<string | null>(null);
-  const [user, setUser] = React.useState<any[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${API_URL}users/6613fbcdfaebdd59e9882df3`);
-        console.log(response.data);
-        setUser(response.data.message);
-        console.log('성공')
-      } catch (error) {
-        console.error('에러', error);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   return (
     <Container>
@@ -120,8 +115,8 @@ const Profile: React.FC = () => {
             <Item>소개</Item>
           </List>
           <InputList>
-            <InputBox>{user.nickName}</InputBox>
-            <InputBox>{user.introduce}</InputBox>
+            <InputBox>{nickName}</InputBox>
+            <InputBox>{introduce}</InputBox>
           </InputList>
         </InputContainer>
         </Info>

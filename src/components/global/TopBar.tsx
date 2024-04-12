@@ -10,7 +10,7 @@ const TopBarContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 13px 0;
+  padding: 16px 0;
   font-size: var(--font-size-lg-2); //32
 `;
 const Container = styled.div`
@@ -85,6 +85,9 @@ const TopBar: React.FC = () => {
   } else if (pathname === '/signup-info' && item === 'carebuddy') {
     menuIndex = index;
     menuName = '회원가입';
+  } else if (pathname === '/feed' && item === '커뮤니티') {
+    menuIndex = index;
+    menuName = '커뮤니티 이름';
   }
 });
 
