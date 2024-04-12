@@ -29,7 +29,8 @@ const Font = styled.p`
   margin: 0;
   font-size: 14px;
   display: flex;
-  line-height: 18px;
+  line-height: 22px;
+  font-weight: 100;
 `
 
 const Footer: React.FC = () => {

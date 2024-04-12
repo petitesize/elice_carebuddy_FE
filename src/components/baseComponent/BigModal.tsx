@@ -47,7 +47,7 @@ const Title = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
-  padding-bottom: 30px;
+  padding: 20px 0 20px 0;
 `;
 
 interface ModalProps {

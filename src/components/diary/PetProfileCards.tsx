@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import MoreKebabIcon from '../../assets/MoreKebabIcon.png';
 import ActionButton from '../baseComponent/ActionButton';
 import defaultImg from '/src/assets/carebuddyLogo.png';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -8,12 +7,13 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Pagination } from 'swiper/modules';
+import PetRegister from '../../pages/petRegister/PetRegister';
+import PetEdit from '../../pages/petEdit/PetEdit';
 
 // 카드 전체 컨테이너
 const PetProfileCardsContainer = styled.div`
   height: 300px;
   display: flex;
-  margin-top: 50px;
   width: 100%;
 `;
 
@@ -21,8 +21,8 @@ const PetProfileCardsContainer = styled.div`
 const PetProfileCardContainer = styled.div`
   width: 244px;
   height: 90%;
-  /* background: #ffffff; */
-  box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.08);
   border-radius: 15px;
   display: flex;
   flex-direction: column;
@@ -36,6 +36,9 @@ const PetProfileCardContainer = styled.div`
     top: 15px;
     right: 15px;
   }
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const ActionButtonContainer = styled.div`
@@ -45,16 +48,6 @@ const ActionButtonContainer = styled.div`
     top: -30px;
     right: 0;
   } */
-`;
-
-const MoreIcon = styled.img`
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  top: 15px;
-  right: 15px;
-  cursor: pointer;
-  color: #cecece;
 `;
 
 const PetProfileImg = styled.img`
@@ -85,6 +78,10 @@ const PetName = styled.p`
   line-height: 26px;
   text-align: center;
   margin-bottom: 6px;
+  transition: color 0.3s ease;
+  &.selectedPet {
+    color: var(--color-green-main);
+  }
 `;
 
 const AddProfileMsg = styled.p`
@@ -112,26 +109,44 @@ const StyledSwiper = styled(Swiper)`
   > div:last-child {
     position: absolute;
     bottom: 0;
+    display: flex;
+    justify-content: center;
   }
 `;
 
 interface PetProfile {
   name: string;
-  breeds: string;
+  kind: string;
   age: number;
-  img: string;
+  profileImg: string;
 }
 
 interface PetProfileProps {
-  profiles: PetProfile[];
+  profiles: PetProfile[] | null;
   onClick: (pet: PetProfile) => void;
+  selectedPetName?: string;
 }
 
-const PetProfileCards: React.FC<PetProfileProps> = ({ profiles, onClick }) => {
+const PetProfileCards: React.FC<PetProfileProps> = ({
+  profiles,
+  selectedPetName,
+  onClick,
+}) => {
+  const [showPetRegister, setShowPetRegister] = useState(false);
+  const [showPetEdit, setShowPetEdit] = useState(false);
   const isMypet = location.pathname !== '/userpage';
   const handleClick = (pet: PetProfile) => {
     onClick(pet);
   };
+
+  const openPetRegister = () => {
+    setShowPetRegister(true);
+  };
+
+  const openPetEdit = () => {
+    setShowPetEdit(true);
+  };
+
   return (
     <PetProfileCardsContainer>
       <StyledSwiper
@@ -146,31 +161,49 @@ const PetProfileCards: React.FC<PetProfileProps> = ({ profiles, onClick }) => {
         modules={[Pagination]}
         className="mySwiper"
       >
-        {profiles.map((profile, index) => (
-          <SwiperSlide key={index}>
-            <PetProfileCardContainer onClick={() => handleClick(profile)}>
-              <ActionButtonContainer className="action">
-                {/* {isMypet && <MoreIcon src={MoreKebabIcon} />} */}
-                {isMypet && <ActionButton direction="vertical" />}
-              </ActionButtonContainer>
+        {profiles &&
+          profiles.map((profile, index) => (
+            <SwiperSlide key={index}>
+              <PetProfileCardContainer>
+                <ActionButtonContainer className="action">
+                  {/* {isMypet && <MoreIcon src={MoreKebabIcon} />} */}
+                  {isMypet && (
+                    <ActionButton direction="vertical" onClick={openPetEdit} />
+                  )}
+                </ActionButtonContainer>
 
-              <PetProfileImg src={profile.img || defaultImg} alt="프로필사진" />
-              <PetName>{profile.name}</PetName>
-              <PetDetails>
-                {profile.breeds} / {profile.age}살
-              </PetDetails>
-            </PetProfileCardContainer>
-          </SwiperSlide>
-        ))}
+                <PetProfileImg
+                  src={profile.profileImg || defaultImg}
+                  alt="프로필사진"
+                  onClick={() => handleClick(profile)}
+                />
+                <PetName
+                  className={
+                    profile.name === selectedPetName ? 'selectedPet' : ''
+                  }
+                  onClick={() => handleClick(profile)}
+                >
+                  {profile.name}
+                </PetName>
+                <PetDetails onClick={() => handleClick(profile)}>
+                  {profile.kind} / {profile.age}살
+                </PetDetails>
+              </PetProfileCardContainer>
+            </SwiperSlide>
+          ))}
         {isMypet && (
           <SwiperSlide>
-            <PetProfileCardContainer>
+            <PetProfileCardContainer onClick={openPetRegister}>
               <AddProfile />
               <AddProfileMsg>프로필 추가</AddProfileMsg>
             </PetProfileCardContainer>
           </SwiperSlide>
         )}
       </StyledSwiper>
+      {showPetRegister && (
+        <PetRegister onClose={() => setShowPetRegister(false)} />
+      )}
+      {showPetEdit && <PetEdit onClose={() => setShowPetEdit(false)} />}
     </PetProfileCardsContainer>
   );
 };

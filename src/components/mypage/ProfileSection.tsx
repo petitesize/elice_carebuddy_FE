@@ -1,8 +1,10 @@
-import styled from 'styled-components';
 import React, { useState } from 'react';
-import Button from '../../components/baseComponent/Button'
-import InputBox from '../../components/baseComponent/InputBox'
+import styled from 'styled-components';
+import Button from '../../components/baseComponent/Button';
+import InputBox from '../../components/baseComponent/InputBox';
 import TextArea from '../baseComponent/TextArea';
+import axios from 'axios';
+import { API_URL } from './../../constants/constants';
 
 const Container = styled.div`
   display: flex;
@@ -13,7 +15,10 @@ const UserContainer = styled.div`
   font-size: var(--font-size-md-1); //16
   display: flex;
   justify-content: space-evenly;
-  margin: 20px 0 40px 0;
+  margin: 30px 0 30px 0;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 15px;
 `;
 
 const Menu = styled.span`
@@ -61,17 +66,18 @@ const ImgContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 `
 
 const DataList = styled.div`
   display: flex;
-  justify-content: flex-end
+  justify-content: flex-end;
 `
 
 const Info = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly
+  justify-content: space-evenly;
 `
 
 const InputList = styled.span`
@@ -84,10 +90,21 @@ const InputContainer = styled.div`
   //width: 100%;
 `
 
+const ErrorText = styled.a`
+  color: red;
+  font-size: 14px;
+  margin-top: 5px; /* 빨간 글씨와 닉네임 입력창 사이의 여백 조정 */
+`;
+
+const ErrorBox = styled.div`
+  padding-left: 70px;
+`
+
 const Profile: React.FC = () => {
   const [profileImage, setProfileImage] = useState<string | null>(null);
-  const [nickName, setNickName] = useState<string>('');
-  const [introduction, setIntroduction] = useState<string>('');
+  const [newNickName, setNewNickName] = useState<string>('');
+  const [newIntroduce, setNewIntroduce] = useState<string>('');
+  const [errorText, setErrorText] = useState<string>('');
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
@@ -98,24 +115,43 @@ const Profile: React.FC = () => {
   };
 
   const handleNickNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNickName(event.target.value);
+    const newName = event.target.value;
+    setNewNickName(newName); // 입력값을 상태에 반영
+  
+    // 길이가 유효하지 않은 경우에만 에러 메시지 표시
+    if (newName.length < 2 || newName.length > 10) {
+      setErrorText('닉네임은 2자 이상, 10자 이하로 입력해주세요.');
+    } else {
+      setErrorText(''); // 유효한 길이일 경우 에러 메시지 제거
+    }
   };
+
 
   const handleIntroductionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setIntroduction(event.target.value);
+    setNewIntroduce(event.target.value);
   };
 
-  const handleSave = () => {
-    const user = {
-      nickName: nickName,
-      introduction: introduction
-    };
+  const handleSave = async () => {
+    try {
+      if (!newNickName) {
+        setErrorText('닉네임을 입력해주세요.');
+        return;
+      }
+
+      await axios.put(`${API_URL}users/6613fbcdfaebdd59e9882df3`, {
+        nickName: newNickName,
+        introduce: newIntroduce
+      });
+      console.log('저장되었습니다.');
+    } catch (error) {
+      console.error('저장 중 오류가 발생했습니다.', error);
+    }
   };
 
   return (
     <Container>
       <Menu>
-        <Item>프로필</Item>
+        <Item>프로필 수정하기</Item>
       </Menu>
       <UserContainer>
         <ImgContainer>
@@ -124,20 +160,23 @@ const Profile: React.FC = () => {
           <HiddenInput id="upload-input" type="file" accept="image/*" onChange={handleImageUpload} />
         </ImgContainer>
         <Info>
-        <InputContainer>
-          <InputList>
-          <List>
-            <ListItem>닉네임</ListItem>
-          </List>
-            <InputBox margin="10px" placeholder="닉네임을 입력해주세요."></InputBox>
-          </InputList>
-          <InputList>
-            <List>
-              <ListItem>소개글</ListItem>
-            </List>
-            <TextArea margin="10px" placeholder="소개글을 입력해주세요." />
-          </InputList>
-        </InputContainer>
+          <InputContainer>
+            <InputList>
+              <List>
+                <ListItem>닉네임</ListItem>
+              </List>
+              <InputBox margin="10px" placeholder="닉네임을 입력해주세요." value={newNickName} onChange={handleNickNameChange}></InputBox>
+            </InputList>
+            <ErrorBox>
+              {errorText && <ErrorText>{errorText}</ErrorText>}
+            </ErrorBox>
+            <InputList>
+              <List>
+                <ListItem>소개글</ListItem>
+              </List>
+              <TextArea margin="10px" placeholder="소개글을 입력해주세요." value={newIntroduce} onChange={handleIntroductionChange} />
+            </InputList>
+          </InputContainer>
           <DataList>
             <Button onClick={handleSave} variant="primary" shape="round" fontSize="md-1" padding="10px 20px" margin="0 10px 0 0">저장하기</Button>
           </DataList>

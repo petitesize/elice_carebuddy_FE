@@ -11,7 +11,7 @@ const Component = styled.div`
 
 const Container = styled.div`
   display: flex;
-  margin-bottom: 20px;
+
   width: auto;
   border-bottom: 1px solid var(--color-grey-2);
 `;
@@ -19,18 +19,18 @@ const Container = styled.div`
 const ContentCard = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 20px 0 20px 0;
 `;
 
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
 `;
 
 const BoxTitle = styled.div`
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-md-2); //18
-  margin-right: 100px;
+  margin: 20px 100px 20px 0;
 `
 
 const ContentTitle = styled.div`
@@ -40,7 +40,7 @@ const ContentTitle = styled.div`
 
 const ContentBody = styled.div`
   font-size: var(--font-size-md-1); //16
-  margin-top: 10px;
+  margin: 10px 0 10px 0;
 `
 
 const Checkbox = styled.input`
@@ -116,7 +116,7 @@ const RecMade: React.FC<ModalProps> = ({ onClose }) => {
               <Content>
                 <ContentTitle>증상</ContentTitle>
                 <ContentBody>
-                  <TextArea width="900px" height="100px" placeholder='입력하여주세요.'/>
+                  <TextArea width="890px" height="100px" placeholder='입력하여주세요.'/>
                 </ContentBody>
               </Content>
             </ContentCard>
@@ -127,7 +127,7 @@ const RecMade: React.FC<ModalProps> = ({ onClose }) => {
               <Content>
                 <ContentTitle>치료</ContentTitle>
                 <ContentBody>
-                  <TextArea width="900px" height="100px" placeholder='입력하여주세요.'/>
+                  <TextArea width="890px" height="100px" placeholder='입력하여주세요.'/>
                 </ContentBody>
               </Content>
             </ContentCard>
@@ -138,7 +138,7 @@ const RecMade: React.FC<ModalProps> = ({ onClose }) => {
               <Content>
                 <ContentTitle>메모</ContentTitle>
                 <ContentBody>
-                  <TextArea width="900px" height="100px" placeholder='입력하여주세요.'/>
+                  <TextArea width="890px" height="100px" placeholder='입력하여주세요.'/>
                 </ContentBody>
               </Content>
             </ContentCard>
