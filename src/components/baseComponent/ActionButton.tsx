@@ -46,7 +46,7 @@ const OptionButtons = styled.div`
   left: 100%;
   border: var(--color-grey-2) 1px solid;
   background-color: var(--color-white);
-  z-index: 1;
+  z-index: 2;
   p {
     color: var();
     display: inline-block;

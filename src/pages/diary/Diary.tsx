@@ -7,6 +7,9 @@ import HealthDiary from '../../components/diary/HealthDiary';
 import axios from 'axios';
 import { API_URL } from '../../constants/constants';
 
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { userState } from '../../recoil/atoms';
+
 const DiaryPageContainer = styled.div`
   width: 100%;
   height: auto;
@@ -34,7 +37,8 @@ const Diary: React.FC = () => {
   // 현재 선택된 반려동물 => 다이어리에 처음 보여줄 반려동물 1마리, 또는 없을 수도 있음
   const [selectedPet, setSelectedPet] = useState<Pet | null>();
   // 사용자 정보
-  const [user, setUser] = React.useState<User | null>(null);
+  // const [user, setUser] = React.useState<User | null>(null);
+  const [user, setUser] = useRecoilState(userState);
   // 반려동물의 병원 기록 => 기록이 여러 개[]일 수도, 없을 수도 있음
   const [hospitalRecords, setHospitalRecords] = useState<any[]>([]);
 
@@ -59,23 +63,37 @@ const Diary: React.FC = () => {
     };
 
     fetchData();
-  }, []);
+  }, [setBuddy]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `${API_URL}users/6617b4493122a35bf1a26f8d`,
-        );
-        const userData = response.data.message;
-        setUser(userData);
+        const response = await axios.get(`${API_URL}buddy`);
+        const buddyData = response.data.message;
+        setBuddy(buddyData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [setBuddy]);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `${API_URL}users/6617b4493122a35bf1a26f8d`,
+  //       );
+  //       const userData = response.data.message;
+  //       setUser(userData);
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
 
   useEffect(() => {
     const fetchData = async () => {
