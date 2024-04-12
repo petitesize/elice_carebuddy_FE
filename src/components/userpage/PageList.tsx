@@ -25,17 +25,26 @@ const Data = styled.a`
 
 `;
 
-const PageList: React.FC = () => {
+interface Post {
+  userId: string;
+  categoryId: string;
+  name: string;
+  group: string;
+  title: string;
+  createdAt: Date;
+}
+
+const PageList: React.FC<Post> = ({ name, group, title, createdAt }) => {
   // 더미 데이터
-  const DummyData = {
-    name: 0, // 대분류: 0강아지 1고양이
-    group: '눈',
-    title: '아이가 아파요 무슨일 일까요?',
-    createdAt: new Date('2024-03-22'),
-  };
+  // const DummyData = {
+  //   name: 0, // 대분류: 0강아지 1고양이
+  //   group: '눈',
+  //   title: '아이가 아파요 무슨일 일까요?',
+  //   createdAt: new Date('2024-03-22'),
+  // };
 
   // name 값에 따라 출력할 동물을 결정
-  const animalType = DummyData.name === 0 ? '강아지' : '고양이';
+  const animalType = Post.name === 0 ? '강아지' : '고양이';
 
   // 년-월-일 형식으로 날짜 포맷팅 함수
   const formatDate = (date: Date) => {
@@ -48,13 +57,13 @@ const PageList: React.FC = () => {
   return (
     <UserContainer>
       <List>
-        <Data>{DummyData.group} {animalType}</Data>
+        <Data>{group} {animalType}</Data>
       </List>
       <List>
-        <Data>{DummyData.title}</Data>
+        <Data>{title}</Data>
       </List>
       <List>
-        <Data>{formatDate(DummyData.createdAt)}</Data>
+        <Data>{formatDate(Post.createdAt)}</Data>
       </List>
     </UserContainer>
   );
