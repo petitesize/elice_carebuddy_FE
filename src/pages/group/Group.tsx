@@ -74,6 +74,7 @@ const Group: React.FC = () => {
         {filteredGroups.map((group, index) => (
           <GroupCard
             key={index}
+            groupId={group._id}
             name={group.group}
             introduction={group.introduction}
           />

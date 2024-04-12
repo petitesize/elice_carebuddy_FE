@@ -139,20 +139,18 @@ const ProfileImg = styled.img`
 `;
 
 interface Post {
-  title: string;
-  content: string;
-  userId: string;
-  updatedAt: string;
+  title?: string;
+  content?: string;
+  userId?: string;
+  updatedAt?: string;
 }
 
-interface Comment {
-
-}
+interface Comment {}
 const postId = '661762dce744e418e35138e3'; //개별 postId
 
 const POST: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
-  const [post, setPost] = useState<Post>({});
+  const [post, setPost] = useState<Post | null>(null);
   // const [comments, setComment] = useState<Comment[]>([]);
 
   useEffect(() => {
@@ -160,8 +158,8 @@ const POST: React.FC = () => {
       try {
         const response = await axios.get(`${API_URL}post/${postId}`);
         setPost(response.data.message[0]);
+        console.log(response.data.message[0]);
         console.log('게시글 조회 성공');
-
       } catch (error) {
         console.error('게시글 조회 실패', error);
       }
@@ -170,7 +168,7 @@ const POST: React.FC = () => {
     fetchData();
   }, []);
 
-  const formattedDate = formatDateIncludeTime({ rowDate: post.updatedAt });
+  const formattedDate = post?.updatedAt ? formatDateIncludeTime({ rowDate: post.updatedAt }) : '';
 
   const handleToggleModal = () => {
     setShowModal((prevState) => !prevState);

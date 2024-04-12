@@ -1,15 +1,17 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { LuMessagesSquare } from 'react-icons/lu';
-import { LuCheck } from 'react-icons/lu';
+// import { LuCheck } from 'react-icons/lu'; // 나중에 동적 렌더링 시 추가
 import Button from '../../components/baseComponent/Button';
 
 
 type GroupCardProps = {
   name: string;
   introduction: string;
+  groupId: string;
 };
 
-const StyledGroupCard = styled.div`
+const StyledGroupCard = styled(Link)`
   display: flex;
   justify-content: flex-start;
   border: solid 1px var(--color-grey-2);
@@ -20,6 +22,8 @@ const StyledGroupCard = styled.div`
   margin: 5px;
   margin-bottom: 10px;
   padding: 15px;
+  text-decoration: none;
+  color: inherit;
 `;
 
 const IconWrapper = styled.div`
@@ -46,26 +50,26 @@ const GroupInfoWrapper = styled.div`
   padding-left: 10px;
 `;
 
-const MemberCheck = styled.div`
-  display: flex;
-  font-size: var(--font-size-ft-1);
-  color: var(--color-green-main);
+// const MemberCheck = styled.div` // 나중에 동적 렌더링 시 추가
+//   display: flex;
+//   font-size: var(--font-size-ft-1);
+//   color: var(--color-green-main);
 
-  p {
-    font-size: var(--font-size-ft-1);
-    font-weight: var(--font-weight-regular);
-    color: var(--color-grey-1);
-  }
-`;
+//   p {
+//     font-size: var(--font-size-ft-1);
+//     font-weight: var(--font-weight-regular);
+//     color: var(--color-grey-1);
+//   }
+// `;
 
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
 
-const GroupCard: React.FC<GroupCardProps> = ({ name, introduction }) => (
+const GroupCard: React.FC<GroupCardProps> = ({ name, introduction, groupId }) => (
   <>
-    <StyledGroupCard>
+    <StyledGroupCard to={`/group/${groupId}`}>
       <IconWrapper>
         <LuMessagesSquare />
       </IconWrapper>
@@ -73,9 +77,16 @@ const GroupCard: React.FC<GroupCardProps> = ({ name, introduction }) => (
         <GroupName>{name}</GroupName>
         <GroupIntroduction>{introduction}</GroupIntroduction>
         <ButtonWrapper>
-          <Button variant="secondary" height="28px" padding="4px 10px" fontSize="ft-1">가입</Button>
+          <Button
+            variant="secondary"
+            height="28px"
+            padding="4px 10px"
+            fontSize="ft-1"
+          >
+            가입
+          </Button>
         </ButtonWrapper>
-        {/* <MemberCheck>
+        {/* <MemberCheck> // 나중에 동적 렌더링 시 추가
         <LuCheck />
         <p>당신은 이 그룹의 멤버입니다</p>
       </MemberCheck> */}

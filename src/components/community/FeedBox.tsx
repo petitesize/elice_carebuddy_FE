@@ -1,20 +1,22 @@
 import styled from 'styled-components';
 import LikeAndCommentCount from './LikeAndCommentCount';
 import Hr from '../baseComponent/Hr';
+import { Link } from 'react-router-dom';
 
 import formatDate from '../../utils/formatDate';
 
 type FeedBoxProps = {
+  postId: string; 
   title: string;
   content: string;
   profile: string; // url? 이미지 타입 변경해야됨
   nickname: string;
-  uploadedDate: string; 
+  uploadedDate: string;
   likeCount: number;
   commentCount: number;
 };
 
-const StyledFeedBox = styled.div`
+const StyledFeedBox = styled(Link)`
   display: flex;
   flex-direction: column;
   border-radius: 10px;
@@ -22,6 +24,9 @@ const StyledFeedBox = styled.div`
   height: 170px;
   padding: 20px 20px;
   margin: 15px 0;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 `;
 
 const TitleContainer = styled.div`
@@ -39,7 +44,6 @@ const ProfileContainer = styled.div`
   padding: 10px 0;
   color: var(--color-grey-1);
   font-size: var(--font-size-sm-1);
-
 
   p {
     margin: 0 3px;
@@ -69,13 +73,15 @@ const Content = styled.pre`
   white-space: pre-wrap;
   line-height: 1.4;
   font-size: var(--font-size-ft-1);
-  min-height: 60px; 
+  min-height: 60px;
 `;
 
 const MoreSpan = () => (
-  <span style={{ color: '#0069E4', fontSize: 'var(--font-size-sm-1)' }}> ...더보기</span>
+  <span style={{ color: '#0069E4', fontSize: 'var(--font-size-sm-1)' }}>
+    {' '}
+    ...더보기
+  </span>
 );
-
 
 const FeedBox: React.FC<FeedBoxProps> = ({
   title,
@@ -85,14 +91,13 @@ const FeedBox: React.FC<FeedBoxProps> = ({
   uploadedDate,
   likeCount,
   commentCount,
+  postId
 }) => {
-
-  const processedContent = content.split('. ').slice(0, 2).join('. ');// 두 문장만 보여주기
-  
-  const formattedDate = formatDate({rowDate: uploadedDate}) // 날짜만 보여주기(시간 x)
+  const processedContent = content.split('. ').slice(0, 2).join('. '); // 두 문장만 보여주기
+  const formattedDate = formatDate({ rowDate: uploadedDate }); // 날짜만 보여주기(시간 x)
 
   return (
-    <StyledFeedBox>
+    <StyledFeedBox to={`/post/${postId}`}>
       <TitleContainer>
         <Title>{title}</Title>
         <LikeAndCommentCount
@@ -100,7 +105,10 @@ const FeedBox: React.FC<FeedBoxProps> = ({
           commentCount={commentCount}
         />
       </TitleContainer>
-      <Content>{processedContent}<MoreSpan /></Content>
+      <Content>
+        {processedContent}
+        <MoreSpan />
+      </Content>
       <Hr />
       <ProfileContainer>
         <ProfileImg src={profile} alt="프로필 이미지" />

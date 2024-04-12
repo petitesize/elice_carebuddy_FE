@@ -96,8 +96,7 @@ const Community: React.FC = () => {
           `${API_URL}users`,
         );
         setMembers(response.data.message);
-        console.log('멤버 조회 성공');
-        console.log(members)
+        console.log('멤버 조회 성공', response.data.message);
       } catch (error) {
         console.error('멤버 조회 실패', error);
       }
@@ -111,14 +110,12 @@ const Community: React.FC = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${API_URL}post`);
-        setPosts(response.data.message);
-        console.log('피드 글 조회 성공');
-        console.log(response.data.message);
+        setPosts(response.data.message[0]);
+        console.log('피드 글 조회 성공', response.data.message[0]);
       } catch (error) {
         console.error('피드 글 조회 실패', error);
       }
     };
-
     fetchData();
   }, []);
 
@@ -162,7 +159,7 @@ const Community: React.FC = () => {
               title={post.title}
               content={post.content}
               src={profileImg}
-              nickname="냥멍이"
+              nickname={post.userId && post.userId.nickName}
               uploadedDate={post.createdAt}
               likeCount={templikeCount}
               commentCount={tempCommentCount}

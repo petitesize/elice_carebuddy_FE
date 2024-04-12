@@ -15,13 +15,11 @@ import PostCreate from '../../components/community/PostCreate';
 
 //로직
 import SendPostData from '../../services/SendPostData';
+import GetRandomItems from '../../utils/GetRandomThreeItems';
 
 import {
   tempCommentCount,
   templikeCount,
-  tempGroupName,
-  tempGroupIntroduction,
-  tempMemberCount,
   SelectDummyCategoryOptions,
   SelectDummyGroupOptions,
 } from '../../../temp-data-community';
@@ -80,6 +78,8 @@ interface Posts {
   title: string;
   content: string;
   createdAt: string;
+  userId: string;
+  nickName: string;
 }
 
 interface Groups {
@@ -89,17 +89,17 @@ interface Groups {
 
 const Home: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
-  const [posts, setPosts] = useState<Groups[]>([]);
-  const [groups, setGroups] = useState<Posts[]>([]);
+  const [posts, setPosts] = useState<Posts[]>([]);
+  const [groups, setGroups] = useState<Groups[]>([]);
   const [groupArray, setGroupArray] = useState<JSX.Element[]>([]);
 
-  // 추천 그룹 불러오기
+  // 그룹 불러오기
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${API_URL}groups`);
         setGroups(response.data.message);
-        console.log('그룹 조회 성공');
+        console.log('그룹 조회 성공', response.data.message);
       } catch (error) {
         console.error('그룹 조회 실패', error);
       }
@@ -107,43 +107,39 @@ const Home: React.FC = () => {
     fetchData();
   }, []);
 
+    // 추천 그룹 뽑아서 배열에 넣기
+    useEffect(() => {
+      const randomGroups = GetRandomItems(groups, 3)
+  
+      if (groups.length > 0) {
+        const updatedGroups = randomGroups.map((group, index) => (
+          <CommunityListSidebar
+            key={index}
+            name={group.group}
+            introduction={group.introduction}
+          />
+        ));
+        setGroupArray(updatedGroups);
+      }
+    }, [groups]);
+  
+    const handleToggleModal = () => {
+      setShowModal((prevState) => !prevState);
+    };
+
   // 피드 글 불러오기
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${API_URL}post`);
         setPosts(response.data.message);
-        console.log('피드 글 조회 성공');
-        console.log(response.data.message);
+        console.log('피드 글 조회 성공', response.data.message);
       } catch (error) {
         console.error('피드 글 조회 실패', error);
       }
     };
-
     fetchData();
   }, []);
-
-  // useEffect(() => {
-  //   const updatedGroups =  <CommunityListSidebar
-  //       name={groups[0].group}
-  //       introduction={groups[0].introduction}
-  //     />,
-  //     <CommunityListSidebar
-  //     name={groups[0].group}
-  //     introduction={groups[0].introduction}
-  //     />,
-  //     <CommunityListSidebar
-  //     name={groups[0].group}
-  //     introduction={groups[0].introduction}
-  //     />,
-  //   ];
-  // }, [groups])
-
-  const randomNumber = Math.floor(Math.random() * groups.length);
-
-  const handleToggleModal = () => {
-    setShowModal((prevState) => !prevState);
-  };
 
   //모달 - 글 등록하는 API
 
@@ -184,13 +180,14 @@ const Home: React.FC = () => {
                   value="등록"
                   component={<PostCreate />}
                   onClose={handleToggleModal}
-                  onClick={SendPostData()}
+                  // onClick={SendPostData()}
                 />
               )}
             </WritingButton>
           </FeedOption>
           {posts.map((post, index) => (
             <FeedBox
+              postId={post._id}
               key={index}
               title={post.title}
               content={post.content}
@@ -203,7 +200,7 @@ const Home: React.FC = () => {
           ))}
         </FeedContainer>
         <SidePanelContainer>
-          {/* <SidePanel name="추천 커뮤니티" array={dummyArray} /> */}
+          <SidePanel name="추천 커뮤니티" array={groupArray} />
         </SidePanelContainer>
       </ContentContainer>
     </>
