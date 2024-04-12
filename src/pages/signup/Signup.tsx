@@ -12,11 +12,13 @@ const Main = styled.div`
 const LoginBox = styled.div`
   background-color: var(--color-white);
   border-radius: 7px;
-  border: 1px solid var(--color-grey-2);
   padding: 50px;
   text-align: center;
 `
-
+const Content = styled.div`
+  line-height: 25px;
+  margin: 20px;
+`
 const Text = styled.div`
   margin: 20px 0 10px 0;
   font-weight: bold;
@@ -45,14 +47,17 @@ const LoginPage: React.FC = () => {
       <Main>
         <LoginBox>
           <Logo src={LogoImg} />
+          <Content>케어버디와 함께<br />
+          사랑하는 나의 반려동물과<br />
+          건강하고 행복한 시간을 보내세요</Content>
           <Text>간편 로그인 / 회원가입</Text>
-          <KakaoLogin
-            token="fc0445196ca1bc948515866bb1fba56e"
-            onSuccess={responseKaKao}
-            onFail={responseFail}
-            getProfile="true"
-            buttonText="카카오로 로그인하기"
-          />
+            <KakaoLogin
+              token="fc0445196ca1bc948515866bb1fba56e"
+              onSuccess={responseKaKao}
+              onFail={responseFail}
+              getProfile="true"
+              buttonText="카카오로 로그인하기"
+            />
         </LoginBox>
       </Main>
     </>

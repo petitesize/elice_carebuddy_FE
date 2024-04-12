@@ -115,7 +115,7 @@ const Profile: React.FC = () => {
   return (
     <Container>
       <Menu>
-        <Item>프로필</Item>
+        <Item>프로필 수정하기</Item>
       </Menu>
       <UserContainer>
         <ImgContainer>

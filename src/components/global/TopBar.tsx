@@ -85,6 +85,9 @@ const TopBar: React.FC = () => {
   } else if (pathname === '/signup-info' && item === 'carebuddy') {
     menuIndex = index;
     menuName = '회원가입';
+  } else if (pathname === '/feed' && item === '커뮤니티') {
+    menuIndex = index;
+    menuName = '커뮤니티 이름';
   }
 });
 
