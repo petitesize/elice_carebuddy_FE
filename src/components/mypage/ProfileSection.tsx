@@ -13,7 +13,7 @@ const UserContainer = styled.div`
   font-size: var(--font-size-md-1); //16
   display: flex;
   justify-content: space-evenly;
-  margin: 20px 0 40px 0;
+  margin: 50px 0 50px 0;
 `;
 
 const Menu = styled.span`
@@ -115,7 +115,7 @@ const Profile: React.FC = () => {
   return (
     <Container>
       <Menu>
-        <Item>프로필</Item>
+        <Item>프로필 수정하기</Item>
       </Menu>
       <UserContainer>
         <ImgContainer>

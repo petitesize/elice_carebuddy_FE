@@ -6,7 +6,7 @@ import Mypage from '../pages/mypage/Mypage';
 import Userpage from '../pages/userpage/Userpage';
 import Home from '../pages/home/Home';
 import Community from '../pages/community/Community';
-import Post from '../pages/post/Post';
+import Post from '../pages/post/Post'
 import Group from '../pages/group/Group';
 import Diary from '../pages/diary/Diary';
 import HospitalInfo from '../pages/hospitalInfo/HospitalInfo';
@@ -25,6 +25,7 @@ const AppRouter = () => {
         <Route path="/userpage" element={<Layout component={Userpage} />} />
         <Route path="/" element={<Layout component={Home} />} />
         <Route path="/community" element={<Layout component={Community} />} />
+        <Route path="/feed" element={<Layout component={Post} />} />
         <Route
           path="/pet-register"
           element={<Layout component={PetRegister} />}

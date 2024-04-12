@@ -14,7 +14,6 @@ import PetEdit from '../../pages/petEdit/PetEdit';
 const PetProfileCardsContainer = styled.div`
   height: 300px;
   display: flex;
-  margin-top: 50px;
   width: 100%;
 `;
 
@@ -23,7 +22,7 @@ const PetProfileCardContainer = styled.div`
   width: 244px;
   height: 90%;
   background: #ffffff;
-  box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.08);
   border-radius: 15px;
   display: flex;
   flex-direction: column;
