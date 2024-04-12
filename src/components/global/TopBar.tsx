@@ -10,7 +10,7 @@ const TopBarContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 13px 0;
+  padding: 16px 0;
   font-size: var(--font-size-lg-2); //32
 `;
 const Container = styled.div`

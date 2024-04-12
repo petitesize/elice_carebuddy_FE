@@ -12,17 +12,20 @@ const Main = styled.div`
 const LoginBox = styled.div`
   background-color: var(--color-white);
   border-radius: 7px;
-  padding: 50px;
   text-align: center;
+  padding: 80px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 15px;
 `
 const Content = styled.div`
   line-height: 25px;
-  margin: 20px;
+  margin: 30px 0 40px 0;
+  font-size: var(--font-size-md-1); //16
 `
 const Text = styled.div`
   margin: 20px 0 10px 0;
   font-weight: bold;
-  font-size: var(--font-size-md-1); //16
+  font-size: var(--font-size-md-2); //18
 `
 const Logo = styled.img`
   width: 150px;
