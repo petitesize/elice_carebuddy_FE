@@ -5,7 +5,7 @@ const Container = styled.div``;
 
 const UserContainer = styled.div`
   font-size: 16px;
-  margin: 50px 0 50px 0;
+  margin: 30px 0 30px 0;
   display: flex;
   flex-direction: column;
 `;
