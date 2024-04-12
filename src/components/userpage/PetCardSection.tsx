@@ -9,7 +9,7 @@ const Container = styled.div`
 
 const UserContainer = styled.div`
   font-size: 14px;
-  margin: 20px 0 40px 0;
+  margin: 30px 0 30px 0;
   display: flex;
   justify-content: center;
 `;
@@ -27,7 +27,30 @@ const Item = styled.a`
   padding: 10px 10px 10px 0;
 `;
 
-const PetCard: React.FC = () => {
+// 임시 데이터와 props
+interface PetProfile {
+  name: string;
+  kind: string;
+  age: number;
+  profileImg: string;
+}
+
+interface PetProfilesProps {
+  nickName?: string;
+  pets?: PetProfile[] | null; // 아직 반려동물이 등록되지 않았을 경우 고려
+  onPetClick: (pet: PetProfile) => void;
+  selectedPetName?: string;
+}
+
+const PetCard: React.FC<PetProfilesProps> = ({
+  nickName,
+  pets,
+  selectedPetName,
+  onPetClick,
+}) => {
+  const handleClick = (pet: PetProfile) => {
+    onPetClick(pet);
+  };
   // 더미 데이터
   // const DummyData = {
   //   nickName: '케어버디',
@@ -36,43 +59,47 @@ const PetCard: React.FC = () => {
   //   petAge: 2,
   //   petImg: 'undefined',
   // };
-  const DummyData = {
-    nickName: 'Owner1',
-    pets: [
-      {
-        name: 'Cat1',
-        breeds: '코리안 숏헤어',
-        age: 16,
-        img: '/src/assets/temp-profile.png',
-      },
-      {
-        name: 'Cat2',
-        breeds: '래그돌',
-        age: 4,
-        img: '/src/assets/temp-profile.png',
-      },
-      {
-        name: 'Cat3',
-        breeds: '코리안 숏헤어',
-        age: 16,
-        img: '/src/assets/temp-profile.png',
-      },
-      {
-        name: 'Cat4',
-        breeds: '코리안 숏헤어',
-        age: 16,
-        img: '/src/assets/temp-profile.png',
-      },
-    ],
-  };
+  // const DummyData = {
+  //   nickName: 'Owner1',
+  //   pets: [
+  //     {
+  //       name: 'Cat1',
+  //       breeds: '코리안 숏헤어',
+  //       age: 16,
+  //       img: '/src/assets/temp-profile.png',
+  //     },
+  //     {
+  //       name: 'Cat2',
+  //       breeds: '래그돌',
+  //       age: 4,
+  //       img: '/src/assets/temp-profile.png',
+  //     },
+  //     {
+  //       name: 'Cat3',
+  //       breeds: '코리안 숏헤어',
+  //       age: 16,
+  //       img: '/src/assets/temp-profile.png',
+  //     },
+  //     {
+  //       name: 'Cat4',
+  //       breeds: '코리안 숏헤어',
+  //       age: 16,
+  //       img: '/src/assets/temp-profile.png',
+  //     },
+  //   ],
+  // };
 
   return (
     <Container>
       <Menu>
-        <Item>{DummyData.nickName}님의 반려동물</Item>
+        <Item>{nickName}님의 반려동물</Item>
       </Menu>
       <UserContainer>
-        <PetProfileCards profiles={DummyData.pets} />
+        <PetProfileCards 
+          profiles={pets || null}
+          selectedPetName={selectedPetName}
+          onClick={handleClick}
+        />
       </UserContainer>
     </Container>
   );

@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { API_URL } from './../../constants/constants';
 
 const Container = styled.div`
   display: flex;
@@ -10,7 +12,11 @@ const UserContainer = styled.div`
   font-size: 16px;
   display: flex;
   justify-content: space-evenly;
-  margin: 20px 0 40px 0;
+  margin: 30px 0 30px 0;
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 15px;
+  height: 200px;
 `;
 
 const Menu = styled.span`
@@ -46,6 +52,7 @@ const ImgContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 `
 
 const Info = styled.div`
@@ -70,8 +77,9 @@ const InputContainer = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+  font-size: 16px;
 `
-interface UserData {
+/* interface UserData {
   nickName: string;
   introduction: string;
 }
@@ -79,9 +87,14 @@ interface UserData {
 const UserData = {
   nickName: '케어버디',
   introduction: '안녕하세요 동물을 사랑하는 사람입니다.'
+} */
+
+interface ProfilesProps {
+  nickName?: string;
+  introduce?: string;
 }
 
-const Profile: React.FC = () => {
+const Profile: React.FC<ProfilesProps> = ({ nickName, introduce }) => {
   const [profileImage, setProfileImage] = useState<string | null>(null);
 
   return (
@@ -102,8 +115,8 @@ const Profile: React.FC = () => {
             <Item>소개</Item>
           </List>
           <InputList>
-            <InputBox>{UserData.nickName}</InputBox>
-            <InputBox>{UserData.introduction}</InputBox>
+            <InputBox>{nickName}</InputBox>
+            <InputBox>{introduce}</InputBox>
           </InputList>
         </InputContainer>
         </Info>
