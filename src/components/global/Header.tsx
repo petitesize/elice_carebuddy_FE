@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom';
 // 링크 및 아이콘에 대한 배열 생성
 const links = [
   { path: '/', label: '로고', icon: imgSrc },
-  { label: '커뮤니티', icon: null, subMenu: ['전체 커뮤니티', '커뮤니티1'] },
-  { label: '건강관리', icon: null, subMenu: ['건강다이어리'] },
+  { label: '커뮤니티', icon: null, subMenu: ['커뮤니티1', '커뮤니티2'] },
+  { label: '건강관리', icon: null, subMenu: ['건강 다이어리'] },
   { label: '정보', icon: null, subMenu: ['병원 검색', '약국 검색'] },
   { path: '/signup', label: '로그인', icon: null },
   { path: '/mypage', label: '', icon: user },
@@ -45,6 +45,7 @@ const MenuBox = styled.span`
   justify-content: space-between;
   position: relative; /* 하위 드롭다운 위치 지정을 위해 상대 위치로 설정 */
   z-index: 1; /* 하위 드롭다운이 상위 요소 위에 위치하도록 설정 */
+  font-weight: var(--font-weight-bold);
 
   & a {
     text-decoration: none;
@@ -115,21 +116,28 @@ const Header: React.FC = () => {
         <MenuBox>
           {links.map((link, index) => (
             <Category key={index} onMouseEnter={() => setActiveMenu(index)} onMouseLeave={() => setActiveMenu(null)}>
-              <Link to={link.path} onClick={() => setActiveMenu(null)} disabled={!link.path}> {/* 링크가 없는 경우 비활성화 */}
-                {link.label === '로고' ? (
-                  <Logo src={link.icon} />
-                ) : (
-                  <>
-                    <span>{link.label}</span>
-                    {link.icon && <Icon src={link.icon} />}
-                  </>
-                )}
-              </Link>
+              {link.path ? ( // 링크가 있을 때만 Link 컴포넌트 사용
+                <Link to={link.path} onClick={() => setActiveMenu(null)}>
+                  {link.label === '로고' ? (
+                    <Logo src={link.icon} />
+                  ) : (
+                    <>
+                      <span>{link.label}</span>
+                      {link.icon && <Icon src={link.icon} />}
+                    </>
+                  )}
+                </Link>
+              ) : (
+                <>
+                  <span>{link.label}</span>
+                  {link.icon && <Icon src={link.icon} />}
+                </>
+              )}
               {activeMenu === index && link.subMenu && (
                 <SubMenu>
                   {link.subMenu.map((item, idx) => (
                     <SubMenuItem key={idx}>
-                      <SubMenuLink to={link.path === '/community' ? (item === '전체 커뮤니티' ? '/community' : '/feed') : link.path === '/diary' ? '/diary' : link.path === '/hospital-info' ? '/hospital-info' : `/${item.toLowerCase().replace(/\s/g, '-')}`}>{item}</SubMenuLink>
+                      <SubMenuLink to={link.label === '커뮤니티' && item === '커뮤니티1' ? '/community' : link.label === '건강관리' && item === '건강 다이어리' ? '/diary' :link.label === '정보' && item === '병원 검색' ? '/hospital-info' : `/${item.toLowerCase().replace(/\s/g, '-')}`}>{item}</SubMenuLink>
                     </SubMenuItem>
                   ))}
                 </SubMenu>
