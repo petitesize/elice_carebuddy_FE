@@ -38,7 +38,7 @@ const Diary: React.FC = () => {
   const [selectedPet, setSelectedPet] = useState<Pet | null>();
   // 사용자 정보
   // const [user, setUser] = React.useState<User | null>(null);
-  const [user, setUser] = useRecoilState(userState);
+  const [user, setUser] = useRecoilState(userState); //O.K
   // 반려동물의 병원 기록 => 기록이 여러 개[]일 수도, 없을 수도 있음
   const [hospitalRecords, setHospitalRecords] = useState<any[]>([]);
 
