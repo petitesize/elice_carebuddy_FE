@@ -40,6 +40,11 @@ const MenuBox = styled.span`
     text-decoration: none;
     color: var(--color-black);
     font-weight: var(--font-weight-bold);
+    transition: all 0.5s;
+    &:hover {
+      /* 호버 시 스타일 */
+      color: var(--color-green-main);
+    }
   }
 `;
 
