@@ -42,6 +42,7 @@ const Diary: React.FC = () => {
   // 반려동물의 병원 기록 => 기록이 여러 개[]일 수도, 없을 수도 있음
   const [hospitalRecords, setHospitalRecords] = useState<any[]>([]);
 
+  console.log(user);
   const handlePetClick = (pet: Pet) => {
     setSelectedPet(pet);
   };
