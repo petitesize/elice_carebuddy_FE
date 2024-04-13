@@ -10,6 +10,8 @@ interface InputProps {
   color?: string;
   placeholder?: string;
   type?: string;
+  value?: string; // 추가된 부분
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void; // 추가된 부분
 }
 
 const fontSizeMap = {
@@ -36,7 +38,7 @@ const InputBoxElement = styled.input<InputProps>`
   outline: none;
 `;
 
-const InputBox: React.FC<InputProps> = ({ fontSize, margin, padding, width, height, color, placeholder, type }) => {
+const InputBox: React.FC<InputProps> = ({ fontSize, margin, padding, width, height, color, placeholder, type, value, onChange }) => {
   return (
     <InputBoxElement
       fontSize={fontSize}
@@ -47,6 +49,8 @@ const InputBox: React.FC<InputProps> = ({ fontSize, margin, padding, width, heig
       color={color}
       placeholder={placeholder}
       type={type}
+      value={value} // 입력값을 value로 전달
+      onChange={onChange} // onChange 함수를 props로 받음
     />
   );
 };

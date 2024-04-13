@@ -31,8 +31,9 @@ const AppRouter = () => {
           element={<Layout component={PetRegister} />}
         />
         <Route path="/pet-edit" element={<Layout component={PetEdit} />} />
-        <Route path="/post" element={<Layout component={Post} />} />
-        <Route path="/group" element={<Layout component={Group} />} />
+        <Route path="/post/:postId" element={<Layout component={Post} />} />
+        <Route path="/community" element={<Layout component={Community} />} />
+        <Route path="/group/" element={<Layout component={Group} />} />
         <Route path="/diary" element={<Layout component={Diary} />} />
         <Route
           path="/hospital-info"

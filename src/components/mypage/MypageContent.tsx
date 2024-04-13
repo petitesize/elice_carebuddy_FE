@@ -66,12 +66,12 @@ const MypageContent: React.FC = () => {
     };
 
     fetchData();
-}, []);
+}, [selectedPet]);
 
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${API_URL}users/6617b4493122a35bf1a26f8d`);
+      const response = await axios.get(`${API_URL}users/6613fbcdfaebdd59e9882df3`);
       console.log(response.data);
       const userData = response.data.message;
       setUser(userData);
@@ -122,6 +122,13 @@ useEffect(() => {
   //     console.error('에러', error);
   //   }
   // };
+
+  const handleNickNameChange = (newNickName: string) => {
+    setUser(prevUser => ({
+      ...prevUser,
+      nickName: newNickName
+    }));
+  };
 
   return (
     <Container>

@@ -48,10 +48,10 @@ const UserpageContent: React.FC = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${API_URL}buddy`);
-        console.log(response.data);
+        //console.log(response.data);
         const buddyData = response.data.message;
         setBuddy(buddyData);
-        console.log('성공')
+        //console.log('성공')
 
         // 첫 렌더링 되었을 때, 선택된 펫이 없으므로 등록된 반려동물이 있는 경우 첫 번째 반려동물을 선택된 펫으로 지정
         if (!selectedPet && buddyData.length > 0) {
@@ -68,9 +68,10 @@ const UserpageContent: React.FC = () => {
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${API_URL}users/6617b4493122a35bf1a26f8d`);
-      console.log(response.data);
+      const response = await axios.get(`${API_URL}users/6613fbcdfaebdd59e9882df3`);
+      //console.log(response.data);
       const userData = response.data.message;
+      console.log(userData);
       setUser(userData);
       console.log('성공')
     } catch (error) {
@@ -87,18 +88,18 @@ useEffect(() => {
       const response = await axios.get(`${API_URL}post/6618a0c09897c137f70265da`);
       //console.log(response.data);
       const postData = response.data.message[0];
-      console.log(response.data.message[0]);
+      //console.log(response.data.message[0]);
       setPost(postData);
-      console.log('성공')
+      //console.log('성공')
 
       // categoryId가 "6617c6dab39abf604bbe8dcc"인 경우 '눈'으로 설정
       if (postData.categoryId._id === "6617c6dab39abf604bbe8dcc") {
         postData.categoryId._id = "눈";
       }
-      console.log(postData.categoryId)
+      //console.log(postData.categoryId)
 
     } catch (error) {
-      console.error('에러', error);
+      //console.error('에러', error);
     }
   };
 

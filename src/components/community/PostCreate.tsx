@@ -58,6 +58,22 @@ const Text = styled.p`
 const PostCreate: React.FC = () => {
   const [uploadedImg, setUploadedImg] = useState('');
 
+  const SendPostData = () => {
+    const [title, setTitle] = useState('');
+    const [content, setContent] = useState('');
+
+    const handleTitleChange = (e) => {
+      setTitle(e.target.value);
+    };
+
+    const handleContentChange = (e) => {
+      setContent(e.target.value);
+    }
+  }
+
+
+  
+
   const handleImageUpload = () => {
     const input = document.createElement('input');
     input.type = 'file';

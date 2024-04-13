@@ -36,7 +36,7 @@ const PetProfileCardContainer = styled.div`
     top: 15px;
     right: 15px;
   }
-  &:hover {
+  :hover {
     cursor: pointer;
   }
 `;
@@ -138,7 +138,7 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
   const handleClick = (pet: PetProfile) => {
     onClick(pet);
   };
-  
+
   const openPetRegister = () => {
     setShowPetRegister(true);
   };
@@ -164,24 +164,28 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
         {profiles &&
           profiles.map((profile, index) => (
             <SwiperSlide key={index}>
-              <PetProfileCardContainer onClick={() => handleClick(profile)}>
+              <PetProfileCardContainer>
                 <ActionButtonContainer className="action">
                   {/* {isMypet && <MoreIcon src={MoreKebabIcon} />} */}
-                  {isMypet && <ActionButton direction="vertical" onClick={openPetEdit} />}
+                  {isMypet && (
+                    <ActionButton direction="vertical" onClick={openPetEdit} />
+                  )}
                 </ActionButtonContainer>
 
                 <PetProfileImg
                   src={profile.profileImg || defaultImg}
                   alt="프로필사진"
+                  onClick={() => handleClick(profile)}
                 />
                 <PetName
                   className={
                     profile.name === selectedPetName ? 'selectedPet' : ''
                   }
+                  onClick={() => handleClick(profile)}
                 >
                   {profile.name}
                 </PetName>
-                <PetDetails>
+                <PetDetails onClick={() => handleClick(profile)}>
                   {profile.kind} / {profile.age}살
                 </PetDetails>
               </PetProfileCardContainer>
@@ -196,7 +200,9 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
           </SwiperSlide>
         )}
       </StyledSwiper>
-      {showPetRegister && <PetRegister onClose={() => setShowPetRegister(false)} />}
+      {showPetRegister && (
+        <PetRegister onClose={() => setShowPetRegister(false)} />
+      )}
       {showPetEdit && <PetEdit onClose={() => setShowPetEdit(false)} />}
     </PetProfileCardsContainer>
   );

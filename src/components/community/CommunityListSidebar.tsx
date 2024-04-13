@@ -3,7 +3,7 @@ import styled from 'styled-components';
 type CommunityListSidebarProps = {
   name: string;
   introduction: string;
-  memberCount: string;
+  memberCount?: string;
 };
 
 const StyledCommunityListSidebar = styled.div`
@@ -44,7 +44,7 @@ const CommunityListSidebar: React.FC<CommunityListSidebarProps> = ({
   <StyledCommunityListSidebar>
     <Name>{name}</Name>
     <Introduction>{introduction}</Introduction>
-    <MemberCount>{memberCount}명의 멤버</MemberCount>
+    {/* <MemberCount>{memberCount}명의 멤버</MemberCount> */}
   </StyledCommunityListSidebar>
 );
 
