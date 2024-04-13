@@ -38,9 +38,13 @@ const Logo = styled.img`
 
 const LoginPage: React.FC = () => {
 
-    let REST_API_KEY = "6bc949b130be05177810686309537eb7";
-    let REDIRECT_URI = "http://localhost:3001/auth/kakao/callback";
-    const kakaoToken = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}`;
+  let REST_API_KEY = "fc0445196ca1bc948515866bb1fba56e";
+  let REDIRECT_URI = "http://localhost:3001/auth/kakao/callback";
+  const kakaoToken = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
+  const handleKakaoLogin = () => {
+    window.location.href = kakaoToken;
+  }
   return (
     <>
       <Main>
@@ -54,7 +58,7 @@ const LoginPage: React.FC = () => {
             건강하고 행복한 시간을 보내세요
           </Content>
           <Text>간편 로그인 / 회원가입</Text>
-            <a href={kakaoToken}>카카오 로그인</a>
+          <button onClick={handleKakaoLogin}>카카오 로그인</button>
         </LoginBox>
       </Main>
     </>

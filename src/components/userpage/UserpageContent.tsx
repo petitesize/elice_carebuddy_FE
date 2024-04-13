@@ -34,7 +34,12 @@ interface Post {
   createdAt: Date;
 }
 
-const UserpageContent: React.FC = () => {
+type UserPageProps = {
+  userId: string
+}
+
+// userId props로 받아오기
+const UserpageContent: React.FC<UserPageProps> = ({ userId = '6613fbcdfaebdd59e9882df3' }) => {
   const [buddy, setBuddy] = React.useState<Pet[] | null>([]);
   const [selectedPet, setSelectedPet] = useState<Pet | null>();
   const [user, setUser] = React.useState<User | null>(null);
@@ -63,59 +68,59 @@ const UserpageContent: React.FC = () => {
     };
 
     fetchData();
-}, []);
+  }, []);
 
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(`${API_URL}users/6613fbcdfaebdd59e9882df3`);
-      //console.log(response.data);
-      const userData = response.data.message;
-      console.log(userData);
-      setUser(userData);
-      console.log('성공')
-    } catch (error) {
-      console.error('에러', error);
-    }
-  };
-
-  fetchData();
-}, []);
-
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(`${API_URL}post/6618a0c09897c137f70265da`);
-      //console.log(response.data);
-      const postData = response.data.message[0];
-      //console.log(response.data.message[0]);
-      setPost(postData);
-      //console.log('성공')
-
-      // categoryId가 "6617c6dab39abf604bbe8dcc"인 경우 '눈'으로 설정
-      if (postData.categoryId._id === "6617c6dab39abf604bbe8dcc") {
-        postData.categoryId._id = "눈";
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${API_URL}users/${userId}`);
+        //console.log(response.data);
+        const userData = response.data.message;
+        console.log(userData);
+        setUser(userData);
+        console.log('성공')
+      } catch (error) {
+        console.error('에러', error);
       }
-      //console.log(postData.categoryId)
+    };
 
-    } catch (error) {
-      //console.error('에러', error);
-    }
-  };
+    fetchData();
+  }, []);
 
-  fetchData();
-}, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${API_URL}post/6618a0c09897c137f70265da`);
+        //console.log(response.data);
+        const postData = response.data.message[0];
+        //console.log(response.data.message[0]);
+        setPost(postData);
+        //console.log('성공')
+
+        // categoryId가 "6617c6dab39abf604bbe8dcc"인 경우 '눈'으로 설정
+        if (postData.categoryId._id === "6617c6dab39abf604bbe8dcc") {
+          postData.categoryId._id = "눈";
+        }
+        //console.log(postData.categoryId)
+
+      } catch (error) {
+        //console.error('에러', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <Container>
-      <ProfileSection nickName={user?.nickName} introduce={user?.introduce}/>
+      <ProfileSection nickName={user?.nickName} introduce={user?.introduce} />
       <PetCardSection
         nickName={user?.nickName}
         selectedPetName={selectedPet?.name}
         pets={buddy}
         onPetClick={handlePetClick} />
       <ListSection
-      //categoryId 값을(숫자) 눈으로 변경
+        //categoryId 값을(숫자) 눈으로 변경
         categoryId={post?.categoryId._id}
         title={post?.title}
         createdAt={post?.createdAt}

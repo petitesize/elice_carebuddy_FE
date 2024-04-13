@@ -42,7 +42,8 @@ const AppRouter = () => {
           path="/pharmacy-info"
           element={<Layout component={PharmacyInfo} />}
         />
-        <Route path="*" element={<NotFound />} />
+        {/*<Route path="*" element={<NotFound />} />*/}
+        <Route path="/auth/kakao/callback" element={<NotFound />} />
       </Routes>
     </Router>
   );
