@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import LogoImg from '../../assets/carebuddyLogo.png';
 import axios from 'axios';
 import { API_URL } from '../../constants/constants';
+import ButtonImg from '../../assets/kakao_login_medium_narrow.png'
 
 const Main = styled.div`
   display: flex;
@@ -16,8 +17,8 @@ const LoginBox = styled.div`
   border-radius: 7px;
   text-align: center;
   padding: 80px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
-  border-radius: 15px;
+  /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 15px; */
 `;
 
 const Content = styled.div`
@@ -34,6 +35,17 @@ const Text = styled.div`
 
 const Logo = styled.img`
   width: 150px;
+`;
+
+const StyledButton = styled.button`
+  background-image: url(${ButtonImg}); // 이미지 경로를 버튼의 배경 이미지로 설정
+  background-size: cover; // 이미지를 버튼의 크기에 맞게 조정
+  width: 200px; // 버튼의 너비 설정
+  height: 50px; // 버튼의 높이 설정
+  border: none; // 버튼의 테두리 제거
+  cursor: pointer; // 커서를 포인터로 변경하여 클릭 가능함을 나타냄
+  border-radius: 5px;
+  margin-top: 10px;
 `;
 
 const LoginPage: React.FC = () => {
@@ -58,7 +70,7 @@ const LoginPage: React.FC = () => {
             건강하고 행복한 시간을 보내세요
           </Content>
           <Text>간편 로그인 / 회원가입</Text>
-          <button onClick={handleKakaoLogin}>카카오 로그인</button>
+          <StyledButton onClick={handleKakaoLogin} />
         </LoginBox>
       </Main>
     </>

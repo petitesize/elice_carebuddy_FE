@@ -11,8 +11,6 @@ import Group from '../pages/group/Group';
 import Diary from '../pages/diary/Diary';
 import HospitalInfo from '../pages/hospitalInfo/HospitalInfo';
 import PharmacyInfo from '../pages/pharmacyInfo/PharmacyInfo';
-import PetRegister from '../pages/petRegister/PetRegister';
-import PetEdit from '../pages/petEdit/PetEdit';
 import NotFound from '../pages/notFound/NotFound';
 
 const AppRouter = () => {
@@ -26,11 +24,6 @@ const AppRouter = () => {
         <Route path="/" element={<Layout component={Home} />} />
         <Route path="/community" element={<Layout component={Community} />} />
         <Route path="/feed" element={<Layout component={Post} />} />
-        <Route
-          path="/pet-register"
-          element={<Layout component={PetRegister} />}
-        />
-        <Route path="/pet-edit" element={<Layout component={PetEdit} />} />
         <Route path="/post/:postId" element={<Layout component={Post} />} />
         <Route path="/community" element={<Layout component={Community} />} />
         <Route path="/group/" element={<Layout component={Group} />} />
@@ -44,7 +37,7 @@ const AppRouter = () => {
           element={<Layout component={PharmacyInfo} />}
         />
         {/*<Route path="*" element={<NotFound />} />*/}
-        <Route path="/auth/kakao/callback" element={<NotFound />} />
+        <Route path="/auth/kakao/callback" element={<Layout component={NotFound} />} />
       </Routes>
     </Router>
   );
