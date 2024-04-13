@@ -1,12 +1,17 @@
 import React from 'react';
 import AppRouter from './routes/Router';
-import GlobalStyle from './components/global/GlobalStyle'
+import GlobalStyle from './components/global/GlobalStyle';
+import { RecoilRoot } from 'recoil';
+import UserAPI from './services/userAPI';
 
 const App = () => {
   return (
     <>
-      <GlobalStyle />
-      <AppRouter />
+      <RecoilRoot>
+        <GlobalStyle />
+        <AppRouter />
+        <UserAPI />
+      </RecoilRoot>
     </>
   );
 };

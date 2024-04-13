@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+import { API_URL } from '../../constants/constants';
 
 // 컴포넌트
 import Banner from '../../components/community/Banner';
@@ -11,36 +13,16 @@ import Button from '../../components/baseComponent/Button';
 import BigModal from '../../components/baseComponent/BigModal';
 import PostCreate from '../../components/community/PostCreate';
 
-// 임시 데이터
-import posts from '../../../temp-data-posts.json';
+//로직
+import SendPostData from '../../services/SendPostData';
+import GetRandomItems from '../../utils/GetRandomThreeItems';
+
 import {
-  profileImg,
   tempCommentCount,
   templikeCount,
-  tempGroupName,
-  tempGroupIntroduction,
-  tempMemberCount,
   SelectDummyCategoryOptions,
   SelectDummyGroupOptions,
 } from '../../../temp-data-community';
-
-const dummyArray = [
-  <CommunityListSidebar
-    name={tempGroupName}
-    introduction={tempGroupIntroduction}
-    memberCount={tempMemberCount}
-  />,
-  <CommunityListSidebar
-    name={tempGroupName}
-    introduction={tempGroupIntroduction}
-    memberCount={tempMemberCount}
-  />,
-  <CommunityListSidebar
-    name={tempGroupName}
-    introduction={tempGroupIntroduction}
-    memberCount={tempMemberCount}
-  />,
-];
 
 const BannerWrapper = styled.div``;
 
@@ -92,12 +74,74 @@ const WritingButton = styled.div`
   }
 `;
 
+interface Posts {
+  title: string;
+  content: string;
+  createdAt: string;
+  userId: string;
+  nickName: string;
+}
+
+interface Groups {
+  group: string;
+  introduction: string;
+}
+
 const Home: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
+  const [posts, setPosts] = useState<Posts[]>([]);
+  const [groups, setGroups] = useState<Groups[]>([]);
+  const [groupArray, setGroupArray] = useState<JSX.Element[]>([]);
 
-  const handleToggleModal = () => {
-    setShowModal((prevState) => !prevState);
-  };
+  // 그룹 불러오기
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${API_URL}groups`);
+        setGroups(response.data.message);
+        console.log('그룹 조회 성공', response.data.message);
+      } catch (error) {
+        console.error('그룹 조회 실패', error);
+      }
+    };
+    fetchData();
+  }, []);
+
+    // 추천 그룹 뽑아서 배열에 넣기
+    useEffect(() => {
+      const randomGroups = GetRandomItems(groups, 3)
+  
+      if (groups.length > 0) {
+        const updatedGroups = randomGroups.map((group, index) => (
+          <CommunityListSidebar
+            key={index}
+            name={group.group}
+            introduction={group.introduction}
+          />
+        ));
+        setGroupArray(updatedGroups);
+      }
+    }, [groups]);
+  
+    const handleToggleModal = () => {
+      setShowModal((prevState) => !prevState);
+    };
+
+  // 피드 글 불러오기
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${API_URL}post`);
+        setPosts(response.data.message);
+        console.log('피드 글 조회 성공', response.data.message);
+      } catch (error) {
+        console.error('피드 글 조회 실패', error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  //모달 - 글 등록하는 API
 
   return (
     <>
@@ -122,32 +166,41 @@ const Home: React.FC = () => {
             </Classification>
             <WritingButton>
               <p>함께 나누고 싶은 이야기가 있나요?</p>
-              <Button variant="primary" shape="round" padding='10px 15px' onClick={handleToggleModal}>글 작성하기</Button>
+              <Button
+                variant="primary"
+                shape="round"
+                padding="10px 15px"
+                onClick={handleToggleModal}
+              >
+                글 작성하기
+              </Button>
               {showModal && (
                 <BigModal
                   title="글쓰기"
                   value="등록"
                   component={<PostCreate />}
                   onClose={handleToggleModal}
+                  // onClick={SendPostData()}
                 />
               )}
             </WritingButton>
           </FeedOption>
           {posts.map((post, index) => (
             <FeedBox
+              postId={post._id}
               key={index}
               title={post.title}
               content={post.content}
-              src={profileImg}
-              nickname="냥멍이"
-              uploadedDate="2024.03.27"
+              profile={post.userId && post.userId.profileImage[0]}
+              nickname={post.userId && post.userId.nickName}
+              uploadedDate={post.createdAt}
               likeCount={templikeCount}
               commentCount={tempCommentCount}
             />
           ))}
         </FeedContainer>
         <SidePanelContainer>
-          <SidePanel name="추천 커뮤니티" array={dummyArray} />
+          <SidePanel name="추천 커뮤니티" array={groupArray} />
         </SidePanelContainer>
       </ContentContainer>
     </>

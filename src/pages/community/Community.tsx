@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+import { API_URL, DOMAIN_URL } from '../../constants/constants';
 
 // 컴포넌트
 import Search from '../../components/baseComponent/Search';
@@ -14,7 +16,7 @@ import LinkButton from '../../components/baseComponent/LinkButton';
 import Button from '../../components/baseComponent/Button';
 
 // 임시 이미지
-const dummyArray = [
+const memberArray = [
   <MemberListSidebar
     src={profileImg}
     nickname={tempNickname}
@@ -39,7 +41,6 @@ import {
   tempNickname,
   tempIntroduction,
 } from '../../../temp-data-community';
-import posts from '../../../temp-data-posts.json';
 
 const ContentContainer = styled.div`
   padding-top: 80px;
@@ -84,6 +85,39 @@ const WritingButton = styled.div`
 
 const Community: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
+  const [posts, setPosts] = React.useState<any[]>([]);
+  const [members, setMembers] = React.useState<any[]>([]);
+
+  // 추천 멤버 조회 API
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${API_URL}users`,
+        );
+        setMembers(response.data.message);
+        console.log('멤버 조회 성공', response.data.message);
+      } catch (error) {
+        console.error('멤버 조회 실패', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // 피드 글 조회 API
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${API_URL}post`);
+        setPosts(response.data.message[0]);
+        console.log('피드 글 조회 성공', response.data.message[0]);
+      } catch (error) {
+        console.error('피드 글 조회 실패', error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const handleToggleModal = () => {
     setShowModal((prevState) => !prevState);
@@ -125,8 +159,8 @@ const Community: React.FC = () => {
               title={post.title}
               content={post.content}
               src={profileImg}
-              nickname={tempNickname}
-              uploadedDate="업로드 날짜"
+              nickname={post.userId && post.userId.nickName}
+              uploadedDate={post.createdAt}
               likeCount={templikeCount}
               commentCount={tempCommentCount}
             />
@@ -136,9 +170,9 @@ const Community: React.FC = () => {
         <SidePanelContainer>
           <GroupOption>
             <LinkButton text="그룹 탈퇴" />
-            <LinkButton text="다른 그룹 둘러보기" />
+            <LinkButton text="다른 그룹 둘러보기" redirectUrl={`${DOMAIN_URL}groups`} />
           </GroupOption>
-          <SidePanel name="추천 멤버" array={dummyArray} />
+          <SidePanel name="추천 멤버" array={memberArray} />
         </SidePanelContainer>
       </ContentContainer>
     </>
