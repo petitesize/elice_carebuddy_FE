@@ -21,15 +21,38 @@ import { API_URL } from '../constants/constants';
 // 4. 사용자는 /me 사용 : 우리는 회원 정보 조회가 users/:id 뿐.. 유저 정보는 모르고 헤더에 토큰이 있는데 이 id는 비워서 보내도 되는 것인지..?
 // 5. 지금 GET users/ 는 가입된 모든 회원을 조회하고 있음... API 생성 요청해야 하는지
 
-const UserAPI = () => {
+// const UserAPI = () => {
+//   const [user, setUser] = useRecoilState(userState);
+
+//   // 커스텀 훅으로 (e.g. useUserState..) 변경 필요, 파일명은 ts가 되어야 한다 (e.g.useGetUserApi)
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         const response = await axios.get(
+//           `${API_URL}users/6617d55fb39abf604bbe8ef6`,
+//         );
+//         const userData = response.data.message;
+//         setUser(userData);
+//         console.log(user);
+//       } catch (error) {
+//         console.error('Error fetching data:', error);
+//       }
+//     };
+
+//     fetchData();
+//   }, []);
+
+//   return null;
+// };
+
+const useGetUserAPI = () => {
   const [user, setUser] = useRecoilState(userState);
 
-  // 커스텀 훅으로 (e.g. useUserState..) 변경 필요, 파일명은 ts가 되어야 한다 (e.g.useGetUserApi)
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${API_URL}users/6617d55fb39abf604bbe8ef6`,
+          `${API_URL}users/661a42a9b7e8af57dbdf175f`,
         );
         const userData = response.data.message;
         setUser(userData);
@@ -42,7 +65,7 @@ const UserAPI = () => {
     fetchData();
   }, []);
 
-  return null;
+  return user;
 };
 
-export default UserAPI;
+export default useGetUserAPI;

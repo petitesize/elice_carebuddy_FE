@@ -2,15 +2,15 @@ import React from 'react';
 import AppRouter from './routes/Router';
 import GlobalStyle from './components/global/GlobalStyle';
 import { RecoilRoot } from 'recoil';
-import UserAPI from './services/userState';
+import UserAPI from './services/userAPI';
 
 const App = () => {
   return (
     <>
       <RecoilRoot>
-        <UserAPI />
         <GlobalStyle />
         <AppRouter />
+        <UserAPI />
       </RecoilRoot>
     </>
   );
