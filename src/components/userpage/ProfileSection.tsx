@@ -1,7 +1,5 @@
 import styled from 'styled-components';
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { API_URL } from './../../constants/constants';
+import React, { useState } from 'react';
 
 const Container = styled.div`
   display: flex;
@@ -14,9 +12,6 @@ const UserContainer = styled.div`
   justify-content: space-evenly;
   margin: 30px 0 30px 0;
   padding: 20px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
-  border-radius: 15px;
-  height: 200px;
 `;
 
 const Menu = styled.span`
@@ -79,15 +74,6 @@ const InputContainer = styled.div`
   width: 100%;
   font-size: 16px;
 `
-/* interface UserData {
-  nickName: string;
-  introduction: string;
-}
-
-const UserData = {
-  nickName: '케어버디',
-  introduction: '안녕하세요 동물을 사랑하는 사람입니다.'
-} */
 
 interface ProfilesProps {
   nickName?: string;

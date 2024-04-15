@@ -11,8 +11,6 @@ import Group from '../pages/group/Group';
 import Diary from '../pages/diary/Diary';
 import HospitalInfo from '../pages/hospitalInfo/HospitalInfo';
 import PharmacyInfo from '../pages/pharmacyInfo/PharmacyInfo';
-import PetRegister from '../pages/petRegister/PetRegister';
-import PetEdit from '../pages/petEdit/PetEdit';
 import NotFound from '../pages/notFound/NotFound';
 
 const AppRouter = () => {
@@ -20,17 +18,13 @@ const AppRouter = () => {
     <Router>
       <Routes>
         <Route path="/signup" element={<Layout component={LoginPage} />} />
-        <Route path="/signup-info" element={<Layout component={SignupInfo} />} />
+        {/*<Route path="/signup-info" element={<Layout component={SignupInfo} />} />*/}
         <Route path="/mypage" element={<Layout component={Mypage} />} />
         <Route path="/userpage" element={<Layout component={Userpage} />} />
+        <Route path="/userpage/:userId" element={<Layout component={Userpage} />} />
         <Route path="/" element={<Layout component={Home} />} />
         <Route path="/community" element={<Layout component={Community} />} />
-        <Route path="/feed" element={<Layout component={Post} />} />
-        <Route
-          path="/pet-register"
-          element={<Layout component={PetRegister} />}
-        />
-        <Route path="/pet-edit" element={<Layout component={PetEdit} />} />
+        <Route path="/post" element={<Layout component={Post} />} />
         <Route path="/post/:postId" element={<Layout component={Post} />} />
         <Route path="/community" element={<Layout component={Community} />} />
         <Route path="/group/" element={<Layout component={Group} />} />
@@ -44,6 +38,7 @@ const AppRouter = () => {
           element={<Layout component={PharmacyInfo} />}
         />
         <Route path="*" element={<NotFound />} />
+        <Route path="/signup-info/auth/kakao/callback" element={<Layout component={SignupInfo} />} />
       </Routes>
     </Router>
   );
