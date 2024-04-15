@@ -13,6 +13,155 @@ import {
 } from 'react-icons/lu';
 import { TbBuildingHospital, TbReportMedical } from 'react-icons/tb';
 import DiaryDetails from './DiaryDetails';
+import axios from 'axios';
+import { API_URL } from '../../constants/constants';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { userState } from '../../recoil/atoms';
+
+// 다 나았는지, 현재 상태를 보여줄 수 있는 것이 추가 구현되면 좋을 듯 함
+// 최신 순으로 정렬되는 것 또한 추가 구현되면 좋을 듯 함
+
+interface DiaryProps {
+  consultationDate: string;
+  disease: string;
+  symptom: string;
+  hospitalizationStatus: Date;
+  memo: string;
+  address: string;
+  doctorName: string;
+  treatment: string;
+}
+
+interface HealthDiaryProps {
+  petId: string;
+  petName?: string;
+  diaryData: DiaryProps[];
+}
+
+const HealthDiary: React.FC<HealthDiaryProps> = ({
+  petId,
+  petName,
+  diaryData,
+}) => {
+  const [showModal, setShowModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [formData, setFormData] = useState({});
+
+  const handleToggleModal = () => {
+    setShowModal(!showModal);
+  };
+
+  const handleDeleteButtonClick = () => {
+    setShowModal(true);
+  };
+
+  const handleToggleEditModal = () => {
+    // 수정 모달 표시 여부를 관리하는 함수
+    setShowEditModal(!showEditModal);
+  };
+
+  const handleEditButtonClick = () => {
+    setShowEditModal(true); // 수정하기 버튼 클릭 시 수정 모달 표시
+  };
+  const handleData = (formData: any) => {
+    // RecMade 컴포넌트에서 입력된 데이터를 받아와서 상태에 저장합니다.
+    setFormData(formData);
+    console.log(formData);
+  };
+
+  const formDataForPOST = {
+    ...formData,
+    userId: useRecoilValue(userState)?._id,
+    buddyId: petId,
+  };
+
+  const handleHospitalPost = async () => {
+    try {
+      const response = await axios.post(`${API_URL}hospital`, formDataForPOST, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      console.log('POST 요청 성공:', response.data);
+      setShowModal(!showModal);
+    } catch (error) {
+      console.error('POST 요청 실패:', error);
+    }
+  };
+
+  // Date 포맷팅 함수
+  const formatDate = (date: Date, includeTime: boolean = false) => {
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    };
+
+    if (includeTime) {
+      options.hour = '2-digit';
+      options.minute = '2-digit';
+      options.hour12 = true;
+    }
+
+    return date.toLocaleDateString('ko-KR', options);
+  };
+  return (
+    <HealthDiaryContainer>
+      <DiaryTitle className="diaryTitle">
+        {petName} <span>건강 다이어리</span>
+      </DiaryTitle>
+      <HorizontalLine />
+      <Button
+        onClick={handleToggleModal}
+        variant={'primary'}
+        shape={'square'}
+        padding={'8px 40px'}
+        children={'기록하기'}
+      ></Button>
+      {showModal && (
+        <BigModal
+          title="진료 기록 등록"
+          value="등록"
+          component={<RecMade onSubmit={handleData} />}
+          onClose={handleToggleModal}
+          onHandleClick={handleHospitalPost}
+        />
+      )}
+      {showEditModal && (
+        <BigModal
+          title="진료 기록 수정"
+          value="수정"
+          component={<RecEdit />} // 수정 모달을 불러옴
+          onClose={handleToggleEditModal}
+        />
+      )}
+      {diaryData.length > 0 ? (
+        diaryData.map((data, index) => (
+          <DiariesContainer key={index}>
+            <p>{formatDate(new Date(data.consultationDate), true)}</p>
+            <HealthReport>
+              <ActionButton
+                onEdit={handleEditButtonClick}
+                direction="horizontal"
+                border="none"
+              />
+              <DeseaseName>
+                <Icon>
+                  <TbReportMedical className="big" />
+                </Icon>
+                <DeseaseTitle>{data.disease}</DeseaseTitle>
+              </DeseaseName>
+              <DiaryDetails data={data} />
+            </HealthReport>
+          </DiariesContainer>
+        ))
+      ) : (
+        <p>기록이 없습니다.(임시작성된 메시지)</p>
+      )}
+    </HealthDiaryContainer>
+  );
+};
 
 const HealthDiaryContainer = styled.div`
   box-sizing: border-box;
@@ -78,9 +227,9 @@ const HealthReport = styled.div`
 const DeseaseName = styled.div`
   display: flex;
   height: 26px;
-  width: 20%;
+  width: 30%;
   padding-top: 26px;
-  padding-right: 30px;
+  padding-right: 20px;
 `;
 
 const Icon = styled.div`
@@ -95,102 +244,5 @@ const Icon = styled.div`
     }
   }
 `;
-
-interface DiaryProps {
-  consultationDate: String;
-  disease: string;
-  symptom: string;
-  hospitalizationStatus: Date;
-  memo: string;
-  address: string;
-  doctorName: string;
-  treatment: string;
-}
-
-interface HealthDiaryProps {
-  petName?: string;
-  diaryData: DiaryProps[];
-}
-
-const HealthDiary: React.FC<HealthDiaryProps> = ({ petName, diaryData }) => {
-  const [showModal, setShowModal] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(false);
-
-  const handleToggleModal = () => {
-    setShowModal(!showModal);
-  };
-
-  const handleDeleteButtonClick = () => {
-    setShowModal(true);
-  };
-
-  const handleToggleEditModal = () => {
-    // 수정 모달 표시 여부를 관리하는 함수
-    setShowEditModal(!showEditModal);
-  };
-
-  const handleEditButtonClick = () => {
-    setShowEditModal(true); // 수정하기 버튼 클릭 시 수정 모달 표시
-  };
-  const handleData = (data: any) => {
-    // RecMade 컴포넌트에서 입력된 데이터를 받아와서 상태에 저장합니다.
-    // setPostData(data);
-    console.log(data);
-  };
-  return (
-    <HealthDiaryContainer>
-      <DiaryTitle className="diaryTitle">
-        {petName} <span>건강 다이어리</span>
-      </DiaryTitle>
-      <HorizontalLine />
-      <Button
-        onClick={handleToggleModal}
-        variant={'primary'}
-        shape={'square'}
-        padding={'8px 40px'}
-        children={'기록하기'}
-      ></Button>
-      {showModal && (
-        <BigModal
-          title="진료 기록 등록"
-          value="등록"
-          component={<RecMade onSubmit={handleData} />}
-          onClose={handleToggleModal}
-        />
-      )}
-      {showEditModal && (
-        <BigModal
-          title="진료 기록 수정"
-          value="수정"
-          component={<RecEdit />} // 수정 모달을 불러옴
-          onClose={handleToggleEditModal}
-        />
-      )}
-      {diaryData.length > 0 ? (
-        diaryData.map((data, index) => (
-          <DiariesContainer key={index}>
-            <p>{data.consultationDate}</p>
-            <HealthReport>
-              <ActionButton
-                onEdit={handleEditButtonClick}
-                direction="horizontal"
-                border="none"
-              />
-              <DeseaseName>
-                <Icon>
-                  <TbReportMedical className="big" />
-                </Icon>
-                <DeseaseTitle>{data.disease}</DeseaseTitle>
-              </DeseaseName>
-              <DiaryDetails data={data} />
-            </HealthReport>
-          </DiariesContainer>
-        ))
-      ) : (
-        <p>기록이 없습니다.(임시작성된 메시지)</p>
-      )}
-    </HealthDiaryContainer>
-  );
-};
 
 export default HealthDiary;

@@ -108,7 +108,7 @@ const Diary: React.FC = () => {
     };
 
     fetchData();
-  }, []);
+  }, [hospitalRecords]);
 
   const filteredHospitalRecords = hospitalRecords.filter(
     (record) => record.buddyId === selectedPet?._id,
@@ -124,6 +124,7 @@ const Diary: React.FC = () => {
       />
       <HealthDiary
         petName={selectedPet?.name}
+        petId={selectedPet?._id}
         diaryData={filteredHospitalRecords}
       />
     </DiaryPageContainer>

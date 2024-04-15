@@ -110,7 +110,7 @@ const DiaryDetails: React.FC<DiaryDetailsProps> = ({ data }) => {
           </Icon>
           <DiaryDetail>
             <DetailTitle>증상</DetailTitle>
-            <p>{data.symptom}</p>
+            <p>{data.symptom || '증상 기록이 없어요'}</p>
           </DiaryDetail>
         </DiaryDetailContainer>
         <DiaryDetailContainer>
@@ -121,8 +121,8 @@ const DiaryDetails: React.FC<DiaryDetailsProps> = ({ data }) => {
             <DetailTitle>입원 여부</DetailTitle>
             <p>
               {data.hospitalizationStatus === null
-                ? '입원 안함'
-                : formatDate(data.hospitalizationStatus)}
+                ? '입원하지 않았어요'
+                : '입원 중이에요'}
             </p>
           </DiaryDetail>
         </DiaryDetailContainer>
@@ -143,7 +143,7 @@ const DiaryDetails: React.FC<DiaryDetailsProps> = ({ data }) => {
           </Icon>
           <DiaryDetail>
             <DetailTitle>처방</DetailTitle>
-            <p>{data.treatment}</p>
+            <p>{data.treatment || '처방 기록이 없어요'}</p>
           </DiaryDetail>
         </DiaryDetailContainer>
         <DiaryDetailContainer>
@@ -153,7 +153,8 @@ const DiaryDetails: React.FC<DiaryDetailsProps> = ({ data }) => {
           <DiaryDetail>
             <DetailTitle>동물병원</DetailTitle>
             <p>
-              {data.address} <span>{data.doctorName} 선생님</span>
+              {data.address === null ? '방문 기록이 없어요' : data.address}{' '}
+              <span>{data.doctorName && data.doctorName + ' 선생님'} </span>
             </p>
           </DiaryDetail>
         </DiaryDetailContainer>
