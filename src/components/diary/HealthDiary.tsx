@@ -132,7 +132,11 @@ const HealthDiary: React.FC<HealthDiaryProps> = ({ petName, diaryData }) => {
   const handleEditButtonClick = () => {
     setShowEditModal(true); // 수정하기 버튼 클릭 시 수정 모달 표시
   };
-
+  const handleData = (data: any) => {
+    // RecMade 컴포넌트에서 입력된 데이터를 받아와서 상태에 저장합니다.
+    // setPostData(data);
+    console.log(data);
+  };
   return (
     <HealthDiaryContainer>
       <DiaryTitle className="diaryTitle">
@@ -150,7 +154,7 @@ const HealthDiary: React.FC<HealthDiaryProps> = ({ petName, diaryData }) => {
         <BigModal
           title="진료 기록 등록"
           value="등록"
-          component={<RecMade />}
+          component={<RecMade onSubmit={handleData} />}
           onClose={handleToggleModal}
         />
       )}
