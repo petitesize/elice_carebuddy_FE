@@ -14,9 +14,6 @@ const UserContainer = styled.div`
   justify-content: space-evenly;
   margin: 30px 0 30px 0;
   padding: 20px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
-  border-radius: 15px;
-  height: 200px;
 `;
 
 const Menu = styled.span`

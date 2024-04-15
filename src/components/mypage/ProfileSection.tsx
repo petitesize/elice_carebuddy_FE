@@ -94,7 +94,7 @@ const ErrorText = styled.a`
 `;
 
 const ErrorBox = styled.div`
-  padding-left: 70px;
+  padding-left: 74px;
 `
 
 const Profile: React.FC = () => {
@@ -131,7 +131,7 @@ const Profile: React.FC = () => {
   const handleSave = async () => {
     try {
       if (!newNickName) {
-        setErrorText('닉네임을 입력해주세요.');
+        setErrorText('닉네임을 입력해주세요');
         return;
       }
 

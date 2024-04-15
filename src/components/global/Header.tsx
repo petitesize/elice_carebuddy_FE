@@ -11,8 +11,7 @@ const links = [
   { label: '커뮤니티', icon: null, subMenu: ['커뮤니티1', '커뮤니티2'] },
   { label: '건강관리', icon: null, subMenu: ['건강 다이어리'] },
   { label: '정보', icon: null, subMenu: ['병원 검색', '약국 검색'] },
-  { path: '/signup', label: '로그인', icon: null },
-  { path: '/mypage', label: '', icon: user },
+  { path: '/mypage', label: '', icon: user }, // 마이페이지
   { path: '/', label: '', icon: alert },
 ];
 
@@ -52,7 +51,6 @@ const MenuBox = styled.span`
     color: var(--color-black);
     font-weight: var(--font-weight-bold);
     transition: all 0.5s;
-    font-size: 14px;
   }
 `;
 
@@ -72,7 +70,6 @@ const Category = styled.div`
   position: relative;
   display: inline-block;
   text-align: center; 
-  margin: 0 20px;
 `;
 
 const SubMenu = styled.div`
@@ -108,12 +105,29 @@ const SubMenuLink = styled(Link)`
   }
 `;
 
+const LoginButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  height: 10px;
+`;
+
+const LoginButton = styled(Link)`
+  text-decoration: none;
+  color: var(--color-black);
+  font-weight: var(--font-weight-bold);
+  transition: all 0.5s;
+  font-size: 12px;
+`;
+
 const Header: React.FC = () => {
   const [activeMenu, setActiveMenu] = useState<number | null>(null);
 
   return (
     <HeaderContainer>
       <Container>
+      <LoginButtonContainer>
+        <LoginButton to="/signup">로그인</LoginButton>
+      </LoginButtonContainer>
         <MenuBox>
           {links.map((link, index) => (
             <Category key={index} onMouseEnter={() => setActiveMenu(index)} onMouseLeave={() => setActiveMenu(null)}>

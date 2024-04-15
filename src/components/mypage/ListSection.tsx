@@ -43,10 +43,17 @@ const ListContainer = styled.div`
   flex-direction: column;
 `;
 
-const ListItem = styled.div`
+const TitleItem = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
+  border-bottom: 1px solid #cecece;
+`;
+
+const ListItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
   border-bottom: 1px solid #cecece;
 `;
 
@@ -90,11 +97,11 @@ const ListSection: React.FC<Post> = ({
       <SectionContainer>
         <UserContainer>
           <ListContainer>
-            <ListItem>
+            <TitleItem>
               {titles.map((title, index) => (
                 <Title key={index}>{title}</Title>
               ))}
-            </ListItem>
+            </TitleItem>
             <ListItem>
               {datas.map((data, index) => (
                 <Data key={index}>{data}</Data>

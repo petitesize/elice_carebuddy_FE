@@ -56,7 +56,7 @@ const UserpageContent: React.FC<UserPageProps> = ({ userId = '6613fbcdfaebdd59e9
         //console.log(response.data);
         const buddyData = response.data.message;
         setBuddy(buddyData);
-        //console.log('성공')
+        console.log('성공')
 
         // 첫 렌더링 되었을 때, 선택된 펫이 없으므로 등록된 반려동물이 있는 경우 첫 번째 반려동물을 선택된 펫으로 지정
         if (!selectedPet && buddyData.length > 0) {
@@ -90,10 +90,10 @@ const UserpageContent: React.FC<UserPageProps> = ({ userId = '6613fbcdfaebdd59e9
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${API_URL}post/6618a0c09897c137f70265da`);
+        const response = await axios.get(`${API_URL}post/${userId}`);
         //console.log(response.data);
         const postData = response.data.message[0];
-        //console.log(response.data.message[0]);
+        console.log(response.data.message);
         setPost(postData);
         //console.log('성공')
 

@@ -38,18 +38,17 @@ const Logo = styled.img`
 `;
 
 const StyledButton = styled.button`
-  background-image: url(${ButtonImg}); // 이미지 경로를 버튼의 배경 이미지로 설정
-  background-size: cover; // 이미지를 버튼의 크기에 맞게 조정
-  width: 200px; // 버튼의 너비 설정
-  height: 50px; // 버튼의 높이 설정
-  border: none; // 버튼의 테두리 제거
-  cursor: pointer; // 커서를 포인터로 변경하여 클릭 가능함을 나타냄
+  background-image: url(${ButtonImg});
+  background-size: cover;
+  width: 200px;
+  height: 50px;
+  border: none;
+  cursor: pointer;
   border-radius: 5px;
   margin-top: 10px;
 `;
 
 const LoginPage: React.FC = () => {
-
   let REST_API_KEY = "fc0445196ca1bc948515866bb1fba56e";
   let REDIRECT_URI = "http://localhost:3001/auth/kakao/callback";
   const kakaoToken = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
