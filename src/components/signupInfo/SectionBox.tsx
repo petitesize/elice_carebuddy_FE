@@ -1,4 +1,6 @@
-import React, { ReactNode } from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import styled from 'styled-components';
 import Button from '../../components/baseComponent/Button';
 import AgreementSection from './AgreementSection';
@@ -22,6 +24,30 @@ const ButtonBox = styled.div`
 `
 
 const SectionBox: React.FC = () => {
+  const navigate = useNavigate();
+  const code = new URL(window.location.href).searchParams.get("code");
+
+  //인가코드 백으로 보내는 코드
+  useEffect(() => {
+    const kakaoLogin = async () => {
+      if (code) { // code 값이 존재하는 경우에만 실행
+        await axios({
+          method: "GET",
+          url: `http://localhost:5173/signup-info/auth/kakao/callback/?code=${code}`,
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            "Access-Control-Allow-Origin": "*",
+          },
+        }).then((res) => {
+          console.log('res: ', res);
+          localStorage.setItem("name", res.data.account.kakaoName);
+          navigate("/");
+        });
+      }
+    };
+    kakaoLogin();
+  }, [code]); // code 값이 변경될 때마다 useEffect 재실행
+
   return (
     <Container>
       <Component>

@@ -50,12 +50,15 @@ const StyledButton = styled.button`
 
 const LoginPage: React.FC = () => {
   let REST_API_KEY = "fc0445196ca1bc948515866bb1fba56e";
-  let REDIRECT_URI = "http://localhost:3001/auth/kakao/callback";
+  let REDIRECT_URI = "http://localhost:5173/signup-info/auth/kakao/callback";
   const kakaoToken = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
+
+  // 카카오 로그인 버튼 클릭 시 실행되는 함수
   const handleKakaoLogin = () => {
-    window.location.href = kakaoToken;
-  }
+      window.location.href = kakaoToken;
+  };
+
   return (
     <>
       <Main>
