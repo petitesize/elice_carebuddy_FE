@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { API_URL } from '../../constants/constants';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { userState } from '../../recoil/atoms';
 
 // 컴포넌트
 import LikeAndCommentCount from '../../components/community/LikeAndCommentCount';
@@ -24,12 +26,8 @@ import { LuThumbsUp, LuChevronLeft } from 'react-icons/lu';
 import {
   tempImg,
   profileImg,
-  tempLikeCount,
-  tempCommentNickname,
   tempComment,
 } from '../../../temp-data-community';
-
-import comments from '../../../temp-data-comment.json';
 
 const Container = styled.div`
   display: flex;
@@ -104,8 +102,14 @@ const PostContentArea = styled.div`
 const Likes = styled.div`
   display: flex;
   flex-direction: row;
-  margin: 0 px;
   color: var(--color-grey-1);
+  font-size: var(--font-size-ft-1);
+  align-items: center; 
+  cursor: pointer;
+
+  & > * {
+    margin: 0 3px;
+  }
 `;
 
 const PostList = styled(Link)`
@@ -140,25 +144,34 @@ const ProfileImg = styled.img`
   border-radius: 50%;
 `;
 
-const CommentArea = styled.div``;
-
 interface Post {
   title?: string;
   content?: string;
-  userId?: string;
+  userId?: {
+    nickName: string;
+  };
   updatedAt?: string;
+  categoryId?: {
+    _id: string;
+  };
+  likeCount: number;
 }
 
-interface Comment {}
-
+interface Comment {
+  deletedAt: string | null;
+}
 
 const POST: React.FC = () => {
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [post, setPost] = useState<Post | null>(null);
-  // const [comments, setComment] = useState<Comment[]>([]);
+  const [comments, setComments] = useState<Comment | null>(null);
+  const [isRecommended, setIsRecommended] = useState(false);
+  const [user] = useRecoilState(userState);
 
   const { postId } = useParams<{ postId: string }>();
 
+  // 게시글 조회 API
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -173,20 +186,73 @@ const POST: React.FC = () => {
     fetchData();
   }, [postId]);
 
-  const formattedDate = post?.updatedAt ? formatDateIncludeTime({ rowDate: post.updatedAt }) : '';
+  const formattedDate = post?.updatedAt
+    ? formatDateIncludeTime({ rowDate: post.updatedAt })
+    : '';
+
+  // 댓글 조회 API -> 나중에 댓글 조회 정상화 되면 실행 테스트 필요
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${API_URL}comment/${postId}`);
+        const filteredComments = response.data.message.filter((comment:Comment) => comment.deletedAt === null);
+        setComments(filteredComments);
+        console.log('댓글 조회 성공');
+        // console.log('댓글 조회 성공', response.data.message); //추후 삭제
+      } catch (error) {
+        console.error('댓글 조회 실패', error);
+      }
+    };
+
+    fetchData();
+  }, [postId]);
+
+  // 추천해요 누르고 취소하는 로직
+  
 
   const handleToggleModal = () => {
-    setShowModal((prevState) => !prevState);
+    setShowModal((prev) => !prev);
   };
 
-  const handleSavePost = () => {
-    // API 생성되면 로직 구현
-    setShowModal(false);
-  };
+  // const handleSavePost = () => {
+  //   // API 생성되면 로직 구현
+  //   setShowModal(false);
+  // };
 
   const handleDeleteButton = () => {
-    return; //추후 API 생성되면 추가
+    // 알럿창, 확인 누를 시 글 삭제 요청
+    const fetchData = async () => {
+      const confirmDelete = window.confirm('정말로 삭제하시겠습니까?');
+
+      if (confirmDelete) {
+        try {
+          const response = await axios.put(`${API_URL}post/${postId}/w`);
+          console.log('글 삭제 성공', response.data.message);
+          navigate(`/group/${post?.categoryId?._id}`);
+        } catch (error) {
+          console.error('글 삭제 실패', error);
+        }
+      }
+    };
+    fetchData();
   };
+
+  // 댓글 등록
+  const handleCreateComment = async(commentText: string) => {
+    try {
+      const commentData = {
+        "postId": `${postId}`,
+        "userId": `${user?._id}`,
+        "text": `${commentText}`
+      };
+
+      const response = await axios.post(`${API_URL}comment`, commentData)
+      return response.data;
+    } catch (error) {
+      console.error('댓글 등록 실패', error);
+      throw error;
+    };
+  }
 
   return (
     <>
@@ -195,7 +261,9 @@ const POST: React.FC = () => {
           <LeftContainer>
             <PostListButtonContainer>
               <LuChevronLeft />
-              <PostList to="">글 목록 보기</PostList>
+              <PostList to={`/group/${post?.categoryId?._id}`}>
+                글 목록 보기
+              </PostList>
             </PostListButtonContainer>
           </LeftContainer>
           <PostContainer>
@@ -210,7 +278,7 @@ const POST: React.FC = () => {
                 </ProfileContainer>
               </PostInformation>
               <PostOption>
-                <LikeAndCommentCount likeCount={1} commentCount={2} />
+                <LikeAndCommentCount likeCount={post?.likeCount} commentCount={comments?.length} userId={user?._id} postId={postId} />
                 <ActionButton
                   border="default"
                   direction="horizontal"
@@ -234,26 +302,33 @@ const POST: React.FC = () => {
               </ImgContainer>
               <Likes>
                 <LuThumbsUp />
-                <p>추천해요 {tempLikeCount}</p>
+                <p>추천해요 {post?.likeCount}</p>
               </Likes>
             </PostContentArea>
             <Hr />
-            <CommentArea>
+            <div>
               <CommentWritingBox
-                text={tempComment}
-                nickname={tempCommentNickname}
+                nickname={user?.nickName}
+                onClick={handleCreateComment}
               ></CommentWritingBox>
-              {comments.map((comment, index) => (
-                <Comment
-                  key={index}
-                  profileImg={comment.profileImg}
-                  text={comment.text}
-                  nickname={comment.nickname}
-                  date={comment.date}
-                />
-              ))}
+              {comments?.map(
+                (
+                  comment,
+                  index,
+                ) => (
+                  <Comment
+                    key={index}
+                    profileImg={comment.profileImg}
+                    text={comment.text}
+                    nickname="임시 닉네임"
+                    date={formatDateIncludeTime({rowDate:comment.createdAt})}
+                    userId={comment?.userId?._id}
+                    commentId={comment?._id}
+                  />
+                ),
+              )}
               {/* <Pagination /> */}
-            </CommentArea>
+            </div>
           </PostContainer>
         </Container>
       )}

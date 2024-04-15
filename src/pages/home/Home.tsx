@@ -19,11 +19,7 @@ import PostCreate from '../../components/community/PostCreate';
 import SendPostData from '../../services/SendPostData';
 import GetRandomItems from '../../utils/GetRandomThreeItems';
 
-
-import {
-  tempCommentCount,
-  templikeCount,
-} from '../../../temp-data-community';
+import { tempCommentCount, templikeCount } from '../../../temp-data-community';
 
 const BannerWrapper = styled.div``;
 
@@ -76,37 +72,35 @@ const WritingButton = styled.div`
 `;
 
 interface Posts {
+  _id: string;
   title: string;
   content: string;
   createdAt: string;
-  userId: string;
-  nickName: string;
+  userId: {
+    profileImage: string[];
+    nickName: string;
+  };
 }
 
 interface Groups {
-  group: string;
+  group: {
+    _id: string;
+    group: string;
+    introduction: string;
+  };
   introduction: string;
 }
-
-// 삭제 예정
-const SelectDummyCategoryOptions = [
-  { value: 'Dog', label: '강아지' },
-  { value: 'Cat', label: '고양이' },
-];
-
-// 삭제 예정
-const SelectDummyWritingGroupOptions = [
-  { value: 'Group', label: '그룹을 선택해 주세요' },
-];
 
 const Home: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [posts, setPosts] = useState<Posts[]>([]);
   const [groups, setGroups] = useState<Groups[]>([]);
   const [groupArray, setGroupArray] = useState<JSX.Element[]>([]);
-  const [user, setUser] = useRecoilState(userState);
+  const [user] = useRecoilState(userState);
 
-  console.log('user', user)
+
+  console.log('user', user);
+  // console.log('categories', user?.categories);
 
   // 그룹 불러오기
   useEffect(() => {
@@ -122,33 +116,46 @@ const Home: React.FC = () => {
     fetchData();
   }, []);
 
+  // 그룹 관련 로직
+  useEffect(() => {
     // 추천 그룹 뽑아서 배열에 넣기
-    useEffect(() => {
-      const randomGroups = GetRandomItems(groups, 3)
-  
-      if (groups.length > 0) {
-        const updatedGroups = randomGroups.map((group, index) => (
-          <CommunityListSidebar
-            key={index}
-            groupId={group._id}
-            name={group.group}
-            introduction={group.introduction}
-          />
-        ));
-        setGroupArray(updatedGroups);
-      }
-    }, [groups]);
-  
-    const handleToggleModal = () => {
-      setShowModal((prevState) => !prevState);
-    };
+    if (groups.length > 0) {
+      const randomGroups = GetRandomItems(groups, 3);
+      const updatedGroups = randomGroups.map((group, index) => (
+        <CommunityListSidebar
+          key={index}
+          groupId={group?._id}
+          name={group?.group}
+          introduction={group?.introduction}
+        />
+      ));
+      setGroupArray(updatedGroups);
+    }
+  }, [groups]);
+
+  const CategoryOptions = [
+    { value: '0', label: '강아지' },
+    { value: '1', label: '고양이' },
+  ];
+
+  const SelectCategoriesOptions = [];
+  // 가입된 그룹 id 불러오기
+  user?.categoryId?.forEach((category) => {
+    SelectCategoriesOptions.push({value: category.group, label: category.group });
+  });
+
+  const handleToggleModal = () => {
+    setShowModal((prevState) => !prevState);
+  };
 
   // 피드 글 불러오기
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${API_URL}post`);
-        setPosts(response.data.message);
+        //deletedAt이 null이 아닌 게시물만 필터링
+        const filteredPosts = response.data.message.filter((post:Post) => post.deletedAt === null);
+        setPosts(filteredPosts);
         console.log('피드 글 조회 성공', response.data.message);
       } catch (error) {
         console.error('피드 글 조회 실패', error);
@@ -172,12 +179,12 @@ const Home: React.FC = () => {
               <Select
                 width="100px"
                 borderRadius="30px"
-                options={SelectDummyCategoryOptions}
+                options={CategoryOptions} 
               />
               <Select
                 width="120px"
                 borderRadius="30px"
-                options={SelectDummyWritingGroupOptions}
+                options={SelectCategoriesOptions}
               />
             </Classification>
             <WritingButton>
@@ -203,13 +210,13 @@ const Home: React.FC = () => {
           </FeedOption>
           {posts.map((post, index) => (
             <FeedBox
-              postId={post._id}
+              postId={post?._id}
               key={index}
-              title={post.title}
-              content={post.content}
+              title={post?.title}
+              content={post?.content}
               profile={post?.userId?.profileImage[0]}
               nickname={post?.userId?.nickName}
-              uploadedDate={post.createdAt}
+              uploadedDate={post?.createdAt}
               likeCount={templikeCount}
               commentCount={tempCommentCount}
             />

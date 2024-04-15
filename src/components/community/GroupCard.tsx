@@ -1,13 +1,16 @@
 import styled from 'styled-components';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { LuMessagesSquare } from 'react-icons/lu';
-// import { LuCheck } from 'react-icons/lu'; // 나중에 동적 렌더링 시 추가
+import { LuCheck } from 'react-icons/lu';
 import Button from '../../components/baseComponent/Button';
+import { useRecoilState } from 'recoil';
+import { userState } from '../../recoil/atoms';
 
 type GroupCardProps = {
   name: string;
   introduction: string;
   groupId: string;
+  onClick: () => void;
 };
 
 const StyledGroupCard = styled(Link)`
@@ -31,10 +34,6 @@ const IconWrapper = styled.div`
   font-size: 20px;
 `;
 
-const GroupName = styled.p`
-  font-size:;
-`;
-
 const GroupIntroduction = styled.p`
   font-size: var(--font-size-ft-1);
   font-weight: var(--font-weight-regular);
@@ -49,25 +48,35 @@ const GroupInfoWrapper = styled.div`
   padding-left: 10px;
 `;
 
-// const MemberCheck = styled.div` // 나중에 동적 렌더링 시 추가
-//   display: flex;
-//   font-size: var(--font-size-ft-1);
-//   color: var(--color-green-main);
+const MemberCheck = styled.div`
+  display: flex;
+  font-size: var(--font-size-ft-1);
+  color: var(--color-green-main);
+  padding-top: 10px;
 
-//   p {
-//     font-size: var(--font-size-ft-1);
-//     font-weight: var(--font-weight-regular);
-//     color: var(--color-grey-1);
-//   }
-// `;
+  p {
+    font-size: var(--font-size-ft-1);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-grey-1);
+  }
+`;
 
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
 
+const GroupCard: React.FC<GroupCardProps> = ({
+  name,
+  introduction,
+  groupId,
+  onClick,
+}) => {
+  const [user] = useRecoilState(userState);
 
-const GroupCard: React.FC<GroupCardProps> = ({ name, introduction, groupId }) => {
+  let isMember = false;
+  let groupIdArray = user?.categoryId.map((category) => category._id) ?? [];
+  isMember = groupIdArray?.includes(groupId);
 
   return (
     <StyledGroupCard to={`/group/${groupId}`}>
@@ -75,18 +84,26 @@ const GroupCard: React.FC<GroupCardProps> = ({ name, introduction, groupId }) =>
         <LuMessagesSquare />
       </IconWrapper>
       <GroupInfoWrapper>
-        <GroupName>{name}</GroupName>
+        <p>{name}</p>
         <GroupIntroduction>{introduction}</GroupIntroduction>
-        <ButtonWrapper>
-          <Button
-            variant="secondary"
-            height="28px"
-            padding="4px 10px"
-            fontSize="ft-1"
-          >
-            가입
-          </Button>
-        </ButtonWrapper>
+        {isMember ? (
+          <ButtonWrapper>
+            <Button
+              variant="secondary"
+              height="28px"
+              padding="4px 10px"
+              fontSize="ft-1"
+              onClick={onClick}
+            >
+              가입
+            </Button>
+          </ButtonWrapper>
+        ) : (
+          <MemberCheck>
+            <LuCheck />
+            <p>이미 가입된 그룹입니다</p>
+          </MemberCheck>
+        )}
       </GroupInfoWrapper>
     </StyledGroupCard>
   );

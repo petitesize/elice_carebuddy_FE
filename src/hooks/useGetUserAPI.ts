@@ -40,10 +40,10 @@ const useGetUserAPI = () => {
       }
     };
 
-    fetchData();
+    fetchData();    
   }, []);
 
-  return user;
+  return user; 
 };
 
 export default useGetUserAPI;

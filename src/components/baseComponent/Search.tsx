@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import { LuSearch } from 'react-icons/lu';
+import React from 'react';
 
 type SearchProps = {
   width?: string;
   fontSize?: string;
   padding?: string;
+  onSearch: (value: string) => void;
 };
 
 const SearchBox = styled.div<SearchProps>`
@@ -15,16 +17,16 @@ const SearchBox = styled.div<SearchProps>`
   border: 1px solid var(--color-grey-2);
   height: auto;
   border-radius: 30px;
-  width: ${({width}) => width && `${width};`};
+  width: ${({ width }) => width && `${width};`};
 `;
 
 const StyledInput = styled.input<SearchProps>`
   border: none;
   border-radius: 30px;
   width: 100%;
-  font-size: ${({fontSize}) => fontSize && `${fontSize};`};
-  padding: ${({padding}) => padding && `${padding};`};
-  
+  font-size: ${({ fontSize }) => fontSize && `${fontSize};`};
+  padding: ${({ padding }) => padding && `${padding};`};
+
   &:focus {
     outline: none;
   }
@@ -36,16 +38,39 @@ const StyledIcon = styled(LuSearch)`
   color: var(--color-grey-2);
 `;
 
-const Search: React.FC<SearchProps> = ({ width, fontSize, padding }) => (
-  <SearchBox width={width}>
-    <StyledInput
-      type="string"
-      placeholder="검색어를 입력하세요"
-      fontSize={fontSize}
-      padding={padding}
-    />
-    <StyledIcon />
-  </SearchBox>
-);
+const Search: React.FC<SearchProps> = ({
+  width,
+  fontSize,
+  padding,
+  onSearch,
+}) => {
+const [searchValue, setSearchValue] = useState('');
+
+const handleChange = (e:React.ChangeEvent<HtmlInputElement>) => {
+  setSearchValue(e.target.value);
+};
+
+const handleSubmit = (e:React.FormEvent<HtmlFormElement>) => {
+  e.preventDefault();
+  onSearch(searchValue);
+};
+
+
+  return (
+    <form onSubmit={handleSubmit}>
+    <SearchBox width={width}>
+      <StyledInput
+        type="string"
+        placeholder="검색어를 입력하세요"
+        value={searchValue}
+        onChange={handleChange}
+        fontSize={fontSize}
+        padding={padding}
+      />
+      <StyledIcon />
+    </SearchBox>
+    </form>
+  );
+};
 
 export default Search;
