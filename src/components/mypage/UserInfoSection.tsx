@@ -10,9 +10,6 @@ const Container = styled.div`
 
 const Section = styled.div`
   margin: 30px 0 30px 0;
-  padding: 20px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
-  border-radius: 15px;
 `
 
 const UserContainer = styled.div`

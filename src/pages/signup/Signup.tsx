@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import LogoImg from '../../assets/carebuddyLogo.png';
 import axios from 'axios';
 import { API_URL } from '../../constants/constants';
+import ButtonImg from '../../assets/kakao_login_medium_narrow.png'
 
 const Main = styled.div`
   display: flex;
@@ -16,8 +17,8 @@ const LoginBox = styled.div`
   border-radius: 7px;
   text-align: center;
   padding: 80px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
-  border-radius: 15px;
+  /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 15px; */
 `;
 
 const Content = styled.div`
@@ -36,11 +37,28 @@ const Logo = styled.img`
   width: 150px;
 `;
 
-const LoginPage: React.FC = () => {
+const StyledButton = styled.button`
+  background-image: url(${ButtonImg});
+  background-size: cover;
+  width: 200px;
+  height: 50px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+`;
 
-    let REST_API_KEY = "6bc949b130be05177810686309537eb7";
-    let REDIRECT_URI = "http://localhost:3001/auth/kakao/callback";
-    const kakaoToken = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}`;
+const LoginPage: React.FC = () => {
+  let REST_API_KEY = "fc0445196ca1bc948515866bb1fba56e";
+  let REDIRECT_URI = "http://localhost:5173/signup-info/auth/kakao/callback";
+  const kakaoToken = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
+
+  // 카카오 로그인 버튼 클릭 시 실행되는 함수
+  const handleKakaoLogin = () => {
+      window.location.href = kakaoToken;
+  };
+
   return (
     <>
       <Main>
@@ -54,7 +72,7 @@ const LoginPage: React.FC = () => {
             건강하고 행복한 시간을 보내세요
           </Content>
           <Text>간편 로그인 / 회원가입</Text>
-            <a href={kakaoToken}>카카오 로그인</a>
+          <StyledButton onClick={handleKakaoLogin} />
         </LoginBox>
       </Main>
     </>

@@ -11,8 +11,7 @@ const links = [
   { label: '커뮤니티', icon: null, subMenu: ['커뮤니티1', '커뮤니티2'] },
   { label: '건강관리', icon: null, subMenu: ['건강 다이어리'] },
   { label: '정보', icon: null, subMenu: ['병원 검색', '약국 검색'] },
-  { path: '/signup', label: '로그인', icon: null },
-  { path: '/mypage', label: '', icon: user },
+  { path: '/mypage', label: '', icon: user }, // 마이페이지
   { path: '/', label: '', icon: alert },
 ];
 
@@ -68,21 +67,20 @@ const Icon = styled.img`
 `;
 
 const Category = styled.div`
-  position: relative; /* 카테고리 상대 위치 설정 */
-  display: inline-block; /* 인라인 요소로 설정하여 텍스트와 아이콘이 같은 라인에 표시되도록 설정 */
-  text-align: center; /* 가운데 정렬 */
-  margin: 0 20px; /* 각 항목 간격 조정 */
+  position: relative;
+  display: inline-block;
+  text-align: center; 
 `;
 
 const SubMenu = styled.div`
-  position: absolute; /* 드롭다운 메뉴 절대 위치 설정 */
-  top: 100%; /* 부모 요소 아래에 표시되도록 설정 */
-  left: 50%; /* 가운데 정렬을 위해 왼쪽으로 이동 */
-  transform: translateX(-50%); /* 가운데 정렬 */
-  width: 100px; /* 드롭다운 메뉴 너비 조절 */
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
   background-color: white;
   border: 1px solid #cecece;
-  z-index: 100; /* 드롭다운 메뉴가 다른 요소 위에 나타나도록 설정 */
+  z-index: 100;
   font-size: 14px;
   display: flex;
   align-items: center;
@@ -91,7 +89,7 @@ const SubMenu = styled.div`
 
 const SubMenuItem = styled.div`
   padding: 10px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #cecece;
   
   &:last-child {
     border-bottom: none; /* 마지막 아이템의 하단 테두리 제거 */
@@ -107,12 +105,29 @@ const SubMenuLink = styled(Link)`
   }
 `;
 
+const LoginButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  height: 10px;
+`;
+
+const LoginButton = styled(Link)`
+  text-decoration: none;
+  color: var(--color-black);
+  font-weight: var(--font-weight-bold);
+  transition: all 0.5s;
+  font-size: 12px;
+`;
+
 const Header: React.FC = () => {
   const [activeMenu, setActiveMenu] = useState<number | null>(null);
 
   return (
     <HeaderContainer>
       <Container>
+      <LoginButtonContainer>
+        <LoginButton to="/signup">로그인</LoginButton>
+      </LoginButtonContainer>
         <MenuBox>
           {links.map((link, index) => (
             <Category key={index} onMouseEnter={() => setActiveMenu(index)} onMouseLeave={() => setActiveMenu(null)}>
