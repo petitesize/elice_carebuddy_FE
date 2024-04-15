@@ -3,13 +3,6 @@ import styled from 'styled-components';
 import InputBox from '../../components/baseComponent/InputBox';
 import RadioBox from '../../components/baseComponent/RadioBox';
 import TextArea from '../../components/baseComponent/TextArea';
-import { userState } from '../../recoil/atoms';
-import Button from '../../components/baseComponent/Button';
-
-const ButtonContainer = styled.div`
-  display: flex;
-  padding: 20px 0 20px 0;
-`;
 
 const Component = styled.div`
   display: flex;
@@ -53,34 +46,41 @@ const ContentBody = styled.div`
 const Checkbox = styled.input``;
 
 interface ModalProps {
-  onClose: () => void;
+  onClose?: () => void;
   onSubmit: (formData: FormData) => void;
 }
 
-const RecMade: React.FC<ModalProps> = ({ onClose, onSubmit }) => {
+interface FormData {
+  doctorName?: string | null;
+  address?: string | null;
+  consultationDate?: string | Date | null;
+  disease?: string | null;
+  hospitalizationStatus?: Date | null;
+  symptom?: string | null;
+  treatment?: string | null;
+  memo?: string | null;
+}
+
+const RecMade: React.FC<ModalProps> = ({ onSubmit }) => {
   const [showRecMadeModal, setShowRecMadeModal] = useState(true);
   const [checked, setChecked] = useState(false);
 
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
-  const [consultDate, setConsultDate] = useState('');
 
-  const [selectedValue, setSelectedValue] = useState(null); // 초기값을 null로 설정
-  const [hospitalizationStatus, setHospitalizationStatus] =
-    useState<Date | null>(null);
   const [selectedOption, setSelectedOption] = useState<string>('아니오'); // 선택된 값 상태
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     // userId: '6617b4493122a35bf1a26f8d',
     // buddyId: '6617b4603122a35bf1a26f8f',
-    doctorName: '',
-    address: '',
-    consultationDate: '',
-    disease: '',
+    doctorName: null,
+    address: null,
+    consultationDate: new Date(),
+    disease: null,
     hospitalizationStatus: null,
-    symptom: '',
-    treatment: '',
-    memo: '',
+    symptom: null,
+    treatment: null,
+    memo: null,
   });
 
   useEffect(() => {
@@ -96,11 +96,11 @@ const RecMade: React.FC<ModalProps> = ({ onClose, onSubmit }) => {
     console.log(value);
     setFormData({
       ...formData,
-      hospitalizationStatus: value === '네' ? new Date() : null,
+      hospitalizationStatus: value === '네' ? new Date() : null, // 여기서 타입 오류가 왜 나는지?
     });
   };
 
-  // 선생님 성함
+  // 선생님 성함 등 input
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -119,15 +119,6 @@ const RecMade: React.FC<ModalProps> = ({ onClose, onSubmit }) => {
     setTime(value);
     setFormData({ ...formData, consultationDate: `${date} ${value}` });
   };
-
-  // const handleSubmit = () => {
-  //   // 폼 데이터를 부모 컴포넌트로 전송
-  //   onSubmit(formData);
-  // };
-
-  // const handleModalBackgroundClick = () => {
-  //   onClose(); // 모달 닫기 함수 호출
-  // };
 
   return (
     <>
@@ -185,6 +176,7 @@ const RecMade: React.FC<ModalProps> = ({ onClose, onSubmit }) => {
                 <ContentTitle>병원 이름</ContentTitle>
                 <ContentBody>
                   <InputBox
+                    name="address"
                     height="20px"
                     value={formData.address}
                     onChange={handleInputChange}
@@ -222,7 +214,13 @@ const RecMade: React.FC<ModalProps> = ({ onClose, onSubmit }) => {
               <Content>
                 <ContentTitle>질병</ContentTitle>
                 <ContentBody>
-                  <InputBox height="20px" placeholder="입력하여주세요." />
+                  <InputBox
+                    height="20px"
+                    placeholder="입력하여주세요."
+                    name="disease"
+                    value={formData.disease}
+                    onChange={handleInputChange}
+                  />
                 </ContentBody>
               </Content>
             </ContentCard>
@@ -237,6 +235,9 @@ const RecMade: React.FC<ModalProps> = ({ onClose, onSubmit }) => {
                     width="890px"
                     height="100px"
                     placeholder="입력하여주세요."
+                    name="symptom"
+                    value={formData.symptom}
+                    onChange={handleInputChange}
                   />
                 </ContentBody>
               </Content>
@@ -246,12 +247,15 @@ const RecMade: React.FC<ModalProps> = ({ onClose, onSubmit }) => {
           <Container>
             <ContentCard>
               <Content>
-                <ContentTitle>치료</ContentTitle>
+                <ContentTitle>처방</ContentTitle>
                 <ContentBody>
                   <TextArea
                     width="890px"
                     height="100px"
                     placeholder="입력하여주세요."
+                    name="treatment"
+                    value={formData.treatment}
+                    onChange={handleInputChange}
                   />
                 </ContentBody>
               </Content>
@@ -267,6 +271,9 @@ const RecMade: React.FC<ModalProps> = ({ onClose, onSubmit }) => {
                     width="890px"
                     height="100px"
                     placeholder="입력하여주세요."
+                    name="memo"
+                    value={formData.memo}
+                    onChange={handleInputChange}
                   />
                 </ContentBody>
               </Content>

@@ -19,10 +19,6 @@ const DiaryPageContainer = styled.div`
   height: auto;
 `;
 
-interface User {
-  nickName: string;
-}
-
 interface Pet {
   _id?: string;
   name: string;
@@ -36,17 +32,17 @@ const Diary: React.FC = () => {
   const [buddy, setBuddy] = React.useState<Pet[] | null>([]);
   // 현재 선택된 반려동물 => 다이어리에 처음 보여줄 반려동물 1마리, 또는 없을 수도 있음
   const [selectedPet, setSelectedPet] = useState<Pet | null>();
-  // 사용자 정보
-  // const [user, setUser] = React.useState<User | null>(null);
+
   const [user, setUser] = useRecoilState(userState); //O.K
   // 반려동물의 병원 기록 => 기록이 여러 개[]일 수도, 없을 수도 있음
   const [hospitalRecords, setHospitalRecords] = useState<any[]>([]);
 
-  console.log(user);
+  // 선택된 반려동물
   const handlePetClick = (pet: Pet) => {
     setSelectedPet(pet);
   };
 
+  // 헤더에 토큰 추가해야함, 전체 반려동물 data state
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -66,36 +62,7 @@ const Diary: React.FC = () => {
     fetchData();
   }, [setBuddy]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${API_URL}buddy`);
-        const buddyData = response.data.message;
-        setBuddy(buddyData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, [setBuddy]);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         `${API_URL}users/6617b4493122a35bf1a26f8d`,
-  //       );
-  //       const userData = response.data.message;
-  //       setUser(userData);
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
+  // 병원 기록 data state
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -108,8 +75,9 @@ const Diary: React.FC = () => {
     };
 
     fetchData();
-  }, []);
+  }, [hospitalRecords]);
 
+  // 해당 반려동물의 병원기록만 filter
   const filteredHospitalRecords = hospitalRecords.filter(
     (record) => record.buddyId === selectedPet?._id,
   );
@@ -124,6 +92,7 @@ const Diary: React.FC = () => {
       />
       <HealthDiary
         petName={selectedPet?.name}
+        petId={selectedPet?._id}
         diaryData={filteredHospitalRecords}
       />
     </DiaryPageContainer>
