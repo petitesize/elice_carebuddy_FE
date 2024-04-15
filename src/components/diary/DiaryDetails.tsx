@@ -68,23 +68,6 @@ const Icon = styled.div`
   }
 `;
 
-// Date 포맷팅 함수
-const formatDate = (date: Date, includeTime: boolean = false) => {
-  const options: Intl.DateTimeFormatOptions = {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-  };
-
-  if (includeTime) {
-    options.hour = '2-digit';
-    options.minute = '2-digit';
-    options.hour12 = true;
-  }
-
-  return date.toLocaleDateString('ko-KR', options);
-};
-
 interface DiaryProps {
   consultationDate: String;
   disease: string;

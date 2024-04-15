@@ -9,7 +9,8 @@ interface TextAreaProps {
   padding?: string;
   margin?: string;
   name?: string; // 추가된 부분
-  value?: string; // 추가된 부분
+  value?: string | null; // 추가된 부분
+  defaultValue?: string | null;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void; // 추가된 부분
 }
 

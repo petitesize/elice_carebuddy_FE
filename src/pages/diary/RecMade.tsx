@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import InputBox from '../../components/baseComponent/InputBox';
 import RadioBox from '../../components/baseComponent/RadioBox';
 import TextArea from '../../components/baseComponent/TextArea';
-import { userState } from '../../recoil/atoms';
 
 const Component = styled.div`
   display: flex;
@@ -47,7 +46,7 @@ const ContentBody = styled.div`
 const Checkbox = styled.input``;
 
 interface ModalProps {
-  onClose: () => void;
+  onClose?: () => void;
   onSubmit: (formData: FormData) => void;
 }
 
@@ -71,7 +70,7 @@ const RecMade: React.FC<ModalProps> = ({ onSubmit }) => {
 
   const [selectedOption, setSelectedOption] = useState<string>('아니오'); // 선택된 값 상태
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     // userId: '6617b4493122a35bf1a26f8d',
     // buddyId: '6617b4603122a35bf1a26f8f',
     doctorName: null,
@@ -101,7 +100,7 @@ const RecMade: React.FC<ModalProps> = ({ onSubmit }) => {
     });
   };
 
-  // 선생님 성함
+  // 선생님 성함 등 input
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -120,15 +119,6 @@ const RecMade: React.FC<ModalProps> = ({ onSubmit }) => {
     setTime(value);
     setFormData({ ...formData, consultationDate: `${date} ${value}` });
   };
-
-  // const handleSubmit = () => {
-  //   // 폼 데이터를 부모 컴포넌트로 전송
-  //   onSubmit(formData);
-  // };
-
-  // const handleModalBackgroundClick = () => {
-  //   onClose(); // 모달 닫기 함수 호출
-  // };
 
   return (
     <>

@@ -1,16 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import BigModal from '../baseComponent/BigModal';
 import RecMade from '../../pages/diary/RecMade';
 import RecEdit from '../../pages/diary/RecEdit';
 import Button from '../baseComponent/Button';
 import ActionButton from '../baseComponent/ActionButton';
-import {
-  LuPill,
-  LuActivitySquare,
-  LuStethoscope,
-  LuMessageSquarePlus,
-} from 'react-icons/lu';
 import { TbBuildingHospital, TbReportMedical } from 'react-icons/tb';
 import DiaryDetails from './DiaryDetails';
 import axios from 'axios';
@@ -22,6 +16,7 @@ import { userState } from '../../recoil/atoms';
 // 최신 순으로 정렬되는 것 또한 추가 구현되면 좋을 듯 함
 
 interface DiaryProps {
+  _id: string;
   consultationDate: string;
   disease: string;
   symptom: string;
@@ -33,7 +28,7 @@ interface DiaryProps {
 }
 
 interface HealthDiaryProps {
-  petId: string;
+  petId?: string;
   petName?: string;
   diaryData: DiaryProps[];
 }
@@ -46,11 +41,13 @@ const HealthDiary: React.FC<HealthDiaryProps> = ({
   const [showModal, setShowModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [formData, setFormData] = useState({});
+  const [recordId, setRecordId] = useState<string | null>(null); // id 상태 추가
 
   const handleToggleModal = () => {
     setShowModal(!showModal);
   };
 
+  // 삭제 버튼?
   const handleDeleteButtonClick = () => {
     setShowModal(true);
   };
@@ -60,9 +57,12 @@ const HealthDiary: React.FC<HealthDiaryProps> = ({
     setShowEditModal(!showEditModal);
   };
 
-  const handleEditButtonClick = () => {
+  const handleEditButtonClick = (id: string) => {
     setShowEditModal(true); // 수정하기 버튼 클릭 시 수정 모달 표시
+    setRecordId(id);
+    console.log(id);
   };
+
   const handleData = (formData: any) => {
     // RecMade 컴포넌트에서 입력된 데이터를 받아와서 상태에 저장합니다.
     setFormData(formData);
@@ -73,6 +73,10 @@ const HealthDiary: React.FC<HealthDiaryProps> = ({
     ...formData,
     userId: useRecoilValue(userState)?._id,
     buddyId: petId,
+  };
+
+  const formDataForPUT = {
+    ...formData,
   };
 
   const handleHospitalPost = async () => {
@@ -87,6 +91,24 @@ const HealthDiary: React.FC<HealthDiaryProps> = ({
       setShowModal(!showModal);
     } catch (error) {
       console.error('POST 요청 실패:', error);
+    }
+  };
+
+  const handleHospitalPut = async () => {
+    try {
+      const response = await axios.put(
+        `${API_URL}hospital/${recordId}`,
+        formDataForPUT,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+      console.log('PUT 요청 성공:', response.data);
+      setShowEditModal(!showEditModal);
+    } catch (error) {
+      console.error('PUT 요청 실패:', error);
     }
   };
 
@@ -132,8 +154,9 @@ const HealthDiary: React.FC<HealthDiaryProps> = ({
         <BigModal
           title="진료 기록 수정"
           value="수정"
-          component={<RecEdit />} // 수정 모달을 불러옴
+          component={<RecEdit onSubmit={handleData} recordId={recordId} />} // 수정 모달을 불러옴
           onClose={handleToggleEditModal}
+          onHandleClick={handleHospitalPut}
         />
       )}
       {diaryData.length > 0 ? (
@@ -142,7 +165,7 @@ const HealthDiary: React.FC<HealthDiaryProps> = ({
             <p>{formatDate(new Date(data.consultationDate), true)}</p>
             <HealthReport>
               <ActionButton
-                onEdit={handleEditButtonClick}
+                onEdit={() => handleEditButtonClick(data._id)}
                 direction="horizontal"
                 border="none"
               />
