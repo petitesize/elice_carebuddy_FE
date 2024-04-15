@@ -3,6 +3,8 @@ import axios from 'axios';
 import styled from 'styled-components';
 import GroupCard from '../../components/community/GroupCard';
 import { API_URL } from '../../constants/constants';
+import { useRecoilState } from 'recoil';
+import { userState } from '../../recoil/atoms';
 
 const Tab = styled.div`
   margin: 20px 0 15px 0;
@@ -36,11 +38,16 @@ interface Group {
   name: number;
   group: string;
   introduction: string;
+  _id: string;
 }
 
 const Group: React.FC = () => {
   const [groups, setGroups] = useState<Group[]>([]);
   const [clickedTab, setClickedTab] = useState(0);
+  const [isMember, setIsMember] = useState(false);
+  const [user] = useRecoilState(userState);
+
+  console.log('user', user);
 
   // 그룹 불러오기
   useEffect(() => {
@@ -54,11 +61,27 @@ const Group: React.FC = () => {
         console.error('게시글 조회 실패', error);
       }
     };
-
     fetchData();
   }, []);
 
   const filteredGroups = groups.filter((group) => group.name === clickedTab);
+
+  // 그룹 가입 API
+  const handleJoinGroup = async (groupId: string) => {
+    try {
+      const data = {
+        categoryId: groupId,
+      };
+
+      const response = await axios.put(
+        `${API_URL}users/${user?._id}/joinGroup`, // 원본
+        data,
+      );
+      console.log('그룹 가입 성공', response.data);
+    } catch (error) {
+      console.error('그룹 가입 실패', error);
+    }
+  };
 
   return (
     <>
@@ -77,6 +100,7 @@ const Group: React.FC = () => {
             groupId={group._id}
             name={group.group}
             introduction={group.introduction}
+            onClick={() => handleJoinGroup(group._id)}
           />
         ))}
       </GroupCardWrapper>

@@ -89,7 +89,6 @@ const PostCreate: React.FC = () => {
   };
 
   return (
-    <>
       <StyledPostCreate>
         <Select options={SelectDummyWritingGroupOptions} width="200px" />
         <InputBox
@@ -116,7 +115,6 @@ const PostCreate: React.FC = () => {
         </Text>
         <Hr />
       </StyledPostCreate>
-    </>
   );
 };
 

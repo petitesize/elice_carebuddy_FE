@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import LinkButton from '../baseComponent/LinkButton.tsx';
-
+import React, { ChangeEvent, useState } from 'react';
 
 type CommentWritingBoxProps = {
   text?: string;
-  nickname: string;
+  nickname: string | undefined;
+  onClick: (commentText: string) => void;
 };
 
 const StyledCommentWritingBox = styled.div`
@@ -16,7 +17,7 @@ const StyledCommentWritingBox = styled.div`
   font-size: var(--font-size-md-1);
   position: relative;
   height: 120px;
-  margin-bottom: 20px;
+  margin: 20px 0;
 `;
 
 const Nickname = styled.p`
@@ -37,16 +38,37 @@ const ButtonContainer = styled.div`
   padding: 0 0 2px;
 `;
 
-const CommentWritingBox: React.FC<CommentWritingBoxProps> = ({ nickname }) => (
-  <>
+const CommentWritingBox: React.FC<CommentWritingBoxProps> = ({
+  nickname,
+  onClick,
+}) => {
+  const [commentText, setCommentText] = useState(''); 
+
+  // 댓글 내용 적으면 업데이터
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setCommentText(e.target.value);
+  };
+
+  // 댓글 등록
+  const handleCommentSubmit = (commentText: string) => {
+    if (commentText.trim() === '') {
+      alert('댓글 내용을 입력해주세요')
+    } else {
+      onClick(commentText);
+      alert('댓글 등록이 완료되었습니다')
+    }      
+    setCommentText('');
+  };
+
+  return (
     <StyledCommentWritingBox>
       <Nickname>{nickname}</Nickname>
-      <CommentBox placeholder="댓글 내용을 입력하세요..." />
+      <CommentBox value={commentText} onChange={handleChange} placeholder="댓글 내용을 입력하세요..." />
       <ButtonContainer>
-        <LinkButton text="등록하기" />
+        <LinkButton text="등록하기" onClick={() => handleCommentSubmit(commentText)} />
       </ButtonContainer>
     </StyledCommentWritingBox>
-  </>
-);
+  );
+};
 
 export default CommentWritingBox;

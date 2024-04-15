@@ -14,6 +14,7 @@ type FeedBoxProps = {
   uploadedDate: string;
   likeCount: number;
   commentCount: number;
+  src?:string;
 };
 
 const StyledFeedBox = styled(Link)`
@@ -21,9 +22,9 @@ const StyledFeedBox = styled(Link)`
   flex-direction: column;
   border-radius: 10px;
   border: solid 1px var(--color-grey-2);
-  height: 170px;
-  padding: 20px 20px;
-  margin: 15px 0;
+  height: 150px;
+  padding: 25px 20px;
+  margin: 20px 0;
   cursor: pointer;
   text-decoration: none;
   color: inherit;
@@ -76,12 +77,10 @@ const Content = styled.pre`
   min-height: 60px;
 `;
 
-const MoreSpan = () => (
-  <span style={{ color: '#0069E4', fontSize: 'var(--font-size-sm-1)' }}>
-    {' '}
-    ...더보기
-  </span>
-);
+const MoreSpan = styled.span`
+color: #0069E4;
+font-size: var(--font-size-sm-1);
+`;
 
 const FeedBox: React.FC<FeedBoxProps> = ({
   title,
@@ -100,14 +99,14 @@ const FeedBox: React.FC<FeedBoxProps> = ({
     <StyledFeedBox to={`/post/${postId}`}>
       <TitleContainer>
         <Title>{title}</Title>
-        <LikeAndCommentCount
+        {/* <LikeAndCommentCount
           likeCount={likeCount}
           commentCount={commentCount}
-        />
+        /> */}
       </TitleContainer>
       <Content>
         {processedContent}
-        <MoreSpan />
+        <MoreSpan>... 더보기</ MoreSpan>
       </Content>
       <Hr />
       <ProfileContainer>

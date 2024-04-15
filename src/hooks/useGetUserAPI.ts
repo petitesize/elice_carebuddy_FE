@@ -30,7 +30,7 @@ const useGetUserAPI = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${API_URL}users/661a42a9b7e8af57dbdf175f`,
+          `${API_URL}users/661a0e5febec873b54de2ad1`,
         );
         const userData = response.data.message;
         setUser(userData);
@@ -40,10 +40,10 @@ const useGetUserAPI = () => {
       }
     };
 
-    fetchData();
+    fetchData();    
   }, []);
 
-  return user;
+  return user; 
 };
 
 export default useGetUserAPI;

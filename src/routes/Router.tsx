@@ -23,11 +23,15 @@ const AppRouter = () => {
         <Route path="/userpage" element={<Layout component={Userpage} />} />
         <Route path="/userpage/:userId" element={<Layout component={Userpage} />} />
         <Route path="/" element={<Layout component={Home} />} />
-        <Route path="/community" element={<Layout component={Community} />} />
-        <Route path="/post" element={<Layout component={Post} />} />
-        <Route path="/post/:postId" element={<Layout component={Post} />} />
-        <Route path="/community" element={<Layout component={Community} />} />
+        <Route path="/group/:groupId" element={<Layout component={Community} />} />
         <Route path="/group/" element={<Layout component={Group} />} />
+        <Route path="/feed" element={<Layout component={Post} />} />
+        <Route
+          path="/pet-register"
+          element={<Layout component={PetRegister} />}
+        />
+        <Route path="/pet-edit" element={<Layout component={PetEdit} />} />
+        <Route path="/post/:postId" element={<Layout component={Post} />} />
         <Route path="/diary" element={<Layout component={Diary} />} />
         <Route
           path="/hospital-info"
