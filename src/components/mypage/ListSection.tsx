@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom'; // react-router-dom에서 Link를 가져옵니다.
 import { API_URL } from './../../constants/constants';
 
 const Container = styled.div``;
@@ -52,8 +53,17 @@ const ListItem = styled.div`
   border-bottom: 1px solid #cecece;
 `;
 
-const DataContainer = styled.div`
-  display: flex;
+const DataContainer = styled.div``;
+
+// Link 컴포넌트를 스타일링하여 언더라인을 없애줍니다.
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: #343434;
+`;
+
+// post.categoryId.group에 색상을 적용하는 스타일
+const CategoryGroup = styled.span`
+  color: #6d987a; // 원하는 색상으로 변경
 `;
 
 interface Post {
@@ -68,10 +78,10 @@ interface Post {
 }
 
 interface ListSectionProps {
-  userId: string; // Props로 userId 추가
+  userId: string;
 }
 
-const ListSection: React.FC<ListSectionProps> = ({ userId }) => { // Props로 userId 받음
+const ListSection: React.FC<ListSectionProps> = ({ userId }) => {
 
   const [posts, setPosts] = useState<Post[]>([]);
 
@@ -81,15 +91,11 @@ const ListSection: React.FC<ListSectionProps> = ({ userId }) => { // Props로 us
         const response = await axios.get(`${API_URL}post`);
         const postData = response.data.message;
 
-        // userId가 일치하는 데이터 찾기
         const matchedPosts = postData.filter(post => post.userId?._id === userId);
 
         if (matchedPosts.length > 0) {
-          // userId와 일치하는 데이터가 있다면 여기서 처리
-          console.log('userId와 일치하는 데이터:', matchedPosts);
           setPosts(matchedPosts);
         } else {
-          // userId와 일치하는 데이터가 없다면 여기서 처리
           console.log('일치하는 데이터가 없습니다.');
         }
 
@@ -99,9 +105,8 @@ const ListSection: React.FC<ListSectionProps> = ({ userId }) => { // Props로 us
     };
 
     fetchData();
-  }, [userId]); // userId가 변경될 때마다 실행
+  }, [userId]);
 
-  // 년-월-일 형식으로 날짜 포맷팅 함수
   const formatDate = (date: string) => {
     const formattedDate = new Date(date);
     const year = formattedDate.getFullYear();
@@ -110,7 +115,6 @@ const ListSection: React.FC<ListSectionProps> = ({ userId }) => { // Props로 us
     return `${year}/${month}/${day}`;
   };
 
-  // 제목과 데이터 배열
   const titles = ['그룹', '글 제목', '작성일'];
 
   return (
@@ -128,7 +132,12 @@ const ListSection: React.FC<ListSectionProps> = ({ userId }) => { // Props로 us
             {posts.map((post, index) => (
               <ListItem key={index}>
                 <DataContainer>
-                  <Data>[{post.categoryId.group}] {post.title}</Data>
+                  {/* StyledLink를 사용하여 Link를 스타일링합니다. */}
+                  <StyledLink to={`/post/${post._id}`}>
+                    <Data>
+                      [<CategoryGroup>{post.categoryId.group}</CategoryGroup>] {post.title}
+                    </Data>
+                  </StyledLink>
                 </DataContainer>
                 <DataContainer>
                   <Data>{formatDate(post.createdAt)}</Data>

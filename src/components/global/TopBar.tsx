@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { API_URL } from './../../constants/constants';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 
@@ -46,9 +48,46 @@ const DummyData: DummyData = {
   ],
 };
 
-const TopBar: React.FC = () => {
+interface Post {
+  _id: string;
+  userId: string;
+  categoryId: {
+    group: string;
+  };
+  name: number;
+  title: string;
+  createdAt: string;
+}
+
+interface Props {
+  userId: string; // Props로 userId 추가
+}
+
+const TopBar: React.FC<Props> = ({ userId }) => {
   const location = useLocation();
   const { pathname } = location;
+
+  const postId = '661762dce744e418e35138e3'
+
+  const [group, setGroup] = useState<Post[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${API_URL}groups`);
+        const groupData = response.data.message;
+
+          console.log('group과 일치하는 데이터:', groupData);
+          setGroup(groupData);
+
+      } catch (error) {
+        console.error('에러', error);
+      }
+    };
+
+    fetchData();
+  }, []); // userId가 변경될 때마다 실행
+
 
   let menuIndex = 0; // 초기값으로 첫 번째 메뉴인 'carebuddy'를 선택합니다.
   let menuName = ''; // menuName의 초기값은 빈 문자열입니다.

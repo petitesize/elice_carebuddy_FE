@@ -21,9 +21,10 @@ const AppRouter = () => {
         {/*<Route path="/signup-info" element={<Layout component={SignupInfo} />} />*/}
         <Route path="/mypage" element={<Layout component={Mypage} />} />
         <Route path="/userpage" element={<Layout component={Userpage} />} />
+        <Route path="/userpage/:userId" element={<Layout component={Userpage} />} />
         <Route path="/" element={<Layout component={Home} />} />
         <Route path="/community" element={<Layout component={Community} />} />
-        <Route path="/feed" element={<Layout component={Post} />} />
+        <Route path="/post" element={<Layout component={Post} />} />
         <Route path="/post/:postId" element={<Layout component={Post} />} />
         <Route path="/community" element={<Layout component={Community} />} />
         <Route path="/group/" element={<Layout component={Group} />} />
@@ -36,7 +37,7 @@ const AppRouter = () => {
           path="/pharmacy-info"
           element={<Layout component={PharmacyInfo} />}
         />
-        {/*<Route path="*" element={<NotFound />} />*/}
+        <Route path="*" element={<NotFound />} />
         <Route path="/signup-info/auth/kakao/callback" element={<Layout component={SignupInfo} />} />
       </Routes>
     </Router>

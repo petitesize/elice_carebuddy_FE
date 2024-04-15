@@ -82,7 +82,6 @@ const MypageContent: React.FC = () => {
 
     fetchData();
   }, [userId]);
-  
 
   return (
     <Container>

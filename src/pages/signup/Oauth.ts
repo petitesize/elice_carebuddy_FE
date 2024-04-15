@@ -3,37 +3,35 @@ import { API_URL } from '../../constants/constants';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const code = new URL(window.location.href).searchParams.get('code');
-const navigate = useNavigate();
-const token = window.localStorage.getItem('token');
+import axios, { AxiosResponse } from 'axios';
 
-useEffect(() => {
-  (async () => {
-    try {
-      // 코드가 존재하는지 확인하고 API에 요청하여 토큰을 받아옴
-      const res = await axios.get(`api/code=${code}`);
-      const token = res.headers.authorization;
+{/*interface Tokens {
+  access_token: string;
+  token_type: string;
+  refresh_token: string;
+  expires_in: number;
+  scope: string;
+}
 
-      // 받아온 토큰을 로컬 스토리지에 저장
-      window.localStorage.setItem('token', token);
+const getTokens = async (): Promise<Tokens> => {
+  const url = 'https://kauth.kakao.com/oauth/token';
 
-      // 데이터를 서버에 보냄
-      const postData = {
-        // 데이터 예시
-      };
+  const data = {
+    grant_type: 'authorization_code',
+    client_id: 'fc0445196ca1bc948515866bb1fba56e',
+    redirect_uri: 'http://localhost:5173/signup-info/auth/kakao/callback',
+    code: 'SVBIOeu9awf-r8nF2gsOfB0sVSjVVyV6htmIVnJjnelaXb0ROL6wfNxJBdHW4BCjG5etiQopb1UAAAF3YfB5Zw',
+  };
 
-      const response = await axios.post('/api/post', postData, {
-        headers: {
-          Authorization: token,
-        },
-      });
+  const response: AxiosResponse<Tokens> = await axios.post(url, data);
 
-      // 메인 페이지로 이동
-      navigate('/main');
-    } catch (error) {
-      console.error(error);
-      // 오류가 발생하면 메인 페이지로 이동
-      navigate('/main');
-    }
-  })();
-}, [code]); // code가 변경될 때마다 useEffect가 실행되도록 배열에 추가
+  // 응답 데이터 반환
+  return response.data;
+};
+
+// 토큰 가져오기
+const tokens: Tokens = await getTokens();
+
+// 결과 출력
+console.log(tokens);
+*/}
