@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { API_URL } from '../../constants/constants';
+import { Link, useParams } from 'react-router-dom';
 
 // 컴포넌트
 import LikeAndCommentCount from '../../components/community/LikeAndCommentCount';
@@ -105,14 +106,15 @@ const Likes = styled.div`
   flex-direction: row;
   margin: 0 px;
   color: var(--color-grey-1);
-
-  p {
-    font-size: var(--font-size-ft-1);
-    margin: 0 5px;
-  }
 `;
 
-const CommentArea = styled.div``;
+const PostList = styled(Link)`
+  font-size: var(--font-size-md-2);
+  margin: 0 5px;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+`;
 
 const ImgContainer = styled.div`
   margin-top: 20px;
@@ -138,6 +140,8 @@ const ProfileImg = styled.img`
   border-radius: 50%;
 `;
 
+const CommentArea = styled.div``;
+
 interface Post {
   title?: string;
   content?: string;
@@ -146,27 +150,28 @@ interface Post {
 }
 
 interface Comment {}
-const postId = '661762dce744e418e35138e3'; //개별 postId
+
 
 const POST: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [post, setPost] = useState<Post | null>(null);
   // const [comments, setComment] = useState<Comment[]>([]);
 
+  const { postId } = useParams<{ postId: string }>();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${API_URL}post/${postId}`);
         setPost(response.data.message[0]);
-        console.log(response.data.message[0]);
-        console.log('게시글 조회 성공');
+        console.log('게시글 조회 성공', response.data.message[0]);
       } catch (error) {
         console.error('게시글 조회 실패', error);
       }
     };
 
     fetchData();
-  }, []);
+  }, [postId]);
 
   const formattedDate = post?.updatedAt ? formatDateIncludeTime({ rowDate: post.updatedAt }) : '';
 
@@ -190,7 +195,7 @@ const POST: React.FC = () => {
           <LeftContainer>
             <PostListButtonContainer>
               <LuChevronLeft />
-              <p>글 목록 보기</p>
+              <PostList to="">글 목록 보기</PostList>
             </PostListButtonContainer>
           </LeftContainer>
           <PostContainer>
@@ -199,7 +204,7 @@ const POST: React.FC = () => {
                 <PostTitle>{post.title}</PostTitle>
                 <ProfileContainer>
                   <ProfileImg src={profileImg} alt="프로필 이미지" />
-                  <p>{post.userId && post.userId.nickName}</p>
+                  <p>{post?.userId?.nickName}</p>
                   <p>|</p>
                   <p>{formattedDate}</p>
                 </ProfileContainer>

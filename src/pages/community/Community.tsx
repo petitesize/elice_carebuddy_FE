@@ -83,10 +83,22 @@ const WritingButton = styled.div`
   }
 `;
 
+interface Post {
+title: string;
+content: string;
+userId: string;
+createdAt: string;
+};
+
+interface Member {
+
+};
+
+
 const Community: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
-  const [posts, setPosts] = React.useState<any[]>([]);
-  const [members, setMembers] = React.useState<any[]>([]);
+  const [posts, setPosts] = React.useState<Post[]>([]);
+  const [members, setMembers] = React.useState<Member[]>([]);
 
   // 추천 멤버 조회 API
   useEffect(() => {
@@ -153,13 +165,13 @@ const Community: React.FC = () => {
               />
             )}
           </WritingButton>
-          {posts.map((post, index) => (
+          {posts.length > 0 && posts.map((post, index) => (
             <FeedBox
               key={index}
               title={post.title}
               content={post.content}
               src={profileImg}
-              nickname={post.userId && post.userId.nickName}
+              nickname={post?.userId?.nickName}
               uploadedDate={post.createdAt}
               likeCount={templikeCount}
               commentCount={tempCommentCount}

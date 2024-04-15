@@ -36,6 +36,7 @@ interface Group {
   name: number;
   group: string;
   introduction: string;
+  _id: string;
 }
 
 const Group: React.FC = () => {

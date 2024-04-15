@@ -6,6 +6,7 @@ type SidePanelProps = {
   groupId: string;
   name: string;
   array: React.ReactNode[];
+  groupId: string;
 };
 
 const StyledSidePanelContainer = styled.div`

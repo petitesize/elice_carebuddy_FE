@@ -1,9 +1,8 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { LuMessagesSquare } from 'react-icons/lu';
 // import { LuCheck } from 'react-icons/lu'; // 나중에 동적 렌더링 시 추가
 import Button from '../../components/baseComponent/Button';
-
 
 type GroupCardProps = {
   name: string;
@@ -67,8 +66,10 @@ const ButtonWrapper = styled.div`
   justify-content: flex-end;
 `;
 
-const GroupCard: React.FC<GroupCardProps> = ({ name, introduction, groupId }) => (
-  <>
+
+const GroupCard: React.FC<GroupCardProps> = ({ name, introduction, groupId }) => {
+
+  return (
     <StyledGroupCard to={`/group/${groupId}`}>
       <IconWrapper>
         <LuMessagesSquare />
@@ -86,13 +87,9 @@ const GroupCard: React.FC<GroupCardProps> = ({ name, introduction, groupId }) =>
             가입
           </Button>
         </ButtonWrapper>
-        {/* <MemberCheck> // 나중에 동적 렌더링 시 추가
-        <LuCheck />
-        <p>당신은 이 그룹의 멤버입니다</p>
-      </MemberCheck> */}
       </GroupInfoWrapper>
     </StyledGroupCard>
-  </>
-);
+  );
+};
 
 export default GroupCard;

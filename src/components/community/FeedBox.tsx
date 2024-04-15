@@ -76,12 +76,10 @@ const Content = styled.pre`
   min-height: 60px;
 `;
 
-const MoreSpan = () => (
-  <span style={{ color: '#0069E4', fontSize: 'var(--font-size-sm-1)' }}>
-    {' '}
-    ...더보기
-  </span>
-);
+const MoreSpan = styled.span`
+color: #0069E4;
+font-size: var(--font-size-sm-1);
+`;
 
 const FeedBox: React.FC<FeedBoxProps> = ({
   title,
@@ -107,7 +105,7 @@ const FeedBox: React.FC<FeedBoxProps> = ({
       </TitleContainer>
       <Content>
         {processedContent}
-        <MoreSpan />
+        <MoreSpan>... 더보기</ MoreSpan>
       </Content>
       <Hr />
       <ProfileContainer>

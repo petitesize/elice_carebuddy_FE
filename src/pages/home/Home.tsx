@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { API_URL } from '../../constants/constants';
+import { useRecoilState } from 'recoil';
+import { userState } from '../../recoil/atoms';
 
 // 컴포넌트
 import Banner from '../../components/community/Banner';
@@ -17,11 +19,10 @@ import PostCreate from '../../components/community/PostCreate';
 import SendPostData from '../../services/SendPostData';
 import GetRandomItems from '../../utils/GetRandomThreeItems';
 
+
 import {
   tempCommentCount,
   templikeCount,
-  SelectDummyCategoryOptions,
-  SelectDummyGroupOptions,
 } from '../../../temp-data-community';
 
 const BannerWrapper = styled.div``;
@@ -87,11 +88,25 @@ interface Groups {
   introduction: string;
 }
 
+// 삭제 예정
+const SelectDummyCategoryOptions = [
+  { value: 'Dog', label: '강아지' },
+  { value: 'Cat', label: '고양이' },
+];
+
+// 삭제 예정
+const SelectDummyWritingGroupOptions = [
+  { value: 'Group', label: '그룹을 선택해 주세요' },
+];
+
 const Home: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [posts, setPosts] = useState<Posts[]>([]);
   const [groups, setGroups] = useState<Groups[]>([]);
   const [groupArray, setGroupArray] = useState<JSX.Element[]>([]);
+  const [user, setUser] = useRecoilState(userState);
+
+  console.log('user', user)
 
   // 그룹 불러오기
   useEffect(() => {
@@ -115,6 +130,7 @@ const Home: React.FC = () => {
         const updatedGroups = randomGroups.map((group, index) => (
           <CommunityListSidebar
             key={index}
+            groupId={group._id}
             name={group.group}
             introduction={group.introduction}
           />
@@ -161,7 +177,7 @@ const Home: React.FC = () => {
               <Select
                 width="120px"
                 borderRadius="30px"
-                options={SelectDummyGroupOptions}
+                options={SelectDummyWritingGroupOptions}
               />
             </Classification>
             <WritingButton>
@@ -191,8 +207,8 @@ const Home: React.FC = () => {
               key={index}
               title={post.title}
               content={post.content}
-              profile={post.userId && post.userId.profileImage[0]}
-              nickname={post.userId && post.userId.nickName}
+              profile={post?.userId?.profileImage[0]}
+              nickname={post?.userId?.nickName}
               uploadedDate={post.createdAt}
               likeCount={templikeCount}
               commentCount={tempCommentCount}
