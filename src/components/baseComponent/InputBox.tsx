@@ -11,7 +11,8 @@ interface InputProps {
   placeholder?: string;
   type?: string;
   name?: string; // 추가된 부분
-  value?: string; // 추가된 부분
+  value?: string | null; // 추가된 부분
+  defaultValue?: string | null;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void; // 추가된 부분
 }
 
@@ -53,6 +54,7 @@ const InputBox: React.FC<InputProps> = ({
   type,
   name,
   value,
+  defaultValue,
   onChange,
 }) => {
   return (
@@ -66,6 +68,7 @@ const InputBox: React.FC<InputProps> = ({
       placeholder={placeholder}
       type={type}
       name={name}
+      defaultValue={defaultValue}
       value={value} // 입력값을 value로 전달
       onChange={onChange} // onChange 함수를 props로 받음
     />

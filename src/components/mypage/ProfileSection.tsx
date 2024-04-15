@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 import Button from '../../components/baseComponent/Button';
 import InputBox from '../../components/baseComponent/InputBox';
@@ -16,9 +16,6 @@ const UserContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   margin: 30px 0 30px 0;
-  padding: 20px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.08);
-  border-radius: 15px;
 `;
 
 const Menu = styled.span`
@@ -97,7 +94,7 @@ const ErrorText = styled.a`
 `;
 
 const ErrorBox = styled.div`
-  padding-left: 70px;
+  padding-left: 74px;
 `
 
 const Profile: React.FC = () => {
@@ -106,7 +103,7 @@ const Profile: React.FC = () => {
   const [newIntroduce, setNewIntroduce] = useState<string>('');
   const [errorText, setErrorText] = useState<string>('');
 
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files?.[0];
     if (selectedFile) {
       const imageUrl = URL.createObjectURL(selectedFile);
@@ -114,7 +111,7 @@ const Profile: React.FC = () => {
     }
   };
 
-  const handleNickNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleNickNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newName = event.target.value;
     setNewNickName(newName); // 입력값을 상태에 반영
   
@@ -127,14 +124,14 @@ const Profile: React.FC = () => {
   };
 
 
-  const handleIntroductionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleIntroductionChange = (event: ChangeEvent<HTMLInputElement>) => {
     setNewIntroduce(event.target.value);
   };
 
   const handleSave = async () => {
     try {
       if (!newNickName) {
-        setErrorText('닉네임을 입력해주세요.');
+        setErrorText('닉네임을 입력해주세요');
         return;
       }
 
@@ -142,7 +139,9 @@ const Profile: React.FC = () => {
         nickName: newNickName,
         introduce: newIntroduce
       });
+      alert('수정되었습니다.'); // 수정 완료 시 알림창 띄우기
       console.log('저장되었습니다.');
+      window.location.reload(); // 페이지 새로고침
     } catch (error) {
       console.error('저장 중 오류가 발생했습니다.', error);
     }

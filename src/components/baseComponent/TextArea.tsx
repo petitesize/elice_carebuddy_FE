@@ -8,6 +8,10 @@ interface TextAreaProps {
   fontSize?: keyof typeof fontSizeMap;
   padding?: string;
   margin?: string;
+  name?: string; // 추가된 부분
+  value?: string | null; // 추가된 부분
+  defaultValue?: string | null;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void; // 추가된 부분
 }
 
 const fontSizeMap = {
@@ -27,7 +31,10 @@ const StyledTextArea = styled.textarea<TextAreaProps>`
   height: ${(props) => props.height || '100px'};
   border: 1px solid var(--color-grey-2);
   border-radius: 4px;
-  font-size: ${(props) => props.fontSize ? fontSizeMap[props.fontSize] : 'var(--font-size-ft-1)'}; //14
+  font-size: ${(props) =>
+    props.fontSize
+      ? fontSizeMap[props.fontSize]
+      : 'var(--font-size-ft-1)'}; //14
   padding: ${(props) => props.padding || '5px'};
   margin: ${(props) => props.margin || '0'};
   color: ${(props) => props.color || 'var(--color-black)'};

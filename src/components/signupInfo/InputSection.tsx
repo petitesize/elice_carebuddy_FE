@@ -10,10 +10,14 @@ const Content = styled.div`
 `
 const Title = styled.div`
   font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-md-2); //20
+  font-size: var(--font-size-md-2); //18
   margin-bottom: 10px;
 `;
 
+const SecondTitle = styled.div`
+  font-size: var(--font-size-md-1); //16
+  margin-bottom: 5px;
+`
 const InputContainer = styled.div`
   display: flex;
 `
@@ -29,6 +33,7 @@ const InputSection: React.FC = () => {
         </Content>
         <Content>
           <Title>회원정보 입력</Title>
+          <SecondTitle>닉네임*</SecondTitle>
           <InputContainer>
             <InputBox height='20px' width='100%' />
           </InputContainer>
