@@ -132,7 +132,7 @@ const HealthDiary: React.FC<HealthDiaryProps> = ({ petName, diaryData }) => {
   const handleEditButtonClick = () => {
     setShowEditModal(true); // 수정하기 버튼 클릭 시 수정 모달 표시
   };
-  console.log(petName);
+
   return (
     <HealthDiaryContainer>
       <DiaryTitle className="diaryTitle">
