@@ -7,7 +7,7 @@ import HealthDiary from '../../components/diary/HealthDiary';
 import axios from 'axios';
 import { API_URL } from '../../constants/constants';
 
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { userState } from '../../recoil/atoms';
 
 const DiaryPageContainer = styled.div`

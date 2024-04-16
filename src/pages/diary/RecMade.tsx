@@ -62,7 +62,8 @@ interface FormData {
 }
 
 const RecMade: React.FC<ModalProps> = ({ onSubmit }) => {
-  const [showRecMadeModal, setShowRecMadeModal] = useState(true);
+  // const [showRecMadeModal, setShowRecMadeModal] = useState(true); // build 수정
+  const showRecMadeModal = useState(true);
   const [checked, setChecked] = useState(false);
 
   const [date, setDate] = useState('');
