@@ -66,7 +66,7 @@ const SectionBox: React.FC = () => {
         const res = await axios.get(`auth/kakao/callback?code=${code}`);
         const token = res.headers.authorization;
         window.localStorage.setItem('token', token);
-        console.log(token);
+        console.log('토큰 :', token);
         navigate('/signup-info/auth/kakao/callback');
       } catch (e) {
         console.error(e);

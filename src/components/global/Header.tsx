@@ -1,19 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { userState } from '../../recoil/atoms';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { API_URL } from './../../constants/constants';
 import styled from 'styled-components';
 import imgSrc from './../../assets/carebuddyLogo.png';
-import user from './../../assets/userIcon.png';
+import userIcon from './../../assets/userIcon.png'
 import alert from './../../assets/alertIcon.png';
-import { Link } from 'react-router-dom';
-
-// 링크 및 아이콘에 대한 배열 생성
-const links = [
-  { path: '/', label: '로고', icon: imgSrc },
-  { label: '커뮤니티', icon: null, subMenu: ['커뮤니티1', '커뮤니티2'] },
-  { label: '건강관리', icon: null, subMenu: ['건강 다이어리'] },
-  { label: '정보', icon: null, subMenu: ['병원 검색', '약국 검색'] },
-  { path: '/mypage', label: '', icon: user }, // 마이페이지
-  { path: '/', label: '', icon: alert },
-];
 
 // styled-components를 사용하여 header 스타일 정의
 const HeaderContainer = styled.header`
@@ -121,17 +115,69 @@ const LoginButton = styled(Link)`
 
 const Header: React.FC = () => {
   const [activeMenu, setActiveMenu] = useState<number | null>(null);
+  const [groups, setGroups] = useState<Group[]>([]);
+  const [user, setUser] = useRecoilState(userState);
+  const [posts, setPosts] = useState<Post[]>([]);
+
+  console.log('user recoil: ', user?.categoryId)
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${API_URL}groups`);
+        const groupData = response.data.message;
+        setGroups(groupData);
+        console.log('그룹데이터 :', groupData);
+      } catch (error) {
+        console.error('에러', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${API_URL}post`);
+        const postData = response.data.message;
+        console.log('postData: ', postData)
+        const matchedPosts = postData.filter(post => post.categoryId === user.categoryId);
+
+        if (matchedPosts.length > 0) {
+          setPosts(matchedPosts);
+        } else {
+          console.log('일치하는 데이터가 없습니다.');
+        }
+
+      } catch (error) {
+        console.error('에러', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // links 배열 정의
+  const links = [
+    { path: '/', label: '로고', icon: imgSrc },
+    { label: '커뮤니티', icon: null },
+    { label: '건강관리', icon: null },
+    { label: '정보', icon: null },
+    { path: '/mypage', label: '', icon: userIcon },
+    { path: '/', label: '', icon: alert },
+  ];
 
   return (
     <HeaderContainer>
       <Container>
-      <LoginButtonContainer>
-        <LoginButton to="/signup">로그인</LoginButton>
-      </LoginButtonContainer>
+        <LoginButtonContainer>
+          <LoginButton to="/signup">로그인</LoginButton>
+        </LoginButtonContainer>
         <MenuBox>
           {links.map((link, index) => (
             <Category key={index} onMouseEnter={() => setActiveMenu(index)} onMouseLeave={() => setActiveMenu(null)}>
-              {link.path ? ( // 링크가 있을 때만 Link 컴포넌트 사용
+              {link.path ? (
                 <Link to={link.path} onClick={() => setActiveMenu(null)}>
                   {link.label === '로고' ? (
                     <Logo src={link.icon} />
@@ -148,13 +194,18 @@ const Header: React.FC = () => {
                   {link.icon && <Icon src={link.icon} />}
                 </>
               )}
-              {activeMenu === index && link.subMenu && (
+              {activeMenu === index && link.label === '커뮤니티' && (
                 <SubMenu>
-                  {link.subMenu.map((item, idx) => (
+                  {groups.map((group, idx) => (
                     <SubMenuItem key={idx}>
-                      <SubMenuLink to={link.label === '커뮤니티' && item === '커뮤니티1' ? '/community' : link.label === '건강관리' && item === '건강 다이어리' ? '/diary' :link.label === '정보' && item === '병원 검색' ? '/hospital-info' : `/${item.toLowerCase().replace(/\s/g, '-')}`}>{item}</SubMenuLink>
+                      <SubMenuLink to={`/group/${group._id}`}>
+                        {group.group}
+                      </SubMenuLink>
                     </SubMenuItem>
                   ))}
+                  <SubMenuItem>
+                    <SubMenuLink to="/group">전체 그룹</SubMenuLink>
+                  </SubMenuItem>
                 </SubMenu>
               )}
             </Category>
