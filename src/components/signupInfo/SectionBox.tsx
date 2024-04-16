@@ -26,50 +26,43 @@ const ButtonBox = styled.div`
 const SectionBox: React.FC = () => {
   const navigate = useNavigate();
 
-  // 쿠키에 코드 저장하는 함수
-  const saveCodeToCookie = (code) => {
-    document.cookie = `authCode=${code}; path=/;`;
-  };
-
-  // 로그인 여부 판별 함수
-  const isLoggedIn = () => {
-    const code = getCodeFromCookie();
-    return !!code; // 코드가 있으면 로그인 상태로 판별
-  };
-
-  // 쿠키에서 코드를 가져오는 함수
-  const getCodeFromCookie = () => {
-    const cookies = document.cookie.split(';');
-    for (let cookie of cookies) {
-      const [name, value] = cookie.trim().split('=');
-      if (name === 'authCode') {
-        return value;
-      }
-    }
-    return null;
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // URL에서 code 추출
         const urlParams = new URLSearchParams(window.location.search);
         const code = urlParams.get('code');
+        console.log('code : ', code);
 
-        // 코드가 없으면 처리하지 않음
-        if (!code) return;
+        // 액세스 토큰 요청
+        const tokenResponse = await axios.post('https://kauth.kakao.com/oauth/token', {
+          grant_type: 'authorization_code',
+          client_id: 'fc0445196ca1bc948515866bb1fba56e',
+          redirect_uri: 'http://localhost:5173/signup-info/auth/kakao/callback',
+          client_secret: 'TJ3MdeN2kNqqzK2YC8yFfI8ZpBaAGEMF',
+          code: code,
+        });
 
-        // 코드를 쿠키에 저장
-        saveCodeToCookie(code);
+        const accessToken = tokenResponse.data.access_token;
 
-        // 코드를 서버로 보내어 토큰을 가져오는 요청
-        const res = await axios.get(`auth/kakao/callback?code=${code}`);
-        const token = res.headers.authorization;
-        window.localStorage.setItem('token', token);
-        console.log('토큰 :', token);
+        // 사용자 정보 요청
+        const userResponse = await axios.get('https://kapi.kakao.com/v2/user/me', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        const email = userResponse.data.kakao_account.email;
+        console.log(userResponse);
+        console.log(email);
+
+        // 서버로 인가 코드와 사용자 이메일을 전송
+        await axios.post('/auth/login', { code, email });
+
+        // 로그인 후 리다이렉트 등 필요한 작업 수행
         navigate('/signup-info/auth/kakao/callback');
-      } catch (e) {
-        console.error(e);
+      } catch (error) {
+        console.error(error);
+        // 에러 처리
         navigate('/*');
       }
     };
