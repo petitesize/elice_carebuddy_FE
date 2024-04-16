@@ -48,17 +48,11 @@ const DummyData: DummyData = {
   ],
 };
 
-interface Post {
+interface Group {
   _id: string;
-  userId: string;
-  categoryId: {
-    group: string;
-  };
   name: number;
-  title: string;
-  createdAt: string;
+  group: string;
 }
-
 interface Props {
   userId: string; // Props로 userId 추가
 }
@@ -69,9 +63,9 @@ const TopBar: React.FC<Props> = ({ userId }) => {
 
   const postId = '661762dce744e418e35138e3'
 
-  const [group, setGroup] = useState<Post[]>([]);
+  const [group, setGroup] = useState<Group[]>([]);
 
-  useEffect(() => {
+  {/*useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${API_URL}groups`);
@@ -86,14 +80,14 @@ const TopBar: React.FC<Props> = ({ userId }) => {
     };
 
     fetchData();
-  }, []); // userId가 변경될 때마다 실행
+  }, []);*/}
 
 
   let menuIndex = 0; // 초기값으로 첫 번째 메뉴인 'carebuddy'를 선택합니다.
   let menuName = ''; // menuName의 초기값은 빈 문자열입니다.
 
- // pathname에 따라 menuIndex와 menuName을 설정합니다.
- DummyData.menu.forEach((item, index) => {
+// path name에 따라 해당하는 메뉴 이름을 설정합니다.
+DummyData.menu.forEach((item, index) => {
   if (pathname === '/' && index === 0) {
     menuIndex = index;
     menuName = '반려동물 건강 서비스';
@@ -127,8 +121,14 @@ const TopBar: React.FC<Props> = ({ userId }) => {
   } else if (pathname === '/feed' && item === '커뮤니티') {
     menuIndex = index;
     menuName = '커뮤니티 이름';
+    //유저페이지는 userId에 따라 각각 다른 데이터가 들어간 화면이 보여야 함
+  } else if (pathname.includes('/userpage/') && item === 'carebuddy') {
+    // '/userpage/'을 포함하면서 'carebuddy'인 경우, 즉 userpage/:id일 때
+    menuIndex = index;
+    menuName = '유저 페이지';
   }
 });
+
 
   return (
     <TopBarContainer>

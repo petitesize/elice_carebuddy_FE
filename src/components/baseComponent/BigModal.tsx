@@ -52,7 +52,6 @@ const ButtonContainer = styled.div`
 
 interface ModalProps {
   onClose: () => void;
-  onHandleClick?: () => void;
   component: ReactNode;
   title: string;
   value: string;
@@ -61,7 +60,6 @@ interface ModalProps {
 const BigModal: React.FC<ModalProps> = ({
   title,
   value,
-  onHandleClick,
   onClose,
   component: Component,
 }) => {
