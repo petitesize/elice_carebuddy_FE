@@ -45,7 +45,7 @@ const UserpageContent: React.FC = () => {
 
   const [buddy, setBuddy] = React.useState<Pet[] | null>([]);
   const [selectedPet, setSelectedPet] = useState<Pet | null>();
-  const [user, setUser] = React.useState<User | null>(null);
+  const [user, setUser] = React.useState<User | null>([]);
 
   const handlePetClick = (pet: Pet) => {
     setSelectedPet(pet);
