@@ -7,7 +7,7 @@ export default defineConfig({
   build: {
     outDir: 'dist', // 빌드된 파일이 생성될 경로 설정
     rollupOptions: {
-      input: '/src/main.tsx', // 진입점을 index.tsx로 설정
+      input: './index.html', // 진입점을 index.html로 설정
     },
   },
   resolve: {
