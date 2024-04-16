@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { LuSearch } from 'react-icons/lu';
-import React from 'react';
+import React, { useState } from 'react';
 
 type SearchProps = {
   width?: string;

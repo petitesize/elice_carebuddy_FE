@@ -26,11 +26,11 @@ const AppRouter = () => {
         <Route path="/group/:groupId" element={<Layout component={Community} />} />
         <Route path="/group/" element={<Layout component={Group} />} />
         <Route path="/feed" element={<Layout component={Post} />} />
-        <Route
+        {/*<Route
           path="/pet-register"
           element={<Layout component={PetRegister} />}
         />
-        <Route path="/pet-edit" element={<Layout component={PetEdit} />} />
+  <Route path="/pet-edit" element={<Layout component={PetEdit} />} />*/}
         <Route path="/post/:postId" element={<Layout component={Post} />} />
         <Route path="/diary" element={<Layout component={Diary} />} />
         <Route
