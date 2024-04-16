@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Hr from '../baseComponent/Hr';
 
 type SidePanelProps = {
-  groupId: string;
+  groupId?: string;
   name: string;
   array: React.ReactNode[];
 };

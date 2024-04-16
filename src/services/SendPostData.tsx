@@ -9,7 +9,6 @@ interface PostData {
   categoryId: string;
   title: string;
   content: string;
-  postImage: string[];
 }
 
 const SendPostData = async (postData: PostData): Promise<void> => {

@@ -4,6 +4,9 @@ import styled from 'styled-components';
 interface BasedSelectProps {
   width?: string;
   borderRadius?: string;
+  onChange?: (selectedOption: {
+    [x: string]: any; value: string; label: string 
+}) => void; // onChange 이벤트 핸들러 추가(home, 글쓰기 모달 용)
 }
 
 interface SelectProps extends BasedSelectProps {
@@ -25,8 +28,26 @@ const BasedSelect: React.FC<SelectProps> = ({
   width,
   borderRadius,
   options,
+  onChange,
 }) => (
-  <StyledSelect width={width} borderRadius={borderRadius}>
+  <StyledSelect
+    width={width}
+    borderRadius={borderRadius}
+    onChange={(e) => {
+      const selectedValue = e.target.value;
+      const selectedOption = options.find(
+        (option) => option.value === selectedValue,
+      );
+      if (selectedOption && onChange) {
+        onChange(selectedOption); // 현재 선택된 옵션을 onChange 이벤트 핸들러로 전달
+      }
+      // 디버깅용 코드 - 나중에 오류날 때 대비하여 안지움
+      // console.log('옵션즈', options) 
+      // console.log('e.target.value', e.target.value) 
+      // console.log('타입', typeof(e.target.value))
+      // console.log('onChange 실행됨', selectedOption)
+    }}
+  >
     {options.map((option) => (
       <option key={option.value} value={option.value}>
         {option.label}

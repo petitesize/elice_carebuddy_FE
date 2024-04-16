@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { LuSearch } from 'react-icons/lu';
-import React from 'react';
+import React, { useState } from 'react';
 
 type SearchProps = {
   width?: string;
@@ -46,11 +46,11 @@ const Search: React.FC<SearchProps> = ({
 }) => {
 const [searchValue, setSearchValue] = useState('');
 
-const handleChange = (e:React.ChangeEvent<HtmlInputElement>) => {
+const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
   setSearchValue(e.target.value);
 };
 
-const handleSubmit = (e:React.FormEvent<HtmlFormElement>) => {
+const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
   onSearch(searchValue);
 };
@@ -63,7 +63,6 @@ const handleSubmit = (e:React.FormEvent<HtmlFormElement>) => {
         type="string"
         placeholder="검색어를 입력하세요"
         value={searchValue}
-        onChange={handleChange}
         fontSize={fontSize}
         padding={padding}
       />

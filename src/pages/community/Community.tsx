@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { API_URL, DOMAIN_URL } from '../../constants/constants';
-import { useParams } from 'react-router-dom';
-
+import { useParams, useNavigate} from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { userState } from '../../recoil/atoms';
 
@@ -103,6 +102,7 @@ interface Post {
 interface Member {}
 
 const Community: React.FC = () => {
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [posts, setPosts] = useState<Post[]>([]);
   const [members, setMembers] = useState<Member[]>([]);
@@ -131,9 +131,15 @@ const Community: React.FC = () => {
       try {
         const response = await axios.get(`${API_URL}post`);
         // deletedAt이 null이 아니고, 카테고리가 같은 데이터만 가지고 오기
-        const filteredDeletedPosts = response.data.message.filter(
-          (post: Post) => post.deletedAt === null,
-        );
+        const filteredDeletedPosts: Post[] = [];
+        response.data.message.forEach((post: Post) => {
+          if (post.deletedAt === null) {
+            filteredDeletedPosts.push(post);
+          }
+        });
+
+        // 그룹 id가 같은 포스트만 가지고 오기 -> 아직 미구현
+
         const filteredGroupPosts = filteredDeletedPosts.filter(
           (post: Post) => post.categoryId._id === groupId,
         );
@@ -167,6 +173,7 @@ const Community: React.FC = () => {
           );
 
           console.log('그룹 탈퇴 성공');
+          navigate(`/`); // 홈 페이지로 리다이렉터
         } catch (error) {
           console.error('그룹 탈퇴 실패', error);
         }
@@ -231,7 +238,7 @@ const Community: React.FC = () => {
             <LinkButton text="그룹 탈퇴" onClick={handleWithdrawalButton} />
             <LinkButton
               text="다른 그룹 둘러보기"
-              redirectUrl={`${DOMAIN_URL}groups`}
+              redirectUrl={`${DOMAIN_URL}group`}
             />
           </GroupOption>
           <SidePanel name="추천 멤버" array={memberArray} />

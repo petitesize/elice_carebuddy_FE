@@ -15,7 +15,7 @@ type CommentProps = {
   nickname: string;
   date: string;
   userId: string;
-  commentId: string;
+  commentId: string | null | undefined;
 };
 
 const StyledComment = styled.div`
@@ -89,38 +89,40 @@ const Comment: React.FC<CommentProps> = ({
   const [onEdit, setOnEdit] = useState(false);
   const [editedText, setEditedText] = useState(text);
 
-  // 백 -> 댓글 삭제 찐으로 delete요청 맞는지 확인하고 붙이기
-  const handleDeleteButton = () => {
-    // 알럿창, 확인 누를 시 댓글 삭제 요청
-    const fetchData = async () => {
-      const confirmDelete = window.confirm('정말로 삭제하시겠습니까?');
-
-      if (confirmDelete) {
-        try {
-          const response = await axios.put(`${API_URL}`);
-          console.log('글 삭제 성공', response.data.message);
-        } catch (error) {
-          console.error('글 삭제 실패', error);
-        }
-      }
-    };
-    fetchData();
-  };
-
   // 댓글 수정
   const handleSave = async () => {
     const Data = {
-      text: `${editedText}`,
+      "text": `${editedText}`,
     };
     try {
       await axios.put(`${API_URL}comment/${commentId}`, Data);
-      console.log('댓글이 수정되었습니다.');
-      window.location.reload(); // 수정된 댓글을 화면에 반영. API 없어서 대신 새로고침 사용
+      console.log('댓글 수정 성공.');
+      window.location.reload(); // 수정 후 새로고침
     } catch (error) {
-      console.error('댓글 수정 중 오류가 발생했습니다.', error);
+      console.error('댓글 수정 실패', error);
     }
     setOnEdit(false);
   };
+
+    // 댓글 삭제
+    const handleDeleteButton = () => {
+      // 알럿창, 확인 누를 시 댓글 삭제 요청
+      const fetchData = async () => {
+        const confirmDelete = window.confirm('정말로 삭제하시겠습니까?');
+  
+        if (confirmDelete) {
+          try {
+            const response = await axios.delete(`${API_URL}comment/${commentId}`);
+            console.log('댓글 삭제 성공', response.data.message);
+            window.location.reload(); // 삭제 후 새로고침
+          } catch (error) {
+            console.error('댓글 삭제 실패', error);
+          }
+        }
+      };
+      fetchData();
+    };
+  
 
   return (
     <StyledComment>

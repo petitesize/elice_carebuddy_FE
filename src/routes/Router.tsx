@@ -13,6 +13,7 @@ import HospitalInfo from '../pages/hospitalInfo/HospitalInfo';
 import PharmacyInfo from '../pages/pharmacyInfo/PharmacyInfo';
 import NotFound from '../pages/notFound/NotFound';
 
+
 const AppRouter = () => {
   return (
     <Router>
@@ -26,11 +27,12 @@ const AppRouter = () => {
         <Route path="/group/:groupId" element={<Layout component={Community} />} />
         <Route path="/group/" element={<Layout component={Group} />} />
         <Route path="/feed" element={<Layout component={Post} />} />
-        <Route
+        {/* 모달로 변경해서 라우팅 경로 삭제된 것 같은데 맞는지 확인하고 지우기 */}
+        {/* <Route 
           path="/pet-register"
           element={<Layout component={PetRegister} />}
         />
-        <Route path="/pet-edit" element={<Layout component={PetEdit} />} />
+        <Route path="/pet-edit" element={<Layout component={PetEdit} />} /> */}
         <Route path="/post/:postId" element={<Layout component={Post} />} />
         <Route path="/diary" element={<Layout component={Diary} />} />
         <Route

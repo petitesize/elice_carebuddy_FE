@@ -5,6 +5,7 @@ import { LuMessageSquare } from 'react-icons/lu';
 type LikeAndCommentCountProps = {
   likeCount: number;
   commentCount: number;
+  userId: string | undefined;
 };
 
 const StyledLikeAndCommentCount = styled.div`

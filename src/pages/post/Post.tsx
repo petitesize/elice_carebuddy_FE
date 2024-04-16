@@ -9,12 +9,12 @@ import { userState } from '../../recoil/atoms';
 // 컴포넌트
 import LikeAndCommentCount from '../../components/community/LikeAndCommentCount';
 import Comment from '../../components/community/Comment';
-// import Pagination from '../../components/baseComponent/Pagination';
 import CommentWritingBox from '../../components/community/CommentWritingBox';
 import ActionButton from '../../components/baseComponent/ActionButton';
 import Hr from '../../components/baseComponent/Hr';
 import BigModal from '../../components/baseComponent/BigModal';
 import PostEdit from '../../components/community/PostEdit';
+// import Pagination from '../../components/baseComponent/Pagination';
 
 // 로직
 import formatDateIncludeTime from '../../utils/formatDateIncludeTime';
@@ -23,11 +23,7 @@ import formatDateIncludeTime from '../../utils/formatDateIncludeTime';
 import { LuThumbsUp, LuChevronLeft } from 'react-icons/lu';
 
 // 임시 데이터
-import {
-  tempImg,
-  profileImg,
-  tempComment,
-} from '../../../temp-data-community';
+import { tempImg, profileImg } from '../../../temp-data-community';
 
 const Container = styled.div`
   display: flex;
@@ -80,7 +76,6 @@ const PostTitle = styled.p`
 
 const PostOption = styled.div`
   display: flex;
-  flex-direction: row;
 `;
 
 const PostContentArea = styled.div`
@@ -102,9 +97,10 @@ const PostContentArea = styled.div`
 const Likes = styled.div`
   display: flex;
   flex-direction: row;
-  color: var(--color-grey-1);
+  color: ${(props) =>
+    props.isLiked ? 'var(--color-green-main)' : 'var(--color-grey-1)'};
   font-size: var(--font-size-ft-1);
-  align-items: center; 
+  align-items: center;
   cursor: pointer;
 
   & > * {
@@ -126,7 +122,6 @@ const ImgContainer = styled.div`
 
 const ProfileContainer = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: flex-start;
   color: var(--color-grey-1);
   font-size: var(--font-size-ft-1);
@@ -155,6 +150,7 @@ interface Post {
     _id: string;
   };
   likeCount: number;
+  likedUsers: string[];
 }
 
 interface Comment {
@@ -164,27 +160,52 @@ interface Comment {
 const POST: React.FC = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
-  const [post, setPost] = useState<Post | null>(null);
   const [comments, setComments] = useState<Comment | null>(null);
-  const [isRecommended, setIsRecommended] = useState(false);
   const [user] = useRecoilState(userState);
+  const [post, setPost] = useState<Post | null>(null); // post
+  const [likedCount, setLikedCount] = useState(0); // 좋아요 수
+  const [isLiked, setIsLiked] = useState(false); // 유저가 좋아요 눌렀는지 여부
 
   const { postId } = useParams<{ postId: string }>();
 
-  // 게시글 조회 API
-  useEffect(() => {
+  // post 불러오기
+  useEffect(()=> {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${API_URL}post/${postId}`);
-        setPost(response.data.message[0]);
-        console.log('게시글 조회 성공', response.data.message[0]);
+        const postData = response.data.message[0];
+        setPost(postData);
+        setLikedCount(postData.likedUsers.length); // 추천해요 총 수
+        console.log('추천해요 수', postData.likedUsers.length); //디버깅용 코드
+        setIsLiked(postData.likedUsers.includes(user?._id)); // 사용자가 해당 게시물의 추천해요 눌렀는지 여부
+        console.log('게시글 조회 성공', postData);
       } catch (error) {
         console.error('게시글 조회 실패', error);
       }
     };
 
     fetchData();
-  }, [postId]);
+  }, [postId, user]);
+
+  // 여기까지는 '초기값 설정'
+
+  // 추천해요 누르고 취소하기 API -> put 요청이 갔다고 뜨는데 안감..!! 일단 user부분 해결하고 디버깅해야돼
+  const handleLiked = async () => {
+    try {
+      const Data = {
+        "userId": `${user?._id}`
+      };
+
+      const response = await axios.put(`${API_URL}post/${postId}/like`, Data);
+      setLikedCount(response.data.message);
+      console.log('유저', user);
+      console.log('업데이트 된 추천해요수', response.data)
+      setIsLiked((prev) => !prev); //좋아요 눌렀는지 여부 변경
+      console.log('추천해요 보내기 성공');
+    } catch (error) {
+      console.log('추천해요 보내기 실패', error);
+    }
+  };
 
   const formattedDate = post?.updatedAt
     ? formatDateIncludeTime({ rowDate: post.updatedAt })
@@ -195,29 +216,25 @@ const POST: React.FC = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${API_URL}comment/${postId}`);
-        const filteredComments = response.data.message.filter((comment:Comment) => comment.deletedAt === null);
+        const filteredComments: Comment[] = [];
+        response.data.message.forEach((comment: Comment) => {
+          if (comment.deletedAt === null) {
+            filteredComments.push(comment);
+          }
+        });
+
         setComments(filteredComments);
         console.log('댓글 조회 성공');
-        // console.log('댓글 조회 성공', response.data.message); //추후 삭제
       } catch (error) {
         console.error('댓글 조회 실패', error);
       }
     };
-
     fetchData();
   }, [postId]);
-
-  // 추천해요 누르고 취소하는 로직
-  
 
   const handleToggleModal = () => {
     setShowModal((prev) => !prev);
   };
-
-  // const handleSavePost = () => {
-  //   // API 생성되면 로직 구현
-  //   setShowModal(false);
-  // };
 
   const handleDeleteButton = () => {
     // 알럿창, 확인 누를 시 글 삭제 요청
@@ -228,7 +245,7 @@ const POST: React.FC = () => {
         try {
           const response = await axios.put(`${API_URL}post/${postId}/w`);
           console.log('글 삭제 성공', response.data.message);
-          navigate(`/group/${post?.categoryId?._id}`);
+          navigate(`/group/${post?.categoryId?._id}`); // 커뮤니티 페이지로 리다이렉트 -> 이전 화면으로 리다이렉트할 수도 있음
         } catch (error) {
           console.error('글 삭제 실패', error);
         }
@@ -238,21 +255,22 @@ const POST: React.FC = () => {
   };
 
   // 댓글 등록
-  const handleCreateComment = async(commentText: string) => {
+  const handleCreateComment = async (commentText: string) => {
     try {
       const commentData = {
         "postId": `${postId}`,
         "userId": `${user?._id}`,
-        "text": `${commentText}`
+        "text": `${commentText}`,
       };
 
-      const response = await axios.post(`${API_URL}comment`, commentData)
-      return response.data;
+      await axios.post(`${API_URL}comment`, commentData);
+
+      console.log('댓글 등록 성공');
+      window.location.reload(); // 댓글 등록 후 새로고침
     } catch (error) {
       console.error('댓글 등록 실패', error);
-      throw error;
-    };
-  }
+    }
+  };
 
   return (
     <>
@@ -278,7 +296,12 @@ const POST: React.FC = () => {
                 </ProfileContainer>
               </PostInformation>
               <PostOption>
-                <LikeAndCommentCount likeCount={post?.likeCount} commentCount={comments?.length} userId={user?._id} postId={postId} />
+                <LikeAndCommentCount
+                  likeCount={likedCount}
+                  commentCount={comments?.length}
+                  userId={user?._id}
+                  postId={postId}
+                />
                 <ActionButton
                   border="default"
                   direction="horizontal"
@@ -300,9 +323,9 @@ const POST: React.FC = () => {
               <ImgContainer>
                 <img src={tempImg} alt="이미지" />
               </ImgContainer>
-              <Likes>
+              <Likes onClick={handleLiked} isLiked={isLiked}>
                 <LuThumbsUp />
-                <p>추천해요 {post?.likeCount}</p>
+                <p>추천해요 {likedCount}</p>
               </Likes>
             </PostContentArea>
             <Hr />
@@ -312,16 +335,19 @@ const POST: React.FC = () => {
                 onClick={handleCreateComment}
               ></CommentWritingBox>
               {comments?.map(
-                (
-                  comment,
-                  index,
-                ) => (
+                (comment: {
+                  _id: React.Key | null | undefined;
+                  profileImg: string;
+                  text: string;
+                  userId: { nickName: string; _id: string };
+                  createdAt: any;
+                }) => (
                   <Comment
-                    key={index}
+                    key={comment?._id}
                     profileImg={comment.profileImg}
                     text={comment.text}
-                    nickname="임시 닉네임"
-                    date={formatDateIncludeTime({rowDate:comment.createdAt})}
+                    nickname={comment?.userId?.nickName}
+                    date={formatDateIncludeTime({ rowDate: comment.createdAt })}
                     userId={comment?.userId?._id}
                     commentId={comment?._id}
                   />
