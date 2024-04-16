@@ -166,6 +166,7 @@ const HealthDiary: React.FC<HealthDiaryProps> = ({
             <HealthReport>
               <ActionButton
                 onEdit={() => handleEditButtonClick(data._id)}
+                onDelete={() => handleEditButtonClick(data._id)}
                 direction="horizontal"
                 border="none"
               />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 // 컴포넌트
@@ -13,11 +13,13 @@ const Profile = styled.div`
   position: relative;
 
   h2 {
-    font: 700 26px/31px 'Pretendard', sans-serif;
+    font:
+      700 26px/31px 'Pretendard',
+      sans-serif;
     display: flex;
     align-items: center;
     text-align: center;
-    color: #6D987A;
+    color: #6d987a;
     margin-bottom: 30px;
     margin-top: 70px;
   }
@@ -34,7 +36,11 @@ const ButtonGroup = styled.div`
   margin-top: 30px;
 `;
 
-const renderSection = (inputType: 'name' | 'age' | 'weight', title: string, text: string = "") => {
+const renderSection = (
+  inputType: 'name' | 'age' | 'weight',
+  title: string,
+  text: string = '',
+) => {
   let placeholder = '';
   switch (inputType) {
     case 'name':
@@ -50,14 +56,17 @@ const renderSection = (inputType: 'name' | 'age' | 'weight', title: string, text
 
   return (
     <SectionWrapper title={title} text={text}>
-      <Input type={inputType === 'name' ? 'text' : 'number'} placeholder={placeholder} />
+      <Input
+        type={inputType === 'name' ? 'text' : 'number'}
+        placeholder={placeholder}
+      />
     </SectionWrapper>
   );
 };
 
 const ModalContent = () => {
-  const profileImageUrl = "";
-  const profileImageAlt = "프로필 이미지";
+  const profileImageUrl = '';
+  const profileImageAlt = '프로필 이미지';
 
   const petOptions = [
     { value: 'dog', label: '강아지' },
@@ -75,26 +84,42 @@ const ModalContent = () => {
 
   return (
     <Profile>
-        <h2>프로필 수정</h2>
-        <PetProfileContainer src={profileImageUrl} alt={profileImageAlt} />
-        {renderSection("name", "반려동물 이름")}
-        <h2>반려동물 종</h2>
-        <PetSpecies>
-          <BasedSelect options={petOptions} width="120px" borderRadius="0" />
-          <BasedSelect options={petOptions1} width="120px" borderRadius="0" />
-        </PetSpecies>
-        {renderSection("age", "반려동물 나이")}
-        <h2>반려동물 성별</h2>
-        <ButtonGroup>
-          <UIButton onClick={() => handleClick('man')} variant='primary' shape='square'>남자 아이</UIButton>
-          <UIButton onClick={() => handleClick('woman')} variant='secondary' shape='square'>여자 아이</UIButton>
-        </ButtonGroup>
-        <h2>중성화 여부</h2>
-        <ButtonGroup>
-          <UIButton onClick={() => handleClick('neutered')} variant='primary'>중성화 전</UIButton>
-          <UIButton onClick={() => handleClick('spayed')} variant='secondary'>중성화 완료</UIButton>
-        </ButtonGroup>
-        {renderSection("weight", "반려동물 체중")}
+      <h2>프로필 수정</h2>
+      <PetProfileContainer src={profileImageUrl} alt={profileImageAlt} />
+      {renderSection('name', '반려동물 이름')}
+      <h2>반려동물 종</h2>
+      <PetSpecies>
+        <BasedSelect options={petOptions} width="120px" borderRadius="0" />
+        <BasedSelect options={petOptions1} width="120px" borderRadius="0" />
+      </PetSpecies>
+      {renderSection('age', '반려동물 나이')}
+      <h2>반려동물 성별</h2>
+      <ButtonGroup>
+        <UIButton
+          onClick={() => handleClick('man')}
+          variant="primary"
+          shape="square"
+        >
+          남자 아이
+        </UIButton>
+        <UIButton
+          onClick={() => handleClick('woman')}
+          variant="secondary"
+          shape="square"
+        >
+          여자 아이
+        </UIButton>
+      </ButtonGroup>
+      <h2>중성화 여부</h2>
+      <ButtonGroup>
+        <UIButton onClick={() => handleClick('neutered')} variant="primary">
+          중성화 전
+        </UIButton>
+        <UIButton onClick={() => handleClick('spayed')} variant="secondary">
+          중성화 완료
+        </UIButton>
+      </ButtonGroup>
+      {renderSection('weight', '반려동물 체중')}
     </Profile>
   );
 };
@@ -104,16 +129,17 @@ interface ModalProps {
 }
 
 const PetEditModal: React.FC<ModalProps> = ({ onClose }) => {
-  const [showPetEditModal, setshowPetEditModal] = useState(true);
+  // const [showPetEditModal, setshowPetEditModal] = useState(true); // build 수정
+  const showPetEditModal = true;
 
   return (
     <>
       {showPetEditModal && (
-        <BigModal 
-          title="반려동물 정보 수정" 
-          value="수정" 
-          onClose={onClose} 
-          component={<ModalContent />} 
+        <BigModal
+          title="반려동물 정보 수정"
+          value="수정"
+          onClose={onClose}
+          component={<ModalContent />}
         />
       )}
     </>

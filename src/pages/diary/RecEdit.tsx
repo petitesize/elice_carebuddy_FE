@@ -58,7 +58,8 @@ interface FormData {
 }
 
 const RecEdit: React.FC<ModalProps> = ({ onSubmit, recordId }) => {
-  const [showRecMadeModal, setShowRecMadeModal] = useState(true);
+  // const [showRecMadeModal, setShowRecMadeModal] = useState(true); // build 수정
+  const showRecMadeModal = true;
   const [defaultFormData, setDefaultFormData] = useState<FormData | null>(null);
 
   const [date, setDate] = useState('');
