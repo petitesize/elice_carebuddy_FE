@@ -52,7 +52,7 @@ const ButtonContainer = styled.div`
 
 interface ModalProps {
   onClose: () => void;
-  onHandleClick: () => void;
+  onHandleClick?: () => void;
   component: ReactNode;
   title: string;
   value: string;
