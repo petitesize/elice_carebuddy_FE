@@ -77,7 +77,7 @@ interface FormData {
 }
 
 interface ImageFormData {
-  image?: any; // 이미지 타입 뭘로 보내야할지 모르겠음. 나중에 추가
+  postImage?: any; // 이미지 타입 뭘로 보내야할지 모르겠음. 나중에 추가
 }
 
 const PostCreate: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
@@ -94,8 +94,8 @@ const PostCreate: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
   });
 
   const [imageFormData, setImageFormData] = useState<ImageFormData>({
-    image: null,
-  })
+    postImage: null,
+  });
 
   useEffect(() => {
     // 부모 컴포넌트에서 POST를 하기 위해 formData가 변경될 때마다 부모 컴포넌트로 데이터를 전송
@@ -105,7 +105,7 @@ const PostCreate: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
   useEffect(() => {
     // 부모 컴포넌트에서 이미지를 POST 하기 위해 imageData 변경될 때마다 부모 컴포넌트로 데이터를 전송
     onSubmitImage(imageFormData);
-  }, [uploadedImg]);
+  }, [imageFormData]);
 
   // select -> 현재 선택된 대분류를 받고, 그에 해당되는 그룹을 보여주는 형식
   const handleCategoryChange = (selectedOption: {
@@ -122,6 +122,12 @@ const PostCreate: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
         value: category._id,
         label: category.group,
       }));
+
+    filteredGroupsOptions.unshift({
+      //대분류를 바꾸면 그룹 선택하도록 동작
+      value: 'select',
+      label: '그룹 선택',
+    });
 
     setSelectedGroupOptions(filteredGroupsOptions);
   };
@@ -155,8 +161,9 @@ const PostCreate: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
       if (selectedFile) {
         const imageUrl = URL.createObjectURL(selectedFile); // 프론트에 업로드
         setUploadedImg(imageUrl);
-        const ImageFormData = new FormData(); // 백 용 FormData 생성
-        ImageFormData.append('file', selectedFile);
+
+        const ImageFormData = new FormData(); // 백에 업로드
+        ImageFormData.append('postImage', selectedFile);
         setImageFormData(ImageFormData);
       }
     };
@@ -198,8 +205,7 @@ const PostCreate: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
         {uploadedImg && <img src={uploadedImg} alt="Uploaded" />}
       </ImageBox>
       <p>
-        개당 업로드 용량: 20MB, 첨부 파일의 경우 사진과 동영상을 합쳐 최대 10개
-        업로드 가능합니다. - 이 부분 나중에 멘트수정!
+        사진은 한 장만 업로드 가능합니다.
       </p>
       <Hr />
     </StyledPostCreate>

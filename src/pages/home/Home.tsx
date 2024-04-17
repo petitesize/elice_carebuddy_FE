@@ -95,6 +95,7 @@ const Home: React.FC = () => {
   const [selectedGroupCategoryId, setselectedGroupCategoryId] = useState(''); // 소분류(그룹의 id)
   const [selectedGroupOptions, setSelectedGroupOptions] = useState<any[]>([]); // 소분류(select용 배열), 타입 추후 수정
 
+  
   // 그룹 불러오기
   useEffect(() => {
     const fetchData = async () => {
@@ -145,7 +146,7 @@ const Home: React.FC = () => {
         // 그룹 아이디가 현재 select된 요소와 같은 것만 가지고 오기
         const filteredGroupPosts: Post[] = [];
         filteredDeletedPosts.forEach((post: Post) => {
-          console.log('포스트.카테고리아이디._id)', post.categoryId._id);
+          // console.log('포스트.카테고리아이디._id)', post.categoryId._id);
           if (post.categoryId._id === selectedGroupCategoryId) {
             filteredGroupPosts.push(post);
           }
@@ -179,6 +180,11 @@ const Home: React.FC = () => {
         label: category.group,
       }));
 
+    filteredGroupsOptions.unshift({ //대분류를 바꾸면 그룹 선택하도록 동작
+      value: 'select',
+      label: '그룹 선택',
+    });
+
     setSelectedGroupOptions(filteredGroupsOptions);
   };
 
@@ -189,6 +195,8 @@ const Home: React.FC = () => {
     setselectedGroupCategoryId(selectedOption.value); // 현재 선택된 소분류를 상태에 업데이트
     console.log('벨류, 라벨', selectedOption.value, selectedOption.label); // 디버깅용 - 현재 선택된 소분류 찍어보는 콘솔 -> 추후 삭제
   };
+  
+
 
   return (
     <>

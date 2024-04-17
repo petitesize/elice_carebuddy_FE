@@ -118,6 +118,7 @@ const PostList = styled(Link)`
 
 const ImgContainer = styled.div`
   margin-top: 20px;
+  width: 1024px;
 `;
 
 const ProfileContainer = styled.div`
@@ -138,6 +139,11 @@ const ProfileImg = styled.img`
   width: 25px;
   border-radius: 50%;
 `;
+
+const Image = styled.img`
+width: 600px;
+height: auto;
+`
 
 interface Post {
   title?: string;
@@ -272,6 +278,9 @@ const POST: React.FC = () => {
     }
   };
 
+    const imageSrc = `http://localhost:3001/uploads/${post?.postImage}`
+
+
   return (
     <>
       {post && (
@@ -321,7 +330,7 @@ const POST: React.FC = () => {
             <PostContentArea>
               <pre>{post.content}</pre>
               <ImgContainer>
-                <img src={post.postImage[0]} alt="이미지" /> 
+                <Image src={imageSrc} alt="이미지" /> 
                 {/* 이 이미지 부분 수정... url 이 필요함 */}
               </ImgContainer>
               <Likes onClick={handleLiked} isLiked={isLiked}>

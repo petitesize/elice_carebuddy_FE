@@ -1,19 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import imgSrc from './../../assets/carebuddyLogo.png';
 import user from './../../assets/userIcon.png';
 import alert from './../../assets/alertIcon.png';
 import { Link } from 'react-router-dom';
-
-// 링크 및 아이콘에 대한 배열 생성
-const links = [
-  { path: '/', label: '로고', icon: imgSrc },
-  { label: '커뮤니티', icon: null, subMenu: ['커뮤니티1', '커뮤니티2'] },
-  { label: '건강관리', icon: null, subMenu: ['건강 다이어리'] },
-  { label: '정보', icon: null, subMenu: ['병원 검색', '약국 검색'] },
-  { path: '/mypage', label: '', icon: user }, // 마이페이지
-  { path: '/', label: '', icon: alert },
-];
+// import { useRecoilState } from 'recoil';
+// import { userState } from '../../recoil/atoms';
 
 // styled-components를 사용하여 header 스타일 정의
 const HeaderContainer = styled.header`
@@ -119,8 +111,56 @@ const LoginButton = styled(Link)`
   font-size: 12px;
 `;
 
+// 링크 및 아이콘에 대한 배열 생성
+const links = [
+  { path: '/', label: '로고', icon: imgSrc },
+  { label: '커뮤니티', icon: null, subMenu: ['커뮤니티1', '커뮤니티2', '모든 그룹'] },
+  { label: '건강관리', icon: null, subMenu: ['건강 다이어리'] },
+  { label: '정보', icon: null, subMenu: ['병원 검색', '약국 검색'] },
+  { path: '/mypage', label: '', icon: user }, // 마이페이지
+  { path: '/', label: '', icon: alert },
+];
+
 const Header: React.FC = () => {
   const [activeMenu, setActiveMenu] = useState<number | null>(null);
+  // const [user] = useRecoilState(userState);
+
+  // const [selectedCategoryValue, setSelectedCategotyValue] = useState(''); // 대분류
+  // const [selectedGroupCategoryId, setselectedGroupCategoryId] = useState(''); // 소분류(그룹의 id)
+  // const [selectedGroupOptions, setSelectedGroupOptions] = useState<any[]>([]); // 소분류(select용 배열), 타입 추후 수정
+
+  // // 서브 메뉴 동적 렌더링
+  
+
+  //   // select -> 현재 선택된 대분류를 받고, 그에 해당되는 그룹을 보여주는 형식
+  //   const handleCategoryChange = (selectedOption: {
+  //     value: string;
+  //     label: string;
+  //   }) => {
+  //     setSelectedCategotyValue(selectedOption.value); // 현재 선택된 대분류를 상태에 업데이트(string값, 0 혹은 1)
+  //     // console.log(selectedOption.value, selectedOption.label); // 디버깅용 - 현재 선택된 대분류 찍어보는 콘솔 -> 추후 삭제
+  
+  //     // 선택된 카테고리에 해당하는 그룹만 필터링하여 업데이트하고 받아오기
+  //     useEffect(() => {
+  //       console.log(콘솔테스트)
+  //     }, [])
+  
+
+
+  //       // .filter(
+  //       //   (category) =>
+  //       //     category.name.toString() === selectedOption.value.toString(),
+  //       // )
+  //       // .map((category) => ({
+  //       //   value: category._id,
+  //       //   label: category.group,
+  //       // }));
+  
+  
+  //     setSelectedGroupOptions(filteredGroupsOptions);
+  //   };
+  
+
 
   return (
     <HeaderContainer>

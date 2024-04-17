@@ -15,7 +15,7 @@ import BigModal from '../../components/baseComponent/BigModal';
 import PostCreate from '../../components/community/PostCreate';
 import LinkButton from '../../components/baseComponent/LinkButton';
 import Pagination from '../../components/baseComponent/Pagination';
-
+import WritingModalButton from '../../components/community/WritingModalButton';
 import Button from '../../components/baseComponent/Button';
 
 // 임시 이미지
@@ -201,22 +201,7 @@ const Community: React.FC = () => {
         <CommunityFeedContainer>
           <WritingButton>
             <p>함께 나누고 싶은 이야기가 있나요?</p>
-            <Button
-              variant="primary"
-              shape="round"
-              padding="10px 15px"
-              onClick={handleToggleModal}
-            >
-              글 작성하기
-            </Button>
-            {showModal && (
-              <BigModal
-                title="글쓰기"
-                value="등록"
-                component={<PostCreate />}
-                onClose={handleToggleModal}
-              />
-            )}
+            <WritingModalButton />
           </WritingButton>
           {posts.length > 0 &&
             posts.map((post, index) => (

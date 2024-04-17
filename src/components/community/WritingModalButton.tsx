@@ -31,13 +31,7 @@ const WritingModalButton = () => {
   const handlePostCreate = async () => {
     try {
       const response = await axios.post(`${API_URL}post`, formDataForPOST);
-      const newPostId = response.data?._id;
-
-      console.log('글 등록 성공:', response.data); // 이거는 됨
-      console.log('새로운 포스트 아이디:', newPostId);
-      console.log('물음표 유무 유:', response.data?._id);
-      console.log('무:', response.data._id);
-      console.log('유저아이디', response.data.userId);
+      const newPostId = response.data.data._id;
 
       setShowModal(false); // 모달 닫기
       setFormData({ // 데이터 초기화
@@ -49,21 +43,18 @@ const WritingModalButton = () => {
 
       // 이미지 함께 전송
       if (imageFormData) {
-        const formDataWithExtension = new FormData();
-        formDataWithExtension.append(imageFormData, imageFormData.name); //맞는지 확인
-        console.log('포스트 아이디:', newPostId);
-        await sendImage(formDataWithExtension, newPostId);
+        await sendImage(imageFormData, newPostId);
       }
     } catch (error) {
       console.error('글 등록 실패:', error);
     }
   };
 
-  const sendImage = async (formData, postId) => {
+  const sendImage = async (imageFormData, postId) => {
     try {
       const response = await axios.post(
         `${API_URL}post/${postId}/postImage`,
-        formData,
+        imageFormData,
         {
           headers: {
             'Content-Type': 'multipart/form-data',
@@ -78,12 +69,12 @@ const WritingModalButton = () => {
 
   const handleData = formData => {
     setFormData(formData);
-    console.log(formData);
+    // console.log(formData); 추후 삭제
   };
 
   const handleImageData = imageFormData => {
     setImageFormData(imageFormData);
-    console.log(imageFormData);
+    // console.log(imageFormData); 추후 삭제
   };
 
   return (
