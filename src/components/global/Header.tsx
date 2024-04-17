@@ -97,6 +97,9 @@ const SubMenuLink = styled(Link)`
   &:hover {
     color: var(--color-green-main); /* 드롭다운 메뉴 아이템 hover 시 효과 */
   }
+  > span {
+    font-size: 10px;
+  }
 `;
 
 const LoginButtonContainer = styled.div`
@@ -231,7 +234,7 @@ const Header: React.FC = () => {
                   {dropdownItems.map((group, idx) => (
                     <SubMenuItem key={idx}>
                       <SubMenuLink to={`/group/${group._id}`}>
-                        {group.group} {group.name}
+                        {group.group} <span>{group.name}</span>
                       </SubMenuLink>
                     </SubMenuItem>
                   ))}
