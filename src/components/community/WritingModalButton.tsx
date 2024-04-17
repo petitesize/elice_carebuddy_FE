@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../../constants/constants';
 import { useRecoilValue } from 'recoil';
@@ -10,6 +11,7 @@ import BigModal from '../../components/baseComponent/BigModal';
 import PostCreate from '../../components/community/PostCreate';
 
 const WritingModalButton = () => {
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
     userId: null,
@@ -31,7 +33,7 @@ const WritingModalButton = () => {
   const handlePostCreate = async () => {
     try {
       const response = await axios.post(`${API_URL}post`, formDataForPOST);
-      const newPostId = response.data.data._id;
+      const createdPostId = response.data.data._id;
 
       setShowModal(false); // 모달 닫기
       setFormData({ // 데이터 초기화
@@ -43,14 +45,17 @@ const WritingModalButton = () => {
 
       // 이미지 함께 전송
       if (imageFormData) {
-        await sendImage(imageFormData, newPostId);
+        await sendImage(imageFormData, createdPostId);
       }
+      
+      // 페이지 리다이렉트
+      navigate(`/post/${createdPostId}`);
     } catch (error) {
       console.error('글 등록 실패:', error);
     }
   };
 
-  const sendImage = async (imageFormData, postId) => {
+  const sendImage = async (imageFormData, postId: string) => {
     try {
       const response = await axios.post(
         `${API_URL}post/${postId}/postImage`,
@@ -69,12 +74,10 @@ const WritingModalButton = () => {
 
   const handleData = formData => {
     setFormData(formData);
-    // console.log(formData); 추후 삭제
   };
 
   const handleImageData = imageFormData => {
     setImageFormData(imageFormData);
-    // console.log(imageFormData); 추후 삭제
   };
 
   return (

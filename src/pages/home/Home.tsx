@@ -10,7 +10,7 @@ import Banner from '../../components/community/Banner';
 import FeedBox from '../../components/community/FeedBox';
 import SidePanel from '../../components/community/SidePanel';
 import CommunityListSidebar from '../../components/community/CommunityListSidebar';
-import Select from '../../components/baseComponent/Select';
+import CommunitySelect from '../../components/baseComponent/CommunitySelect';
 import WritingModalButton from '../../components/community/WritingModalButton';
 
 // 상수
@@ -193,9 +193,7 @@ const Home: React.FC = () => {
     label: string;
   }) => {
     setselectedGroupCategoryId(selectedOption.value); // 현재 선택된 소분류를 상태에 업데이트
-    console.log('벨류, 라벨', selectedOption.value, selectedOption.label); // 디버깅용 - 현재 선택된 소분류 찍어보는 콘솔 -> 추후 삭제
   };
-  
 
 
   return (
@@ -206,13 +204,13 @@ const Home: React.FC = () => {
           <FeedOption>
             <Classification>
               <p>분류:</p>
-              <Select
+              <CommunitySelect
                 width="100px"
                 borderRadius="30px"
                 options={CategoryOptions}
                 onChange={handleCategoryChange}
               />
-              <Select
+              <CommunitySelect
                 width="120px"
                 borderRadius="30px"
                 options={selectedGroupOptions}

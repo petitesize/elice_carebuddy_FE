@@ -5,7 +5,7 @@ import { userState } from '../../recoil/atoms';
 
 // 컴포넌트
 import Hr from '../baseComponent/Hr.tsx';
-import Select from '../baseComponent/Select.tsx';
+import CommunitySelect from '../baseComponent/CommunitySelect.tsx';
 import InputBox from '../baseComponent/InputBox.tsx';
 import TextArea from '../baseComponent/TextArea.tsx';
 import LinkButton from '../baseComponent/LinkButton.tsx';
@@ -80,6 +80,12 @@ interface ImageFormData {
   postImage?: any; // 이미지 타입 뭘로 보내야할지 모르겠음. 나중에 추가
 }
 
+interface Category {
+  _id: string | null;
+  group: string | null;
+  name: string | null;
+}
+
 const PostCreate: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
   const [user] = useRecoilState(userState);
   const [selectedCategoryValue, setSelectedCategotyValue] = useState(''); // 선택된 대분류
@@ -112,18 +118,17 @@ const PostCreate: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
     value: string;
     label: string;
   }) => {
-    setSelectedCategotyValue(selectedOption.value); // 현재 선택된 대분류를 상태에 업데이트(string값, 0 혹은 1)
-    // console.log(selectedOption.value, selectedOption.label); // 디버깅용 - 현재 선택된 대분류 찍어보는 콘솔 -> 추후 삭제
+    setSelectedCategotyValue(selectedOption.value); // 현재 선택된 대분류를 상태에 업데이트(0 혹은 1)
 
     // 선택된 카테고리에 해당하는 그룹만 필터링하여 업데이트하고 받아오기
     const filteredGroupsOptions = user?.categoryId
-      .filter((category) => category.name.toString() === selectedOption.value)
+      .filter((category: Category) => category.name?.toString() === selectedOption.value)
       .map((category) => ({
         value: category._id,
         label: category.group,
       }));
 
-    filteredGroupsOptions.unshift({
+    filteredGroupsOptions?.unshift({
       //대분류를 바꾸면 그룹 선택하도록 동작
       value: 'select',
       label: '그룹 선택',
@@ -173,12 +178,12 @@ const PostCreate: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
   return (
     <StyledPostCreate>
       <SelectContainer>
-        <Select
+        <CommunitySelect
           options={CategoryOptions}
           width="100px"
           onChange={handleCategoryChange}
         />
-        <Select
+        <CommunitySelect
           width="100px"
           options={selectedGroupOptions}
           onChange={handleSelectedGroup}

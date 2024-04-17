@@ -6,6 +6,7 @@ type LikeAndCommentCountProps = {
   likeCount: number;
   commentCount: number;
   userId: string | undefined;
+  postId: string | null | undefined;
 };
 
 const StyledLikeAndCommentCount = styled.div`

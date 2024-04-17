@@ -116,10 +116,14 @@ const LoginButton = styled(Link)`
 // 링크 및 아이콘에 대한 배열 생성
 const links = [
   { path: '/', label: '로고', icon: imgSrc },
-  { label: '커뮤니티', icon: null, subMenu: ['커뮤니티1', '커뮤니티2', '모든 그룹'] },
+  {
+    label: '커뮤니티',
+    icon: null,
+    subMenu: ['커뮤니티1', '커뮤니티2', '모든 그룹'],
+  },
   { label: '건강관리', icon: null, subMenu: ['건강 다이어리'] },
   { label: '정보', icon: null, subMenu: ['병원 검색', '약국 검색'] },
-  { path: '/mypage', label: '', icon: user }, // 마이페이지
+  { path: '/mypage', label: '', icon: userIcon }, // 마이페이지
   { path: '/', label: '', icon: alert },
 ];
 
@@ -143,14 +147,15 @@ const Header: React.FC = () => {
       })
     : [];
 
-  console.log(dropdownItems);
+
+  // console.log(dropdownItems);   // 콘솔 찍혀서 주석처리 해뒀는데 충돌 나면 이거 버리시면 돼요
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${API_URL}groups`);
         const groupData = response.data.message;
         setGroups(groupData);
-        console.log('그룹데이터 :', groupData);
+        // console.log('그룹데이터 :', groupData); //이것도요!
       } catch (error) {
         console.error('에러', error);
       }
@@ -159,28 +164,29 @@ const Header: React.FC = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${API_URL}post`);
-        const postData = response.data.message;
-        console.log('postData: ', postData);
-        const matchedPosts = postData.filter(
-          (post) => post.categoryId === user.categoryId,
-        );
+  // 에러나서 잠깐 주석쳐놓았는데 충돌 나면 이거 버리시면 돼요!
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(`${API_URL}post`);
+  //       const postData = response.data.message;
+  //       console.log('postData: ', postData);
+  //       const matchedPosts = postData.filter(
+  //         (post) => post.categoryId === user.categoryId,
+  //       );
 
-        if (matchedPosts.length > 0) {
-          setPosts(matchedPosts);
-        } else {
-          console.log('일치하는 데이터가 없습니다.');
-        }
-      } catch (error) {
-        console.error('에러', error);
-      }
-    };
+  //       if (matchedPosts.length > 0) {
+  //         setPosts(matchedPosts);
+  //       } else {
+  //         console.log('일치하는 데이터가 없습니다.');
+  //       }
+  //     } catch (error) {
+  //       console.error('에러', error);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   // links 배열 정의
   const links = [

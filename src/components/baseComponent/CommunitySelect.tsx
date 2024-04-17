@@ -1,5 +1,3 @@
-//current 버전으로 분리
-
 import React from 'react';
 import styled from 'styled-components';
 
@@ -26,7 +24,7 @@ const StyledSelect = styled.select<BasedSelectProps>`
   ${({ borderRadius }) => borderRadius && `border-radius: ${borderRadius};`}
 `;
 
-const BasedSelect: React.FC<SelectProps> = ({
+const CommunitySelect: React.FC<SelectProps> = ({
   width,
   borderRadius,
   options,
@@ -53,4 +51,4 @@ const BasedSelect: React.FC<SelectProps> = ({
   </StyledSelect>
 );
 
-export default BasedSelect;
+export default CommunitySelect;

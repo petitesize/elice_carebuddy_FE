@@ -56,7 +56,6 @@ interface ModalProps {
   component: ReactNode;
   title: string;
   value: string;
-  onHandleClick?: () => void;
 }
 
 const BigModal: React.FC<ModalProps> = ({

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { API_URL, DOMAIN_URL } from '../../constants/constants';
 import { useParams, useNavigate} from 'react-router-dom';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { userState } from '../../recoil/atoms';
 
 // 컴포넌트
@@ -11,12 +11,9 @@ import Search from '../../components/baseComponent/Search';
 import FeedBox from '../../components/community/FeedBox';
 import SidePanel from '../../components/community/SidePanel';
 import MemberListSidebar from '../../components/community/MemberListSidebar';
-import BigModal from '../../components/baseComponent/BigModal';
-import PostCreate from '../../components/community/PostCreate';
 import LinkButton from '../../components/baseComponent/LinkButton';
-import Pagination from '../../components/baseComponent/Pagination';
 import WritingModalButton from '../../components/community/WritingModalButton';
-import Button from '../../components/baseComponent/Button';
+
 
 // 임시 이미지
 const memberArray = [
@@ -138,8 +135,7 @@ const Community: React.FC = () => {
           }
         });
 
-        // 그룹 id가 같은 포스트만 가지고 오기 -> 아직 미구현
-
+        // 그룹 id가 같은 포스트만 가지고 오기 
         const filteredGroupPosts = filteredDeletedPosts.filter(
           (post: Post) => post.categoryId._id === groupId,
         );
@@ -152,11 +148,7 @@ const Community: React.FC = () => {
     fetchData();
   }, []);
 
-  const handleToggleModal = () => {
-    setShowModal((prevState) => !prevState);
-  };
-
-  // 그룹 탈퇴 API -> 나중에 로그인, 유저 연결하고 제대로 작동하는지 확인하기
+  // 그룹 탈퇴 API 
   const handleWithdrawalButton = () => {
     const fetchData = async () => {
       const confirmWithdrawal = window.confirm('정말로 탈퇴하시겠습니까?');
@@ -173,7 +165,8 @@ const Community: React.FC = () => {
           );
 
           console.log('그룹 탈퇴 성공');
-          navigate(`/`); // 홈 페이지로 리다이렉터
+          alert('성공적으로 탈퇴되었습니다.')
+          navigate(`/`); // 홈페이지로 리다이렉트
         } catch (error) {
           console.error('그룹 탈퇴 실패', error);
         }
@@ -182,7 +175,7 @@ const Community: React.FC = () => {
     fetchData();
   };
 
-  // 검색 기능
+  // 검색 기능 -> 아직 미구현 상태
   const handleSearch = (searchValue: string) => {
     console.log("검색어:", searchValue);
   };
@@ -216,7 +209,6 @@ const Community: React.FC = () => {
                 commentCount={tempCommentCount}
               />
             ))}
-          {/* <Pagination /> */}
         </CommunityFeedContainer>
         <SidePanelContainer>
           <GroupOption>
