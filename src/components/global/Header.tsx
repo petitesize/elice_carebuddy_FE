@@ -161,14 +161,14 @@ const Header: React.FC = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${API_URL}post`);
-        const postData = response.data.message;
-        const matchedPosts = postData.filter(
-          (post) => post.categoryId === user.categoryId,
-        );
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(`${API_URL}post`);
+  //       const postData = response.data.message;
+  //       const matchedPosts = postData.filter(
+  //         (post) => post.categoryId === user.categoryId,
+  //       )
 
   //       if (matchedPosts.length > 0) {
   //         setPosts(matchedPosts);

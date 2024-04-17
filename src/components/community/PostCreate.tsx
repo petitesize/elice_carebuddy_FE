@@ -11,57 +11,6 @@ import TextArea from '../baseComponent/TextArea.tsx';
 import LinkButton from '../baseComponent/LinkButton.tsx';
 import CategoryOptions from '../../constants/CategoryOptions.tsx';
 
-const StyledPostCreate = styled.div`
-  & > * {
-    margin: 10px 0 10px 0;
-  }
-`;
-
-const SelectContainer = styled.div`
-  width: 255px;
-  display: flex;
-  justify-content: flex-start;
-
-  & > * {
-    margin-right: 10px;
-  }
-`;
-
-const ImageArea = styled.div`
-  display: flex;
-
-  & > * {
-    //padding-right: 10px;
-  }
-
-  h3 {
-    font-size: var(--font-size-md-2);
-    margin-right: 10px;
-  }
-`;
-
-const ImageBox = styled.div<{ hasImage: boolean }>`
-  padding: 10px;
-  border: 1px dashed var(--color-grey-2);
-  border-radius: 10px;
-  height: 140px;
-  width: 100%;
-  margin: 0;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  overflow-x: auto;
-  white-space: nowrap;
-  position: relative;
-
-  img {
-    max-width: 100%;
-    max-height: 80%;
-    object-fit: cover;
-    position: absolute;
-  }
-`;
-
 interface ModalProps {
   onClose?: () => void;
   onSubmit: (formData: FormData) => void;
@@ -218,3 +167,54 @@ const PostCreate: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
 };
 
 export default PostCreate;
+
+const StyledPostCreate = styled.div`
+  & > * {
+    margin: 10px 0 10px 0;
+  }
+`;
+
+const SelectContainer = styled.div`
+  width: 255px;
+  display: flex;
+  justify-content: flex-start;
+
+  & > * {
+    margin-right: 10px;
+  }
+`;
+
+const ImageArea = styled.div`
+  display: flex;
+
+  & > * {
+    //padding-right: 10px;
+  }
+
+  h3 {
+    font-size: var(--font-size-md-2);
+    margin-right: 10px;
+  }
+`;
+
+const ImageBox = styled.div<{ hasImage: boolean }>`
+  padding: 10px;
+  border: 1px dashed var(--color-grey-2);
+  border-radius: 10px;
+  height: 140px;
+  width: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-x: auto;
+  white-space: nowrap;
+  position: relative;
+
+  img {
+    max-width: 100%;
+    max-height: 80%;
+    object-fit: cover;
+    position: absolute;
+  }
+`;
