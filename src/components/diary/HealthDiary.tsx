@@ -157,7 +157,13 @@ const HealthDiary: React.FC<HealthDiaryProps> = ({
         {petName} <span>건강 다이어리</span>
       </DiaryTitle>
       <HorizontalLine />
-      
+      <Button
+        onClick={handleToggleModal}
+        variant={'primary'}
+        shape={'square'}
+        padding={'8px 40px'}
+        children={'기록하기'}
+      ></Button>
       {showModal && (
         <BigModal
           title="진료 기록 등록"
@@ -181,13 +187,6 @@ const HealthDiary: React.FC<HealthDiaryProps> = ({
           .slice()
           .reverse()
           .map((data, index) => (
-            <Button
-        onClick={handleToggleModal}
-        variant={'primary'}
-        shape={'square'}
-        padding={'8px 40px'}
-        children={'기록하기'}
-      ></Button>
             <DiariesContainer key={index}>
               <p>{formatDate(new Date(data.consultationDate), true)}</p>
               <HealthReport>
@@ -209,11 +208,8 @@ const HealthDiary: React.FC<HealthDiaryProps> = ({
           ))
       ) : (
         <DiariesContainer className="noReport">
-          <p>작성하신 {petName}의 진료 기록이 없습니다. </p>
-          <p>
-            상단의 '기록하기' 버튼을 클릭하여 새로운 진료 기록을 작성할 수
-            있습니다.
-          </p>
+          <p>{petName}의 진료 기록이 없습니다. </p>
+          <p></p>
         </DiariesContainer>
       )}
     </HealthDiaryContainer>

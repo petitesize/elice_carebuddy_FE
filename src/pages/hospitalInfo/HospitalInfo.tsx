@@ -1,10 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import HospitalSearch from '../../components/information/HospitalSearch';
 import SearchResult from '../../components/information/HostpitalSearchResult';
 import InfoPageContainer from '../../components/information/InfoPageContainer';
 import SearchBox from '../../components/information/SearchBox';
 import { LuMapPin } from 'react-icons/lu';
 import styled from 'styled-components';
+import { API_URL } from '../../constants/constants';
+import Pagination from 'rc-pagination';
+
+const StyledPagination = styled(Pagination)`
+  .rc-pagination-item-link:hover {
+    color: var(--color-green-main);
+    border-color: var(--color-green-main);
+  }
+
+  .rc-pagination-item-active,
+  .rc-pagination-item:hover {
+    border-color: var(--color-green-main);
+  }
+  .rc-pagination-item-active a,
+  .rc-pagination-item:hover a,
+  .rc-pagination-item-link:hover {
+    color: var(--color-green-main);
+  }
+`;
 
 const MapLink = styled.a`
   text-decoration: none;
@@ -13,6 +32,29 @@ const MapLink = styled.a`
 
 const Information: React.FC = () => {
   const [selectedCity, setSelectedCity] = useState('');
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hospitalData, setHospitalData] = useState([]);
+  const [totalPages, setTotalPages] = useState(0);
+
+  const fetchData = async (page) => {
+    try {
+      const response = await fetch(`${API_URL}search/hospitals?page=${page}`);
+      const data = await response.json();
+      setHospitalData(data.message.datas);
+      setTotalPages(data.message.totalPage);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData(currentPage);
+  }, [currentPage]);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   const handleCityChange = (e) => {
     console.log(e.target.value);
@@ -29,51 +71,14 @@ const Information: React.FC = () => {
         onCityChange={handleCityChange}
         onSearch={handleSearchButtonClick}
       />
-      <SearchResult filterData={DummyHospitalData} />
+      <SearchResult data={hospitalData} />
+      <StyledPagination
+        current={currentPage}
+        total={totalPages}
+        onChange={handlePageChange}
+      />
     </InfoPageContainer>
   );
 };
 
 export default Information;
-const DummyHospitalData: (string | JSX.Element)[][] = [
-  [
-    '광주광역시 북구 본촌마을길',
-    '이태원동물병원',
-    '02-797-6677',
-    <MapLink href="">
-      <LuMapPin />
-    </MapLink>,
-  ],
-  [
-    '대구광역시 북구',
-    '이태원동물병원2',
-    '02-797-6677',
-    <MapLink href="">
-      <LuMapPin />
-    </MapLink>,
-  ],
-  [
-    '경상남도 창녕군 창녕읍',
-    '이태원동물병원3',
-    '02-797-6677',
-    <MapLink href="">
-      <LuMapPin />
-    </MapLink>,
-  ],
-  [
-    '서울특별시 용산구',
-    '이태원동물병원4',
-    '02-797-6677',
-    <MapLink href="">
-      <LuMapPin />
-    </MapLink>,
-  ],
-  [
-    '서울특별시 용산구',
-    '이태원동물병원5',
-    '02-797-6677',
-    <MapLink href="">
-      <LuMapPin />
-    </MapLink>,
-  ],
-];
