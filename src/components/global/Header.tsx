@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { userState } from '../../recoil/atoms';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -130,20 +130,18 @@ const Header: React.FC = () => {
 
   const dropdownItems = userGroups
     ? userGroups.map((group) => {
-        // name이 0이면 "강아지", name이 1이면 "고양이"로 변경하여 반환
-        const name = mapping[group.name];
-        return { ...group, name };
-      })
+      // name이 0이면 "강아지", name이 1이면 "고양이"로 변경하여 반환
+      const name = mapping[group.name];
+      return { ...group, name };
+    })
     : [];
 
-  console.log(dropdownItems);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${API_URL}groups`);
         const groupData = response.data.message;
         setGroups(groupData);
-        console.log('그룹데이터 :', groupData);
       } catch (error) {
         console.error('에러', error);
       }
@@ -157,7 +155,6 @@ const Header: React.FC = () => {
       try {
         const response = await axios.get(`${API_URL}post`);
         const postData = response.data.message;
-        console.log('postData: ', postData);
         const matchedPosts = postData.filter(
           (post) => post.categoryId === user.categoryId,
         );
@@ -215,20 +212,15 @@ const Header: React.FC = () => {
                   {link.icon && <Icon src={link.icon} />}
                 </>
               )}
-              {/* {activeMenu === index && link.label === '커뮤니티' && (
+              {/* 건강 다이어리 서브메뉴 표시 */}
+              {activeMenu === index && link.label === '건강관리' && (
                 <SubMenu>
-                  {groups.map((group, idx) => (
-                    <SubMenuItem key={idx}>
-                      <SubMenuLink to={`/group/${group._id}`}>
-                        {group.group}
-                      </SubMenuLink>
-                    </SubMenuItem>
-                  ))}
                   <SubMenuItem>
-                    <SubMenuLink to="/group">전체 그룹</SubMenuLink>
+                    <SubMenuLink to="/diary">건강 다이어리</SubMenuLink>
                   </SubMenuItem>
                 </SubMenu>
-              )} */}
+              )}
+              {/* 커뮤니티 서브메뉴 표시 */}
               {activeMenu === index && link.label === '커뮤니티' && (
                 <SubMenu>
                   {dropdownItems.map((group, idx) => (
@@ -240,6 +232,17 @@ const Header: React.FC = () => {
                   ))}
                   <SubMenuItem>
                     <SubMenuLink to="/group">전체 그룹</SubMenuLink>
+                  </SubMenuItem>
+                </SubMenu>
+              )}
+              {/* 정보 서브메뉴 표시 */}
+              {activeMenu === index && link.label === '정보' && (
+                <SubMenu>
+                  <SubMenuItem>
+                    <SubMenuLink to="/hospital-info">병원 정보</SubMenuLink>
+                  </SubMenuItem>
+                  <SubMenuItem>
+                    <SubMenuLink to="/pharmacy-info">약국 정보</SubMenuLink>
                   </SubMenuItem>
                 </SubMenu>
               )}
