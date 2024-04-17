@@ -13,6 +13,7 @@ import HospitalInfo from '../pages/hospitalInfo/HospitalInfo';
 import PharmacyInfo from '../pages/pharmacyInfo/PharmacyInfo';
 import NotFound from '../pages/notFound/NotFound';
 
+
 const AppRouter = () => {
   return (
     <Router>
@@ -25,12 +26,6 @@ const AppRouter = () => {
         <Route path="/" element={<Layout component={Home} />} />
         <Route path="/group/:groupId" element={<Layout component={Community} />} />
         <Route path="/group/" element={<Layout component={Group} />} />
-        <Route path="/post" element={<Layout component={Post} />} />
-        {/*<Route
-          path="/pet-register"
-          element={<Layout component={PetRegister} />}
-        />
-  <Route path="/pet-edit" element={<Layout component={PetEdit} />} />*/}
         <Route path="/post/:postId" element={<Layout component={Post} />} />
         <Route path="/diary" element={<Layout component={Diary} />} />
         <Route

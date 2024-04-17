@@ -5,8 +5,29 @@ type CommunityListSidebarProps = {
   name: string;
   introduction: string;
   groupId: string;
-    // memberCount?: string;
+  memberCount?: number;
 };
+
+// const MemberCount = styled.p` //고도화시 추가
+//   color: var(--color-grey-1);
+//   font-size: var(--font-size-ft-1);
+//   font-weight: var(--font-weight-regular);
+// `;
+
+const CommunityListSidebar: React.FC<CommunityListSidebarProps> = ({
+  name,
+  introduction,
+  groupId
+  // memberCount,
+}) => (
+  <StyledCommunityListSidebar to={`group/${groupId}`}>
+    <Name>{name}</Name>
+    <Introduction>{introduction}</Introduction>
+    {/* <MemberCount>{memberCount}명의 멤버</MemberCount> */}
+  </StyledCommunityListSidebar>
+);
+
+export default CommunityListSidebar;
 
 const StyledCommunityListSidebar = styled(Link)`
   display: flex;
@@ -34,24 +55,3 @@ const Introduction = styled.p`
   font-weight: var(--font-weight-regular);
   line-height: 1.2rem;
 `;
-
-// const MemberCount = styled.p`
-//   color: var(--color-grey-1);
-//   font-size: var(--font-size-ft-1);
-//   font-weight: var(--font-weight-regular);
-// `;
-
-const CommunityListSidebar: React.FC<CommunityListSidebarProps> = ({
-  name,
-  introduction,
-  groupId
-  // memberCount,
-}) => (
-  <StyledCommunityListSidebar to={`group/${groupId}`}>
-    <Name>{name}</Name>
-    <Introduction>{introduction}</Introduction>
-    {/* <MemberCount>{memberCount}명의 멤버</MemberCount> */}
-  </StyledCommunityListSidebar>
-);
-
-export default CommunityListSidebar;

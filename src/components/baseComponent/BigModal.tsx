@@ -52,10 +52,10 @@ const ButtonContainer = styled.div`
 
 interface ModalProps {
   onClose: () => void;
+  onHandleClick?: () => void; //빌드용 선택자 처리
   component: ReactNode;
   title: string;
   value: string;
-  onHandleClick?: () => void;
 }
 
 const BigModal: React.FC<ModalProps> = ({
