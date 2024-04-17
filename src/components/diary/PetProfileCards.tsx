@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ActionButton from '../baseComponent/ActionButton';
-import defaultImg from '/src/assets/carebuddyLogo.png';
+// import defaultImg from '/src/assets/carebuddyLogo.png';
+import defaultImg from '/src/assets/defaultProfileDummy.png';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
