@@ -108,3 +108,4 @@ const BigModal: React.FC<ModalProps> = ({
 };
 
 export default BigModal;
+

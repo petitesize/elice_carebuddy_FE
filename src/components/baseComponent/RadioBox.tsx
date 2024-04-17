@@ -18,12 +18,6 @@ const RadioBox: React.FC<RadioBoxProps> = ({
   value,
   checked,
 }) => {
-  // 라디오 버튼 변경 핸들러 변경 전: 확인 후 다음 MERGE 때 삭제해주세요!
-  // const [selectedOption, setSelectedOption] = useState<string>(''); // 선택된 라디오 버튼 값 상태
-
-  // const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setSelectedOption(event.target.value); // 선택된 라디오 버튼 값 업데이트
-  // };
 
   const handleOptionChange = () => {
     onChange(value); // 선택된 값 전달
