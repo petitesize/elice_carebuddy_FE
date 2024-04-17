@@ -60,7 +60,7 @@ const TableList: React.FC<TableProps> = ({ headers, data }) => {
         </thead>
 
         <tbody>
-          {data.length > 0 ? (
+          {data && data.length > 0 ? (
             data.map((row, rowIndex) => (
               <tr key={rowIndex}>
                 {row.map((cell, cellIndex) => (

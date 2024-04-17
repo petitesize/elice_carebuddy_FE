@@ -4,6 +4,7 @@ import styled from 'styled-components';
 interface BasedSelectProps {
   width?: string;
   borderRadius?: string;
+  onChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 interface SelectProps extends BasedSelectProps {
@@ -25,8 +26,9 @@ const BasedSelect: React.FC<SelectProps> = ({
   width,
   borderRadius,
   options,
+  onChange,
 }) => (
-  <StyledSelect width={width} borderRadius={borderRadius}>
+  <StyledSelect width={width} borderRadius={borderRadius} onChange={onChange}>
     {options.map((option) => (
       <option key={option.value} value={option.value}>
         {option.label}
