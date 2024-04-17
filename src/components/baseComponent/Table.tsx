@@ -14,6 +14,7 @@ const Container = styled.div`
 const Table = styled.table`
   border-spacing: 0;
   border-collapse: collapse;
+  width: 80%;
 
   th:first-child {
     border-top-left-radius: 6px;
@@ -26,7 +27,8 @@ const Table = styled.table`
   th,
   td {
     padding: 12px;
-    min-width: 200px;
+    width: 200px;
+
     border-bottom: 1px solid var(--color-grey-1);
   }
 
@@ -43,10 +45,12 @@ const Table = styled.table`
 
 interface TableProps {
   headers: string[]; // 테이블 헤더를 받는 props
-  data: (string | JSX.Element)[][]; // 테이블 데이터를 받는 props
+  // data: (string | JSX.Element)[][]; // 테이블 데이터를 받는 props
+  data: { [key: string]: string }[];
 }
 
 const TableList: React.FC<TableProps> = ({ headers, data }) => {
+  console.log(data);
   return (
     <Container>
       <Table>
@@ -60,11 +64,12 @@ const TableList: React.FC<TableProps> = ({ headers, data }) => {
         </thead>
 
         <tbody>
-          {data.length > 0 ? (
+          {data && data.length > 0 ? (
             data.map((row, rowIndex) => (
               <tr key={rowIndex}>
-                {row.map((cell, cellIndex) => (
-                  <td key={cellIndex}>{cell}</td>
+                {/* 헤더와 일치하는 속성 값을 직접 사용: 전달할 때, 위치(헤더label): address(속성명) 으로 전달해줘야함*/}
+                {headers.map((header, cellIndex) => (
+                  <td key={cellIndex}>{row[header]}</td>
                 ))}
               </tr>
             ))

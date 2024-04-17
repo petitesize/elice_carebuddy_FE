@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { API_URL } from './../../constants/constants';
 import styled from 'styled-components';
@@ -51,11 +51,6 @@ const UserAsk: React.FC<ModalProps> = ({ onClose }) => {
   const [showUserAskModal, setShowUserAskModal] = useState(true);
   const [showUserTrueModal, setShowUserTrueModal] = useState(false);
 
-  const handleToggleUserTrueModal = () => {
-    setShowUserAskModal(!showUserAskModal);
-    setShowUserTrueModal(!showUserTrueModal);
-  };
-
   const handleUserTrueClose = () => {
     setShowUserAskModal(false);
   };
@@ -70,10 +65,10 @@ const UserAsk: React.FC<ModalProps> = ({ onClose }) => {
     try {
       // 유저의 ID
       const userId = '6613fbcdfaebdd59e9882df3';
-  
+
       // 서버에 DELETE 요청을 보냅니다.
       const response = await axios.put(`${API_URL}users/${userId}/w`);
-  
+
       // 응답에서 deletedAt 값을 확인하여 회원 삭제 여부를 판별합니다.
       if (response.data.deletedAt === null) {
         console.log('회원이 삭제되지 않았습니다.');
@@ -84,9 +79,9 @@ const UserAsk: React.FC<ModalProps> = ({ onClose }) => {
       console.error('에러:', error);
     }
   };
-  
 
-  
+
+
   return (
     <>
       {showUserAskModal && (

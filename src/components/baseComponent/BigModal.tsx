@@ -56,14 +56,15 @@ interface ModalProps {
   component: ReactNode;
   title: string;
   value: string;
+  onHandleClick?: () => void;
 }
 
 const BigModal: React.FC<ModalProps> = ({
   title,
   value,
-  onHandleClick,
   onClose,
   component: Component,
+  onHandleClick, // 지우지 말아주세요(모달 버튼 클릭 핸들러 필요)
 }) => {
   useEffect(() => {
     document.body.style.overflow = 'hidden'; // 모달 열렸을 때 배경 스크롤 막음
@@ -108,3 +109,4 @@ const BigModal: React.FC<ModalProps> = ({
 };
 
 export default BigModal;
+

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { userState } from '../../recoil/atoms';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { API_URL } from './../../constants/constants';
 import styled from 'styled-components';
 import imgSrc from './../../assets/carebuddyLogo.png';
-import user from './../../assets/userIcon.png';
+import userIcon from './../../assets/userIcon.png';
 import alert from './../../assets/alertIcon.png';
-import { Link } from 'react-router-dom';
-// import { useRecoilState } from 'recoil';
-// import { userState } from '../../recoil/atoms';
 
 // styled-components를 사용하여 header 스타일 정의
 const HeaderContainer = styled.header`
@@ -61,7 +63,7 @@ const Icon = styled.img`
 const Category = styled.div`
   position: relative;
   display: inline-block;
-  text-align: center; 
+  text-align: center;
 `;
 
 const SubMenu = styled.div`
@@ -82,7 +84,7 @@ const SubMenu = styled.div`
 const SubMenuItem = styled.div`
   padding: 10px;
   border-bottom: 1px solid #cecece;
-  
+
   &:last-child {
     border-bottom: none; /* 마지막 아이템의 하단 테두리 제거 */
   }
@@ -91,7 +93,7 @@ const SubMenuItem = styled.div`
 const SubMenuLink = styled(Link)`
   text-decoration: none;
   color: inherit;
-  
+
   &:hover {
     color: var(--color-green-main); /* 드롭다운 메뉴 아이템 hover 시 효과 */
   }
@@ -123,55 +125,87 @@ const links = [
 
 const Header: React.FC = () => {
   const [activeMenu, setActiveMenu] = useState<number | null>(null);
-  // const [user] = useRecoilState(userState);
+  const [groups, setGroups] = useState<Group[]>([]);
+  const [user, setUser] = useRecoilState(userState);
+  const [posts, setPosts] = useState<Post[]>([]);
 
-  // const [selectedCategoryValue, setSelectedCategotyValue] = useState(''); // 대분류
-  // const [selectedGroupCategoryId, setselectedGroupCategoryId] = useState(''); // 소분류(그룹의 id)
-  // const [selectedGroupOptions, setSelectedGroupOptions] = useState<any[]>([]); // 소분류(select용 배열), 타입 추후 수정
+  const userGroups = user?.categoryId;
+  const mapping = {
+    0: '강아지',
+    1: '고양이',
+  };
 
-  // // 서브 메뉴 동적 렌더링
-  
+  const dropdownItems = userGroups
+    ? userGroups.map((group) => {
+        // name이 0이면 "강아지", name이 1이면 "고양이"로 변경하여 반환
+        const name = mapping[group.name];
+        return { ...group, name };
+      })
+    : [];
 
-  //   // select -> 현재 선택된 대분류를 받고, 그에 해당되는 그룹을 보여주는 형식
-  //   const handleCategoryChange = (selectedOption: {
-  //     value: string;
-  //     label: string;
-  //   }) => {
-  //     setSelectedCategotyValue(selectedOption.value); // 현재 선택된 대분류를 상태에 업데이트(string값, 0 혹은 1)
-  //     // console.log(selectedOption.value, selectedOption.label); // 디버깅용 - 현재 선택된 대분류 찍어보는 콘솔 -> 추후 삭제
-  
-  //     // 선택된 카테고리에 해당하는 그룹만 필터링하여 업데이트하고 받아오기
-  //     useEffect(() => {
-  //       console.log(콘솔테스트)
-  //     }, [])
-  
+  console.log(dropdownItems);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${API_URL}groups`);
+        const groupData = response.data.message;
+        setGroups(groupData);
+        console.log('그룹데이터 :', groupData);
+      } catch (error) {
+        console.error('에러', error);
+      }
+    };
 
+    fetchData();
+  }, []);
 
-  //       // .filter(
-  //       //   (category) =>
-  //       //     category.name.toString() === selectedOption.value.toString(),
-  //       // )
-  //       // .map((category) => ({
-  //       //   value: category._id,
-  //       //   label: category.group,
-  //       // }));
-  
-  
-  //     setSelectedGroupOptions(filteredGroupsOptions);
-  //   };
-  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${API_URL}post`);
+        const postData = response.data.message;
+        console.log('postData: ', postData);
+        const matchedPosts = postData.filter(
+          (post) => post.categoryId === user.categoryId,
+        );
 
+        if (matchedPosts.length > 0) {
+          setPosts(matchedPosts);
+        } else {
+          console.log('일치하는 데이터가 없습니다.');
+        }
+      } catch (error) {
+        console.error('에러', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // links 배열 정의
+  const links = [
+    { path: '/', label: '로고', icon: imgSrc },
+    { label: '커뮤니티', icon: null },
+    { label: '건강관리', icon: null },
+    { label: '정보', icon: null },
+    { path: '/mypage', label: '', icon: userIcon },
+    { path: '/', label: '', icon: alert },
+  ];
 
   return (
     <HeaderContainer>
       <Container>
-      <LoginButtonContainer>
-        <LoginButton to="/signup">로그인</LoginButton>
-      </LoginButtonContainer>
+        <LoginButtonContainer>
+          <LoginButton to="/signup">로그인</LoginButton>
+        </LoginButtonContainer>
         <MenuBox>
           {links.map((link, index) => (
-            <Category key={index} onMouseEnter={() => setActiveMenu(index)} onMouseLeave={() => setActiveMenu(null)}>
-              {link.path ? ( // 링크가 있을 때만 Link 컴포넌트 사용
+            <Category
+              key={index}
+              onMouseEnter={() => setActiveMenu(index)}
+              onMouseLeave={() => setActiveMenu(null)}
+            >
+              {link.path ? (
                 <Link to={link.path} onClick={() => setActiveMenu(null)}>
                   {link.label === '로고' ? (
                     <Logo src={link.icon} />
@@ -188,13 +222,32 @@ const Header: React.FC = () => {
                   {link.icon && <Icon src={link.icon} />}
                 </>
               )}
-              {activeMenu === index && link.subMenu && (
+              {/* {activeMenu === index && link.label === '커뮤니티' && (
                 <SubMenu>
-                  {link.subMenu.map((item, idx) => (
+                  {groups.map((group, idx) => (
                     <SubMenuItem key={idx}>
-                      <SubMenuLink to={link.label === '커뮤니티' && item === '커뮤니티1' ? '/community' : link.label === '건강관리' && item === '건강 다이어리' ? '/diary' :link.label === '정보' && item === '병원 검색' ? '/hospital-info' : `/${item.toLowerCase().replace(/\s/g, '-')}`}>{item}</SubMenuLink>
+                      <SubMenuLink to={`/group/${group._id}`}>
+                        {group.group}
+                      </SubMenuLink>
                     </SubMenuItem>
                   ))}
+                  <SubMenuItem>
+                    <SubMenuLink to="/group">전체 그룹</SubMenuLink>
+                  </SubMenuItem>
+                </SubMenu>
+              )} */}
+              {activeMenu === index && link.label === '커뮤니티' && (
+                <SubMenu>
+                  {dropdownItems.map((group, idx) => (
+                    <SubMenuItem key={idx}>
+                      <SubMenuLink to={`/group/${group._id}`}>
+                        {group.group} {group.name}
+                      </SubMenuLink>
+                    </SubMenuItem>
+                  ))}
+                  <SubMenuItem>
+                    <SubMenuLink to="/group">전체 그룹</SubMenuLink>
+                  </SubMenuItem>
                 </SubMenu>
               )}
             </Category>

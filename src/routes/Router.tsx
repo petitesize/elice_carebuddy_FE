@@ -26,13 +26,6 @@ const AppRouter = () => {
         <Route path="/" element={<Layout component={Home} />} />
         <Route path="/group/:groupId" element={<Layout component={Community} />} />
         <Route path="/group/" element={<Layout component={Group} />} />
-        <Route path="/feed" element={<Layout component={Post} />} />
-        {/* 모달로 변경해서 라우팅 경로 삭제된 것 같은데 맞는지 확인하고 지우기 */}
-        {/* <Route 
-          path="/pet-register"
-          element={<Layout component={PetRegister} />}
-        />
-        <Route path="/pet-edit" element={<Layout component={PetEdit} />} /> */}
         <Route path="/post/:postId" element={<Layout component={Post} />} />
         <Route path="/diary" element={<Layout component={Diary} />} />
         <Route

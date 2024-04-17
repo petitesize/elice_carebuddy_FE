@@ -7,7 +7,7 @@ import HealthDiary from '../../components/diary/HealthDiary';
 import axios from 'axios';
 import { API_URL } from '../../constants/constants';
 
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { userState } from '../../recoil/atoms';
 
 const DiaryPageContainer = styled.div`
@@ -79,7 +79,8 @@ const Diary: React.FC = () => {
 
   // 해당 반려동물의 병원기록만 filter
   const filteredHospitalRecords = hospitalRecords.filter(
-    (record) => record.buddyId === selectedPet?._id,
+    (record) =>
+      record.buddyId === selectedPet?._id && record.deletedAt === null,
   );
 
   return (
