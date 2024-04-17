@@ -1,13 +1,54 @@
 import styled from 'styled-components';
-import { LuSearch } from 'react-icons/lu';
 import React, { useState } from 'react';
+import { LuSearch } from 'react-icons/lu';
+
 
 type SearchProps = {
   width?: string;
   fontSize?: string;
   padding?: string;
-  onSearch: (value: string) => void;
+  placeholder?: string;
+  onSearch?: (value: string) => void;
 };
+
+const Search: React.FC<SearchProps> = ({
+  width,
+  fontSize,
+  padding,
+  onSearch,
+  placeholder = '검색어를 입력하세요',
+}) => {
+const [searchValue, setSearchValue] = useState('');
+
+const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+  setSearchValue(e.target.value);
+  console.log('searchValue', searchValue)
+};
+
+const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  onSearch(searchValue);
+};
+
+
+  return (
+    <form onSubmit={handleSubmit}>
+    <SearchBox width={width}>
+      <StyledInput
+        type="string"
+        placeholder={placeholder}
+        onChange={handleChange} 
+        value={searchValue}
+        fontSize={fontSize}
+        padding={padding}
+      />
+      <StyledIcon />
+    </SearchBox>
+    </form>
+  );
+};
+
+export default Search;
 
 const SearchBox = styled.div<SearchProps>`
   display: flex;
@@ -37,39 +78,3 @@ const StyledIcon = styled(LuSearch)`
   margin-right: 10px;
   color: var(--color-grey-2);
 `;
-
-const Search: React.FC<SearchProps> = ({
-  width,
-  fontSize,
-  padding,
-  onSearch,
-}) => {
-const [searchValue, setSearchValue] = useState('');
-
-const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-  setSearchValue(e.target.value);
-};
-
-const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  onSearch(searchValue);
-};
-
-
-  return (
-    <form onSubmit={handleSubmit}>
-    <SearchBox width={width}>
-      <StyledInput
-        type="string"
-        placeholder="검색어를 입력하세요"
-        value={searchValue}
-        fontSize={fontSize}
-        padding={padding}
-      />
-      <StyledIcon />
-    </SearchBox>
-    </form>
-  );
-};
-
-export default Search;
