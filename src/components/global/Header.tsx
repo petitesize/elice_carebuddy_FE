@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { API_URL } from './../../constants/constants';
 import styled from 'styled-components';
 import imgSrc from './../../assets/carebuddyLogo.png';
-import userIcon from './../../assets/userIcon.png'
+import userIcon from './../../assets/userIcon.png';
 import alert from './../../assets/alertIcon.png';
 
 // styled-components를 사용하여 header 스타일 정의
@@ -63,7 +63,7 @@ const Icon = styled.img`
 const Category = styled.div`
   position: relative;
   display: inline-block;
-  text-align: center; 
+  text-align: center;
 `;
 
 const SubMenu = styled.div`
@@ -84,7 +84,7 @@ const SubMenu = styled.div`
 const SubMenuItem = styled.div`
   padding: 10px;
   border-bottom: 1px solid #cecece;
-  
+
   &:last-child {
     border-bottom: none; /* 마지막 아이템의 하단 테두리 제거 */
   }
@@ -93,7 +93,7 @@ const SubMenuItem = styled.div`
 const SubMenuLink = styled(Link)`
   text-decoration: none;
   color: inherit;
-  
+
   &:hover {
     color: var(--color-green-main); /* 드롭다운 메뉴 아이템 hover 시 효과 */
   }
@@ -119,8 +119,21 @@ const Header: React.FC = () => {
   const [user, setUser] = useRecoilState(userState);
   const [posts, setPosts] = useState<Post[]>([]);
 
-  console.log('user recoil: ', user?.categoryId)
-  
+  const userGroups = user?.categoryId;
+  const mapping = {
+    0: '강아지',
+    1: '고양이',
+  };
+
+  const dropdownItems = userGroups
+    ? userGroups.map((group) => {
+        // name이 0이면 "강아지", name이 1이면 "고양이"로 변경하여 반환
+        const name = mapping[group.name];
+        return { ...group, name };
+      })
+    : [];
+
+  console.log(dropdownItems);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -141,15 +154,16 @@ const Header: React.FC = () => {
       try {
         const response = await axios.get(`${API_URL}post`);
         const postData = response.data.message;
-        console.log('postData: ', postData)
-        const matchedPosts = postData.filter(post => post.categoryId === user.categoryId);
+        console.log('postData: ', postData);
+        const matchedPosts = postData.filter(
+          (post) => post.categoryId === user.categoryId,
+        );
 
         if (matchedPosts.length > 0) {
           setPosts(matchedPosts);
         } else {
           console.log('일치하는 데이터가 없습니다.');
         }
-
       } catch (error) {
         console.error('에러', error);
       }
@@ -176,7 +190,11 @@ const Header: React.FC = () => {
         </LoginButtonContainer>
         <MenuBox>
           {links.map((link, index) => (
-            <Category key={index} onMouseEnter={() => setActiveMenu(index)} onMouseLeave={() => setActiveMenu(null)}>
+            <Category
+              key={index}
+              onMouseEnter={() => setActiveMenu(index)}
+              onMouseLeave={() => setActiveMenu(null)}
+            >
               {link.path ? (
                 <Link to={link.path} onClick={() => setActiveMenu(null)}>
                   {link.label === '로고' ? (
@@ -194,12 +212,26 @@ const Header: React.FC = () => {
                   {link.icon && <Icon src={link.icon} />}
                 </>
               )}
-              {activeMenu === index && link.label === '커뮤니티' && (
+              {/* {activeMenu === index && link.label === '커뮤니티' && (
                 <SubMenu>
                   {groups.map((group, idx) => (
                     <SubMenuItem key={idx}>
                       <SubMenuLink to={`/group/${group._id}`}>
                         {group.group}
+                      </SubMenuLink>
+                    </SubMenuItem>
+                  ))}
+                  <SubMenuItem>
+                    <SubMenuLink to="/group">전체 그룹</SubMenuLink>
+                  </SubMenuItem>
+                </SubMenu>
+              )} */}
+              {activeMenu === index && link.label === '커뮤니티' && (
+                <SubMenu>
+                  {dropdownItems.map((group, idx) => (
+                    <SubMenuItem key={idx}>
+                      <SubMenuLink to={`/group/${group._id}`}>
+                        {group.group} {group.name}
                       </SubMenuLink>
                     </SubMenuItem>
                   ))}
