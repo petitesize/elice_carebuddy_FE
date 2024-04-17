@@ -11,9 +11,7 @@ import FeedBox from '../../components/community/FeedBox';
 import SidePanel from '../../components/community/SidePanel';
 import CommunityListSidebar from '../../components/community/CommunityListSidebar';
 import Select from '../../components/baseComponent/Select';
-import Button from '../../components/baseComponent/Button';
-import BigModal from '../../components/baseComponent/BigModal';
-import PostCreate from '../../components/community/PostCreate';
+import WritingModalButton from '../../components/community/WritingModalButton';
 
 // 상수
 import CategoryOptions from '../../constants/CategoryOptions'; //select 대분류
@@ -88,7 +86,6 @@ interface Groups {
 
 const Home: React.FC = () => {
   const [user] = useRecoilState(userState);
-  const [showModal, setShowModal] = useState(false);
 
   const [posts, setPosts] = useState<Posts[]>([]);
   const [groups, setGroups] = useState<Groups[]>([]);
@@ -97,9 +94,6 @@ const Home: React.FC = () => {
   const [selectedCategoryValue, setSelectedCategotyValue] = useState(''); // 대분류
   const [selectedGroupCategoryId, setselectedGroupCategoryId] = useState(''); // 소분류(그룹의 id)
   const [selectedGroupOptions, setSelectedGroupOptions] = useState<any[]>([]); // 소분류(select용 배열), 타입 추후 수정
-
-  const [formData, setFormData] = useState({}); //postCreate modal에 보낼 입력 데이터
-  const [imageData, setImageData] = useState(''); //postCreate modal에 보낼 이미지 데이터
 
   // 그룹 불러오기
   useEffect(() => {
@@ -131,8 +125,6 @@ const Home: React.FC = () => {
       setGroupArray(updatedGroups);
     }
   }, [groups]);
-
-
 
   interface Post {
     deletedAt: string | null;
@@ -198,38 +190,6 @@ const Home: React.FC = () => {
     console.log('벨류, 라벨', selectedOption.value, selectedOption.label); // 디버깅용 - 현재 선택된 소분류 찍어보는 콘솔 -> 추후 삭제
   };
 
-  const handleData = (formData: any) => {
-    // postCreate 컴포넌트에서 입력된 데이터를 받아와서 상태에 저장
-    setFormData(formData);
-    console.log(formData);
-  };
-
-  const handleImageData = (imageData: string) => {
-    // postCreate 컴포넌트에서 입력된 이미지 데이터를 받아와서 상태에 저장
-    setImageData(imageData);
-    console.log(imageData);
-  };
-
-  const formDataForPOST = {
-    ...formData,
-    userId: useRecoilValue(userState)?._id,
-  };
-
-  const handlePostCreate = async () => {
-    try {
-      const response = await axios.post(`${API_URL}post`, formDataForPOST);
-
-      console.log('글 등록 성공:', response.data);
-      setShowModal(!showModal);
-    } catch (error) {
-      console.error('글 등록 실패:', error);
-    }
-  };
-
-  const handleToggleModal = () => { 
-    setShowModal((prevState) => !prevState);
-  };
-
   return (
     <>
       <Banner />
@@ -253,28 +213,7 @@ const Home: React.FC = () => {
             </Classification>
             <WritingButton>
               <p>함께 나누고 싶은 이야기가 있나요?</p>
-              <Button
-                variant="primary"
-                shape="round"
-                padding="10px 15px"
-                onClick={handleToggleModal}
-              >
-                글 작성하기
-              </Button>
-              {showModal && (
-                <BigModal
-                  title="글쓰기"
-                  value="등록"
-                  component={
-                    <PostCreate
-                      onSubmit={handleData}
-                      onSubmitImage={handleImageData}
-                    />
-                  }
-                  onClose={handleToggleModal}
-                  onHandleClick={handlePostCreate}
-                />
-              )}
+              <WritingModalButton />
             </WritingButton>
           </FeedOption>
           {posts.map((post, index) => (

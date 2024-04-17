@@ -65,7 +65,7 @@ const ImageBox = styled.div<{ hasImage: boolean }>`
 interface ModalProps {
   onClose?: () => void;
   onSubmit: (formData: FormData) => void;
-  onSubmitImage: (imageData: ImageData) => void;
+  onSubmitImage: (imageData: ImageFormData) => void;
 }
 
 interface FormData {
@@ -76,26 +76,26 @@ interface FormData {
   content?: string | null;
 }
 
-interface imageData {
-  image? : string | null;
+interface ImageFormData {
+  image?: any; // 이미지 타입 뭘로 보내야할지 모르겠음. 나중에 추가
 }
 
 const PostCreate: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
   const [user] = useRecoilState(userState);
-  const [showPostCreateModal, setShowPostCreateModal] = useState(true); // 왜 하는지 정확히는 모름 이유 알면 추가
+  const [selectedCategoryValue, setSelectedCategotyValue] = useState(''); // 선택된 대분류
+  const [selectedGroupOptions, setSelectedGroupOptions] = useState<any[]>([]); // 선택된 소분류. 타입 추후 수정.
+  const [uploadedImg, setUploadedImg] = useState<string | null>(null); // 업로드된 이미지
 
-  const [selectedCategoryValue, setSelectedCategotyValue] = useState(''); // 대분류
-  const [selectedGroupOptions, setSelectedGroupOptions] = useState<any[]>([]); // 타입 추후 수정.
-
-  const [uploadedImg, setUploadedImg] = useState(''); // 업로드된 이미지
-
-  const [formData, setFromData] = useState<FormData>({
+  const [formData, setFormData] = useState<FormData>({
     userId: null,
     categoryId: null,
     title: null,
     content: null,
-    // image: null,
   });
+
+  const [imageFormData, setImageFormData] = useState<ImageFormData>({
+    image: null,
+  })
 
   useEffect(() => {
     // 부모 컴포넌트에서 POST를 하기 위해 formData가 변경될 때마다 부모 컴포넌트로 데이터를 전송
@@ -104,7 +104,7 @@ const PostCreate: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
 
   useEffect(() => {
     // 부모 컴포넌트에서 이미지를 POST 하기 위해 imageData 변경될 때마다 부모 컴포넌트로 데이터를 전송
-    onSubmitImage(uploadedImg);
+    onSubmitImage(imageFormData);
   }, [uploadedImg]);
 
   // select -> 현재 선택된 대분류를 받고, 그에 해당되는 그룹을 보여주는 형식
@@ -128,12 +128,12 @@ const PostCreate: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setFromData({ ...formData, title: value });
+    setFormData({ ...formData, title: value });
   };
 
   const handleContentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setFromData({ ...formData, content: value });
+    setFormData({ ...formData, content: value });
   };
 
   const handleSelectedGroup = (selectedOption: {
@@ -142,7 +142,7 @@ const PostCreate: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
     label: string;
   }) => {
     const categoryId = selectedOption.value;
-    setFromData({ ...formData, categoryId: categoryId });
+    setFormData({ ...formData, categoryId: categoryId });
   };
 
   // 이미지 업로드(프론트 코드, 모달 내에서 이미지 업로드하고 보여주기)
@@ -150,17 +150,18 @@ const PostCreate: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
-    input.onchange = (event) => {
+    input.onchange = async (event) => {
       const selectedFile = (event.target as HTMLInputElement).files?.[0];
       if (selectedFile) {
-        const imageUrl = URL.createObjectURL(selectedFile);
+        const imageUrl = URL.createObjectURL(selectedFile); // 프론트에 업로드
         setUploadedImg(imageUrl);
+        const ImageFormData = new FormData(); // 백 용 FormData 생성
+        ImageFormData.append('file', selectedFile);
+        setImageFormData(ImageFormData);
       }
     };
     input.click();
   };
-
-  // 
 
   return (
     <StyledPostCreate>

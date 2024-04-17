@@ -321,7 +321,8 @@ const POST: React.FC = () => {
             <PostContentArea>
               <pre>{post.content}</pre>
               <ImgContainer>
-                <img src={tempImg} alt="이미지" />
+                <img src={post.postImage[0]} alt="이미지" /> 
+                {/* 이 이미지 부분 수정... url 이 필요함 */}
               </ImgContainer>
               <Likes onClick={handleLiked} isLiked={isLiked}>
                 <LuThumbsUp />
