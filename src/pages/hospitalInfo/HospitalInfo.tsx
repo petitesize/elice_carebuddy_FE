@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import SearchResult from '../../components/information/HostpitalSearchResult';
 import InfoPageContainer from '../../components/information/InfoPageContainer';
 import SearchBox from '../../components/information/SearchBox';
-import { LuMapPin } from 'react-icons/lu';
 import styled from 'styled-components';
 import { API_URL } from '../../constants/constants';
 import Pagination from 'rc-pagination';
@@ -41,11 +40,9 @@ const Information: React.FC = () => {
 
   const fetchData = async (page) => {
     try {
-      const response = await fetch(`${API_URL}search/hospitals?page=${page}`);
+      const response = await fetch(`${API_URL}search/AllH?page=${page}`);
       const data = await response.json();
-      console.log(data);
       setHospitalData(data.message.datas);
-
       setTotalPages(data.message.totalPage);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -53,7 +50,11 @@ const Information: React.FC = () => {
   };
 
   useEffect(() => {
-    fetchData(currentPage);
+    if (selectedCity != '') {
+      fetchSearchData(currentPage, selectedCity, selectedDistrict);
+    } else {
+      fetchData(currentPage);
+    }
   }, [currentPage]);
 
   const handlePageChange = (page) => {
@@ -67,18 +68,17 @@ const Information: React.FC = () => {
   // 검색 버튼 클릭 시 호출될 함수
   const handleSearch = () => {
     // 검색을 수행하고 결과를 상태로 업데이트
-    fetchSearchData(currentPage, selectedCity, selectedDistrict);
+    fetchSearchData(1, selectedCity, selectedDistrict);
   };
 
   const fetchSearchData = async (page, city, district) => {
     try {
       const response = await fetch(
-        `${API_URL}search/hospitals?page=${page}&address=${city} ${district}`,
+        `${API_URL}search/hospitals?address=${city} ${district}&page=${page}`,
       );
       const data = await response.json();
-      console.log(data);
-      setHospitalData(data.message.datas);
-      setTotalPages(data.message.totalPage);
+      setHospitalData(data.hospitals.datas);
+      setTotalPages(data.hospitals.totalPage);
     } catch (error) {
       console.error('Error fetching data:', error);
     }

@@ -133,14 +133,14 @@ const ListSection: React.FC<ListSectionProps> = ({ userId }) => {
               <ListItem key={index}>
                 <DataContainer>
                   {/* StyledLink를 사용하여 Link를 스타일링합니다. */}
-                  <StyledLink to={`/post/${post._id}`}>
+                  <StyledLink to={`/post/${post?._id}`}>
                     <Data>
-                      [<CategoryGroup>{post.categoryId.group}</CategoryGroup>] {post.title}
+                      [<CategoryGroup>{post?.categoryId?.group}</CategoryGroup>] {post?.title}
                     </Data>
                   </StyledLink>
                 </DataContainer>
                 <DataContainer>
-                  <Data>{formatDate(post.createdAt)}</Data>
+                  <Data>{formatDate(post?.createdAt)}</Data>
                 </DataContainer>
               </ListItem>
             ))}
