@@ -69,7 +69,7 @@ const HealthDiary: React.FC<HealthDiaryProps> = ({
     if (confirmDelete) {
       try {
         const response = await axios.put(
-          `${API_URL}hospital/${id}`,
+          `${API_URL}hospital/${id}/d`,
           {
             deletedAt: new Date(),
           },

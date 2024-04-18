@@ -4,7 +4,6 @@ import { RecoilRoot } from 'recoil';
 import { userQuery } from './recoil/selectors';
 import { useRecoilValue } from 'recoil';
 import UserAPI from './services/userAPI';
-import { useEffect } from 'react';
 import axios from 'axios';
 
 const App = () => {
