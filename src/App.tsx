@@ -3,9 +3,10 @@ import GlobalStyle from './components/global/GlobalStyle';
 import { RecoilRoot } from 'recoil';
 import { userQuery } from './recoil/selectors';
 import { useRecoilValue } from 'recoil';
+import React, { useEffect } from 'react';
+
 import UserAPI from './services/userAPI';
 import axios from 'axios';
-import { useEffect } from 'react';
 
 const App = () => {
   useEffect(() => {

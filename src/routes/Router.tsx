@@ -37,7 +37,7 @@ const AppRouter = () => {
           element={<Layout component={PharmacyInfo} />}
         />
         <Route path="*" element={<NotFound />} />
-        <Route path="/sign" element={<Layout component={SignupInfo} />} />
+        <Route path="/signup-info" element={<Layout component={SignupInfo} />} />
       </Routes>
     </Router>
   );
