@@ -45,15 +45,26 @@ const StyledButton = styled.button`
   margin-top: 10px;
 `;
 
-const REST_API_KEY = "fc0445196ca1bc948515866bb1fba56e";
-const REDIRECT_URI = "http://localhost:5173/signup-info/auth/kakao/callback";
-const kakaoToken = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+interface KakaoOpt {
+  clientId: string;
+  redirectUri: string;
+  clientSecret: string;
+}
 
+const kakaoOpt: KakaoOpt = {
+  clientId: import.meta.env.VITE_KAKAO_REST_API_KEY || '',
+  redirectUri: import.meta.env.VITE_REDIRECT_URI || '',
+  clientSecret: import.meta.env.VITE_SECRET_KEY || ''
+};
 const LoginPage: React.FC = () => {
   const handleKakaoLogin = () => {
-    window.location.href = kakaoToken;
+    window.location.href=`https://kauth.kakao.com/oauth/authorize?client_id=${kakaoOpt.clientId}&redirect_uri=${kakaoOpt.redirectUri}&response_type=code`
+  };
+  const test = async () => {
+    window.location.href='http://kdt-sw-8-team01.elicecoding.com/auth/kakao'
   };
 
+    
   return (
     <>
       <Main>
@@ -67,7 +78,7 @@ const LoginPage: React.FC = () => {
             건강하고 행복한 시간을 보내세요
           </Content>
           <Text>간편 로그인 / 회원가입</Text>
-          <StyledButton onClick={handleKakaoLogin} />
+          <StyledButton onClick={test} />
         </LoginBox>
       </Main>
     </>

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PetProfileCards from '../diary/PetProfileCards';
+import axios from 'axios';
 
 const Container = styled.div`
   display: flex;
@@ -52,6 +53,8 @@ const PetCard: React.FC<PetProfilesProps> = ({
     onPetClick(pet);
   };
 
+
+
   return (
     <Container>
       <Menu>
@@ -69,3 +72,5 @@ const PetCard: React.FC<PetProfilesProps> = ({
 };
 
 export default PetCard;
+
+
