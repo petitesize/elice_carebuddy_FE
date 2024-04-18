@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import SearchResult from '../../components/information/HostpitalSearchResult';
 import InfoPageContainer from '../../components/information/InfoPageContainer';
 import SearchBox from '../../components/information/SearchBox';
-import { LuMapPin } from 'react-icons/lu';
 import styled from 'styled-components';
 import { API_URL } from '../../constants/constants';
 import Pagination from 'rc-pagination';
