@@ -52,6 +52,25 @@ const PostCreate: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
     postImage: null,
   });
 
+  // 이미지 업로드(프론트 코드, 모달 내에서 이미지 업로드하고 보여주기)
+  const handleImageUpload = () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.onchange = async (event) => {
+      const selectedFile = (event.target as HTMLInputElement).files?.[0];
+      if (selectedFile) {
+        const imageUrl = URL.createObjectURL(selectedFile); // 프론트에 업로드
+        setUploadedImg(imageUrl);
+
+        const ImageFormData = new FormData(); // 백에 업로드
+        ImageFormData.append('postImage', selectedFile);
+        setImageFormData(ImageFormData);
+      }
+    };
+    input.click();
+  };
+  
   useEffect(() => {
     // 부모 컴포넌트에서 POST를 하기 위해 formData가 변경될 때마다 부모 컴포넌트로 데이터를 전송
     onSubmit(formData);

@@ -23,7 +23,7 @@ const ModalContent = styled.div`
   border-radius: 7px;
   border: 1px solid var(--color-grey2);
   border-top: 20px solid #6d987a;
-  padding: 20px 30px;
+  padding: 20px;
   display: flex;
   justify-content: center;
   z-index: 10000;
@@ -46,7 +46,6 @@ const Title = styled.div`
 `;
 
 const ButtonContainer = styled.div`
-  display: flex;
   padding: 20px 0 20px 0;
 `;
 
