@@ -54,27 +54,25 @@ interface KakaoOpt {
 const kakaoOpt: KakaoOpt = {
   clientId: import.meta.env.VITE_KAKAO_REST_API_KEY || '',
   redirectUri: import.meta.env.VITE_REDIRECT_URI || '',
-  clientSecret: import.meta.env.VITE_SECRET_KEY || ''
+  clientSecret: import.meta.env.VITE_SECRET_KEY || '',
 };
 const LoginPage: React.FC = () => {
-    const generateKakaoLoginURL = () => {
+  const generateKakaoLoginURL = () => {
     return `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoOpt.clientId}&redirect_uri=${kakaoOpt.redirectUri}&respose_type=code`;
-}
+  };
 
-// Kakao 로ient그인 버튼 클릭 이벤트 처리
-const handleKakaoLogin = () => {
-	console.log(clientId)
+  const handleKakaoLogin = () => {
     const kakaoLoginURL = generateKakaoLoginURL();
-    window.location.href = kakaoLoginURL; 
-}
-   
+    window.location.href = kakaoLoginURL;
+  };
+
   return (
     <>
       <Main>
         <LoginBox>
           <Logo src={LogoImg} />
           <Content>
-            케어버디와 함께{redirectUri}ㄴ
+            케어버디와 함께
             <br />
             사랑하는 나의 반려동물과
             <br />

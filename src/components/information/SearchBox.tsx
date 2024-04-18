@@ -363,12 +363,12 @@ const SearchBox: React.FC<{
             /> */}
             <Title>지역: </Title>
             <BasedSelect
-              width="100%"
+              width="30%"
               options={SelectDummyCityOptions}
               onChange={handleCityChange}
             ></BasedSelect>
             <BasedSelect
-              width="100%"
+              width="30%"
               options={SelectDummyDistrictOptions[selectedCity]}
               onChange={handleDistrictChange}
             ></BasedSelect>
@@ -378,6 +378,7 @@ const SearchBox: React.FC<{
               padding={'8px 16px'}
               children={'검색'}
               onClick={onSearch}
+              margin={'32px'}
             />
           </SearchContainer>
         </SearchBoxContainer>
@@ -400,7 +401,7 @@ const HospitalSearchContainer = styled.div`
 `;
 
 const SearchBoxContainer = styled.div`
-  width: 50%;
+  width: 80%;
   position: relative;
 `;
 
@@ -415,10 +416,12 @@ const SelectContainer = styled.div`
 const SearchContainer = styled.div`
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   position: relative;
   > button {
-    position: absolute;
-    right: -90px;
+    /* position: absolute;
+    right: -90px; */
+
     font-weight: var(--font-weight-normal);
   }
 `;
