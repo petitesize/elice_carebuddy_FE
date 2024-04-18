@@ -131,7 +131,7 @@ const Profile: React.FC = () => {
             {uploadedImg ? (
               <img src={uploadedImg} alt="Uploaded" />
             ) : (
-              <img src={`${UPLOADED_IMG_URL}${profileImage}`} alt="Profile" />
+              <img src={`${UPLOADED_IMG_URL}uploads/${profileImage}`} alt="Profile" />
             )}
           </ImageBox>
           <LinkButton

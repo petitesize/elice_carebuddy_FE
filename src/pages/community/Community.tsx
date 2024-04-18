@@ -100,7 +100,7 @@ const Community: React.FC = () => {
     }
   }, []);
 
-  // const imageSrc = `${UPLOADED_IMG_URL}${post?.postImage}`; // 교체시 참고
+  // const imageSrc = `${UPLOADED_IMG_URL}uploads/${post?.postImage}`; // 교체시 참고
 
   // 피드 글 조회 API
   useEffect(() => {

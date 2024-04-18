@@ -5,4 +5,4 @@
 export const DOMAIN_URL = 'http://kdt-sw-8-team01.elicecoding.com/';
 
 // post 이미지 불러오는 URL
-export const UPLOADED_IMG_URL = 'http://localhost:3001/uploads/';
+export const UPLOADED_IMG_URL = 'http://localhost:3001/';
