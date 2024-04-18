@@ -54,6 +54,7 @@ const UserTrue: React.FC<ModalProps> = ({ onClose }) => {
   const handleWithdraw = () => {
     handleToggleUserTrueModal(); // Close the modal
     onClose(); // Close the UserTrue modal
+    
   };
 
   return (

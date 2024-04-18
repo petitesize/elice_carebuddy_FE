@@ -8,6 +8,7 @@ import { API_URL, UPLOADED_IMG_URL } from './../../constants/constants';
 import { useRecoilState } from 'recoil';
 import { userState } from '../../recoil/atoms';
 import LinkButton from '../baseComponent/LinkButton';
+import camera from '../../assets/camera.png'
 
 interface User {
   _id: string;
