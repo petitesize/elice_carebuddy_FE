@@ -46,7 +46,18 @@ const MenuBox = styled.span`
     font-weight: var(--font-weight-bold);
     transition: all 0.5s;
   }
+  > div {
+    margin-right: 96px;
+  }
+  > div:first-child {
+    margin-right: auto;
+  }
+  > div:last-child {
+    margin-right: 0;
+  }
 `;
+
+const HeaderDiv = styled.div``;
 
 const Logo = styled.img`
   cursor: pointer;
@@ -79,6 +90,7 @@ const SubMenu = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin-top: 2px;
 `;
 
 const SubMenuItem = styled.div`
@@ -193,12 +205,12 @@ const Header: React.FC = () => {
 
   // links 배열 정의
   const links = [
-    { path: '/', label: '로고', icon: imgSrc },
-    { label: '커뮤니티', icon: null },
-    { label: '건강관리', icon: null },
-    { label: '정보', icon: null },
-    { path: '/mypage', label: '', icon: userIcon },
-    { path: '/', label: '', icon: alert },
+    { path: '/', label: '로고', icon: imgSrc, className: '' },
+    { label: '커뮤니티', icon: null, className: 'community' },
+    { label: '건강관리', icon: null, className: 'health' },
+    { label: '정보', icon: null, className: 'info' },
+    { path: '/mypage', label: '', icon: userIcon, className: 'mypage' },
+    // { path: '/', label: '', icon: alert },
   ];
 
   return (
@@ -226,10 +238,10 @@ const Header: React.FC = () => {
                   )}
                 </Link>
               ) : (
-                <>
-                  <span>{link.label}</span>
+                <HeaderDiv>
+                  <span className={link.className}>{link.label}</span>
                   {link.icon && <Icon src={link.icon} />}
-                </>
+                </HeaderDiv>
               )}
               {/* 건강 다이어리 서브메뉴 표시 */}
               {activeMenu === index && link.label === '건강관리' && (
@@ -241,7 +253,7 @@ const Header: React.FC = () => {
               )}
               {/* 커뮤니티 서브메뉴 표시 */}
               {activeMenu === index && link.label === '커뮤니티' && (
-                <SubMenu>
+                <SubMenu className="community">
                   {dropdownItems.map((group, idx) => (
                     <SubMenuItem key={idx}>
                       <SubMenuLink to={`/group/${group._id}`}>
@@ -256,7 +268,7 @@ const Header: React.FC = () => {
               )}
               {/* 정보 서브메뉴 표시 */}
               {activeMenu === index && link.label === '정보' && (
-                <SubMenu>
+                <SubMenu className="info">
                   <SubMenuItem>
                     <SubMenuLink to="/hospital-info">병원 정보</SubMenuLink>
                   </SubMenuItem>
