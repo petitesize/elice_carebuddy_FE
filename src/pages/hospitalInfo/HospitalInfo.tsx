@@ -31,7 +31,9 @@ const MapLink = styled.a`
 `;
 
 const Information: React.FC = () => {
+  // 선택된 시/도와 구/군 정보를 저장할 상태
   const [selectedCity, setSelectedCity] = useState('');
+  const [selectedDistrict, setSelectedDistrict] = useState('');
 
   const [currentPage, setCurrentPage] = useState(1);
   const [hospitalData, setHospitalData] = useState([]);
@@ -41,7 +43,9 @@ const Information: React.FC = () => {
     try {
       const response = await fetch(`${API_URL}search/hospitals?page=${page}`);
       const data = await response.json();
+      console.log(data);
       setHospitalData(data.message.datas);
+
       setTotalPages(data.message.totalPage);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -60,16 +64,34 @@ const Information: React.FC = () => {
     console.log(e.target.value);
     setSelectedCity(e.target.value);
   };
-  const handleSearchButtonClick = () => {
-    // 검색 버튼 클릭 시, 해당 시/도 값과 검색어를 전달
-    console.log('선택된 시/도:', selectedCity);
+  // 검색 버튼 클릭 시 호출될 함수
+  const handleSearch = () => {
+    // 검색을 수행하고 결과를 상태로 업데이트
+    fetchSearchData(currentPage, selectedCity, selectedDistrict);
+  };
+
+  const fetchSearchData = async (page, city, district) => {
+    try {
+      const response = await fetch(
+        `${API_URL}search/hospitals?page=${page}&address=${city} ${district}`,
+      );
+      const data = await response.json();
+      console.log(data);
+      setHospitalData(data.message.datas);
+      setTotalPages(data.message.totalPage);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   };
 
   return (
     <InfoPageContainer>
       <SearchBox
-        onCityChange={handleCityChange}
-        onSearch={handleSearchButtonClick}
+        selectedCity={selectedCity}
+        setSelectedCity={setSelectedCity}
+        selectedDistrict={selectedDistrict}
+        setSelectedDistrict={setSelectedDistrict}
+        onSearch={handleSearch}
       />
       <SearchResult data={hospitalData} />
       <StyledPagination
