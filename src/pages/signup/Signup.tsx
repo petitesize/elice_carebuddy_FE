@@ -61,15 +61,7 @@ const LoginPage: React.FC = () => {
     window.location.href=`https://kauth.kakao.com/oauth/authorize?client_id=${kakaoOpt.clientId}&redirect_uri=${kakaoOpt.redirectUri}&response_type=code`
   };
   const test = async () => {
-    axios.get('http://kdt-sw-8-team01.elicecoding.com/auth/kakao')
-    .then(response => {
-      // 요청이 성공한 경우 처리할 내용
-      console.log(response.data);
-    })
-    .catch(error => {
-      // 요청이 실패한 경우 처리할 내용
-      console.error('에러 발생:', error);
-    });
+    window.location.href='http://kdt-sw-8-team01.elicecoding.com/auth/kakao'
   };
 
     
