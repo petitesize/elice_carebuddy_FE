@@ -9,7 +9,7 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/auth/checking', { withCredentials: true });
+        const response = await axios.get('http://kdt-sw-8-team01.elicecoding.com/auth/checking', { withCredentials: true });
         console.log(response)
       } catch (error) {
         console.error('Error fetching data:', error);

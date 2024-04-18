@@ -43,5 +43,5 @@
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
   },
-  "proxy": "http://localhost:3001"
+  "proxy": "http://kdt-sw-8-team01.elicecoding.comk"
 }
