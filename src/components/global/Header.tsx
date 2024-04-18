@@ -123,17 +123,22 @@ const Header: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
 
   const userGroups = user?.categoryId;
-  const mapping = {
+
+  interface Mapping {
+    [key: number]: string;
+  }
+
+  const mapping: Mapping = {
     0: '강아지',
     1: '고양이',
   };
 
   const dropdownItems = userGroups
     ? userGroups.map((group) => {
-      // name이 0이면 "강아지", name이 1이면 "고양이"로 변경하여 반환
-      const name = mapping[group.name];
-      return { ...group, name };
-    })
+        // name이 0이면 "강아지", name이 1이면 "고양이"로 변경하여 반환
+        const name = mapping[group.name]; // 여기서 에러 왜 나는지..? Category가 어디에 있는거지?
+        return { ...group, name };
+      })
     : [];
 
   useEffect(() => {
