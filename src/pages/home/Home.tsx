@@ -99,9 +99,6 @@ const Home: React.FC = () => {
   const [user] = useRecoilState(userState);
 
 
-  console.log('user', user);
-  // console.log('categories', user?.categories);
-
   // 그룹 불러오기
   useEffect(() => {
     const fetchData = async () => {
