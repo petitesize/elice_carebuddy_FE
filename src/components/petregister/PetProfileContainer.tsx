@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import cameraIcon from '../../assets/camera.png'; // 카메라 아이콘 이미지 import
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
 `;
@@ -18,10 +18,19 @@ const PetProfileImg = styled.img`
 `;
 
 const UploadButton = styled.label`
-  padding: 10px;
-  text-decoration: underline;
   cursor: pointer;
-  font-size: 14px;
+  position: relative;
+  bottom: -50px;
+  right: 35px;
+`;
+
+const CameraIcon = styled.img`
+  width: 32px;
+  height: 30px;
+  margin-right: 5px;
+  border-radius: 50%;
+  border: 1px solid #6d987a;
+  padding: 2px;
 `;
 
 const HiddenInput = styled.input`
@@ -34,10 +43,20 @@ interface PetProfileContainerProps {
 }
 
 const PetProfileContainer: React.FC<PetProfileContainerProps> = ({ profileImage, handleImageUpload }) => {
+  const handleUploadButtonClick = () => {
+    // HiddenInput을 클릭하여 파일 업로드 창을 연다.
+    const inputElement = document.getElementById('upload-input');
+    if (inputElement) {
+      inputElement.click();
+    }
+  };
+
   return (
     <Container>
       <PetProfileImg src={profileImage || undefined} />
-      <UploadButton htmlFor="upload-input">프로필 사진 업로드하기</UploadButton>
+      <UploadButton onClick={handleUploadButtonClick}>
+        <CameraIcon src={cameraIcon} alt="Camera Icon" />
+      </UploadButton>
       <HiddenInput id="upload-input" type="file" accept="image/*" onChange={handleImageUpload} />
     </Container>
   );

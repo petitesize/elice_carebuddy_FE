@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import imgSrc from '../../assets/withDraw.png';
 import SmallModal from '../../components/baseComponent/SmallModal';
 import UserTrue from './UserTrue';
-import Button from '../../components/baseComponent/Button'
+import Button from '../../components/baseComponent/Button';
 
 const Container = styled.div`
   display: flex;
@@ -17,13 +17,13 @@ const Text = styled.p`
   text-align: center;
   line-height: 23px;
   font-size: var(--font-size-md-1); //16
-`
+`;
 
 const Title = styled.p`
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-md-2); //18
   padding: 20px;
-`
+`;
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -80,12 +80,14 @@ const UserAsk: React.FC<ModalProps> = ({ onClose }) => {
     }
   };
 
-
+  const handleBackgroundClick = () => {
+    setShowUserAskModal(false);
+  };
 
   return (
     <>
       {showUserAskModal && (
-        <Container>
+        <Container onClick={handleBackgroundClick}>
           <Logo src={imgSrc} />
           <Title>정말 탈퇴하시겠습니까?</Title>
           <Text>
