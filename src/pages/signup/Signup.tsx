@@ -45,21 +45,7 @@ const StyledButton = styled.button`
   margin-top: 10px;
 `;
 
-interface KakaoOpt {
-  clientId: string;
-  redirectUri: string;
-  clientSecret: string;
-}
-
-const kakaoOpt: KakaoOpt = {
-  clientId: import.meta.env.VITE_KAKAO_REST_API_KEY || '',
-  redirectUri: import.meta.env.VITE_REDIRECT_URI || '',
-  clientSecret: import.meta.env.VITE_SECRET_KEY || ''
-};
 const LoginPage: React.FC = () => {
-  const handleKakaoLogin = () => {
-    window.location.href=`https://kauth.kakao.com/oauth/authorize?client_id=${kakaoOpt.clientId}&redirect_uri=${kakaoOpt.redirectUri}&response_type=code`
-  };
   const test = async () => {
     window.location.href='http://localhost:3001/auth/kakao'
   };
