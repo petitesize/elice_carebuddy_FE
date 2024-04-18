@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { API_URL } from './../../constants/constants';
 import styled from 'styled-components';
 import Button from '../../components/baseComponent/Button';
 import AgreementSection from './AgreementSection';
 import InputSection from './InputSection';
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -24,59 +23,38 @@ const ButtonBox = styled.div`
 `;
 
 const SectionBox: React.FC = () => {
-  const navigate = useNavigate();
+  const [nickName, setNickName] = useState('');
+  const [email, setEmail] = useState('');
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const code = urlParams.get('code');
-        console.log('code : ', code);
 
-        // 액세스 토큰 요청
-        const tokenResponse = await axios.post('https://kauth.kakao.com/oauth/token', {
-          grant_type: 'authorization_code',
-          client_id: 'fc0445196ca1bc948515866bb1fba56e',
-          redirect_uri: 'http://localhost:5173/signup-info/auth/kakao/callback',
-          client_secret: 'TJ3MdeN2kNqqzK2YC8yFfI8ZpBaAGEMF',
-          code: code,
-        });
+  const sendUserDataToServer = async () => {
+    try {
+      const data = {
+        categories: [],
+        buddyId: [],
+        nickName: nickName,
+        email: email,
+        adminNumber: 0,
+        profileImage: []
+      };
 
-        const accessToken = tokenResponse.data.access_token;
-
-        // 사용자 정보 요청
-        const userResponse = await axios.get('https://kapi.kakao.com/v2/user/me', {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-
-        const email = userResponse.data.kakao_account.email;
-        console.log(userResponse);
-        console.log(email);
-
-        // 서버로 인가 코드와 사용자 이메일을 전송
-        await axios.post('/auth/login', { code, email });
-
-        // 로그인 후 리다이렉트 등 필요한 작업 수행
-        navigate('/signup-info/auth/kakao/callback');
-      } catch (error) {
-        console.error(error);
-        // 에러 처리
-        navigate('/*');
-      }
-    };
-
-    fetchData();
-  }, [navigate]);
+      const response = await axios.post(`${API_URL}users`, {
+        'email': `${email}`,
+        'nickName': `${nickName}`
+      });
+      console.log('서버 응답:', response.data);
+    } catch (error) {
+      console.error('서버에 유저 데이터 전송 중 오류 발생:', error);
+    }
+  };
 
   return (
     <Container>
       <Component>
-        <InputSection />
+        <InputSection onNickNameChange={setNickName} />
         <AgreementSection />
         <ButtonBox>
-          <Button variant="primary" padding='20px 40px'>가입하기</Button>
+          <Button variant="primary" padding='20px 40px' onClick={sendUserDataToServer}>가입하기</Button>
         </ButtonBox>
       </Component>
     </Container>

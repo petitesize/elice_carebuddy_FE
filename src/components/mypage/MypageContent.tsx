@@ -64,7 +64,7 @@ const MypageContent: React.FC = () => {
   return (
     <Container>
       <UserInfoSection
-        nickName={user?.nickName}
+        nickName={user?.nickName || ''}
         introduce={user?.introduce}
         email={user?.email}
       />
