@@ -61,7 +61,8 @@ const LoginPage: React.FC = () => {
     window.location.href=`https://kauth.kakao.com/oauth/authorize?client_id=${kakaoOpt.clientId}&redirect_uri=${kakaoOpt.redirectUri}&response_type=code`
   };
   const test = async () => {
-    window.location.href='http://kdt-sw-8-team01.elicecoding.com/auth/kakao'
+    try {  const res = await axios.get('http://kdt-sw-8-team01.elicecoding.com/auth/kakao'); 
+    console.log(res);     } catch (error) {       console.log(error);     }
   };
 
     
