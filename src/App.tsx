@@ -5,6 +5,7 @@ import { userQuery } from './recoil/selectors';
 import { useRecoilValue } from 'recoil';
 import UserAPI from './services/userAPI';
 import axios from 'axios';
+import { useEffect } from 'react';
 
 const App = () => {
   useEffect(() => {
