@@ -26,12 +26,20 @@ const Profile: React.FC = () => {
   const [errorText, setErrorText] = useState<string>('');
   const [imageFormData, setImageFormData] = useState(null);
 
-  // 현재 유저 기본 정보를 수정 인풋에 채워넣음
+  // 유저 정보가 로딩되면 현재 유저 기본 정보를 수정 인풋에 채워넣음
   useEffect(() => {
     setNewNickName(user?.nickName);
     setNewIntroduce(user?.introduce);
     setProfileImage(user?.profileImage);
   }, [user]);
+
+    // // 유저 정보가 로딩되면 현재 유저 기본 정보를 수정 인풋에 채워넣음
+    // useEffect(() => {
+    //   setNewNickName(user.nickName);
+    //   setNewIntroduce(user.introduce);
+    //   setProfileImage(user.profileImage);
+    // }, []);
+  
 
   const handleNickNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newName = event.target.value;

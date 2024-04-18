@@ -64,12 +64,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ nickName, email, introduce }) => {
   const handleToggleModal = () => {
     setShowModal(!showModal);
   };
-
-    // 더미 데이터
-    // const DummyUserInfoData = {
-    //   email: 'carebuddy@kakao.com',
-    // };
-
+  
   return (
     <Container>
         <Menu>
