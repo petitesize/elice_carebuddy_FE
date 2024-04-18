@@ -21,6 +21,7 @@ const UploadButton = styled.label`
   padding: 10px;
   text-decoration: underline;
   cursor: pointer;
+  font-size: 14px;
 `;
 
 const HiddenInput = styled.input`

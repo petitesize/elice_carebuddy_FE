@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; // react-router-dom에서 Link를 가져옵니다.
+import { Link } from 'react-router-dom';
 import { API_URL } from './../../constants/constants';
 
 const Container = styled.div``;
@@ -55,57 +55,49 @@ const ListItem = styled.div`
 
 const DataContainer = styled.div``;
 
-// Link 컴포넌트를 스타일링하여 언더라인을 없애줍니다.
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: #343434;
 `;
 
-// post.categoryId.group에 색상을 적용하는 스타일
 const CategoryGroup = styled.span`
-  color: #6d987a; // 원하는 색상으로 변경
+  color: #6d987a;
 `;
 
 interface Post {
   _id: string;
-  userId: string;
   categoryId: {
     group: string;
   };
-  name: number;
   title: string;
   createdAt: string;
 }
 
 interface ListSectionProps {
-  userId: string;
+  postId: string; // postId를 props로 전달 받음
 }
 
-const ListSection: React.FC<ListSectionProps> = ({ userId }) => {
+const ListSection: React.FC<ListSectionProps> = ({ postId }) => {
+  // const [posts, setPosts] = useState<Post[]>([]);
 
-  const [posts, setPosts] = useState<Post[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${API_URL}post`);
-        const postData = response.data.message;
-
-        const matchedPosts = postData.filter(post => post.userId?._id === userId);
-
-        if (matchedPosts.length > 0) {
-          setPosts(matchedPosts);
-        } else {
-          console.log('일치하는 데이터가 없습니다.');
-        }
-
-      } catch (error) {
-        console.error('에러', error);
-      }
-    };
-
-    fetchData();
-  }, [userId]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(`${API_URL}post`);
+  //       const postData = response.data.message;
+  //       console.log(postData);
+  //       // postId와 일치하는 게시물만 필터링
+  //       const filteredPosts = postData.filter(post => post._id === postId);
+  //       setPosts(filteredPosts);
+  //       console.log('게시글 데이터:', filteredPosts); // 필터링된 게시글 데이터 콘솔에 추가
+  //     } catch (error) {
+  //       console.error('에러', error);
+  //     }
+  //   };
+  
+  //   fetchData();
+  // }, [postId]);
+  
 
   const formatDate = (date: string) => {
     const formattedDate = new Date(date);
@@ -132,7 +124,6 @@ const ListSection: React.FC<ListSectionProps> = ({ userId }) => {
             {posts.map((post, index) => (
               <ListItem key={index}>
                 <DataContainer>
-                  {/* StyledLink를 사용하여 Link를 스타일링합니다. */}
                   <StyledLink to={`/post/${post._id}`}>
                     <Data>
                       [<CategoryGroup>{post.categoryId.group}</CategoryGroup>] {post.title}
