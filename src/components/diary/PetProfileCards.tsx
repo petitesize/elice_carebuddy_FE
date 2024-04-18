@@ -10,6 +10,7 @@ import 'swiper/css/navigation';
 import { Pagination } from 'swiper/modules';
 import PetRegister from '../../pages/petRegister/PetRegister';
 import PetEdit from '../../pages/petEdit/PetEdit';
+import { UPLOADED_IMG_URL } from '../../constants/constants';
 
 // 카드 전체 컨테이너
 const PetProfileCardsContainer = styled.div`
@@ -174,7 +175,7 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
                 </ActionButtonContainer>
 
                 <PetProfileImg
-                  src={profile.profileImg || defaultImg}
+                  src={`${UPLOADED_IMG_URL}uploads/${profile?.buddyImage[0]}`}
                   alt="프로필사진"
                   onClick={() => handleClick(profile)}
                 />
