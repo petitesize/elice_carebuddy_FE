@@ -9,11 +9,6 @@ import ProfileSection from './ProfileSection';
 import PetCardSection from './PetCardSection';
 import ListSection from './ListSection';
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
 interface User {
   _id: string;
   nickName: string;
@@ -89,3 +84,9 @@ const MypageContent: React.FC = () => {
 };
 
 export default MypageContent;
+
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
