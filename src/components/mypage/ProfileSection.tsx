@@ -75,7 +75,7 @@ const Profile: React.FC = () => {
       };
 
       await axios.put(`${API_URL}users/${user?._id}`, Data);
-      alert('수정되었습니다.'); // 수정 완료 시 알림창 띄우기
+      alert('수정되었습니다.'); // 수정 완료 시 알럿으로 알려주기
 
       console.log('소개 수정 성공');
       window.location.reload(); // 페이지 새로고침
