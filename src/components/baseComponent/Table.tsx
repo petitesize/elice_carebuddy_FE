@@ -45,12 +45,11 @@ const Table = styled.table`
 
 interface TableProps {
   headers: string[]; // 테이블 헤더를 받는 props
-  // data: (string | JSX.Element)[][]; // 테이블 데이터를 받는 props
   data: { [key: string]: string }[];
 }
 
 const TableList: React.FC<TableProps> = ({ headers, data }) => {
-  console.log(data);
+  // console.log(data); // 테이블에 렌더링 될 데이터 배열을 확인할 수 있습니다
   return (
     <Container>
       <Table>
