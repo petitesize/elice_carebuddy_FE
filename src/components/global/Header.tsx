@@ -116,6 +116,20 @@ const LoginButton = styled(Link)`
   font-size: 12px;
 `;
 
+// 링크 및 아이콘에 대한 배열 생성
+const links = [
+  { path: '/', label: '로고', icon: imgSrc },
+  {
+    label: '커뮤니티',
+    icon: null,
+    subMenu: ['커뮤니티1', '커뮤니티2', '모든 그룹'],
+  },
+  { label: '건강관리', icon: null, subMenu: ['건강 다이어리'] },
+  { label: '정보', icon: null, subMenu: ['병원 검색', '약국 검색'] },
+  { path: '/mypage', label: '', icon: userIcon }, // 마이페이지
+  { path: '/', label: '', icon: alert },
+];
+
 const Header: React.FC = () => {
   const [activeMenu, setActiveMenu] = useState<number | null>(null);
   const [groups, setGroups] = useState<Group[]>([]);
@@ -155,27 +169,27 @@ const Header: React.FC = () => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${API_URL}post`);
-        const postData = response.data.message;
-        const matchedPosts = postData.filter(
-          (post) => post.categoryId === user.categoryId,
-        );
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(`${API_URL}post`);
+  //       const postData = response.data.message;
+  //       const matchedPosts = postData.filter(
+  //         (post) => post.categoryId === user.categoryId,
+  //       )
 
-        if (matchedPosts.length > 0) {
-          setPosts(matchedPosts);
-        } else {
-          console.log('일치하는 데이터가 없습니다.');
-        }
-      } catch (error) {
-        console.error('에러', error);
-      }
-    };
+  //       if (matchedPosts.length > 0) {
+  //         setPosts(matchedPosts);
+  //       } else {
+  //         console.log('일치하는 데이터가 없습니다.');
+  //       }
+  //     } catch (error) {
+  //       console.error('에러', error);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   // links 배열 정의
   const links = [

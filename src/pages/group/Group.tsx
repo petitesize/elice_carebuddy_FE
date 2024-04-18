@@ -44,7 +44,6 @@ interface Group {
 const Group: React.FC = () => {
   const [groups, setGroups] = useState<Group[]>([]);
   const [clickedTab, setClickedTab] = useState(0);
-  const [isMember, setIsMember] = useState(false);
   const [user] = useRecoilState(userState);
 
   console.log('user', user);
@@ -62,20 +61,20 @@ const Group: React.FC = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [user?.categoryId]);
 
   const filteredGroups = groups.filter((group) => group.name === clickedTab);
 
   // 그룹 가입 API
   const handleJoinGroup = async (groupId: string) => {
     try {
-      const data = {
+      const Data = {
         categoryId: groupId,
       };
 
       const response = await axios.put(
-        `${API_URL}users/${user?._id}/joinGroup`, // 원본
-        data,
+        `${API_URL}users/${user?._id}/joinGroup`,
+        Data,
       );
       console.log('그룹 가입 성공', response.data);
     } catch (error) {

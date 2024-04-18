@@ -87,6 +87,11 @@ const GroupCard: React.FC<GroupCardProps> = ({
         <p>{name}</p>
         <GroupIntroduction>{introduction}</GroupIntroduction>
         {isMember ? (
+          <MemberCheck>
+            <LuCheck />
+            <p>이미 가입된 그룹입니다</p>
+          </MemberCheck>
+        ) : (
           <ButtonWrapper>
             <Button
               variant="secondary"
@@ -97,12 +102,7 @@ const GroupCard: React.FC<GroupCardProps> = ({
             >
               가입
             </Button>
-          </ButtonWrapper>
-        ) : (
-          <MemberCheck>
-            <LuCheck />
-            <p>이미 가입된 그룹입니다</p>
-          </MemberCheck>
+          </ButtonWrapper> 
         )}
       </GroupInfoWrapper>
     </StyledGroupCard>

@@ -26,7 +26,7 @@ import { API_URL } from '../constants/constants';
 const useGetUserAPI = () => {
   const [user, setUser] = useRecoilState(userState);
 
-  useEffect(() => {
+  useEffect(() => {  
     const fetchData = async () => {
       try {
         const response = await axios.get(
@@ -34,7 +34,8 @@ const useGetUserAPI = () => {
         );
         const userData = response.data.message;
         setUser(userData);
-        console.log(user);
+        // console.log(user); //디버깅 중 주석처리
+        console.log('user 조회 성공하면 여기 값:', user); // 디버깅용 코드 -> 추후 디버깅되면 삭제
       } catch (error) {
         console.error('Error fetching data:', error);
       }

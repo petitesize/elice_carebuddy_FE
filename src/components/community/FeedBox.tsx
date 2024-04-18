@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import LikeAndCommentCount from './LikeAndCommentCount';
 import Hr from '../baseComponent/Hr';
 import { Link } from 'react-router-dom';
 
@@ -88,8 +87,6 @@ const FeedBox: React.FC<FeedBoxProps> = ({
   profile,
   nickname,
   uploadedDate,
-  likeCount,
-  commentCount,
   postId
 }) => {
   const processedContent = content.split('. ').slice(0, 2).join('. '); // 두 문장만 보여주기
@@ -99,10 +96,6 @@ const FeedBox: React.FC<FeedBoxProps> = ({
     <StyledFeedBox to={`/post/${postId}`}>
       <TitleContainer>
         <Title>{title}</Title>
-        {/* <LikeAndCommentCount
-          likeCount={likeCount}
-          commentCount={commentCount}
-        /> */}
       </TitleContainer>
       <Content>
         {processedContent}
