@@ -57,28 +57,31 @@ const kakaoOpt: KakaoOpt = {
   clientSecret: import.meta.env.VITE_SECRET_KEY || ''
 };
 const LoginPage: React.FC = () => {
-  const handleKakaoLogin = () => {
-    window.location.href=`https://kauth.kakao.com/oauth/authorize?client_id=${kakaoOpt.clientId}&redirect_uri=${kakaoOpt.redirectUri}&response_type=code`
-  };
-  const test = async () => {
-    window.location.href='http://kdt-sw-8-team01.elicecoding.com/auth/kakao'
-  };
+    const generateKakaoLoginURL = () => {
+    return `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoOpt.clientId}&redirect_uri=${kakaoOpt.redirectUri}&respose_type=code`;
+}
 
-    
+// Kakao 로ient그인 버튼 클릭 이벤트 처리
+const handleKakaoLogin = () => {
+	console.log(clientId)
+    const kakaoLoginURL = generateKakaoLoginURL();
+    window.location.href = kakaoLoginURL; 
+}
+   
   return (
     <>
       <Main>
         <LoginBox>
           <Logo src={LogoImg} />
           <Content>
-            케어버디와 함께
+            케어버디와 함께{redirectUri}ㄴ
             <br />
             사랑하는 나의 반려동물과
             <br />
             건강하고 행복한 시간을 보내세요
           </Content>
           <Text>간편 로그인 / 회원가입</Text>
-          <StyledButton onClick={test} />
+          <StyledButton onClick={handleKakaoLogin} />
         </LoginBox>
       </Main>
     </>
