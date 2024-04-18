@@ -6,9 +6,9 @@ export default defineConfig({
   plugins: [react()],
   build: {
     outDir: 'dist', // 빌드된 파일이 생성될 경로 설정
-    rollupOptions: {
-      input: './index.html', // 진입점을 index.html로 설정
-    },
+    // rollupOptions: {
+    //   input: './index.html', // 진입점을 index.html로 설정
+    // },
   },
   resolve: {
     alias: {
