@@ -4,6 +4,7 @@ import { RecoilRoot } from 'recoil';
 import { useEffect } from 'react'; // 한 번만 임포트
 import UserAPI from './services/userAPI';
 import axios from 'axios';
+import { useEffect } from 'react';
 
 const App = () => {
   useEffect(() => {
