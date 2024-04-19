@@ -213,8 +213,6 @@ const Header: React.FC = () => {
   const redirectNotLogin = () => {
     if (!isLoggedIn) {
       window.alert('로그인이 필요한 기능입니다.');
-      navigate('/');
-      return;
     }
   };
 
@@ -242,6 +240,7 @@ const Header: React.FC = () => {
                     setActiveMenu(null);
                     if (link.path === '/mypage') {
                       redirectNotLogin();
+                      navigate('/');
                     }
                   }}
                 >
@@ -264,7 +263,13 @@ const Header: React.FC = () => {
               {activeMenu === index && link.label === '건강관리' && (
                 <SubMenu>
                   <SubMenuItem>
-                    <SubMenuLink onClick={redirectNotLogin} to="/diary">
+                    <SubMenuLink
+                      to="/diary"
+                      onClick={() => {
+                        redirectNotLogin();
+                        navigate('/');
+                      }}
+                    >
                       건강 다이어리
                     </SubMenuLink>
                   </SubMenuItem>

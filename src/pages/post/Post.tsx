@@ -173,7 +173,10 @@ const POST: React.FC = () => {
               <PostInformation>
                 <PostTitle>{post.title}</PostTitle>
                 <ProfileContainer>
-                  <ProfileImg src={profileImg} alt="프로필 이미지" />
+                  <ProfileImg
+                    src={`${UPLOADED_IMG_URL}${post?.userId?.profileImage[0]}`}
+                    alt="프로필 이미지"
+                  />
                   <p>{post?.userId?.nickName}</p>
                   <p>|</p>
                   <p>{formattedDate}</p>
@@ -217,7 +220,7 @@ const POST: React.FC = () => {
                 }) => (
                   <Comment
                     key={comment?._id}
-                    profileImg={comment.profileImg}
+                    profileImg={`${UPLOADED_IMG_URL}${comment?.userId?.profileImage[0]}`}
                     text={comment.text}
                     nickname={comment?.userId?.nickName}
                     date={formatDateIncludeTime({ rowDate: comment.createdAt })}
