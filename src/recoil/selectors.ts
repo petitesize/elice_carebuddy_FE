@@ -31,7 +31,7 @@ const getUserData = async () => {
         return response.data.user;
       }
     } catch (error) {
-      console.error('Error fetching user data:', error);
+      // console.error('Error fetching user data:', error);
       return null;
     }
   } else return null;
@@ -55,7 +55,7 @@ export const userQuery = selector({
       }
     } catch (error) {
       console.error('Error fetching user data:', error);
-      throw error;
+      return null;
     }
   },
 });
