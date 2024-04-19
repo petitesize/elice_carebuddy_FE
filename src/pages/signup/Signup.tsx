@@ -54,17 +54,28 @@ interface KakaoOpt {
 const kakaoOpt: KakaoOpt = {
   clientId: import.meta.env.VITE_KAKAO_REST_API_KEY || '',
   redirectUri: import.meta.env.VITE_REDIRECT_URI || '',
-  clientSecret: import.meta.env.VITE_SECRET_KEY || ''
+  clientSecret: import.meta.env.VITE_SECRET_KEY || '',
 };
 const LoginPage: React.FC = () => {
-  const handleKakaoLogin = () => {
-    window.location.href=`https://kauth.kakao.com/oauth/authorize?client_id=${kakaoOpt.clientId}&redirect_uri=${kakaoOpt.redirectUri}&response_type=code`
-  };
-  const test = async () => {
-    window.location.href='http://localhost:3001/auth/kakao'
-  };
 
-    
+  const generateKakaoLoginURL = () => {
+    return `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoOpt.clientId}&redirect_uri=${kakaoOpt.redirectUri}&response_type=code`;
+}
+
+// Kakao 로그인 버튼 클릭 이벤트 처리
+const handleKakaoLogin = () => {
+    const kakaoLoginURL = generateKakaoLoginURL();
+    window.location.href = kakaoLoginURL; 
+}
+  // const test = async () => {
+  //   try {
+  //     const res = await axios.get('http://localhost:3001/auth/kakao');
+  //     console.log(res);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   return (
     <>
       <Main>
@@ -78,7 +89,7 @@ const LoginPage: React.FC = () => {
             건강하고 행복한 시간을 보내세요
           </Content>
           <Text>간편 로그인 / 회원가입</Text>
-          <StyledButton onClick={test} />
+          <StyledButton onClick={handleKakaoLogin} />
         </LoginBox>
       </Main>
     </>
