@@ -10,6 +10,8 @@ import Button from '../../components/baseComponent/Button';
 import BigModal from '../../components/baseComponent/BigModal';
 import PostCreate from '../../components/community/PostCreate';
 
+
+
 const WritingModalButton = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);

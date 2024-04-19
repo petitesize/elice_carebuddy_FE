@@ -10,6 +10,7 @@ interface ButtonProps {
   padding?: string;
   height?: string;
   onClick?: () => void; 
+  preventClick?: boolean; // preventClick 속성 추가
 }
 
 const fontSizeMap = {
@@ -40,7 +41,7 @@ const ButtonElement = styled.button<ButtonProps>`
   border: ${(props) =>
     props.variant === 'secondary' ? '1px solid var(--color-grey-2)' : '1px solid var(--color-grey-2)'};
   border-radius: ${(props) => (props.shape === 'round' ? '20px' : '0')};
-  cursor: pointer;
+  cursor: ${(props) => (props.preventClick ? 'default' : 'pointer')}; // 클릭 비활성화 시 커서 변경
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -51,14 +52,21 @@ const ButtonElement = styled.button<ButtonProps>`
   height: ${(props) => props.height || '36px'};
 
   &:hover {
-    background-color: ${(props) =>
-      props.variant === 'primary' ? '#567760' : '#d4d4d4'};
-    color: ${(props) =>
-      props.variant === 'primary'
-        ? 'var(--color-white)'
-        : 'var(--color-grey-1)'};
+    ${(props) =>
+      !props.preventClick && // preventClick가 true이면 hover 스타일 적용하지 않음
+      `
+      background-color: ${
+        props.variant === 'primary' ? '#567760' : '#d4d4d4'
+      };
+      color: ${
+        props.variant === 'primary'
+          ? 'var(--color-white)'
+          : 'var(--color-grey-1)'
+      };
+    `}
   }
 `;
+
 
 const Text = styled.div`
   font-family: 'Pretendard-Regular', sans-serif;
@@ -73,6 +81,7 @@ const UIButton: React.FC<ButtonProps> = ({
   margin,
   padding,
   height,
+  preventClick
 }) => {
   const actualVariant = variant || 'secondary'; // variant가 없는 경우에는 'secondary'로 설정
   const actualShape = shape || 'square'; // shape가 없는 경우에는 'square'로 설정
@@ -86,6 +95,7 @@ const UIButton: React.FC<ButtonProps> = ({
       margin={margin}
       padding={padding}
       height={height}
+      preventClick={preventClick}
     >
       <Text>{children}</Text>
     </ButtonElement>
