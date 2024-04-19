@@ -149,6 +149,7 @@ const Header: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
 
   const userGroups = user?.categoryId;
+  console.log(userGroups);
 
   interface Mapping {
     [key: number]: string;
