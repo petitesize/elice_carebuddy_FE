@@ -9,6 +9,7 @@ import { useRecoilState } from 'recoil';
 import { userState } from '../../recoil/atoms';
 import LinkButton from '../baseComponent/LinkButton';
 import camera from '../../assets/camera.png'
+import PetProfileContainer from './../petregister/PetProfileContainer';
 
 interface User {
   _id: string;

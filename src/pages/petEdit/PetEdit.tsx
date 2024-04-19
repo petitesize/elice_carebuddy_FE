@@ -111,8 +111,6 @@ const PetEdit: React.FC<ModalProps> = ({ onSubmit, onSubmitImage, recordId }) =>
     const fetchDefaultBuddy = async () => {
       try {
         const response = await axios.get(`${API_URL}buddy/${recordId}`);
-        const buddyData = response.data.message[0];
-  
         const formData = response.data.message[0];
         setFormData(formData);
 
@@ -185,7 +183,7 @@ const PetEdit: React.FC<ModalProps> = ({ onSubmit, onSubmitImage, recordId }) =>
         <h2>프로필 등록</h2>
         <Container>
           <PetProfileImg
-            src={uploadedImg ? uploadedImg : `public/defaultbuddyImage.png`}
+            src={uploadedImg ? uploadedImg : `${UPLOADED_IMG_URL}public/defaultbuddyImage.png`}
             alt="반려동물 프로필 사진"
           />
           {/* 이미지 경로 다시 체크해야할듯 */}

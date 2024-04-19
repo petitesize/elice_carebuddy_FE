@@ -26,6 +26,22 @@ const SectionBox: React.FC = () => {
   const [nickName, setNickName] = useState('');
   const [email, setEmail] = useState('');
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          'http://kdt-sw-8-team01.elicecoding.com/api/auth/checking',
+          { withCredentials: true },
+        );
+        console.log('유저 데이터', response.data.email);
+        setEmail(response.data.email);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const sendUserDataToServer = async () => {
     try {
@@ -35,12 +51,12 @@ const SectionBox: React.FC = () => {
         nickName: nickName,
         email: email,
         adminNumber: 0,
-        profileImage: []
+        profileImage: [],
       };
 
       const response = await axios.post(`${API_URL}users`, {
-        'email': `${email}`,
-        'nickName': `${nickName}`
+        email: `${email}`,
+        nickName: `${nickName}`,
       });
       console.log('서버 응답:', response.data);
     } catch (error) {
@@ -54,7 +70,13 @@ const SectionBox: React.FC = () => {
         <InputSection onNickNameChange={setNickName} />
         <AgreementSection />
         <ButtonBox>
-          <Button variant="primary" padding='20px 40px' onClick={sendUserDataToServer}>가입하기</Button>
+          <Button
+            variant="primary"
+            padding="20px 40px"
+            onClick={sendUserDataToServer}
+          >
+            가입하기
+          </Button>
         </ButtonBox>
       </Component>
     </Container>

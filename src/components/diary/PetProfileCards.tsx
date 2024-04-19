@@ -301,7 +301,7 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
                 </ActionButtonContainer>
 
                 <PetProfileImg
-                  src={`${UPLOADED_IMG_URL}${profile?.buddyImage[0]}`}
+                  src={`${UPLOADED_IMG_URL}public/defaultbuddyImage.png`}
                   alt="프로필사진"
                   onClick={() => handleClick(profile)}
                 />
