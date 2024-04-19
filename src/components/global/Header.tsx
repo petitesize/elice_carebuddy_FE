@@ -146,7 +146,6 @@ const Header: React.FC = () => {
   const [activeMenu, setActiveMenu] = useState<number | null>(null);
   const [groups, setGroups] = useState<Group[]>([]);
   const [user, setUser] = useRecoilState(userState);
-  const [posts, setPosts] = useState<Post[]>([]);
 
   const userGroups = user?.categoryId;
 
@@ -172,7 +171,7 @@ const Header: React.FC = () => {
       try {
         const response = await axios.get(`${API_URL}groups`);
         const groupData = response.data.message;
-        setGroups(groupData);
+        setGroups('헤더', groupData);
       } catch (error) {
         console.error('에러', error);
       }

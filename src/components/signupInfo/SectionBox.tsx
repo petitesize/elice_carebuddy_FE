@@ -36,7 +36,8 @@ const SectionBox: React.FC = () => {
           'http://localhost:3001/api/auth/checking',
           { withCredentials: true },
         );
-        console.log('유저 데이터', response.data.email);
+        console.log('유저 이메일', response.data.email);
+        console.log('유저 이메일', response.data.nickName);
         setEmail(response.data.email);
       } catch (error) {
         console.error('Error fetching data:', error);
