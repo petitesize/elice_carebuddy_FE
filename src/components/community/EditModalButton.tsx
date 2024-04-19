@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../../constants/constants';
 import { useRecoilValue } from 'recoil';
-import { userState } from '../../recoil/atoms';
+import { userQuery } from '../../recoil/selectors.ts';
 
 // 컴포넌트
 import ActionButton from '../../components/baseComponent/ActionButton';
@@ -25,12 +25,15 @@ const EditModalButton = () => {
 
   const formDataForPOST = {
     ...formData,
-    userId: useRecoilValue(userState)?._id,
+    userId: useRecoilValue(userQuery)?._id,
   };
 
-  const handlePostEdit = async () => { 
+  const handlePostEdit = async () => {
     try {
-      const response = await axios.put(`${API_URL}post/${postId}`, formDataForPOST);
+      const response = await axios.put(
+        `${API_URL}post/${postId}`,
+        formDataForPOST,
+      );
       const createdPostId = response.data.data._id;
 
       setShowModal(false); // 모달 닫기
@@ -48,7 +51,7 @@ const EditModalButton = () => {
       }
 
       window.location.reload(); // 글 수정 후 새로고침
-      console.log('글 수정 성공')
+      console.log('글 수정 성공');
     } catch (error) {
       console.error('글 수정 실패:', error);
     }
@@ -56,15 +59,11 @@ const EditModalButton = () => {
 
   const sendImage = async (imageFormData, postId: string) => {
     try {
-      await axios.post(
-        `${API_URL}post/${postId}/postImage`,
-        imageFormData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
+      await axios.post(`${API_URL}post/${postId}/postImage`, imageFormData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
         },
-      );
+      });
       console.log('이미지 업로드 성공');
     } catch (error) {
       console.error('이미지 업로드 실패:', error);

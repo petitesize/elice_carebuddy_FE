@@ -8,7 +8,7 @@ import axios from 'axios';
 import { API_URL } from '../../constants/constants';
 
 import { useRecoilState } from 'recoil';
-import { userState } from '../../recoil/atoms';
+import { userQuery } from '../../recoil/selectors.ts';
 
 const DiaryPageContainer = styled.div`
   width: 100%;
@@ -33,7 +33,8 @@ const Diary: React.FC = () => {
   // 현재 선택된 반려동물 => 다이어리에 처음 보여줄 반려동물 1마리, 또는 없을 수도 있음
   const [selectedPet, setSelectedPet] = useState<Pet | null>();
 
-  const [user, setUser] = useRecoilState(userState); //O.K
+  // const [user, setUser] = useRecoilState(userState); //O.K
+  const [user, setUser] = useRecoilState(userQuery);
   // 반려동물의 병원 기록 => 기록이 여러 개[]일 수도, 없을 수도 있음
   const [hospitalRecords, setHospitalRecords] = useState<any[]>([]);
 
@@ -49,7 +50,9 @@ const Diary: React.FC = () => {
         const response = await axios.get(`${API_URL}buddy`);
         const buddyData = response.data.message;
         // userId가 recoil로 불러온 user의 userId와 동일한 것만 필터링
-        const filteredBuddy = buddyData.filter(buddy => buddy.userId === user?._id);
+        const filteredBuddy = buddyData.filter(
+          (buddy) => buddy.userId === user?._id,
+        );
         setBuddy(filteredBuddy);
         console.log('성공');
       } catch (error) {

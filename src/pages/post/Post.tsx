@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { userState } from '../../recoil/atoms';
+import { userQuery } from '../../recoil/selectors.ts';
 import { API_URL, UPLOADED_IMG_URL } from '../../constants/constants';
 
 // 컴포넌트
@@ -45,7 +45,8 @@ const POST: React.FC = () => {
   // const navigate = useNavigate(); 추후 삭제
   // const [showModal, setShowModal] = useState(false);
   const [comments, setComments] = useState<Comment | null>(null);
-  const [user] = useRecoilState(userState);
+  // const [user] = useRecoilState(userState);
+  const [user] = useRecoilState(userQuery);
   const [post, setPost] = useState<Post | null>(null); // post
   const [likedCount, setLikedCount] = useState(0); // 좋아요 수
   const [isLiked, setIsLiked] = useState(false); // 유저가 좋아요 눌렀는지 여부

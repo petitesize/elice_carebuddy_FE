@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { API_URL, UPLOADED_IMG_URL } from '../../constants/constants';
 import { useRecoilState } from 'recoil';
-import { userState } from '../../recoil/atoms';
+import { userQuery } from '../../recoil/selectors.ts';
 
 // 컴포넌트
 import Banner from '../../components/community/Banner';
@@ -38,7 +38,8 @@ interface Groups {
 }
 
 const Home: React.FC = () => {
-  const [user] = useRecoilState(userState);
+  // const [user] = useRecoilState(userState);
+  const [user] = useRecoilState(userQuery);
 
   const [posts, setPosts] = useState<Posts[]>([]); // 필터링될 게시글
   const [totalPost, setTotalPost] = useState<Posts[]>([]); // 전체 게시글
@@ -47,8 +48,8 @@ const Home: React.FC = () => {
 
   const [selectedCategoryValue, setSelectedCategotyValue] = useState(''); // 대분류
   const [selectedGroupCategoryId, setselectedGroupCategoryId] = useState(''); // 소분류(그룹의 id)
-  const [selectedGroupOptions, setSelectedGroupOptions] = useState<any[]>([]); 
-  
+  const [selectedGroupOptions, setSelectedGroupOptions] = useState<any[]>([]);
+
   // 그룹 불러오기
   useEffect(() => {
     const fetchData = async () => {
@@ -97,7 +98,7 @@ const Home: React.FC = () => {
         });
 
         // 게시글 최신순 정렬
-        const sortedPosts = sortByLatest(filteredDeletedPosts)
+        const sortedPosts = sortByLatest(filteredDeletedPosts);
         setPosts(sortedPosts);
 
         // 모든 게시글
@@ -204,9 +205,8 @@ const Home: React.FC = () => {
                   uploadedDate={post?.createdAt}
                 />
               ))}
-      
         </FeedContainer>
-        <SidePanelContainer>    
+        <SidePanelContainer>
           <SidePanel name="추천 커뮤니티" array={groupArray} />
         </SidePanelContainer>
       </ContentContainer>

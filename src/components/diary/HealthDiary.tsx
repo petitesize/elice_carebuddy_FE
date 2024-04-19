@@ -10,7 +10,7 @@ import DiaryDetails from './DiaryDetails';
 import axios from 'axios';
 import { API_URL } from '../../constants/constants';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { userState } from '../../recoil/atoms';
+import { userQuery } from '../../recoil/selectors.ts';
 
 // 다 나았는지, 현재 상태를 보여줄 수 있는 것이 추가 구현되면 좋을 듯 함
 // 최신 순으로 정렬되는 것 또한 추가 구현되면 좋을 듯 함
@@ -94,7 +94,7 @@ const HealthDiary: React.FC<HealthDiaryProps> = ({
 
   const formDataForPOST = {
     ...formData,
-    userId: useRecoilValue(userState)?._id,
+    userId: useRecoilValue(userQuery)?._id,
     buddyId: petId,
   };
 

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { userState } from '../../recoil/atoms';
+import { userQuery } from '../../recoil/selectors.ts';
 import axios from 'axios';
 import { API_URL } from './../../constants/constants';
 import UserInfoSection from './UserInfoSection';
@@ -37,7 +37,8 @@ interface Post {
 const MypageContent: React.FC = () => {
   const [buddy, setBuddy] = useState<Pet[] | null>([]);
   const [selectedPet, setSelectedPet] = useState<Pet | null>();
-  const [user, setUser] = useRecoilState(userState);
+  // const [user, setUser] = useRecoilState(userState);
+  const [user, setUser] = useRecoilState(userQuery);
   const [post, setPost] = useState<Post | null>(null);
 
   const handlePetClick = (pet: Pet) => {
@@ -50,7 +51,9 @@ const MypageContent: React.FC = () => {
         const response = await axios.get(`${API_URL}buddy`);
         const buddyData = response.data.message;
         // userId가 recoil로 불러온 user의 userId와 동일한 것만 필터링
-        const filteredBuddy = buddyData.filter(buddy => buddy.userId === user?._id);
+        const filteredBuddy = buddyData.filter(
+          (buddy) => buddy.userId === user?._id,
+        );
         setBuddy(filteredBuddy);
         console.log('성공');
       } catch (error) {
@@ -68,23 +71,19 @@ const MypageContent: React.FC = () => {
         introduce={user?.introduce}
         email={user?.email}
       />
-      <ProfileSection
-        nickName={user?.nickName}
-        introduce={user?.introduce}
-      />
+      <ProfileSection nickName={user?.nickName} introduce={user?.introduce} />
       <PetCardSection
         nickName={user?.nickName}
         selectedPetName={selectedPet?.name}
         pets={buddy}
         onPetClick={handlePetClick}
       />
-      <ListSection userId={user?._id}/>
+      <ListSection userId={user?._id} />
     </Container>
   );
 };
 
 export default MypageContent;
-
 
 const Container = styled.div`
   display: flex;
