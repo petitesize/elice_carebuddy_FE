@@ -16,7 +16,7 @@ const getUserData = async () => {
     .some((cookie) => cookie.trim().startsWith('accessToken='));
   console.log('Document cookies:', document.cookie);
 
-  if (cookieExists) {
+  if (cookieExists && window.location.pathname !== '/signup-info') {
     try {
       console.log(`${API_URL}me`);
       // 유저 정보를 가져오는 API 요청
