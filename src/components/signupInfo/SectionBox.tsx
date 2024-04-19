@@ -29,10 +29,10 @@ const ButtonBox = styled.div`
 const SectionBox: React.FC = () => {
   const [nickName, setNickName] = useState('');
   const [email, setEmail] = useState('');
-  const setUser = useSetRecoilState(userToken);
+  // const setUser = useSetRecoilState(userToken);
   const navigate = useNavigate(); // useNavigate 훅 사용
 
-  console.log('setUser: ' + setUser);
+  console.log('setUser: ');
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -52,6 +52,7 @@ const SectionBox: React.FC = () => {
 
   const sendUserDataToServer = async () => {
     try {
+      const setUser = useSetRecoilState(userToken);
       const data = {
         categories: [],
         buddyId: [],
