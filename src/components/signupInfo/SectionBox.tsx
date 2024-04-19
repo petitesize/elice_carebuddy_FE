@@ -60,9 +60,6 @@ const SectionBox: React.FC = () => {
         adminNumber: 0,
         profileImage: [],
       };
-      useEffect(() => {
-        //check if "access_token" exists in Cookie and set it to Recoil
-      }, []);
 
       // 서버로 POST 요청 보내기
       const response = await axios.post(`${API_URL}users`, data);
