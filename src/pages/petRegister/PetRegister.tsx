@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { API_URL, UPLOADED_IMG_URL } from '../../constants/constants';
 import { ImageFormData } from '../../components/diary/PetProfileCards';
 
 import cameraIcon from '../../assets/camera.png';
@@ -8,7 +7,6 @@ import cameraIcon from '../../assets/camera.png';
 // 컴포넌트
 import Button from '../../components/baseComponent/Button';
 import InputBox from '../../components/baseComponent/InputBox';
-// import PetProfileContainer from '../../components/petregister/PetProfileContainer';
 
 const Container = styled.div`
   display: flex;
@@ -244,12 +242,12 @@ const PetRegister: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
       </Section>
       <Section>
         <h2>중성화 여부</h2>
-        <ButtonBox>
+        {/* <ButtonBox>
           <Button
             padding="20px 20px"
             margin="0 20px 0 0"
             type="number"
-            variant={neutered === 'yes' ? 'primary' : ''}
+            variant={isNeutered === 'yes' ? 'primary' : ''}
             onClick={() => handleNeuteredClick('yes')} // 중성화 전 버튼 클릭 시
           >
             중성화 전
@@ -258,12 +256,12 @@ const PetRegister: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
             padding="20px 20px"
             margin="0 20px 0 0"
             type="number"
-            variant={neutered === 'no' ? 'primary' : ''}
+            variant={isNeutered === 'no' ? 'primary' : ''}
             onClick={() => handleNeuteredClick('no')} // 중성화 완료 버튼 클릭 시
           >
             중성화 완료
           </Button>
-        </ButtonBox>
+        </ButtonBox> */}
       </Section>
       <Section>
         <h2>반려동물 체중</h2>
