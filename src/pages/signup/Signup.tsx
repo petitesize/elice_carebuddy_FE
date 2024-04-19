@@ -58,6 +58,7 @@ const kakaoOpt: KakaoOpt = {
 };
 const LoginPage: React.FC = () => {
   const generateKakaoLoginURL = () => {
+    console.log('여기??');
     return `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoOpt.clientId}&redirect_uri=${kakaoOpt.redirectUri}&response_type=code`; // 오타 수정: respose_type -> response_type
   };
 

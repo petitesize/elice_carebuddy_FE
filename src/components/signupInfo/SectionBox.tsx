@@ -30,7 +30,7 @@ const SectionBox: React.FC = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          'http://kdt-sw-8-team01.elicecoding.com/api/auth/checking',
+          'http://localhost:3001/api/auth/checking',
           { withCredentials: true },
         );
         console.log('유저 데이터', response.data.email);
