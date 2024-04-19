@@ -48,19 +48,17 @@ const Diary: React.FC = () => {
       try {
         const response = await axios.get(`${API_URL}buddy`);
         const buddyData = response.data.message;
-        setBuddy(buddyData);
-
-        // 첫 렌더링 되었을 때, 선택된 펫이 없으므로 등록된 반려동물이 있는 경우 첫 번째 반려동물을 선택된 펫으로 지정
-        if (!selectedPet && buddyData.length > 0) {
-          setSelectedPet(buddyData[0]);
-        }
+        // userId가 recoil로 불러온 user의 userId와 동일한 것만 필터링
+        const filteredBuddy = buddyData.filter(buddy => buddy.userId === user?._id);
+        setBuddy(filteredBuddy);
+        console.log('성공');
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching buddy by userId:', error);
       }
     };
 
     fetchData();
-  }, [setBuddy]);
+  }, [user]);
 
   // 병원 기록 data state
   useEffect(() => {
