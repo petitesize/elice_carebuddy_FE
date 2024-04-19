@@ -69,13 +69,14 @@ const SectionBox: React.FC = () => {
 
       // 서버 응답이 성공적일 경우
       if (response.status === 201) {
-        const setUser = useSetRecoilState(userToken);
+        // const setUser = useSetRecoilState(userToken);
+        console.log('응답성공?');
         const token = document.cookie
           .split(';')
           .find((cookie) => cookie.trim().startsWith('accessToken='))
           ?.split('=')[1];
         if (token) {
-          setUser(token);
+          // setUser(token);
         }
         // alert 창을 띄워 성공 메시지를 표시
         alert('회원가입에 성공했습니다!');
