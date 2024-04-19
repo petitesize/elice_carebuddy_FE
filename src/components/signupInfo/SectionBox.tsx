@@ -61,16 +61,16 @@ const SectionBox: React.FC = () => {
         adminNumber: 0,
         profileImage: [],
       };
-      const token = document.cookie
-        .split(';')
-        .find((cookie) => cookie.trim().startsWith('accessToken='))
-        ?.split('=')[1];
-
-      console.log('token:' + token);
-      if (token) {
-        setUser(token);
-        console.log('tokenSet');
-      }
+      useEffect(() => {
+        //check if "access_token" exists in Cookie and set it to Recoil
+        const token = document.cookie
+          .split(';')
+          .find((cookie) => cookie.trim().startsWith('accessToken='))
+          ?.split('=')[1];
+        if (token) {
+          setUser(token);
+        }
+      }, []);
       // 서버로 POST 요청 보내기
       const response = await axios.post(`${API_URL}users`, data);
 
@@ -91,16 +91,16 @@ const SectionBox: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    //check if "access_token" exists in Cookie and set it to Recoil
-    const token = document.cookie
-      .split(';')
-      .find((cookie) => cookie.trim().startsWith('accessToken='))
-      ?.split('=')[1];
-    if (token) {
-      setUser(token);
-    }
-  }, []);
+  // useEffect(() => {
+  //   //check if "access_token" exists in Cookie and set it to Recoil
+  //   const token = document.cookie
+  //     .split(';')
+  //     .find((cookie) => cookie.trim().startsWith('accessToken='))
+  //     ?.split('=')[1];
+  //   if (token) {
+  //     setUser(token);
+  //   }
+  // }, []);
 
   return (
     <Container>
