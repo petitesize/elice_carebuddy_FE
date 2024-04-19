@@ -213,6 +213,7 @@ const Header: React.FC = () => {
   const redirectNotLogin = () => {
     if (!isLoggedIn) {
       window.alert('로그인이 필요한 기능입니다.');
+      window.location.reload();
     }
   };
 
@@ -240,7 +241,6 @@ const Header: React.FC = () => {
                     setActiveMenu(null);
                     if (link.path === '/mypage') {
                       redirectNotLogin();
-                      navigate('/');
                     }
                   }}
                 >
@@ -267,7 +267,6 @@ const Header: React.FC = () => {
                       to="/diary"
                       onClick={() => {
                         redirectNotLogin();
-                        navigate('/');
                       }}
                     >
                       건강 다이어리
