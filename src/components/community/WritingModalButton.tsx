@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../../constants/constants';
@@ -20,9 +20,26 @@ const WritingModalButton = () => {
     content: null,
   });
   const [imageFormData, setImageFormData] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // 페이지가 로드될 때 쿠키를 확인하여 로그인 여부를 결정
+    const checkLoggedInStatus = () => {
+      const accessTokenExists = document.cookie
+        .split(';')
+        .some((cookie) => cookie.trim().startsWith('accessToken='));
+      setIsLoggedIn(accessTokenExists);
+    };
+
+    checkLoggedInStatus();
+  }, []); // 페이지 로드 시 한 번만 실행되도록 빈 배열을 전달
 
   const handleToggleModal = () => {
     setShowModal((prevState) => !prevState);
+    if (!isLoggedIn) {
+      window.alert('로그인이 필요한 기능입니다.');
+      window.location.reload();
+    }
   };
 
   const formDataForPOST = {
