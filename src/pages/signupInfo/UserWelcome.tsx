@@ -40,7 +40,7 @@ interface ModalProps {
   onClose: () => void;
 }
 
-const UserTrue: React.FC<ModalProps> = ({ onClose }) => {
+const UserWelcome: React.FC<ModalProps> = ({ onClose }) => {
   const [showUserTrueModal, setShowUserTrueModal] = useState(false);
 
   const handleToggleUserTrueModal = () => {
@@ -59,9 +59,9 @@ const UserTrue: React.FC<ModalProps> = ({ onClose }) => {
   return (
     <Container>
       <Logo src={imgSrc} />
-      <Title>탈퇴 완료</Title>
-      <Text>회원님의 탈퇴가 완료되었습니다.<br />
-        케어버디를 이용해주셔서 감사합니다.
+      <Title>가입 완료</Title>
+      <Text>가입이 완료되었습니다.<br />
+        케어버디를 가입해주셔서 감사합니다.
       </Text>
       <ButtonContainer>
         <Button onClick={handleWithdraw} variant="primary" fontSize="ft-1" padding="0 80px">확인</Button>
@@ -73,4 +73,4 @@ const UserTrue: React.FC<ModalProps> = ({ onClose }) => {
   );
 };
 
-export default UserTrue;
+export default UserWelcome;

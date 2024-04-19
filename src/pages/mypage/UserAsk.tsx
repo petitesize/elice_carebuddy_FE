@@ -45,9 +45,10 @@ const WithdrawButton = styled.a`
 
 interface ModalProps {
   onClose: () => void;
+  userId: string; // userId를 props로 받도록 정의
 }
 
-const UserAsk: React.FC<ModalProps> = ({ onClose }) => {
+const UserAsk: React.FC<ModalProps> = ({ onClose, userId }) => {
   const [showUserAskModal, setShowUserAskModal] = useState(true);
   const [showUserTrueModal, setShowUserTrueModal] = useState(false);
 
@@ -63,17 +64,15 @@ const UserAsk: React.FC<ModalProps> = ({ onClose }) => {
     setShowUserAskModal(false);
     setShowUserTrueModal(true);
     try {
-      // 유저의 ID
-      const userId = '6613fbcdfaebdd59e9882df3';
-
-      // 서버에 DELETE 요청을 보냅니다.
+      // 부모 컴포넌트에서 받은 userId를 사용합니다.
       const response = await axios.put(`${API_URL}users/${userId}/w`);
 
-      // 응답에서 deletedAt 값을 확인하여 회원 삭제 여부를 판별합니다.
+      // 응답에서 `deletedAt` 값을 확인하여 회원 삭제 여부를 판별합니다.
       if (response.data.deletedAt === null) {
         console.log('회원이 삭제되지 않았습니다.');
       } else {
         console.log('회원이 삭제되었습니다.');
+        alert('회원 탈퇴가 완료되었습니다.')
       }
     } catch (error) {
       console.error('에러:', error);
@@ -96,10 +95,16 @@ const UserAsk: React.FC<ModalProps> = ({ onClose }) => {
             재가입해도 복구가 어려워요.
           </Text>
           <ButtonContainer>
-            <Button onClick={handleKeepMembership} variant="primary" fontSize="ft-1" margin="10px" padding="0 40px">
+            <Button
+              onClick={handleKeepMembership}
+              variant="primary"
+              fontSize="ft-1"
+              margin="10px"
+              padding="0 40px"
+            >
               계속 회원을 유지할래요
             </Button>
-            <WithdrawButton onClick={handleWithdrawal} onclose={handleUserTrueClose}>탈퇴하기</WithdrawButton>
+            <WithdrawButton onClick={handleWithdrawal}>탈퇴하기</WithdrawButton>
           </ButtonContainer>
         </Container>
       )}

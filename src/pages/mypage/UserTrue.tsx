@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import imgSrc from '../../assets/TrueIcon.png'
+import imgSrc from '../../assets/TrueIcon.png';
 import SmallModal from '../../components/baseComponent/SmallModal';
-import Button from '../../components/baseComponent/Button'
+import Button from '../../components/baseComponent/Button';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
   display: flex;
@@ -15,13 +16,13 @@ const Text = styled.p`
   line-height: 23px;
   font-size: var(--font-size-md-1); //16
   padding: 0 10px 10px 10px;
-`
+`;
 
 const Title = styled.p`
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-md-2); //18
   padding: 20px;
-`
+`;
 
 const ButtonContainer = styled.div`
   display: flex;
@@ -42,6 +43,7 @@ interface ModalProps {
 
 const UserTrue: React.FC<ModalProps> = ({ onClose }) => {
   const [showUserTrueModal, setShowUserTrueModal] = useState(false);
+  const navigate = useNavigate(); // useNavigate 훅 사용
 
   const handleToggleUserTrueModal = () => {
     setShowUserTrueModal(!showUserTrueModal);
@@ -54,14 +56,15 @@ const UserTrue: React.FC<ModalProps> = ({ onClose }) => {
   const handleWithdraw = () => {
     handleToggleUserTrueModal(); // Close the modal
     onClose(); // Close the UserTrue modal
-    
+    navigate('/'); // 확인 버튼 클릭 시 '/' 경로로 이동
   };
 
   return (
     <Container>
       <Logo src={imgSrc} />
       <Title>탈퇴 완료</Title>
-      <Text>회원님의 탈퇴가 완료되었습니다.<br />
+      <Text>
+        회원님의 탈퇴가 완료되었습니다.<br />
         케어버디를 이용해주셔서 감사합니다.
       </Text>
       <ButtonContainer>
