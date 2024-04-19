@@ -80,9 +80,9 @@ const Banner: React.FC = () => {
           color="var(--color-grey-1)"
           padding="10px 0"
           fontWeight="var(--font-weight-regular)"
-          fontSize="var(--font-size-md-2)"
+          fontSize="var(--font-size-md-1)"
         >
-          꾸준한 질병 기록으로 아이의 건강을 지키고, 안내멘트~~
+          꾸준한 질병 기록으로 아이의 건강을 지키고, 아이의 행복을 위한 정보를 나눠보아요.
         </GuidanceMessage>
       </TextContainer>
     </StyledBanner>

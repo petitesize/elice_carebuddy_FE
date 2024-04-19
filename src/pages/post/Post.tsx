@@ -113,9 +113,9 @@ const POST: React.FC = () => {
     fetchData();
   }, [postId, commentCount]);
 
-  // const handleToggleModal = () => {
-  //   setShowModal((prev) => !prev);
-  // };
+  const handleToggleModal = () => {
+    setShowModal((prev) => !prev);
+  };
 
   // const handleDeleteButton = () => {
   //   // 알럿창, 확인 누를 시 글 삭제 요청
@@ -186,26 +186,14 @@ const POST: React.FC = () => {
                   postId={postId}
                 />
                 <EditModalButton />
-                {/* <ActionButton 추후 제대로 돌아가면 삭제
-                  border="default"
-                  direction="horizontal"
-                  onEdit={handleToggleModal}
-                  onDelete={handleDeleteButton}
-                />
-                {showModal && (
-                  <BigModal
-                    title="글 수정하기"
-                    value="수정"
-                    component={<PostEdit onSubmit={} onSubmitImage={} />}
-                    onClose={handleToggleModal}
-                  />
-                )} */}
               </PostOption>
             </PostTopArea>
             <PostContentArea>
               <pre>{post.content}</pre>
               <ImgContainer>
-                <Image src={imageSrc} alt="이미지" />
+                {post?.postImage.length !== 0 && (
+                  <Image src={imageSrc} alt="이미지" />
+                )}
               </ImgContainer>
               <Likes onClick={handleLiked} isLiked={isLiked}>
                 <LuThumbsUp />

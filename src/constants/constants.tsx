@@ -5,4 +5,4 @@ export const API_URL = 'http://localhost:3001/api/';
 export const DOMAIN_URL = 'http://kdt-sw-8-team01.elicecoding.com/';
 
 // post 이미지 불러오는 URL
-export const UPLOADED_IMG_URL = 'http://localhost:3001/';
+export const UPLOADED_IMG_URL = 'http://localhost:3001/uploads/'; //이거 uploads로 고정할거예요! 충돌나면 이걸 남겨주세요

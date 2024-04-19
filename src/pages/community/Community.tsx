@@ -61,7 +61,7 @@ const Community: React.FC = () => {
       try {
         // 전체 유저 조회
         const response = await axios.get(`${API_URL}users`);
-        const allMembers: Member[] = response.data.message; 
+        const allMembers: Member[] = response.data.message;
         console.log('posts', posts);
 
         // 현재 그룹에 속한 멤버만 선택
@@ -70,8 +70,12 @@ const Community: React.FC = () => {
         );
 
         // 소속 멤버에서 '유저'를 제외하기(유저 추천을 위한 멤버 조회이기 때문)
-        const currentUser = groupMembers.find((member) => member._id === user?._id);
-        const filteredGroupMembers = groupMembers.filter((member) => member._id !== currentUser?._id);        
+        const currentUser = groupMembers.find(
+          (member) => member._id === user?._id,
+        );
+        const filteredGroupMembers = groupMembers.filter(
+          (member) => member._id !== currentUser?._id,
+        );
 
         setGroupMembers(filteredGroupMembers);
         console.log('멤버 조회 성공', filteredGroupMembers);
@@ -100,7 +104,7 @@ const Community: React.FC = () => {
     }
   }, []);
 
-  // const imageSrc = `${UPLOADED_IMG_URL}${post?.postImage}`; // 교체시 참고
+  // const imageSrc = `${UPLOADED_IMG_URL}uploads/${post?.postImage}`; // 교체시 참고
 
   // 피드 글 조회 API
   useEffect(() => {
@@ -117,11 +121,11 @@ const Community: React.FC = () => {
 
         // 게시글 최신순 정렬
         const sortedPosts = sortByLatest(filteredDeletedPosts);
-
         // 그룹 id가 같은 포스트만 가지고 오기
         const filteredGroupPosts = sortedPosts.filter(
-          (post: Post) => post.categoryId._id === groupId,
+          (post: Post) => post.categoryId?._id === groupId,
         );
+
         setPosts(filteredGroupPosts);
         console.log('피드 글 조회 성공', filteredGroupPosts);
       } catch (error) {

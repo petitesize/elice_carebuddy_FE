@@ -14,6 +14,7 @@ interface InputProps {
   value?: string | null; // 추가된 부분
   defaultValue?: string | null;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void; // 추가된 부분
+  preventClick?: boolean; // preventClick 속성 추가
 }
 
 const fontSizeMap = {
@@ -41,7 +42,14 @@ const InputBoxElement = styled.input<InputProps>`
   height: ${(props) => props.height || '30px'};
   color: ${(props) => props.color || 'var(--color-black)'};
   outline: none;
-`;
+
+  ${(props) => //클릭 비활성화
+    props.preventClick &&
+    `
+      cursor: default; 
+      background-color: #f2f2f2; 
+    `}
+  `
 
 const InputBox: React.FC<InputProps> = ({
   fontSize,
@@ -56,6 +64,7 @@ const InputBox: React.FC<InputProps> = ({
   value,
   defaultValue,
   onChange,
+  preventClick,
 }) => {
   return (
     <InputBoxElement
@@ -71,6 +80,8 @@ const InputBox: React.FC<InputProps> = ({
       defaultValue={defaultValue}
       value={value} // 입력값을 value로 전달
       onChange={onChange} // onChange 함수를 props로 받음
+      preventClick={preventClick} 
+
     />
   );
 };

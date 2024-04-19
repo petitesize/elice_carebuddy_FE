@@ -26,7 +26,7 @@ interface FormData {
 }
 
 interface ImageFormData {
-  postImage?: any; // 이미지 타입 뭘로 보내야할지 모르겠음. 나중에 추가
+  postImage?: any; 
 }
 
 interface Category {
@@ -124,7 +124,6 @@ const PostCreate: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
     setFormData({ ...formData, categoryId: categoryId });
   };
 
-
   return (
     <StyledPostCreate>
       <SelectContainer>
@@ -198,7 +197,7 @@ const ImageArea = styled.div`
   }
 `;
 
-const ImageBox = styled.div<{ hasImage: boolean }>`
+const ImageBox = styled.div`
   padding: 10px;
   border: 1px dashed var(--color-grey-2);
   border-radius: 10px;

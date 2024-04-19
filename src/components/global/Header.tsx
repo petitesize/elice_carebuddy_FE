@@ -148,6 +148,7 @@ const Header: React.FC = () => {
   const [user, setUser] = useRecoilState(userState);
 
   const userGroups = user?.categoryId;
+  console.log(userGroups);
 
   interface Mapping {
     [key: number]: string;
