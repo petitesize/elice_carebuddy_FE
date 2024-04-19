@@ -25,7 +25,7 @@ const EditModalButton = () => {
 
   const formDataForPOST = {
     ...formData,
-    userId: useRecoilValue(userState)?._id,
+    userId: useRecoilValue(userQuery)?._id,
   };
 
   const handlePostEdit = async () => {
