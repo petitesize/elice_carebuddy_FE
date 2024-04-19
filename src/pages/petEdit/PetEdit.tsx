@@ -88,7 +88,11 @@ interface FormData {
   isNeutered?: Date | null;
 }
 
-const PetEdit: React.FC<ModalProps> = ({ onSubmit, onSubmitImage, recordId }) => {
+const PetEdit: React.FC<ModalProps> = ({
+  onSubmit,
+  onSubmitImage,
+  recordId,
+}) => {
   const [uploadedImg, setUploadedImg] = useState<string | null>(null); // 업로드된 이미지(프론트에서 보여주는 용도)
   const [imageFormData, setImageFormData] = useState<ImageFormData>({
     // 백으로 보내줄 이미지 파일
@@ -121,7 +125,7 @@ const PetEdit: React.FC<ModalProps> = ({ onSubmit, onSubmitImage, recordId }) =>
     };
     fetchDefaultBuddy();
   }, [recordId]);
-  
+
   useEffect(() => {
     // 부모 컴포넌트에서 이미지를 POST 하기 위해 imageData 변경될 때마다 부모 컴포넌트로 데이터를 전송
     onSubmit(formData);
@@ -151,7 +155,6 @@ const PetEdit: React.FC<ModalProps> = ({ onSubmit, onSubmitImage, recordId }) =>
     input.click();
   };
 
-
   const handleAgeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setFormData({ ...formData, age: value });
@@ -161,7 +164,6 @@ const PetEdit: React.FC<ModalProps> = ({ onSubmit, onSubmitImage, recordId }) =>
     const { value } = e.target;
     setFormData({ ...formData, weight: value });
   };
-
 
   const handleNeuteredClick = (selectedNeutered: string) => {
     if (selectedNeutered === 'no') {
@@ -175,7 +177,6 @@ const PetEdit: React.FC<ModalProps> = ({ onSubmit, onSubmitImage, recordId }) =>
       setNeutered(selectedNeutered);
     }
   };
-  
 
   return (
     <Profile>
@@ -183,8 +184,12 @@ const PetEdit: React.FC<ModalProps> = ({ onSubmit, onSubmitImage, recordId }) =>
         <h2>프로필 등록</h2>
         <Container>
           <PetProfileImg
-            src={uploadedImg ? uploadedImg : `${UPLOADED_IMG_URL}public/defaultbuddyImage.png`}
-            alt="반려동물 프로필 사진"
+            src={
+              uploadedImg
+                ? uploadedImg
+                : `${UPLOADED_IMG_URL}public/defaultbuddyImage.png`
+            }
+            alt=""
           />
           {/* 이미지 경로 다시 체크해야할듯 */}
           <UploadButton onClick={handleUploadButtonClick}>
@@ -200,7 +205,7 @@ const PetEdit: React.FC<ModalProps> = ({ onSubmit, onSubmitImage, recordId }) =>
           fontSize="md-1"
           value={formData?.name}
           preventClick={true}
-          />
+        />
       </Section>
       <Section>
         <h2>반려동물 성별</h2>
@@ -248,24 +253,24 @@ const PetEdit: React.FC<ModalProps> = ({ onSubmit, onSubmitImage, recordId }) =>
       <Section>
         <h2>중성화 여부</h2>
         <ButtonBox>
-        <Button
-          padding="20px 20px"
-          margin="0 20px 0 0"
-          type="number"
-          variant={formData?.isNeutered !== 'yes' ? 'primary' : 'secondary'} 
-          onClick={() => hndleNeuteredClick('yes')} // 중성화 전 버튼 클릭 시
-        >
-          중성화 전
-        </Button>
-        <Button
-          padding="20px 20px"
-          margin="0 20px 0 0"
-          type="number"
-          variant={formData?.isNeutered === 'no' ? 'primary' : 'secondary'} 
-          onClick={() => handleNeuteredClick('no')} // 중성화 완료 버튼 클릭 시
-        >
-          중성화 완료
-        </Button>
+          <Button
+            padding="20px 20px"
+            margin="0 20px 0 0"
+            type="number"
+            variant={formData?.isNeutered !== 'yes' ? 'primary' : 'secondary'}
+            onClick={() => hndleNeuteredClick('yes')} // 중성화 전 버튼 클릭 시
+          >
+            중성화 전
+          </Button>
+          <Button
+            padding="20px 20px"
+            margin="0 20px 0 0"
+            type="number"
+            variant={formData?.isNeutered === 'no' ? 'primary' : 'secondary'}
+            onClick={() => handleNeuteredClick('no')} // 중성화 완료 버튼 클릭 시
+          >
+            중성화 완료
+          </Button>
         </ButtonBox>
       </Section>
       <Section>

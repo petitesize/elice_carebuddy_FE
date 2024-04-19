@@ -165,13 +165,13 @@ const PetRegister: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
   };
 
   const handleGenderClick = (selectedGender: string) => {
-      setGender(selectedGender);
-      console.log('셀렉티드젠더', selectedGender)
-      setFormData((prevState) => ({
-        ...prevState,
-        sex: selectedGender
-      }));
-      // setFormData( {...formData, sex: selectedGender });
+    setGender(selectedGender);
+    console.log('셀렉티드젠더', selectedGender);
+    setFormData((prevState) => ({
+      ...prevState,
+      sex: selectedGender,
+    }));
+    // setFormData( {...formData, sex: selectedGender });
   };
   const handleNeuteredClick = (selectedNeutered: string) => {
     if (selectedNeutered === 'no') {
@@ -193,7 +193,7 @@ const PetRegister: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
         <Container>
           <PetProfileImg
             src={uploadedImg ? uploadedImg : `public/defaultbuddyImage.png`}
-            alt="반려동물 프로필 사진"
+            alt=""
           />
           {/* 이미지 경로 다시 체크해야할듯 */}
           <UploadButton onClick={handleUploadButtonClick}>
@@ -253,24 +253,24 @@ const PetRegister: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
       <Section>
         <h2>중성화 여부</h2>
         <ButtonBox>
-        <Button
-          padding="20px 20px"
-          margin="0 20px 0 0"
-          type="number"
-          variant={neutered === 'yes' ? 'primary' : 'secondary'}
-          onClick={() => handleNeuteredClick('yes')} // 중성화 전 버튼 클릭 시
-        >
-          중성화 전
-        </Button>
-        <Button
-          padding="20px 20px"
-          margin="0 20px 0 0"
-          type="number"
-          variant={neutered === 'no' ? 'primary' : 'secondary'} 
-          onClick={() => handleNeuteredClick('no')} // 중성화 완료 버튼 클릭 시
-        >
-          중성화 완료
-        </Button>
+          <Button
+            padding="20px 20px"
+            margin="0 20px 0 0"
+            type="number"
+            variant={neutered === 'yes' ? 'primary' : 'secondary'}
+            onClick={() => handleNeuteredClick('yes')} // 중성화 전 버튼 클릭 시
+          >
+            중성화 전
+          </Button>
+          <Button
+            padding="20px 20px"
+            margin="0 20px 0 0"
+            type="number"
+            variant={neutered === 'no' ? 'primary' : 'secondary'}
+            onClick={() => handleNeuteredClick('no')} // 중성화 완료 버튼 클릭 시
+          >
+            중성화 완료
+          </Button>
         </ButtonBox>
       </Section>
       <Section>
