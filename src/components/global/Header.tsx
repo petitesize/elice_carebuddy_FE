@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { userQuery } from '../../recoil/selectors.ts';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { API_URL } from './../../constants/constants';
 import styled from 'styled-components';
 import imgSrc from './../../assets/carebuddyLogo.png';
@@ -212,6 +212,7 @@ const Header: React.FC = () => {
   const redirectNotLogin = () => {
     if (!isLoggedIn) {
       window.alert('로그인이 필요한 기능입니다.');
+      useNavigate();
     }
   };
 
