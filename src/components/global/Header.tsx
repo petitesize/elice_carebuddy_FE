@@ -128,6 +128,14 @@ const LoginButton = styled(Link)`
   font-size: 12px;
 `;
 
+const LogoutButton = styled(Link)`
+  text-decoration: none;
+  color: var(--color-black);
+  font-weight: var(--font-weight-bold);
+  transition: all 0.5s;
+  font-size: 12px;
+`;
+
 // 링크 및 아이콘에 대한 배열 생성
 const links = [
   { path: '/', label: '로고', icon: imgSrc },
@@ -147,6 +155,7 @@ const Header: React.FC = () => {
   const [groups, setGroups] = useState<Group[]>([]);
   // const [user, setUser] = useRecoilState(userState);
   const [user] = useRecoilState(userQuery);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const userGroups = user?.categoryId;
   console.log(userGroups);
@@ -214,11 +223,37 @@ const Header: React.FC = () => {
     // { path: '/', label: '', icon: alert },
   ];
 
+  console.log('Document cookies:', document.cookie);
+
+  const deleteCookie = () => {
+    console.log(document.cookie);
+    document.cookie =
+      'accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    setIsLoggedIn(false);
+    window.location.reload();
+  };
+
+  useEffect(() => {
+    // 페이지가 로드될 때 쿠키를 확인하여 로그인 여부를 결정
+    const checkLoggedInStatus = () => {
+      const accessTokenExists = document.cookie
+        .split(';')
+        .some((cookie) => cookie.trim().startsWith('accessToken='));
+      setIsLoggedIn(accessTokenExists);
+    };
+
+    checkLoggedInStatus();
+  }, []); // 페이지 로드 시 한 번만 실행되도록 빈 배열을 전달
+
   return (
     <HeaderContainer>
       <Container>
         <LoginButtonContainer>
-          <LoginButton to="/signup">로그인</LoginButton>
+          {isLoggedIn ? (
+            <LogoutButton onClick={deleteCookie}>로그아웃</LogoutButton>
+          ) : (
+            <LoginButton to="/signup">로그인</LoginButton>
+          )}
         </LoginButtonContainer>
         <MenuBox>
           {links.map((link, index) => (
