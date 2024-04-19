@@ -33,7 +33,8 @@ const SectionBox: React.FC = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:3001/api/auth/checking',
+          // 'http://localhost:3001/api/auth/checking',
+          'http://kdt-sw-8-team01.elicecoding.com/api/auth/checking',
           { withCredentials: true },
         );
         console.log('유저 이메일', response.data.email);
@@ -68,7 +69,10 @@ const SectionBox: React.FC = () => {
         // 지정된 URL로 페이지 이동
         navigate('/');
       } else {
-        console.error('서버 응답이 성공적이지 않았습니다:', response.statusText);
+        console.error(
+          '서버 응답이 성공적이지 않았습니다:',
+          response.statusText,
+        );
       }
     } catch (error) {
       console.error('서버에 유저 데이터 전송 중 오류 발생:', error);
