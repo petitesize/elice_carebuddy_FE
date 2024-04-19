@@ -153,7 +153,7 @@ const POST: React.FC = () => {
     }
   };
 
-  const imageSrc = `${UPLOADED_IMG_URL}uploads/${post?.postImage}`;
+  const imageSrc = `${UPLOADED_IMG_URL}${post?.postImage}`;
 
   return (
     <>

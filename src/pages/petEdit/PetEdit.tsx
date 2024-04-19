@@ -4,7 +4,7 @@ import styled from 'styled-components';
 // 컴포넌트
 import Button from '../../components/baseComponent/Button';
 import InputBox from '../../components/baseComponent/InputBox';
-import PetProfileContainer from '../../components/petregister/PetProfileContainer';
+// import PetProfileContainer from '../../components/petregister/PetProfileContainer';
 
 const Section = styled.div`
   font-size: 16px;

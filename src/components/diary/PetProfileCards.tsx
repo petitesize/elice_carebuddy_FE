@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import ActionButton from '../baseComponent/ActionButton';
 // import defaultImg from '/src/assets/carebuddyLogo.png';
@@ -10,8 +11,11 @@ import 'swiper/css/navigation';
 import { Pagination } from 'swiper/modules';
 import PetRegister from '../../pages/petRegister/PetRegister';
 import PetEdit from '../../pages/petEdit/PetEdit';
-import { UPLOADED_IMG_URL } from '../../constants/constants';
+import { API_URL, UPLOADED_IMG_URL } from '../../constants/constants';
 import BigModal from '../baseComponent/BigModal';
+
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../recoil/atoms';
 
 // 카드 전체 컨테이너
 const PetProfileCardsContainer = styled.div`
@@ -61,6 +65,7 @@ const PetProfileImg = styled.img`
   border: 0;
   overflow: hidden;
   text-align: center;
+  object-fit: cover;
 `;
 
 // 프로필이 없을 때
@@ -130,6 +135,13 @@ interface PetProfileProps {
   selectedPetName?: string;
 }
 
+export interface ImageFormData {
+  // 어떤 타입인지 몰라 테스트해보고 결정
+  buddyImage?: any;
+  // buddyImage?: File | null;
+  // buddyImage?: FileList | null;
+}
+
 const PetProfileCards: React.FC<PetProfileProps> = ({
   profiles,
   selectedPetName,
@@ -138,6 +150,20 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
   const [showPetRegister, setShowPetRegister] = useState(false);
   const [showPetEdit, setShowPetEdit] = useState(false);
   const isMypet = location.pathname !== '/userpage';
+  const [imageFormData, setImageFormData] = useState<ImageFormData>({
+    buddyImage: null,
+  });
+
+  const [formData, setFormData] = useState({
+    userId: null,
+    name: null,
+    kind: null,
+    age: null,
+    sex: null,
+    weight: null,
+    // isNeutered: null
+  });
+
   const handleClick = (pet: PetProfile) => {
     onClick(pet);
   };
@@ -153,6 +179,66 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
   const handleCloseModal = () => {
     setShowPetRegister(false);
     setShowPetEdit(false);
+  };
+
+  const formDataForPOST = {
+    ...formData,
+    userId: useRecoilValue(userState)?._id,
+  };
+
+  const handlePetRegister = async () => {
+    try {
+      const response = await axios.post(`${API_URL}buddy`, formDataForPOST); // 동물 등록에 대한 post요청(API 바꾸기)
+      const createdPetRegisterId: string = response.data.data._id; // 여기서 생긴 id값 가져와서 해야함
+      console.log(createdPetRegisterId);
+
+      setShowPetRegister(false); // 모달 닫기
+      setFormData({
+        // 데이터 초기화
+        userId: null,
+        name: null,
+        kind: null,
+        age: null,
+        sex: null,
+        weight: null,
+        // isNeutered: null
+      });
+
+      // 이미지 함께 전송
+      if (imageFormData) {
+        await sendImage(imageFormData, createdPetRegisterId);
+      }
+
+      console.log('동물 등록 성공', response.data.data);
+    } catch (error) {
+      console.error('동물 등록 실패:', error);
+    }
+  };
+
+  const sendImage = async (imageFormData, PetRegisterId: string) => {
+    //이미지 등록하는 함수
+    try {
+      const response = await axios.post(
+        `${API_URL}buddy/${PetRegisterId}/buddyImage`,
+        imageFormData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        },
+      );
+      console.log('이미지 업로드 성공:', response.data);
+    } catch (error) {
+      console.error('이미지 업로드 실패:', error);
+    }
+  };
+
+  const handleData = (formData) => {
+    setFormData(formData);
+  };
+
+  const handleImageData = (imageFormData) => {
+    setImageFormData(imageFormData);
   };
 
   return (
@@ -181,7 +267,7 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
                 </ActionButtonContainer>
 
                 <PetProfileImg
-                  src={`${UPLOADED_IMG_URL}uploads/${profile?.buddyImage[0]}`}
+                  src={`${UPLOADED_IMG_URL}${profile?.buddyImage[0]}`}
                   alt="프로필사진"
                   onClick={() => handleClick(profile)}
                 />
@@ -212,8 +298,14 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
         <BigModal
           title="동물 등록"
           value="등록"
-          component={<PetRegister />}
+          component={
+            <PetRegister
+              onSubmit={handleData}
+              onSubmitImage={handleImageData}
+            />
+          }
           onClose={handleCloseModal}
+          onHandleClick={handlePetRegister}
         />
       )}
       {showPetEdit && (

@@ -64,7 +64,7 @@ const PostEdit: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
         setDefaultGroupOption(`${formData?.categoryId.group}`);
 
         // default 이미지 넣어주기
-        setUploadedImg(`${UPLOADED_IMG_URL}uploads/${formData?.postImage}`)
+        setUploadedImg(`${UPLOADED_IMG_URL}${formData?.postImage}`)
 
         console.log('글 불러오기 성공');
       } catch (error) {
