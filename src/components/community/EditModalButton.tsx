@@ -94,7 +94,7 @@ const EditModalButton = () => {
         try {
           const response = await axios.put(`${API_URL}post/${postId}/w`);
           console.log('글 삭제 성공', response.data.message);
-          navigate(`/group/${post?.categoryId?._id}`); // 커뮤니티 페이지로 리다이렉트 -> 이전 화면으로 리다이렉트할 수도 있음
+          navigate(`/group/${post?.categoryId}`); // 커뮤니티 페이지로 리다이렉트 -> 이전 화면으로 리다이렉트할 수도 있음
         } catch (error) {
           console.error('글 삭제 실패', error);
         }

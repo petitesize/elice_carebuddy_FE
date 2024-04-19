@@ -8,7 +8,7 @@ type FeedBoxProps = {
   postId: string; 
   title: string;
   content: string;
-  profile: string; // url? 이미지 타입 변경해야됨
+  profile: string; 
   nickname: string;
   uploadedDate: string;
   likeCount: number;

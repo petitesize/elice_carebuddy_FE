@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { API_URL } from '../../constants/constants';
+import { API_URL, UPLOADED_IMG_URL } from '../../constants/constants';
 import { useRecoilState } from 'recoil';
 import { userState } from '../../recoil/atoms';
 
@@ -187,7 +187,7 @@ const Home: React.FC = () => {
                   key={post?._id}
                   title={post?.title}
                   content={post?.content}
-                  profile={post?.userId?.profileImage[0]}
+                  profile={`${UPLOADED_IMG_URL}${post?.userId?.profileImage[0]}`}
                   nickname={post?.userId?.nickName}
                   uploadedDate={post?.createdAt}
                 />
@@ -198,13 +198,14 @@ const Home: React.FC = () => {
                   key={post?._id}
                   title={post?.title}
                   content={post?.content}
-                  profile={post?.userId?.profileImage[0]}
+                  profile={`${UPLOADED_IMG_URL}${post?.userId?.profileImage[0]}`}
                   nickname={post?.userId?.nickName}
                   uploadedDate={post?.createdAt}
                 />
               ))}
+      
         </FeedContainer>
-        <SidePanelContainer>
+        <SidePanelContainer>    
           <SidePanel name="추천 커뮤니티" array={groupArray} />
         </SidePanelContainer>
       </ContentContainer>
