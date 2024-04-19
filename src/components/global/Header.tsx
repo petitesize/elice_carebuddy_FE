@@ -32,7 +32,7 @@ const Container = styled.div`
   z-index: 1; /* 헤더 내부 요소 위에 위치하도록 설정 */
 `;
 
-const MenuBox = styled.span`
+const MenuBox = styled.p`
   display: flex;
   align-items: center;
   justify-content: space-between;
