@@ -211,6 +211,7 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
       }
 
       console.log('동물 등록 성공', response.data.data);
+      window.location.reload();
     } catch (error) {
       console.error('동물 등록 실패:', error);
     }
@@ -261,6 +262,7 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
 
       console.log('동물 수정 성공', response.data.data);
       handleCloseModal();
+      window.location.reload();
     } catch (error) {
       console.error('동물 수정 실패:', error);
     }
