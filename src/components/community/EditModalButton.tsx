@@ -73,7 +73,6 @@ const EditModalButton = () => {
 
   const handleData = (formData) => {
     setFormData(formData);
-    // console.log('폼데이터', formData); // 추후 삭제
   };
 
   const handleImageData = (imageFormData) => {

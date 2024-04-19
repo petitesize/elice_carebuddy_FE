@@ -48,6 +48,7 @@ const Home: React.FC = () => {
   const [selectedCategoryValue, setSelectedCategotyValue] = useState(''); // 대분류
   const [selectedGroupCategoryId, setselectedGroupCategoryId] = useState(''); // 소분류(그룹의 id)
   const [selectedGroupOptions, setSelectedGroupOptions] = useState<any[]>([]); 
+  
   // 그룹 불러오기
   useEffect(() => {
     const fetchData = async () => {
