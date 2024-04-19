@@ -7,6 +7,7 @@ import cameraIcon from '../../assets/camera.png';
 // 컴포넌트
 import Button from '../../components/baseComponent/Button';
 import InputBox from '../../components/baseComponent/InputBox';
+// import PetProfileContainer from '../../components/petregister/PetProfileContainer';
 
 const Container = styled.div`
   display: flex;
@@ -79,9 +80,10 @@ interface FormData {
   name?: string | null;
   kind?: string | null;
   age?: number | null;
+  gender?: string | null;
   sex?: string | null;
   weight?: number | null;
-  // isNeutered?: string | null;
+  isNeutered?: Date | null;
 }
 
 const PetRegister: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
@@ -91,16 +93,17 @@ const PetRegister: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
     buddyImage: null,
   });
   const [gender, setGender] = useState(''); // 성별 선택 여부 상태
-  // const [neutered, setNeutered] = useState(''); // 중성화 여부 선택 상태
+  const [neutered, setNeutered] = useState(''); // 중성화 여부 선택 상태
 
   const [formData, setFormData] = useState({
     userId: '',
     name: '',
     kind: '',
     age: 0,
+    gender: '',
     sex: '',
     weight: 0,
-    // isNeutered: '',
+    isNeutered: null,
   });
 
   useEffect(() => {
@@ -162,19 +165,26 @@ const PetRegister: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
   };
 
   const handleGenderClick = (selectedGender: string) => {
-    setGender(selectedGender);
-    setFormData((prevState) => ({
-      ...prevState,
-      gender: selectedGender,
-    }));
+      setGender(selectedGender);
+      console.log('셀렉티드젠더', selectedGender)
+      setFormData((prevState) => ({
+        ...prevState,
+        sex: selectedGender
+      }));
+      // setFormData( {...formData, sex: selectedGender });
   };
-
-  // const handleNeuteredClick = (selectedNeutered: string) => {
-    // setFormData((prevState) => ({
-    //   ...prevState,
-    //   isNeutered: selectedNeutered,
-    // }));
-  // };
+  const handleNeuteredClick = (selectedNeutered: string) => {
+    if (selectedNeutered === 'no') {
+      const currentDate = new Date();
+      setNeutered(selectedNeutered);
+      setFormData((prevState) => ({
+        ...prevState,
+        isNeutered: currentDate,
+      }));
+    } else if (selectedNeutered === 'yes') {
+      setNeutered(selectedNeutered);
+    }
+  };
 
   return (
     <Profile>
@@ -207,8 +217,8 @@ const PetRegister: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
             padding="20px 20px"
             margin="0 20px 0 0"
             type="number"
-            variant={gender === 'female' ? 'primary' : ''}
-            onClick={() => handleGenderClick('female')} // 여자 아이 버튼 클릭 시
+            variant={gender === '0' ? 'primary' : ''}
+            onClick={() => handleGenderClick('0')} // 여자 아이 버튼 클릭 시
           >
             여자 아이
           </Button>
@@ -216,8 +226,8 @@ const PetRegister: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
             padding="20px 20px"
             margin="0 20px 0 0"
             type="number"
-            variant={gender === 'male' ? 'primary' : ''}
-            onClick={() => handleGenderClick('male')} // 남자 아이 버튼 클릭 시
+            variant={gender === '1' ? 'primary' : ''}
+            onClick={() => handleGenderClick('1')} // 남자 아이 버튼 클릭 시
           >
             남자 아이
           </Button>
@@ -242,26 +252,26 @@ const PetRegister: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
       </Section>
       <Section>
         <h2>중성화 여부</h2>
-        {/* <ButtonBox>
-          <Button
-            padding="20px 20px"
-            margin="0 20px 0 0"
-            type="number"
-            variant={isNeutered === 'yes' ? 'primary' : ''}
-            onClick={() => handleNeuteredClick('yes')} // 중성화 전 버튼 클릭 시
-          >
-            중성화 전
-          </Button>
-          <Button
-            padding="20px 20px"
-            margin="0 20px 0 0"
-            type="number"
-            variant={isNeutered === 'no' ? 'primary' : ''}
-            onClick={() => handleNeuteredClick('no')} // 중성화 완료 버튼 클릭 시
-          >
-            중성화 완료
-          </Button>
-        </ButtonBox> */}
+        <ButtonBox>
+        <Button
+          padding="20px 20px"
+          margin="0 20px 0 0"
+          type="number"
+          variant={neutered === 'yes' ? 'primary' : 'secondary'}
+          onClick={() => handleNeuteredClick('yes')} // 중성화 전 버튼 클릭 시
+        >
+          중성화 전
+        </Button>
+        <Button
+          padding="20px 20px"
+          margin="0 20px 0 0"
+          type="number"
+          variant={neutered === 'no' ? 'primary' : 'secondary'} 
+          onClick={() => handleNeuteredClick('no')} // 중성화 완료 버튼 클릭 시
+        >
+          중성화 완료
+        </Button>
+        </ButtonBox>
       </Section>
       <Section>
         <h2>반려동물 체중</h2>

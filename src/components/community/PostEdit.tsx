@@ -29,7 +29,7 @@ interface FormData {
 }
 
 interface ImageFormData {
-  postImage?: any; // 이미지 타입 뭘로 보내야할지 모르겠음. 나중에 추가
+  postImage?: File; 
 }
 
 const PostEdit: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
@@ -170,11 +170,6 @@ const SelectContainer = styled.div`
 
 const ImageArea = styled.div`
   display: flex;
-
-  & > * {
-    //padding-right: 10px;
-  }
-
   h3 {
     font-size: var(--font-size-md-2);
     margin-right: 10px;

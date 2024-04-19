@@ -137,9 +137,7 @@ interface PetProfileProps {
 
 export interface ImageFormData {
   // 어떤 타입인지 몰라 테스트해보고 결정
-  buddyImage?: any;
-  // buddyImage?: File | null;
-  // buddyImage?: FileList | null;
+  buddyImage?: File | null;
 }
 
 const PetProfileCards: React.FC<PetProfileProps> = ({
@@ -147,6 +145,7 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
   selectedPetName,
   onClick,
 }) => {
+  const [recordId, setRecordId] = useState<string | null>(null); // 수정하려는 반려동물의 id 상태 추가
   const [showPetRegister, setShowPetRegister] = useState(false);
   const [showPetEdit, setShowPetEdit] = useState(false);
   const isMypet = location.pathname !== '/userpage';
@@ -161,7 +160,7 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
     age: null,
     sex: null,
     weight: null,
-    // isNeutered: null
+    isNeutered: null
   });
 
   const handleClick = (pet: PetProfile) => {
@@ -172,8 +171,9 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
     setShowPetRegister(true);
   };
 
-  const openPetEdit = () => {
-    setShowPetEdit(true);
+  const handleEditButtonClick = (id: string) => { //원래의 openPetEdit
+    setShowPetEdit(true); // 수정 모달 표시
+    setRecordId(id); // id값 설정
   };
 
   const handleCloseModal = () => {
@@ -189,7 +189,7 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
   const handlePetRegister = async () => {
     try {
       const response = await axios.post(`${API_URL}buddy`, formDataForPOST); // 동물 등록에 대한 post요청(API 바꾸기)
-      const createdPetRegisterId: string = response.data.data._id; // 여기서 생긴 id값 가져와서 해야함
+      const createdPetRegisterId: string = response.data.data._id; // 새로 생긴 _id값
       console.log(createdPetRegisterId);
 
       setShowPetRegister(false); // 모달 닫기
@@ -201,7 +201,7 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
         age: null,
         sex: null,
         weight: null,
-        // isNeutered: null
+        isNeutered: null
       });
 
       // 이미지 함께 전송
@@ -233,8 +233,37 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
     }
   };
 
+  const handlePetEdit = async () => { //에딧 함수
+    try {
+      const response = await axios.put(`${API_URL}buddy/${recordId}`, formDataForPOST); // 동물 수정에 대한 put요청(API 바꾸기)
+
+      setShowPetRegister(false); // 모달 닫기
+      setFormData({
+        // 데이터 초기화
+        userId: null,
+        name: null,
+        kind: null,
+        age: null,
+        sex: null,
+        weight: null,
+        isNeutered: null
+      });
+
+      // 이미지 함께 전송
+      if (imageFormData) {
+        await sendImage(imageFormData, recordId);
+      }
+
+      console.log('동물 수정 성공', response.data.data);
+      handleCloseModal();
+    } catch (error) {
+      console.error('동물 수정 실패:', error);
+    }
+  };
+
   const handleData = (formData) => {
     setFormData(formData);
+    console.log('폼데이터', formData)
   };
 
   const handleImageData = (imageFormData) => {
@@ -264,7 +293,9 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
                   {isMypet && (
                     <ActionButton
                       direction="vertical"
-                      onEdit={() => openPetEdit()}
+                      onEdit={() => handleEditButtonClick(profile?._id)}
+                      // onDelete={() => handleDeleteButtonClick(data._id)} 아직 이 함수 없음
+
                     />
                   )}
                 </ActionButtonContainer>
@@ -315,8 +346,9 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
         <BigModal
           title="동물 정보 수정"
           value="수정"
-          component={<PetEdit />}
+          component={<PetEdit onSubmit={handleData} onSubmitImage={handleImageData} recordId={recordId}/>}
           onClose={handleCloseModal}
+          onHandleClick={handlePetEdit}
         />
       )}
     </PetProfileCardsContainer>
