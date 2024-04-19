@@ -26,19 +26,7 @@
     "styled-components": "^6.1.8",
     "styled-reset": "^4.5.2",
     "swiper": "^11.1.0",
-    "typewriter-effect": "^2.21.0",
-    "@rollup/rollup-win32-x64-msvc": {
-      "version": "^4.14.3",
-      "os": [
-        "win32"
-      ]
-    },
-    "@rollup/rollup-darwin-x64": {
-      "version": "^4.14.3",
-      "os": [
-        "darwin"
-      ]
-    }
+    "typewriter-effect": "^2.21.0"
   },
   "devDependencies": {
       "@types/react": "^18.2.66",

@@ -37,8 +37,6 @@ const SectionBox: React.FC = () => {
           'http://kdt-sw-8-team01.elicecoding.com/api/auth/checking',
           { withCredentials: true },
         );
-        console.log('유저 이메일', response.data.email);
-        console.log('유저 이메일', response.data.nickName);
         setEmail(response.data.email);
       } catch (error) {
         console.error('Error fetching data:', error);
