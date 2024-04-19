@@ -13,7 +13,7 @@ const SignupInfo: React.FC = () => {
       .split(';')
       .find((cookie) => cookie.trim().startsWith('accessToken='))
       ?.split('=')[1];
-    
+
     if (token) {
       setUser(token);
     }

@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../../components/baseComponent/Button';
 import AgreementSection from './AgreementSection';
 import InputSection from './InputSection';
+import { userToken } from '../../recoil/selectors';
+import { useSetRecoilState } from 'recoil';
 
 const Container = styled.div`
   display: flex;
@@ -27,6 +29,7 @@ const ButtonBox = styled.div`
 const SectionBox: React.FC = () => {
   const [nickName, setNickName] = useState('');
   const [email, setEmail] = useState('');
+  const setUser = useSetRecoilState(userToken);
   const navigate = useNavigate(); // useNavigate 훅 사용
 
   useEffect(() => {
@@ -56,7 +59,14 @@ const SectionBox: React.FC = () => {
         adminNumber: 0,
         profileImage: [],
       };
+      const token = document.cookie
+        .split(';')
+        .find((cookie) => cookie.trim().startsWith('accessToken='))
+        ?.split('=')[1];
 
+      if (token) {
+        setUser(token);
+      }
       // 서버로 POST 요청 보내기
       const response = await axios.post(`${API_URL}users`, data);
 
@@ -76,6 +86,17 @@ const SectionBox: React.FC = () => {
       console.error('서버에 유저 데이터 전송 중 오류 발생:', error);
     }
   };
+
+  useEffect(() => {
+    //check if "access_token" exists in Cookie and set it to Recoil
+    // const token = document.cookie
+    //   .split(';')
+    //   .find((cookie) => cookie.trim().startsWith('accessToken='))
+    //   ?.split('=')[1];
+    // if (token) {
+    //   setUser(token);
+    // }
+  }, []);
 
   return (
     <Container>
