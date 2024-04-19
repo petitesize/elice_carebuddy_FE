@@ -33,7 +33,7 @@ const SectionBox: React.FC = () => {
           'http://kdt-sw-8-team01.elicecoding.com/api/auth/checking',
           { withCredentials: true },
         );
-        console.log(`유저 데이터: ${response}`);
+        console.log('유저 데이터', response);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
