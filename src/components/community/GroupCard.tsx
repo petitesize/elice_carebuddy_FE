@@ -4,7 +4,7 @@
 // import { LuCheck } from 'react-icons/lu';
 // import Button from '../../components/baseComponent/Button';
 // import { useRecoilState } from 'recoil';
-// import { userState } from '../../recoil/atoms';
+// import { userQuery } from '../../recoil/selectors.ts';
 
 // type GroupCardProps = {
 //   name: string;
@@ -102,7 +102,7 @@
 //             >
 //               가입
 //             </Button>
-//           </ButtonWrapper> 
+//           </ButtonWrapper>
 //         )}
 //       </GroupInfoWrapper>
 //     </StyledGroupCard>
@@ -117,7 +117,7 @@ import { LuMessagesSquare } from 'react-icons/lu';
 import { LuCheck } from 'react-icons/lu';
 import Button from '../../components/baseComponent/Button';
 import { useRecoilState } from 'recoil';
-import { userState } from '../../recoil/atoms';
+import { userQuery } from '../../recoil/selectors.ts';
 
 type GroupCardProps = {
   name: string;
@@ -185,7 +185,8 @@ const GroupCard: React.FC<GroupCardProps> = ({
   groupId,
   onClick,
 }) => {
-  const [user] = useRecoilState(userState);
+  // const [user] = useRecoilState(userState);
+  const [user] = useRecoilState(userQuery);
 
   let isMember = false;
   let groupIdArray = user?.categoryId.map((category) => category._id) ?? [];
@@ -218,7 +219,7 @@ const GroupCard: React.FC<GroupCardProps> = ({
             >
               가입
             </Button>
-          </ButtonWrapper> 
+          </ButtonWrapper>
         )}
       </GroupInfoWrapper>
     </StyledGroupCard>

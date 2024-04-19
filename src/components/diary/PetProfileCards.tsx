@@ -15,7 +15,7 @@ import { API_URL, UPLOADED_IMG_URL } from '../../constants/constants';
 import BigModal from '../baseComponent/BigModal';
 
 import { useRecoilValue } from 'recoil';
-import { userState } from '../../recoil/atoms';
+import { userQuery } from '../../recoil/selectors.ts';
 
 // 카드 전체 컨테이너
 const PetProfileCardsContainer = styled.div`
@@ -160,7 +160,7 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
     age: null,
     sex: null,
     weight: null,
-    isNeutered: null
+    isNeutered: null,
   });
 
   const handleClick = (pet: PetProfile) => {
@@ -171,7 +171,8 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
     setShowPetRegister(true);
   };
 
-  const handleEditButtonClick = (id: string) => { //원래의 openPetEdit
+  const handleEditButtonClick = (id: string) => {
+    //원래의 openPetEdit
     setShowPetEdit(true); // 수정 모달 표시
     setRecordId(id); // id값 설정
   };
@@ -201,7 +202,7 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
         age: null,
         sex: null,
         weight: null,
-        isNeutered: null
+        isNeutered: null,
       });
 
       // 이미지 함께 전송
@@ -233,9 +234,13 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
     }
   };
 
-  const handlePetEdit = async () => { //에딧 함수
+  const handlePetEdit = async () => {
+    //에딧 함수
     try {
-      const response = await axios.put(`${API_URL}buddy/${recordId}`, formDataForPOST); // 동물 수정에 대한 put요청(API 바꾸기)
+      const response = await axios.put(
+        `${API_URL}buddy/${recordId}`,
+        formDataForPOST,
+      ); // 동물 수정에 대한 put요청(API 바꾸기)
 
       setShowPetRegister(false); // 모달 닫기
       setFormData({
@@ -246,7 +251,7 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
         age: null,
         sex: null,
         weight: null,
-        isNeutered: null
+        isNeutered: null,
       });
 
       // 이미지 함께 전송
@@ -294,7 +299,6 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
                       direction="vertical"
                       onEdit={() => handleEditButtonClick(profile?._id)}
                       // onDelete={() => handleDeleteButtonClick(data._id)} 아직 이 함수 없음
-
                     />
                   )}
                 </ActionButtonContainer>
@@ -345,7 +349,13 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
         <BigModal
           title="동물 정보 수정"
           value="수정"
-          component={<PetEdit onSubmit={handleData} onSubmitImage={handleImageData} recordId={recordId}/>}
+          component={
+            <PetEdit
+              onSubmit={handleData}
+              onSubmitImage={handleImageData}
+              recordId={recordId}
+            />
+          }
           onClose={handleCloseModal}
           onHandleClick={handlePetEdit}
         />

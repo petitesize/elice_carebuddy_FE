@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { userState } from '../../recoil/atoms';
+import { userQuery } from '../../recoil/selectors.ts';
 
 import { API_URL } from '../../constants/constants.tsx';
 
@@ -85,14 +85,15 @@ const Comment: React.FC<CommentProps> = ({
   userId,
   commentId,
 }) => {
-  const [user] = useRecoilState(userState);
+  // const [user] = useRecoilState(userState);
+  const [user] = useRecoilState(userQuery);
   const [onEdit, setOnEdit] = useState(false);
   const [editedText, setEditedText] = useState(text);
 
   // 댓글 수정
   const handleSave = async () => {
     const Data = {
-      "text": `${editedText}`,
+      text: `${editedText}`,
     };
     try {
       await axios.put(`${API_URL}comment/${commentId}`, Data);
@@ -104,25 +105,24 @@ const Comment: React.FC<CommentProps> = ({
     setOnEdit(false);
   };
 
-    // 댓글 삭제
-    const handleDeleteButton = () => {
-      // 알럿창, 확인 누를 시 댓글 삭제 요청
-      const fetchData = async () => {
-        const confirmDelete = window.confirm('정말로 삭제하시겠습니까?');
-  
-        if (confirmDelete) {
-          try {
-            const response = await axios.delete(`${API_URL}comment/${commentId}`);
-            console.log('댓글 삭제 성공', response.data.message);
-            window.location.reload(); // 삭제 후 새로고침
-          } catch (error) {
-            console.error('댓글 삭제 실패', error);
-          }
+  // 댓글 삭제
+  const handleDeleteButton = () => {
+    // 알럿창, 확인 누를 시 댓글 삭제 요청
+    const fetchData = async () => {
+      const confirmDelete = window.confirm('정말로 삭제하시겠습니까?');
+
+      if (confirmDelete) {
+        try {
+          const response = await axios.delete(`${API_URL}comment/${commentId}`);
+          console.log('댓글 삭제 성공', response.data.message);
+          window.location.reload(); // 삭제 후 새로고침
+        } catch (error) {
+          console.error('댓글 삭제 실패', error);
         }
-      };
-      fetchData();
+      }
     };
-  
+    fetchData();
+  };
 
   return (
     <StyledComment>

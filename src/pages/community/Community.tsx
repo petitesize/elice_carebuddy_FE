@@ -8,7 +8,7 @@ import {
 } from '../../constants/constants';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { userState } from '../../recoil/atoms';
+import { userQuery } from '../../recoil/selectors.ts';
 import GetRandomItems from '../../utils/GetRandomThreeItems'; // GetRandomItems 함수 import
 
 // 컴포넌트
@@ -46,7 +46,8 @@ interface Member {
 
 const Community: React.FC = () => {
   const navigate = useNavigate();
-  const [user] = useRecoilState(userState);
+  // const [user] = useRecoilState(userState);
+  const [user] = useRecoilState(userQuery);
   const { groupId } = useParams<{ groupId: string }>();
   const [posts, setPosts] = useState<Post[]>([]); // 그룹의 전체 게시글
   const [groupMembers, setGroupMembers] = useState<Member[]>([]); // 현재 그룹에 소속된 멤버

@@ -6,9 +6,9 @@ import TextArea from '../baseComponent/TextArea';
 import axios from 'axios';
 import { API_URL, UPLOADED_IMG_URL } from './../../constants/constants';
 import { useRecoilState } from 'recoil';
-import { userState } from '../../recoil/atoms';
+import { userQuery } from '../../recoil/selectors.ts';
 import LinkButton from '../baseComponent/LinkButton';
-import camera from '../../assets/camera.png'
+import camera from '../../assets/camera.png';
 import PetProfileContainer from './../petregister/PetProfileContainer';
 
 interface User {
@@ -35,13 +35,12 @@ const Profile: React.FC = () => {
     setProfileImage(user?.profileImage);
   }, [user]);
 
-    // // 유저 정보가 로딩되면 현재 유저 기본 정보를 수정 인풋에 채워넣음
-    // useEffect(() => {
-    //   setNewNickName(user.nickName);
-    //   setNewIntroduce(user.introduce);
-    //   setProfileImage(user.profileImage);
-    // }, []);
-  
+  // // 유저 정보가 로딩되면 현재 유저 기본 정보를 수정 인풋에 채워넣음
+  // useEffect(() => {
+  //   setNewNickName(user.nickName);
+  //   setNewIntroduce(user.introduce);
+  //   setProfileImage(user.profileImage);
+  // }, []);
 
   const handleNickNameChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newName = event.target.value;

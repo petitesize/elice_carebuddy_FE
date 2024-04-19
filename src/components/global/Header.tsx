@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { userState } from '../../recoil/atoms';
+import { userQuery } from '../../recoil/selectors.ts';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { API_URL } from './../../constants/constants';
@@ -145,7 +145,8 @@ const links = [
 const Header: React.FC = () => {
   const [activeMenu, setActiveMenu] = useState<number | null>(null);
   const [groups, setGroups] = useState<Group[]>([]);
-  const [user, setUser] = useRecoilState(userState);
+  // const [user, setUser] = useRecoilState(userState);
+  const [user] = useRecoilState(userQuery);
 
   const userGroups = user?.categoryId;
   console.log(userGroups);

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React, { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { userState } from '../../recoil/atoms';
+import { userQuery } from '../../recoil/selectors.ts';
 
 // 컴포넌트
 import Hr from '../baseComponent/Hr.tsx';
@@ -26,7 +26,7 @@ interface FormData {
 }
 
 interface ImageFormData {
-  postImage?: any; 
+  postImage?: any;
 }
 
 interface Category {
@@ -36,7 +36,8 @@ interface Category {
 }
 
 const PostCreate: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
-  const [user] = useRecoilState(userState);
+  // const [user] = useRecoilState(userState);
+  const [user] = useRecoilState(userQuery);
   const [selectedCategoryValue, setSelectedCategotyValue] = useState(''); // 선택된 대분류
   const [selectedGroupOptions, setSelectedGroupOptions] = useState<any[]>([]); // 선택된 소분류. 타입 추후 수정.
   const [uploadedImg, setUploadedImg] = useState<string | null>(null); // 업로드된 이미지
@@ -70,7 +71,7 @@ const PostCreate: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
     };
     input.click();
   };
-  
+
   useEffect(() => {
     // 부모 컴포넌트에서 POST를 하기 위해 formData가 변경될 때마다 부모 컴포넌트로 데이터를 전송
     onSubmit(formData);
@@ -90,7 +91,10 @@ const PostCreate: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
 
     // 선택된 카테고리에 해당하는 그룹만 필터링하여 업데이트하고 받아오기
     const filteredGroupsOptions = user?.categoryId
-      .filter((category: Category) => category.name?.toString() === selectedOption.value)
+      .filter(
+        (category: Category) =>
+          category.name?.toString() === selectedOption.value,
+      )
       .map((category) => ({
         value: category._id,
         label: category.group,
@@ -158,9 +162,7 @@ const PostCreate: React.FC<ModalProps> = ({ onSubmit, onSubmitImage }) => {
       <ImageBox hasImage={!!uploadedImg}>
         {uploadedImg && <img src={uploadedImg} alt="Uploaded" />}
       </ImageBox>
-      <p>
-        사진은 한 장만 업로드 가능합니다.
-      </p>
+      <p>사진은 한 장만 업로드 가능합니다.</p>
       <Hr />
     </StyledPostCreate>
   );

@@ -3,14 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../../constants/constants';
 import { useRecoilValue } from 'recoil';
-import { userState } from '../../recoil/atoms';
+import { userQuery } from '../../recoil/selectors.ts';
 
 // 컴포넌트
 import Button from '../../components/baseComponent/Button';
 import BigModal from '../../components/baseComponent/BigModal';
 import PostCreate from '../../components/community/PostCreate';
-
-
 
 const WritingModalButton = () => {
   const navigate = useNavigate();
@@ -24,10 +22,10 @@ const WritingModalButton = () => {
   const [imageFormData, setImageFormData] = useState(null);
 
   const handleToggleModal = () => {
-    setShowModal(prevState => !prevState);
+    setShowModal((prevState) => !prevState);
   };
 
-    const formDataForPOST = {
+  const formDataForPOST = {
     ...formData,
     userId: useRecoilValue(userState)?._id,
   };
@@ -38,7 +36,8 @@ const WritingModalButton = () => {
       const createdPostId = response.data.data._id;
 
       setShowModal(false); // 모달 닫기
-      setFormData({ // 데이터 초기화
+      setFormData({
+        // 데이터 초기화
         userId: null,
         categoryId: null,
         title: null,
@@ -49,7 +48,7 @@ const WritingModalButton = () => {
       if (imageFormData) {
         await sendImage(imageFormData, createdPostId);
       }
-      
+
       // 페이지 리다이렉트
       navigate(`/post/${createdPostId}`);
     } catch (error) {
@@ -66,7 +65,7 @@ const WritingModalButton = () => {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
-        }
+        },
       );
       console.log('이미지 업로드 성공:', response.data);
     } catch (error) {
@@ -74,11 +73,11 @@ const WritingModalButton = () => {
     }
   };
 
-  const handleData = formData => {
+  const handleData = (formData) => {
     setFormData(formData);
   };
 
-  const handleImageData = imageFormData => {
+  const handleImageData = (imageFormData) => {
     setImageFormData(imageFormData);
   };
 
@@ -96,7 +95,9 @@ const WritingModalButton = () => {
         <BigModal
           title="글쓰기"
           value="등록"
-          component={<PostCreate onSubmit={handleData} onSubmitImage={handleImageData} />}
+          component={
+            <PostCreate onSubmit={handleData} onSubmitImage={handleImageData} />
+          }
           onClose={handleToggleModal}
           onHandleClick={handlePostCreate}
         />
