@@ -234,12 +234,20 @@ const Header: React.FC = () => {
               onMouseLeave={() => setActiveMenu(null)}
             >
               {link.path ? (
-                <Link to={link.path} onClick={() => setActiveMenu(null)}>
+                <Link
+                  to={link.path}
+                  onClick={() => {
+                    setActiveMenu(null);
+                    if (link.path === '/mypage') {
+                      redirectNotLogin();
+                    }
+                  }}
+                >
                   {link.label === '로고' ? (
                     <Logo src={link.icon} />
                   ) : (
                     <>
-                      <span onClick={redirectNotLogin}>{link.label}</span>
+                      <span>{link.label}</span>
                       {link.icon && <Icon src={link.icon} />}
                     </>
                   )}
