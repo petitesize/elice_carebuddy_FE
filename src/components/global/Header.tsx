@@ -142,6 +142,7 @@ const Header: React.FC = () => {
   // const [user, setUser] = useRecoilState(userState);
   const [user] = useRecoilState(userQuery);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   const userGroups = user?.categoryId;
   console.log(userGroups);
@@ -212,7 +213,7 @@ const Header: React.FC = () => {
   const redirectNotLogin = () => {
     if (!isLoggedIn) {
       window.alert('로그인이 필요한 기능입니다.');
-      useNavigate();
+      navigate('/');
     }
   };
 
