@@ -263,7 +263,6 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
 
   const handleData = (formData) => {
     setFormData(formData);
-    console.log('폼데이터', formData)
   };
 
   const handleImageData = (imageFormData) => {
