@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { API_URL } from './../../constants/constants';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../components/baseComponent/Button';
 import AgreementSection from './AgreementSection';
 import InputSection from './InputSection';
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -25,15 +27,17 @@ const ButtonBox = styled.div`
 const SectionBox: React.FC = () => {
   const [nickName, setNickName] = useState('');
   const [email, setEmail] = useState('');
+  const navigate = useNavigate(); // useNavigate 훅 사용
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          'http://kdt-sw-8-team01.elicecoding.com/api/auth/checking',
+          'http://localhost:3001/api/auth/checking',
           { withCredentials: true },
         );
-        console.log('유저 데이터', response.data.email);
+        console.log('유저 이메일', response.data.email);
+        console.log('유저 이메일', response.data.nickName);
         setEmail(response.data.email);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -54,11 +58,18 @@ const SectionBox: React.FC = () => {
         profileImage: [],
       };
 
-      const response = await axios.post(`${API_URL}users`, {
-        email: `${email}`,
-        nickName: `${nickName}`,
-      });
-      console.log('서버 응답:', response.data);
+      // 서버로 POST 요청 보내기
+      const response = await axios.post(`${API_URL}users`, data);
+
+      // 서버 응답이 성공적일 경우
+      if (response.status === 201) {
+        // alert 창을 띄워 성공 메시지를 표시
+        alert('회원가입에 성공했습니다!');
+        // 지정된 URL로 페이지 이동
+        navigate('/');
+      } else {
+        console.error('서버 응답이 성공적이지 않았습니다:', response.statusText);
+      }
     } catch (error) {
       console.error('서버에 유저 데이터 전송 중 오류 발생:', error);
     }

@@ -65,22 +65,25 @@ const Group: React.FC = () => {
 
   const filteredGroups = groups.filter((group) => group.name === clickedTab);
 
-  // 그룹 가입 API
-  const handleJoinGroup = async (groupId: string) => {
-    try {
-      const Data = {
-        categoryId: groupId,
-      };
+// 그룹 가입 API
+const handleJoinGroup = async (groupId: string) => {
+  try {
+    const Data = {
+      categoryId: groupId,
+    };
 
-      const response = await axios.put(
-        `${API_URL}users/${user?._id}/joinGroup`,
-        Data,
-      );
-      console.log('그룹 가입 성공', response.data);
-    } catch (error) {
-      console.error('그룹 가입 실패', error);
-    }
-  };
+    const response = await axios.put(
+      `${API_URL}users/${user?._id}/joinGroup`,
+      Data,
+    );
+    confirm('그룹 가입이 완료되었습니다');
+    window.location.reload();
+    console.log('그룹 가입 성공', response.data);
+  } catch (error) {
+    console.error('그룹 가입 실패', error);
+  }
+};
+
 
   return (
     <>
