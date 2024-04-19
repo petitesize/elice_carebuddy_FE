@@ -9,11 +9,11 @@ interface User {
 }
 
 // 외부 API에서 유저 정보를 가져오는 함수
-
 const getUserData = async (userIdOrToken: string): Promise<User | null> => {
   const cookieExists = document.cookie
     .split(';')
     .some((cookie) => cookie.trim().startsWith('accessToken='));
+    console.log('Document cookies:', document.cookie);
 
   if (cookieExists) {
     try {
