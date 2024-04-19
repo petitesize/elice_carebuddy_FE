@@ -35,11 +35,12 @@ const WritingModalButton = () => {
   }, []); // 페이지 로드 시 한 번만 실행되도록 빈 배열을 전달
 
   const handleToggleModal = () => {
-    setShowModal((prevState) => !prevState);
     if (!isLoggedIn) {
       window.alert('로그인이 필요한 기능입니다.');
       window.location.reload();
+      return;
     }
+    setShowModal((prevState) => !prevState);
   };
 
   const formDataForPOST = {
