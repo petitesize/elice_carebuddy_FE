@@ -20,7 +20,8 @@ interface User {
 }
 
 const Profile: React.FC = () => {
-  const [user] = useRecoilState<User>(userState);
+  // const [user] = useRecoilState<User>(userState);
+  const [user] = useRecoilState(userQuery);
   const [uploadedImg, setUploadedImg] = useState<string | null>(null); // 업로드된 이미지
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [newNickName, setNewNickName] = useState<string | null>(null); // useEffect로 기존 값을 받아서 수정

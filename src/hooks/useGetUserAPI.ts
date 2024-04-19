@@ -41,18 +41,10 @@ import { API_URL } from '../constants/constants';
 //       }
 //     };
 
-<<<<<<< HEAD
 //     fetchData();
 //   }, []);
 
 //   return user;
 // };
-=======
-    fetchData();
-  }, []);
-
-  return user;
-};
->>>>>>> 6673e0662c095c97f934a10a24c2633888d7551f
 
 // export default useGetUserAPI;

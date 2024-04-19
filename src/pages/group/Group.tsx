@@ -44,7 +44,8 @@ interface Group {
 const Group: React.FC = () => {
   const [groups, setGroups] = useState<Group[]>([]);
   const [clickedTab, setClickedTab] = useState(0);
-  const [user] = useRecoilState(userState);
+  // const [user] = useRecoilState(userState);
+  const [user] = useRecoilState(userQuery);
 
   console.log('user', user);
 
