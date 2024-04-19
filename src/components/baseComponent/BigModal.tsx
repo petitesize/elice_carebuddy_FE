@@ -17,13 +17,13 @@ const ModalBackground = styled.div`
 
 const ModalContent = styled.div`
   position: relative;
-  width: 1024px;
+  width: 60%;
   max-height: 80vh;
   background-color: var(--color-white);
   border-radius: 7px;
   border: 1px solid var(--color-grey2);
   border-top: 20px solid #6d987a;
-  padding: 20px;
+  padding: 20px 60px;
   display: flex;
   justify-content: center;
   z-index: 10000;
@@ -33,7 +33,7 @@ const ModalContent = styled.div`
 
 const Container = styled.div`
   padding-top: 10px;
-  width: 900px;
+  width: 100%;
   margin: 0 auto;
 `;
 
@@ -107,4 +107,3 @@ const BigModal: React.FC<ModalProps> = ({
 };
 
 export default BigModal;
-

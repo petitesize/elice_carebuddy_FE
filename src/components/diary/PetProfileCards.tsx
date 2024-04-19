@@ -262,7 +262,10 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
                 <ActionButtonContainer className="action">
                   {/* {isMypet && <MoreIcon src={MoreKebabIcon} />} */}
                   {isMypet && (
-                    <ActionButton direction="vertical" onClick={openPetEdit} />
+                    <ActionButton
+                      direction="vertical"
+                      onEdit={() => openPetEdit()}
+                    />
                   )}
                 </ActionButtonContainer>
 
