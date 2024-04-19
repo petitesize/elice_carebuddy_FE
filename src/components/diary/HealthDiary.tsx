@@ -94,7 +94,7 @@ const HealthDiary: React.FC<HealthDiaryProps> = ({
 
   const formDataForPOST = {
     ...formData,
-    userId: useRecoilValue(userState)?._id,
+    userId: useRecoilValue(userQuery)?._id,
     buddyId: petId,
   };
 

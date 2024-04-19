@@ -184,7 +184,7 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
 
   const formDataForPOST = {
     ...formData,
-    userId: useRecoilValue(userState)?._id,
+    userId: useRecoilValue(userQuery)?._id,
   };
 
   const handlePetRegister = async () => {
