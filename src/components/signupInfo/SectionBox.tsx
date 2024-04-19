@@ -32,6 +32,7 @@ const SectionBox: React.FC = () => {
   const setUser = useSetRecoilState(userToken);
   const navigate = useNavigate(); // useNavigate 훅 사용
 
+  console.log('setUser: ' + setUser);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -64,8 +65,10 @@ const SectionBox: React.FC = () => {
         .find((cookie) => cookie.trim().startsWith('accessToken='))
         ?.split('=')[1];
 
+      console.log('token:' + token);
       if (token) {
         setUser(token);
+        console.log('tokenSet');
       }
       // 서버로 POST 요청 보내기
       const response = await axios.post(`${API_URL}users`, data);
@@ -89,13 +92,13 @@ const SectionBox: React.FC = () => {
 
   useEffect(() => {
     //check if "access_token" exists in Cookie and set it to Recoil
-    // const token = document.cookie
-    //   .split(';')
-    //   .find((cookie) => cookie.trim().startsWith('accessToken='))
-    //   ?.split('=')[1];
-    // if (token) {
-    //   setUser(token);
-    // }
+    const token = document.cookie
+      .split(';')
+      .find((cookie) => cookie.trim().startsWith('accessToken='))
+      ?.split('=')[1];
+    if (token) {
+      setUser(token);
+    }
   }, []);
 
   return (
