@@ -13,17 +13,17 @@ const getUserData = async (userIdOrToken: string): Promise<User | null> => {
   const cookieExists = document.cookie
     .split(';')
     .some((cookie) => cookie.trim().startsWith('accessToken='));
-    console.log('Document cookies:', document.cookie);
+  console.log('Document cookies:', document.cookie);
 
   if (cookieExists) {
     try {
-      console.log(`${API_URL}users/me`);
+      console.log(`${API_URL}me`);
       // 유저 정보를 가져오는 API 요청
       // const response = await axios.get<User>(`${API_URL}users/${userIdOrToken}`);
-      const response = await axios.get<User>(`${API_URL}users/me`, {
+      const response = await axios.get<User>(`${API_URL}me`, {
         withCredentials: true, // 이 옵션을 통해 axios가 쿠키를 요청에 포함시킵니다.
       });
-
+      console.log('me호출');
       if (response.status === 200) {
         // console.log(response.data);
         console.log('user 조회 성공하면 여기 값:', response.data);

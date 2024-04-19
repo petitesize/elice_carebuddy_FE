@@ -23,7 +23,7 @@ const UserAPI = () => {
     const fetchData = async () => {
       try {
         setUser(userData);
-        console.log('user 조회 성공하면 여기 값:', userData);
+        console.log('user 조회 성공하면 여기 값 이건 UserAPI:', userData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
