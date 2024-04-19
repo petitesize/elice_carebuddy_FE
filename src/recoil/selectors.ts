@@ -1,15 +1,16 @@
-import React, { useEffect } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { selectorFamily } from 'recoil';
 import axios from 'axios';
+import { atom, selector } from 'recoil';
 import { API_URL } from '../constants/constants';
 
 interface User {
   // 구현되면 정의
 }
-
+export const userToken = atom({
+  key: 'userToken',
+  default: '',
+});
 // 외부 API에서 유저 정보를 가져오는 함수
-const getUserData = async (userIdOrToken: string): Promise<User | null> => {
+const getUserData = async () => {
   const cookieExists = document.cookie
     .split(';')
     .some((cookie) => cookie.trim().startsWith('accessToken='));
@@ -37,12 +38,16 @@ const getUserData = async (userIdOrToken: string): Promise<User | null> => {
 };
 
 // selectorFamily를 사용하여 비동기로 유저 정보를 가져오는 선택자 정의
-export const userQuery = selectorFamily<User | null, string>({
+export const userQuery = selector({
   key: 'userQuery',
-  get: (userIdOrToken) => async () => {
+  get: async ({ get }) => {
+    const token = get(userToken);
     try {
+      if (token === null) {
+        return null;
+      }
       // 외부 API에서 유저 정보를 가져옴
-      const userData = await getUserData(userIdOrToken);
+      const userData = await getUserData();
       if (userData === null) {
         return null;
       } else {
