@@ -57,24 +57,14 @@ const kakaoOpt: KakaoOpt = {
   clientSecret: import.meta.env.VITE_SECRET_KEY || '',
 };
 const LoginPage: React.FC = () => {
-
   const generateKakaoLoginURL = () => {
-    return `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoOpt.clientId}&redirect_uri=${kakaoOpt.redirectUri}&response_type=code`;
-}
+    return `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoOpt.clientId}&redirect_uri=${kakaoOpt.redirectUri}&response_type=code`; // 오타 수정: respose_type -> response_type
+  };
 
-// Kakao 로그인 버튼 클릭 이벤트 처리
-const handleKakaoLogin = () => {
+  const handleKakaoLogin = () => {
     const kakaoLoginURL = generateKakaoLoginURL();
-    window.location.href = kakaoLoginURL; 
-}
-  // const test = async () => {
-  //   try {
-  //     const res = await axios.get('http://localhost:3001/auth/kakao');
-  //     console.log(res);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+    window.location.href = kakaoLoginURL;
+  };
 
   return (
     <>

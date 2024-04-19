@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import ActionButton from '../baseComponent/ActionButton';
-import defaultImg from '/src/assets/carebuddyLogo.png';
+// import defaultImg from '/src/assets/carebuddyLogo.png';
+import defaultImg from '/src/assets/defaultProfileDummy.png';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -9,6 +10,8 @@ import 'swiper/css/navigation';
 import { Pagination } from 'swiper/modules';
 import PetRegister from '../../pages/petRegister/PetRegister';
 import PetEdit from '../../pages/petEdit/PetEdit';
+import { UPLOADED_IMG_URL } from '../../constants/constants';
+import BigModal from '../baseComponent/BigModal';
 
 // 카드 전체 컨테이너
 const PetProfileCardsContainer = styled.div`
@@ -147,6 +150,11 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
     setShowPetEdit(true);
   };
 
+  const handleCloseModal = () => {
+    setShowPetRegister(false);
+    setShowPetEdit(false);
+  };
+
   return (
     <PetProfileCardsContainer>
       <StyledSwiper
@@ -168,12 +176,15 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
                 <ActionButtonContainer className="action">
                   {/* {isMypet && <MoreIcon src={MoreKebabIcon} />} */}
                   {isMypet && (
-                    <ActionButton direction="vertical" onClick={openPetEdit} />
+                    <ActionButton
+                      direction="vertical"
+                      onEdit={() => openPetEdit()}
+                    />
                   )}
                 </ActionButtonContainer>
 
                 <PetProfileImg
-                  src={profile.profileImg || defaultImg}
+                  src={`${UPLOADED_IMG_URL}uploads/${profile?.buddyImage[0]}`}
                   alt="프로필사진"
                   onClick={() => handleClick(profile)}
                 />
@@ -201,9 +212,21 @@ const PetProfileCards: React.FC<PetProfileProps> = ({
         )}
       </StyledSwiper>
       {showPetRegister && (
-        <PetRegister onClose={() => setShowPetRegister(false)} />
+        <BigModal
+          title="동물 등록"
+          value="등록"
+          component={<PetRegister />}
+          onClose={handleCloseModal}
+        />
       )}
-      {showPetEdit && <PetEdit onClose={() => setShowPetEdit(false)} />}
+      {showPetEdit && (
+        <BigModal
+          title="동물 정보 수정"
+          value="수정"
+          component={<PetEdit />}
+          onClose={handleCloseModal}
+        />
+      )}
     </PetProfileCardsContainer>
   );
 };

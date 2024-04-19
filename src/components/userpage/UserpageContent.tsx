@@ -23,6 +23,7 @@ interface Pet {
   kind: string;
   age: number;
   profileImg: string;
+  postId: Array;
 }
 
 interface Post {
@@ -41,7 +42,7 @@ const UserpageContent: React.FC = () => {
   const pathname = location.pathname;
   const userIdIndex = pathname.lastIndexOf('/userpage/') + '/userpage/'.length;
   const userId = pathname.substring(userIdIndex);
-  console.log(userId);
+  //console.log(userId);
 
   const [buddy, setBuddy] = React.useState<Pet[] | null>([]);
   const [selectedPet, setSelectedPet] = useState<Pet | null>();
@@ -74,9 +75,8 @@ const UserpageContent: React.FC = () => {
       try {
         const response = await axios.get(`${API_URL}users/${userId}`);
         const userData = response.data.message;
-        console.log(userData);
         setUser(userData);
-        console.log('성공')
+        console.log('유저 data: ', userData.postId.title)
       } catch (error) {
         console.error('에러', error);
       }
@@ -86,6 +86,30 @@ const UserpageContent: React.FC = () => {
       fetchData();
     }
   }, [userId]);
+
+  // const [posts, setPosts] = useState<Post[]>([]);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(`${API_URL}post`);
+  //       const postData = response.data.message;
+
+  //       // postData가 배열인 경우, 각 게시물 데이터 객체에서 userId 값을 추출하는 방법
+  //       const userIds = postData.map(post => post.userId);
+  //       console.log('게시물들의 userId:', userIds);
+
+  //       const postIds = postData.map(post => post._id);
+  //       console.log('게시물들의 _id:', postIds);
+
+  //     } catch (error) {
+  //       console.error('에러', error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, [userId]);
+
 
   return (
     <Container>
@@ -97,7 +121,7 @@ const UserpageContent: React.FC = () => {
         selectedPetName={selectedPet?.name}
         pets={buddy}
         onPetClick={handlePetClick} />
-      <ListSection userId={userId || ''} />
+      <ListSection userId={userId}/>
     </Container>
   );
 };

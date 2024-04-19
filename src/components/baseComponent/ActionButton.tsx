@@ -71,7 +71,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({
 }) => {
   const [isClicked, setIsClicked] = useState(false);
   const buttonRef = useRef<HTMLDivElement>(null);
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
 
   const handleClick = () => {
     setIsClicked((prevState) => !prevState);

@@ -17,13 +17,13 @@ const ModalBackground = styled.div`
 
 const ModalContent = styled.div`
   position: relative;
-  width: 1024px;
+  width: 60%;
   max-height: 80vh;
   background-color: var(--color-white);
   border-radius: 7px;
   border: 1px solid var(--color-grey2);
   border-top: 20px solid #6d987a;
-  padding: 20px 30px;
+  padding: 20px 60px;
   display: flex;
   justify-content: center;
   z-index: 10000;
@@ -33,7 +33,7 @@ const ModalContent = styled.div`
 
 const Container = styled.div`
   padding-top: 10px;
-  width: 900px;
+  width: 100%;
   margin: 0 auto;
 `;
 
@@ -46,12 +46,12 @@ const Title = styled.div`
 `;
 
 const ButtonContainer = styled.div`
-  display: flex;
   padding: 20px 0 20px 0;
 `;
 
 interface ModalProps {
   onClose: () => void;
+  onHandleClick?: () => void; //빌드용 선택자 처리
   component: ReactNode;
   title: string;
   value: string;
@@ -62,6 +62,7 @@ const BigModal: React.FC<ModalProps> = ({
   value,
   onClose,
   component: Component,
+  onHandleClick, // 지우지 말아주세요(모달 버튼 클릭 핸들러 필요)
 }) => {
   useEffect(() => {
     document.body.style.overflow = 'hidden'; // 모달 열렸을 때 배경 스크롤 막음

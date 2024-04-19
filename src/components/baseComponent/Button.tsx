@@ -38,7 +38,7 @@ const ButtonElement = styled.button<ButtonProps>`
       ? fontSizeMap[props.fontSize]
       : 'var(--font-size-md-1)'}; // Default font size: var(--font-size-md-1)
   border: ${(props) =>
-    props.variant === 'secondary' ? '1px solid var(--color-grey-2)' : 'none'};
+    props.variant === 'secondary' ? '1px solid var(--color-grey-2)' : '1px solid var(--color-grey-2)'};
   border-radius: ${(props) => (props.shape === 'round' ? '20px' : '0')};
   cursor: pointer;
   display: inline-flex;

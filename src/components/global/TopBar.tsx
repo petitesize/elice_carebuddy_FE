@@ -16,6 +16,7 @@ const TopBarContainer = styled.div`
   font-size: var(--font-size-lg-2); //32
 `;
 const Container = styled.div`
+  padding: 8px 0;
   width: 1024px;
 `;
 
@@ -61,7 +62,7 @@ const TopBar: React.FC<Props> = ({ userId }) => {
   const location = useLocation();
   const { pathname } = location;
 
-  const postId = '661762dce744e418e35138e3'
+  const postId = '661762dce744e418e35138e3';
 
   const [group, setGroup] = useState<Group[]>([]);
 
@@ -71,9 +72,8 @@ const TopBar: React.FC<Props> = ({ userId }) => {
         const response = await axios.get(`${API_URL}groups`);
         const groupData = response.data.message;
 
-          console.log('group과 일치하는 데이터:', groupData);
-          setGroup(groupData);
-
+        console.log('group과 일치하는 데이터:', groupData);
+        setGroup(groupData);
       } catch (error) {
         console.error('에러', error);
       }
@@ -81,7 +81,6 @@ const TopBar: React.FC<Props> = ({ userId }) => {
 
     fetchData();
   }, []);*/}
-
 
   let menuIndex = 0; // 초기값으로 첫 번째 메뉴인 'carebuddy'를 선택합니다.
   let menuName = ''; // menuName의 초기값은 빈 문자열입니다.

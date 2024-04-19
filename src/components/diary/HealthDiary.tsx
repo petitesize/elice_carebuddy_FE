@@ -48,19 +48,42 @@ const HealthDiary: React.FC<HealthDiaryProps> = ({
   };
 
   // 삭제 버튼?
-  const handleDeleteButtonClick = () => {
-    setShowModal(true);
-  };
+  // const handleDeleteButtonClick = () => {
+  //   setShowModal(true);
+  // };
 
   const handleToggleEditModal = () => {
     // 수정 모달 표시 여부를 관리하는 함수
     setShowEditModal(!showEditModal);
   };
 
+  // 수정하기 버튼 클릭 시 수정하려는 기록의 recordId state 저장
   const handleEditButtonClick = (id: string) => {
-    setShowEditModal(true); // 수정하기 버튼 클릭 시 수정 모달 표시
+    setShowEditModal(true); // 수정 모달 표시
     setRecordId(id);
-    console.log(id);
+  };
+
+  // 삭제 클릭 시
+  const handleDeleteButtonClick = async (id: string) => {
+    const confirmDelete = window.confirm('해당 진료 기록을 삭제하시겠습니까?');
+    if (confirmDelete) {
+      try {
+        const response = await axios.put(
+          `${API_URL}hospital/${id}/d`,
+          {
+            deletedAt: new Date(),
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          },
+        );
+        console.log(`PUT 요청 성공: ${response.data}`);
+      } catch (error) {
+        console.error('Error deleting record:', error);
+      }
+    }
   };
 
   const handleData = (formData: any) => {
@@ -160,28 +183,34 @@ const HealthDiary: React.FC<HealthDiaryProps> = ({
         />
       )}
       {diaryData.length > 0 ? (
-        diaryData.map((data, index) => (
-          <DiariesContainer key={index}>
-            <p>{formatDate(new Date(data.consultationDate), true)}</p>
-            <HealthReport>
-              <ActionButton
-                onEdit={() => handleEditButtonClick(data._id)}
-                onDelete={() => handleEditButtonClick(data._id)}
-                direction="horizontal"
-                border="none"
-              />
-              <DeseaseName>
-                <Icon>
-                  <TbReportMedical className="big" />
-                </Icon>
-                <DeseaseTitle>{data.disease}</DeseaseTitle>
-              </DeseaseName>
-              <DiaryDetails data={data} />
-            </HealthReport>
-          </DiariesContainer>
-        ))
+        diaryData
+          .slice()
+          .reverse()
+          .map((data, index) => (
+            <DiariesContainer key={index}>
+              <p>{formatDate(new Date(data.consultationDate), true)}</p>
+              <HealthReport>
+                <ActionButton
+                  onEdit={() => handleEditButtonClick(data._id)}
+                  onDelete={() => handleDeleteButtonClick(data._id)}
+                  direction="horizontal"
+                  border="none"
+                />
+                <DeseaseName>
+                  <Icon>
+                    <TbReportMedical className="big" />
+                  </Icon>
+                  <DeseaseTitle>{data.disease}</DeseaseTitle>
+                </DeseaseName>
+                <DiaryDetails data={data} />
+              </HealthReport>
+            </DiariesContainer>
+          ))
       ) : (
-        <p>기록이 없습니다.(임시작성된 메시지)</p>
+        <DiariesContainer className="noReport">
+          <p>{petName}의 진료 기록이 없습니다. </p>
+          <p></p>
+        </DiariesContainer>
       )}
     </HealthDiaryContainer>
   );
@@ -230,6 +259,11 @@ const DiariesContainer = styled.div`
   width: 100%;
   margin-top: 50px;
   margin-bottom: 150px;
+  &.noReport {
+    > p {
+      padding-bottom: 8px;
+    }
+  }
 `;
 
 // 다이어리 본문 컨테이너
