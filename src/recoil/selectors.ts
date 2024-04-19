@@ -23,14 +23,15 @@ const getUserData = async (userIdOrToken: string): Promise<User | null> => {
       const response = await axios.get<User>(`${API_URL}users/me`, {
         withCredentials: true, // 이 옵션을 통해 axios가 쿠키를 요청에 포함시킵니다.
       });
-      console.log(response.data.user);
+
       if (response.status === 200) {
-        console.log(response.data);
+        // console.log(response.data);
+        console.log('user 조회 성공하면 여기 값:', response.data);
         return response.data.user;
       }
     } catch (error) {
       console.error('Error fetching user data:', error);
-      throw error;
+      return null;
     }
   } else return null;
 };
