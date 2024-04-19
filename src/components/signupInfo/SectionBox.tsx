@@ -52,7 +52,6 @@ const SectionBox: React.FC = () => {
 
   const sendUserDataToServer = async () => {
     try {
-      const setUser = useSetRecoilState(userToken);
       const data = {
         categories: [],
         buddyId: [],
@@ -63,6 +62,14 @@ const SectionBox: React.FC = () => {
       };
       useEffect(() => {
         //check if "access_token" exists in Cookie and set it to Recoil
+      }, []);
+
+      // 서버로 POST 요청 보내기
+      const response = await axios.post(`${API_URL}users`, data);
+
+      // 서버 응답이 성공적일 경우
+      if (response.status === 201) {
+        const setUser = useSetRecoilState(userToken);
         const token = document.cookie
           .split(';')
           .find((cookie) => cookie.trim().startsWith('accessToken='))
@@ -70,12 +77,6 @@ const SectionBox: React.FC = () => {
         if (token) {
           setUser(token);
         }
-      }, []);
-      // 서버로 POST 요청 보내기
-      const response = await axios.post(`${API_URL}users`, data);
-
-      // 서버 응답이 성공적일 경우
-      if (response.status === 201) {
         // alert 창을 띄워 성공 메시지를 표시
         alert('회원가입에 성공했습니다!');
         // 지정된 URL로 페이지 이동
