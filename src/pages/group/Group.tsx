@@ -76,6 +76,7 @@ const Group: React.FC = () => {
         `${API_URL}users/${user?._id}/joinGroup`,
         Data,
       );
+      confirm('그룹 가입이 완료되었습니다');
       console.log('그룹 가입 성공', response.data);
     } catch (error) {
       console.error('그룹 가입 실패', error);
